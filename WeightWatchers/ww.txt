@@ -1,0 +1,26 @@
+unit => gr
+        l
+        theelepel
+        eetlepel
+        stuks
+
+<voedingsmiddel naam="suiker" unit="theelepel" punten="1">
+<gerecht naam="moussaka" punten="1">
+<restaurantgerecht naam="tjap-tjoy" punten="1">
+
+tabel eenheden
+tabel maaltijden
+tabel voedigsmiddelen
+tabel dagen
+
+<dag datum="nnnn-nn-nn">
+  <item 
+
+algorithm points calculator:
+points = calories / 60 * vet / 9.
+
+4 points voor onbeperkt: (let wel : per maaltijd !)
+pasta, aardappelen, rijst, roggevolkorenbrood, volkoren ontbijt granen, havervlokken.
+3 points voor onbeperkt : 
+kip, kalkoen, magere vis, mager rundsvlees, lamsfilet, biefstuk, mager kalfsvlees,
+tonijn uit blik in eigen nat, kaas 0% vetgehalte, yoghurt 0% v.g. quorn, peulvruchten en zeevruchten

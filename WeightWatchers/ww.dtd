@@ -1,0 +1,90 @@
+<?xml encoding="ISO-8859-1"?>
+
+<!-- @version:  -->
+<!ELEMENT receptdefs (receptdef)*>
+<!ELEMENT voedingsmiddeldefs (voedingsmiddeldef)*>
+<!ELEMENT gerechtdefs (gerechtdef)*>
+<!ELEMENT units (unit)*>
+<!ELEMENT week (dag)+>
+<!ATTLIST week
+  begindatum  CDATA #REQUIRED
+  einddatum  CDATA #REQUIRED
+  startweight CDATA #REQUIRED
+  punten CDATA #REQUIRED>
+<!ELEMENT portieomschrijving EMPTY>
+<!ATTLIST portieomschrijving
+  omschrijving  CDATA #REQUIRED>
+<!ELEMENT dag (voedingsmiddel|recept|gerecht|handmatigitem)*>
+<!ATTLIST dag
+  gewicht CDATA #IMPLIED
+  datum   CDATA #REQUIRED
+  bonuspunten CDATA 0>
+<!ELEMENT voedingsmiddeldef (portie)+>
+<!ATTLIST voedingsmiddeldef
+  naam ID #REQUIRED
+  categorie CDATA #IMPLIED
+  unit IDREF #REQUIRED
+  kcalper100 CDATA #REQUIRED
+  vetper100 CDATA #REQUIRED
+  sterreportie IDREF #IMPLIED
+  vrijeportie (true|false) #IMPLIED
+  vrijepunten CDATA 0>
+<!ELEMENT receptdef (voedingsmiddel|recept|gerecht|handmatigitem)+>
+<!ATTLIST receptdef
+  naam ID #REQUIRED
+  punten CDATA #REQUIRED>
+<!ELEMENT gerechtdef EMPTY>
+<!ATTLIST gerechtdef
+  naam ID #REQUIRED
+  punten CDATA #REQUIRED>
+<!ELEMENT voedingsmiddel (standardlot|freelot)>
+<!ATTLIST voedingsmiddel
+  naam ID #REQUIRED
+  categorie CDATA #IMPLIED
+  unit IDREF #REQUIRED>
+<!ELEMENT recept EMPTY>
+<!ATTLIST recept
+  naam ID #REQUIRED
+  punten CDATA #REQUIRED
+  hoeveelheid CDATA #REQUIRED>
+<!ELEMENT gerecht EMPTY>
+<!ATTLIST gerecht
+  naam ID #REQUIRED
+  punten CDATA #REQUIRED
+  hoeveelheid CDATA #REQUIRED>
+<!ELEMENT handmatigitem EMPTY>
+<!ATTLIST handmatigitem
+  naam ID #REQUIRED
+  punten CDATA #REQUIRED
+  hoeveelheid CDATA #REQUIRED>
+<!ELEMENT unit EMPTY>
+<!ATTLIST unit
+  naam ID #REQUIRED>
+<!ELEMENT portie EMPTY>
+<!ATTLIST portie
+  portieomschrijving CDATA #REQUIRED
+  eenheden CDATA #REQUIRED>
+<!ELEMENT standardlot (portie)>
+<!ATTLIST standardlot
+  sterrelot (true|false) #REQUIRED
+  hoeveelheid CDATA #REQUIRED
+  kcalper100 CDATA #REQUIRED
+  vetper100 CDATA #REQUIRED>
+<!ELEMENT freelot EMPTY>
+<!ATTLIST freelot
+  punten CDATA #REQUIRED>
+<!ELEMENT personalia EMPTY>
+<!ATTLIST personalia
+  naam CDATA #REQUIRED
+  gebruikersnaam CDATA #REQUIRED
+  punten CDATA #REQUIRED
+  geboren CDATA #REQUIRED
+  geslacht (Mannelijk|Vrouwelijk) #REQUIRED
+  werk (Zittend|Staand|Lopend|Zwaar) #REQUIRED
+  lengte CDATA #REQUIRED
+  gewicht CDATA #REQUIRED
+  streefgewicht CDATA #REQUIRED
+  startgewicht CDATA #REQUIRED
+  huidiggewicht CDATA #REQUIRED
+  streven (Afvallen|OpGewichtBlijven) #REQUIRED>
+  

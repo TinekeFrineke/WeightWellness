@@ -1,0 +1,9 @@
+Flexipoints: mSterrePortie (sterreportie: 3 sterretjes per dag) wordt niet meer ondersteund; moet een bestaande portie zijn
+FlexiPoints: mHasFreeFPPortion (vrije portie, in xml "vrijeportie")
+                                met vrijepunten
+ProPoints:   mHasFreePPPortion (vrije portie, is in xml "vrijeppportie")
+                                met vrijepppunten
+
+Zouden dit geen elementen moeten zijn?
+
+Bonussen alleen voor FP en PP. De huidige tabel is alleen voor flexipoints, voor andere tellingen misschien andere vulling?

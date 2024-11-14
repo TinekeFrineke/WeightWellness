@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F858E66E-AC24-4159-BF13-8C9E75858F0A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>WWGenerated2015</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <TargetName>WWGenerated</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <TargetName>WWGenerated</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CRTDBG_MAP_ALLOC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\stdafx.cpp" />
+    <ClCompile Include="Source\XmlBonuscell.cpp" />
+    <ClCompile Include="Source\XmlBonuscellReader.cpp" />
+    <ClCompile Include="Source\XmlBonuscellWriter.cpp" />
+    <ClCompile Include="Source\XmlBonuslist.cpp" />
+    <ClCompile Include="Source\XmlBonuslistReader.cpp" />
+    <ClCompile Include="Source\XmlBonuslistWriter.cpp" />
+    <ClCompile Include="Source\XmlClass.cpp" />
+    <ClCompile Include="Source\XmlDag.cpp" />
+    <ClCompile Include="Source\XmlDagReader.cpp" />
+    <ClCompile Include="Source\XmlDagWriter.cpp" />
+    <ClCompile Include="Source\XmlFlexipoints.cpp" />
+    <ClCompile Include="Source\XmlFlexipointsReader.cpp" />
+    <ClCompile Include="Source\XmlFlexipointsWriter.cpp" />
+    <ClCompile Include="Source\XmlFreelot.cpp" />
+    <ClCompile Include="Source\XmlFreelotReader.cpp" />
+    <ClCompile Include="Source\XmlFreelotWriter.cpp" />
+    <ClCompile Include="Source\XmlGerecht.cpp" />
+    <ClCompile Include="Source\XmlGerechtdef.cpp" />
+    <ClCompile Include="Source\XmlGerechtdefReader.cpp" />
+    <ClCompile Include="Source\XmlGerechtdefs.cpp" />
+    <ClCompile Include="Source\XmlGerechtdefsReader.cpp" />
+    <ClCompile Include="Source\XmlGerechtdefsWriter.cpp" />
+    <ClCompile Include="Source\XmlGerechtdefWriter.cpp" />
+    <ClCompile Include="Source\XmlGerechtReader.cpp" />
+    <ClCompile Include="Source\XmlGerechtWriter.cpp" />
+    <ClCompile Include="Source\XmlHandmatigitem.cpp" />
+    <ClCompile Include="Source\XmlHandmatigitemReader.cpp" />
+    <ClCompile Include="Source\XmlHandmatigitemWriter.cpp" />
+    <ClCompile Include="Source\XmlKcal.cpp" />
+    <ClCompile Include="Source\XmlKcalReader.cpp" />
+    <ClCompile Include="Source\XmlKcalWriter.cpp" />
+    <ClCompile Include="Source\XmlKoolhydraten.cpp" />
+    <ClCompile Include="Source\XmlKoolhydratenReader.cpp" />
+    <ClCompile Include="Source\XmlKoolhydratenWriter.cpp" />
+    <ClCompile Include="Source\XmlPersonalia.cpp" />
+    <ClCompile Include="Source\XmlPersonaliaReader.cpp" />
+    <ClCompile Include="Source\XmlPersonaliaWriter.cpp" />
+    <ClCompile Include="Source\XmlPortie.cpp" />
+    <ClCompile Include="Source\XmlPortieomschrijving.cpp" />
+    <ClCompile Include="Source\XmlPortieomschrijvingReader.cpp" />
+    <ClCompile Include="Source\XmlPortieomschrijvingWriter.cpp" />
+    <ClCompile Include="Source\XmlPortieReader.cpp" />
+    <ClCompile Include="Source\XmlPortieWriter.cpp" />
+    <ClCompile Include="Source\XmlPropoints.cpp" />
+    <ClCompile Include="Source\XmlPropointsReader.cpp" />
+    <ClCompile Include="Source\XmlPropointsWriter.cpp" />
+    <ClCompile Include="Source\XmlPuntenper100.cpp" />
+    <ClCompile Include="Source\XmlPuntenper100Reader.cpp" />
+    <ClCompile Include="Source\XmlPuntenper100Writer.cpp" />
+    <ClCompile Include="Source\XmlRecept.cpp" />
+    <ClCompile Include="Source\XmlReceptdef.cpp" />
+    <ClCompile Include="Source\XmlReceptdefReader.cpp" />
+    <ClCompile Include="Source\XmlReceptdefs.cpp" />
+    <ClCompile Include="Source\XmlReceptdefsReader.cpp" />
+    <ClCompile Include="Source\XmlReceptdefsWriter.cpp" />
+    <ClCompile Include="Source\XmlReceptdefWriter.cpp" />
+    <ClCompile Include="Source\XmlReceptReader.cpp" />
+    <ClCompile Include="Source\XmlReceptWriter.cpp" />
+    <ClCompile Include="Source\XmlStandardlot.cpp" />
+    <ClCompile Include="Source\XmlStandardlotReader.cpp" />
+    <ClCompile Include="Source\XmlStandardlotWriter.cpp" />
+    <ClCompile Include="Source\XmlSterrelot.cpp" />
+    <ClCompile Include="Source\XmlSterrelotReader.cpp" />
+    <ClCompile Include="Source\XmlSterrelotWriter.cpp" />
+    <ClCompile Include="Source\XmlStrategybase.cpp" />
+    <ClCompile Include="Source\XmlStrategybaseReader.cpp" />
+    <ClCompile Include="Source\XmlStrategybaseWriter.cpp" />
+    <ClCompile Include="Source\XmlUnit.cpp" />
+    <ClCompile Include="Source\XmlUnitReader.cpp" />
+    <ClCompile Include="Source\XmlUnits.cpp" />
+    <ClCompile Include="Source\XmlUnitsReader.cpp" />
+    <ClCompile Include="Source\XmlUnitsWriter.cpp" />
+    <ClCompile Include="Source\XmlUnitWriter.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddel.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddeldef.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddeldefReader.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddeldefs.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddeldefsReader.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddeldefsWriter.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddeldefWriter.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddelheader.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddelheaderReader.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddelheaderWriter.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddelReader.cpp" />
+    <ClCompile Include="Source\XmlVoedingsmiddelWriter.cpp" />
+    <ClCompile Include="Source\XmlVoedingswaarde.cpp" />
+    <ClCompile Include="Source\XmlVoedingswaardeReader.cpp" />
+    <ClCompile Include="Source\XmlVoedingswaardeWriter.cpp" />
+    <ClCompile Include="Source\XmlVrijeportie.cpp" />
+    <ClCompile Include="Source\XmlVrijeportieReader.cpp" />
+    <ClCompile Include="Source\XmlVrijeportieWriter.cpp" />
+    <ClCompile Include="Source\XmlWeek.cpp" />
+    <ClCompile Include="Source\XmlWeekReader.cpp" />
+    <ClCompile Include="Source\XmlWeekWriter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\stdafx.h" />
+    <ClInclude Include="Source\XmlBonuscell.h" />
+    <ClInclude Include="Source\XmlBonuscellReader.h" />
+    <ClInclude Include="Source\XmlBonuscellWriter.h" />
+    <ClInclude Include="Source\XmlBonuslist.h" />
+    <ClInclude Include="Source\XmlBonuslistReader.h" />
+    <ClInclude Include="Source\XmlBonuslistWriter.h" />
+    <ClInclude Include="Source\XmlClass.h" />
+    <ClInclude Include="Source\XmlDag.h" />
+    <ClInclude Include="Source\XmlDagReader.h" />
+    <ClInclude Include="Source\XmlDagWriter.h" />
+    <ClInclude Include="Source\XmlFlexipoints.h" />
+    <ClInclude Include="Source\XmlFlexipointsReader.h" />
+    <ClInclude Include="Source\XmlFlexipointsWriter.h" />
+    <ClInclude Include="Source\XmlFreelot.h" />
+    <ClInclude Include="Source\XmlFreelotReader.h" />
+    <ClInclude Include="Source\XmlFreelotWriter.h" />
+    <ClInclude Include="Source\XmlGerecht.h" />
+    <ClInclude Include="Source\XmlGerechtdef.h" />
+    <ClInclude Include="Source\XmlGerechtdefReader.h" />
+    <ClInclude Include="Source\XmlGerechtdefs.h" />
+    <ClInclude Include="Source\XmlGerechtdefsReader.h" />
+    <ClInclude Include="Source\XmlGerechtdefsWriter.h" />
+    <ClInclude Include="Source\XmlGerechtdefWriter.h" />
+    <ClInclude Include="Source\XmlGerechtReader.h" />
+    <ClInclude Include="Source\XmlGerechtWriter.h" />
+    <ClInclude Include="Source\XmlHandmatigitem.h" />
+    <ClInclude Include="Source\XmlHandmatigitemReader.h" />
+    <ClInclude Include="Source\XmlHandmatigitemWriter.h" />
+    <ClInclude Include="Source\XmlKcal.h" />
+    <ClInclude Include="Source\XmlKcalReader.h" />
+    <ClInclude Include="Source\XmlKcalWriter.h" />
+    <ClInclude Include="Source\XmlKoolhydraten.h" />
+    <ClInclude Include="Source\XmlKoolhydratenReader.h" />
+    <ClInclude Include="Source\XmlKoolhydratenWriter.h" />
+    <ClInclude Include="Source\XmlPersonalia.h" />
+    <ClInclude Include="Source\XmlPersonaliaReader.h" />
+    <ClInclude Include="Source\XmlPersonaliaWriter.h" />
+    <ClInclude Include="Source\XmlPortie.h" />
+    <ClInclude Include="Source\XmlPortieomschrijving.h" />
+    <ClInclude Include="Source\XmlPortieomschrijvingReader.h" />
+    <ClInclude Include="Source\XmlPortieomschrijvingWriter.h" />
+    <ClInclude Include="Source\XmlPortieReader.h" />
+    <ClInclude Include="Source\XmlPortieWriter.h" />
+    <ClInclude Include="Source\XmlPropoints.h" />
+    <ClInclude Include="Source\XmlPropointsReader.h" />
+    <ClInclude Include="Source\XmlPropointsWriter.h" />
+    <ClInclude Include="Source\XmlPuntenper100.h" />
+    <ClInclude Include="Source\XmlPuntenper100Reader.h" />
+    <ClInclude Include="Source\XmlPuntenper100Writer.h" />
+    <ClInclude Include="Source\XmlRecept.h" />
+    <ClInclude Include="Source\XmlReceptdef.h" />
+    <ClInclude Include="Source\XmlReceptdefReader.h" />
+    <ClInclude Include="Source\XmlReceptdefs.h" />
+    <ClInclude Include="Source\XmlReceptdefsReader.h" />
+    <ClInclude Include="Source\XmlReceptdefsWriter.h" />
+    <ClInclude Include="Source\XmlReceptdefWriter.h" />
+    <ClInclude Include="Source\XmlReceptReader.h" />
+    <ClInclude Include="Source\XmlReceptWriter.h" />
+    <ClInclude Include="Source\XmlStandardlot.h" />
+    <ClInclude Include="Source\XmlStandardlotReader.h" />
+    <ClInclude Include="Source\XmlStandardlotWriter.h" />
+    <ClInclude Include="Source\XmlSterrelot.h" />
+    <ClInclude Include="Source\XmlSterrelotReader.h" />
+    <ClInclude Include="Source\XmlSterrelotWriter.h" />
+    <ClInclude Include="Source\XmlStrategybase.h" />
+    <ClInclude Include="Source\XmlStrategybaseReader.h" />
+    <ClInclude Include="Source\XmlStrategybaseWriter.h" />
+    <ClInclude Include="Source\XmlUnit.h" />
+    <ClInclude Include="Source\XmlUnitReader.h" />
+    <ClInclude Include="Source\XmlUnits.h" />
+    <ClInclude Include="Source\XmlUnitsReader.h" />
+    <ClInclude Include="Source\XmlUnitsWriter.h" />
+    <ClInclude Include="Source\XmlUnitWriter.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddel.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddeldef.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddeldefReader.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddeldefs.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddeldefsReader.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddeldefsWriter.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddeldefWriter.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddelheader.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddelheaderReader.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddelheaderWriter.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddelReader.h" />
+    <ClInclude Include="Source\XmlVoedingsmiddelWriter.h" />
+    <ClInclude Include="Source\XmlVoedingswaarde.h" />
+    <ClInclude Include="Source\XmlVoedingswaardeReader.h" />
+    <ClInclude Include="Source\XmlVoedingswaardeWriter.h" />
+    <ClInclude Include="Source\XmlVrijeportie.h" />
+    <ClInclude Include="Source\XmlVrijeportieReader.h" />
+    <ClInclude Include="Source\XmlVrijeportieWriter.h" />
+    <ClInclude Include="Source\XmlWeek.h" />
+    <ClInclude Include="Source\XmlWeekReader.h" />
+    <ClInclude Include="Source\XmlWeekWriter.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

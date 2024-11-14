@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE elements SYSTEM "E:/Projects/VC2015/XercesCodeGenerator/XercesCodeGenerator/generator.dtd">
+<elements namespace="ww2015">
+  <element name="receptdefs" root="true">
+    <children>
+      <child name="receptdef" number="ZeroOrMore"/>
+    </children>
+  </element> <!-- receptdefs -->
+  <element name="voedingsmiddeldefs" root="true">
+    <children>
+      <child name="voedingsmiddeldef" number="ZeroOrMore"/>
+    </children>
+  </element>
+  <element name="gerechtdefs" root="true">
+    <children>
+      <child name="gerechtdef" number="ZeroOrMore"/>
+    </children>
+  </element>
+  <element name="units" root="true">
+    <children>
+      <child name="unit" number="ZeroOrMore"/>
+    </children>
+  </element>
+  <element name="week" root="true">
+    <children>
+      <child name="dag" number="OneOrMore"/>
+    </children>
+    <attributes>
+      <attribute name="begindatum"/>
+      <attribute name="einddatum"/>
+      <attribute name="punten" type="int"/>
+      <attribute name="weekpunten" type="int"/>
+      <attribute name="startweight"/>
+      <attribute name="strategie" type="enum" default="FlexiPoints">
+        <enumvalues>
+          <enumvalue value="FlexiPoints"/>
+          <enumvalue value="ProPoints"/>
+          <enumvalue value="KCal"/>
+          <enumvalue value="Koolhydraten"/>
+        </enumvalues>
+      </attribute>
+    </attributes>
+  </element>
+  <element name="voedingswaarde">
+    <attributes>
+      <attribute name="kcalper100" default="-1"/>
+      <attribute name="vetper100" default="-1"/>
+      <attribute name="koolhydratenper100" default="-1"/>
+      <attribute name="eiwitper100" default="-1"/>
+      <attribute name="vezelsper100" default="-1"/>
+    </attributes>
+  </element>
+  <element name="puntenper100">
+    <attributes>
+      <attribute name="punten"/>
+    </attributes>
+  </element>
+  <element name="portieomschrijving">
+    <attributes>
+      <attribute name="omschrijving"/>
+    </attributes>
+  </element>
+  <element name="dag" root="false">
+    <children>
+      <child name="voedingsmiddel" number="ZeroOrMore"/>
+      <child name="recept" number="ZeroOrMore"/>
+      <child name="gerecht" number="ZeroOrMore"/>
+      <child name="handmatigitem" number="ZeroOrMore"/>
+      <child name="bonuscell" number="ZeroOrMore"/>
+    </children>
+    <attributes>
+      <attribute name="bonuspunten"/>
+      <attribute name="datum"/>
+      <attribute name="gewicht"/>
+    </attributes>
+  </element>
+  <element name="voedingsmiddelheader">
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="categorie"/>
+      <attribute name="merk" required="false"/>
+      <attribute name="unit"/>
+    </attributes>
+  </element>
+  <element name="voedingsmiddeldef">
+    <children>
+      <child name="voedingsmiddelheader" number="One"/>
+      <child name="portie" number="OneOrMore"/>
+      <child name="voedingswaarde" number="ZeroOrOne"/>
+      <child name="puntenper100" number="ZeroOrOne"/>
+    </children>
+    <attributes>
+      <attribute name="favoriet" type="enum" default="false">
+        <enumvalues>
+          <enumvalue value="true"/>
+          <enumvalue value="false"/>
+        </enumvalues>
+      </attribute>
+    </attributes>
+  </element>
+  <element name="receptdef">
+    <children>
+      <child name="voedingsmiddel" number="ZeroOrMore"/>
+      <child name="recept" number="ZeroOrMore"/>
+      <child name="gerecht" number="ZeroOrMore"/>
+      <child name="handmatigitem" number="ZeroOrMore"/>
+    </children>
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="porties"/>
+    </attributes>
+  </element>
+  <element name="gerechtdef">
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="punten"/>
+    </attributes>
+  </element>
+  <element name="voedingsmiddel">
+    <children>
+      <child name="standardlot" number="ZeroOrOne"/>
+      <child name="freelot" number="ZeroOrOne"/>
+    </children>
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="categorie"/>
+      <attribute name="merk" required="false"/>
+      <attribute name="unit"/>
+    </attributes>
+  </element>
+  <element name="recept">
+    <children/>
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="punten"/>
+      <attribute name="hoeveelheid"/>
+    </attributes>
+  </element>
+  <element name="gerecht">
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="punten"/>
+      <attribute name="hoeveelheid"/>
+    </attributes>
+  </element>
+  <element name="handmatigitem"> <!-- Kan alleen worden toegevoed aan een dag -->
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="punten"/>
+      <attribute name="hoeveelheid"/>
+    </attributes>
+  </element>
+  <element name="unit">
+    <attributes>
+      <attribute name="naam"/>
+    </attributes>
+  </element>
+  <element name="portie">
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="eenheden"/>
+    </attributes>
+  </element>
+  <element name="standardlot">
+    <children>
+      <child name="portie" number="One"/>
+      <child name="voedingswaarde" number="ZeroOrOne"/>
+      <child name="puntenper100" number="ZeroOrOne"/>
+    </children>
+    <attributes>
+      <attribute name="hoeveelheid"/>
+    </attributes>
+  </element>
+  <element name="freelot">
+    <attributes>
+      <attribute name="punten"/>
+    </attributes>
+  </element>
+  <element name="personalia" root="true">
+    <attributes>
+      <attribute name="naam"/>
+      <attribute name="gebruikersnaam"/>
+      <attribute name="punten"/>
+      <attribute name="pppunten"/>
+      <attribute name="ppweekpunten"/>
+      <attribute name="kcpunten"/>
+      <attribute name="kcweekpunten"/>
+      <attribute name="geboren"/>
+      <attribute name="geslacht" type="enum">
+        <enumvalues>
+          <enumvalue value="Mannelijk"/>
+          <enumvalue value="Vrouwelijk"/>
+        </enumvalues>
+      </attribute>
+      <attribute name="werk" type="enum">
+        <enumvalues>
+          <enumvalue value="Zittend"/>
+          <enumvalue value="Staand"/>
+          <enumvalue value="Lopend"/>
+          <enumvalue value="Zwaar"/>
+        </enumvalues>
+      </attribute>
+      <attribute name="lengte"/>
+      <attribute name="gewicht"/>
+      <attribute name="streefgewicht"/>
+      <attribute name="startgewicht"/>
+      <attribute name="huidiggewicht"/>
+      <attribute name="strategie" type="enum" default="CarboHydrates">
+        <enumvalues>
+          <enumvalue value="FlexiPoints"/>
+          <enumvalue value="ProPoints"/>
+          <enumvalue value="KCal"/>
+          <enumvalue value="CarboHydrates"/>
+        </enumvalues>
+      </attribute>
+    </attributes>
+  </element>
+  <element name="bonuslist" root="false">
+    <children>
+      <child name="bonuscell" number="ZeroOrMore"/>
+    </children>
+  </element>
+  <element name="bonuscell">
+    <attributes>
+      <attribute name="gewicht" required="true" type="int"/>
+      <attribute name="intensiteit" required="true" type="enum">
+        <enumvalues>
+          <enumvalue value="laag"/>
+          <enumvalue value="middel"/>
+          <enumvalue value="hoog"/>
+        </enumvalues>
+      </attribute>
+      <attribute name="minuten" required="true" type="int"/>
+      <attribute name="punten" required="true" type="int"/>
+    </attributes>
+  </element>
+  <element name="vrijeportie">
+    <!-- represents a free amount of food that has a fixed number of points -->
+    <attributes>
+      <attribute name="voedingsmiddel" required="true"/>
+      <attribute name="punten" required="true"/>
+    </attributes>
+  </element>
+  <element name="sterrelot">
+    <!-- represents a portion of food that has a fixed number of points -->
+    <attributes>
+      <attribute name="voedingsmiddel" required="true"/>
+      <attribute name="portie" required="true"/>
+      <attribute name="hoeveelheid" required="true"/>
+    </attributes>
+  </element>
+  <element name="vrijeporties" root="false">
+    <children>
+      <child name="vrijeportie" number="ZeroOrOne"/>
+    </children>
+  </element>
+  <element name="sterrelots" root="false">
+    <children>
+      <child name="sterrelot" number="ZeroOrOne"/>
+    </children>
+  </element>
+  <element name="flexipoints" root="true">
+    <children>
+      <child name="bonuslist" number="One"/>
+      <child name="strategybase" number="One"/>
+      <child name="vrijeporties" number="One"/>
+    </children>
+  </element>
+  <element name="propoints" root="true">
+    <children>
+      <child name="bonuslist" number="One"/>
+      <child name="strategybase" number="One"/>
+      <child name="sterrelots" number="One"/>
+    </children>
+  </element>
+  <element name="kcal" root="true">
+    <children>
+      <child name="strategybase" number="One"/>
+    </children>
+  </element>
+  <element name="koolhydraten" root="true">
+    <children>
+      <child name="strategybase" number="One"/>
+    </children>
+  </element>
+  <element name="strategybase">
+  </element>
+</elements>
