@@ -55,7 +55,7 @@ namespace WW_NAMESPACE
 {
 
 
- XmlReader::XmlReader(WW::Model & aModel)
+XmlReader::XmlReader(WW::Model & aModel)
 : mModel(aModel)
 {
 }

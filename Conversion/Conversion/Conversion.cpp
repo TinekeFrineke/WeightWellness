@@ -3,8 +3,8 @@
 
 #include "stdafx.h"
 
-#include "ww\wwmodel\xml01\xml01reader.h"
-#include "ww\wwmodel\xmlwriter.h"
+#include "WWModel/XmlReader.h"
+#include "WWModel/XmlWriter.h"
 
 #include <xercesc/util/PlatformUtils.hpp>
 
@@ -17,7 +17,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
   XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
 
-  WW_0_1::XmlReader reader(model);
+  WW_1_0::XmlReader reader(model);
   reader.Read(argv[1]);
 
   WW_1_0::XmlWriter writer(model);

@@ -37,7 +37,6 @@ public:
   double                    GetPoints() const                 { return mPoints; }
   double                    GetSaveablePoints() const         { return mSaveablePoints; }
   STRATEGY_TYPE             GetStrategy() const               { return mStrategy; }
-  //const PointsCalculator &  GetCalculator() const             { return mCalculator; }
 
   void                      SetPoints(double aPoints)         { mPoints = aPoints; }
   void                      SetSaveablePoints(double aPoints) { mSaveablePoints = aPoints; }

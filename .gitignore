@@ -33,3 +33,7 @@ WeightWatchers/weightwatchers.ini
 WeightWatchers/.vs/
 /WWGenerated2015/Debug/
 /WWGenerated2015/Release/
+/Conversion/Conversion/Release/
+/Conversion/Conversion/Debug/
+/WWGenerated2019/Debug/
+/WWGenerated2019/Release/
