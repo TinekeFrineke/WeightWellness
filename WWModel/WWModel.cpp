@@ -323,7 +323,7 @@ double Model::GetVrijePunten() const
     case STRATEGY_TYPE::ProPoints:
       return 7;
     case STRATEGY_TYPE::KCal:
-      return GetPersonalia()[0]->GetKCWeekPuntenTotaal() / 7 - GetPersonalia()[0]->GetKCPuntenTotaal();
+      return GetPersonalia()[0]->GetKCWeekPuntenTotaal();
     case STRATEGY_TYPE::CarboHydrates:
       return GetPersonalia()[0]->GetCHWeekPuntenTotaal() / 7 - GetPersonalia()[0]->GetCHPuntenTotaal();
     default:
