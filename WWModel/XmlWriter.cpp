@@ -54,33 +54,33 @@ namespace WW_NAMESPACE
 {
 
 
-XmlBase::eRESULT XmlWriter::Write(const std::tstring & aDirectory)
+XmlBase::Result XmlWriter::Write(const std::tstring & aDirectory)
 {
-  eRESULT result = WritePersonalia(aDirectory + _T("\\personalia.xml"));
-  if (result == RESULT_Ok)
+  Result result = WritePersonalia(aDirectory + _T("\\personalia.xml"));
+  if (result == Result::RESULT_Ok)
     result = WriteUnits(aDirectory + _T("\\units.xml"));
-  if (result == RESULT_Ok)
+  if (result == Result::RESULT_Ok)
     result = WriteVoedingsmiddelDefinities(aDirectory + _T("\\voedingsmiddeldefinities.xml"));
-  if (result == RESULT_Ok)
+  if (result == Result::RESULT_Ok)
     result = WriteRecepten(aDirectory + _T("\\recepten.xml"));
-  if (result == RESULT_Ok)
+  if (result == Result::RESULT_Ok)
     result = WriteGerechten(aDirectory + _T("\\restaurantgerechten.xml"));
-  if (result == RESULT_Ok)
+  if (result == Result::RESULT_Ok)
     result = WriteWeeks(aDirectory);
 
   return result;
 }
 
 
-XmlBase::eRESULT XmlWriter::WritePersonalia(const std::tstring & aFilename)
+XmlBase::Result XmlWriter::WritePersonalia(const std::tstring & aFilename)
 {
   if (mModel.GetPersonalia().empty())
-    return RESULT_Ok;
+    return Result::RESULT_Ok;
 
   WW::Personalia * personalia = mModel.GetActivePersonalia();
 
   if (personalia->GetUserName().empty())
-    return RESULT_Ok;
+    return Result::RESULT_Ok;
 
   WW_GENERATED_NAMESPACE::XmlPersonalia * xmlpersonalia = new WW_GENERATED_NAMESPACE::XmlPersonalia;
   xmlpersonalia->Setgebruikersnaam(personalia->GetUserName());
@@ -117,7 +117,7 @@ XmlBase::eRESULT XmlWriter::WritePersonalia(const std::tstring & aFilename)
     xmlpersonalia->Setstrategie(WW_GENERATED_NAMESPACE::XmlPersonalia::strategie_CarboHydrates);
     break;
   default:
-    return RESULT_InterpretError;
+    return Result::RESULT_InterpretError;
   }
 
   WW_GENERATED_NAMESPACE::XmlPersonaliaWriter writer;
@@ -125,11 +125,11 @@ XmlBase::eRESULT XmlWriter::WritePersonalia(const std::tstring & aFilename)
 
   delete xmlpersonalia;
 
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::WriteUnits(const std::tstring & aFilename)
+XmlBase::Result XmlWriter::WriteUnits(const std::tstring & aFilename)
 {
   WW_GENERATED_NAMESPACE::XmlUnits * xmlunits = new WW_GENERATED_NAMESPACE::XmlUnits;
 
@@ -146,11 +146,11 @@ XmlBase::eRESULT XmlWriter::WriteUnits(const std::tstring & aFilename)
 
   delete xmlunits;
 
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring & aFilename)
+XmlBase::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring & aFilename)
 {
   WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefs * xmlvmdefinities = new WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefs;
 
@@ -220,11 +220,11 @@ XmlBase::eRESULT XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring & a
   writer.Write(aFilename, *xmlvmdefinities);
   delete xmlvmdefinities;
 
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::WriteRecepten(const std::tstring & aFilename)
+XmlBase::Result XmlWriter::WriteRecepten(const std::tstring & aFilename)
 {
   WW_GENERATED_NAMESPACE::XmlReceptdefs * xmlrecepten = new WW_GENERATED_NAMESPACE::XmlReceptdefs;
 
@@ -246,11 +246,11 @@ XmlBase::eRESULT XmlWriter::WriteRecepten(const std::tstring & aFilename)
   writer.Write(aFilename, *xmlrecepten);
   delete xmlrecepten;
 
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::WriteGerechten(const std::tstring & aFilename)
+XmlBase::Result XmlWriter::WriteGerechten(const std::tstring & aFilename)
 {
   WW_GENERATED_NAMESPACE::XmlGerechtdefs * xmlgerechten = new WW_GENERATED_NAMESPACE::XmlGerechtdefs;
 
@@ -265,16 +265,16 @@ XmlBase::eRESULT XmlWriter::WriteGerechten(const std::tstring & aFilename)
   WW_GENERATED_NAMESPACE::XmlGerechtdefsWriter xmlwriter;
   xmlwriter.Write(aFilename, *xmlgerechten);
   delete xmlgerechten;
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::WriteWeeks(const std::tstring & aDirectory)
+XmlBase::Result XmlWriter::WriteWeeks(const std::tstring & aDirectory)
 {
-  eRESULT result = RESULT_Ok;
+  Result result = Result::RESULT_Ok;
  
   const std::vector<WW::Week *> & weeks = mModel.GetWeeks();
-  for (size_t i = 0; i < weeks.size() && result == RESULT_Ok; ++i)
+  for (size_t i = 0; i < weeks.size() && result == Result::RESULT_Ok; ++i)
   {
     Utils::Date startdate = weeks[i]->GetStartDate();
     result = Write(*weeks[i], aDirectory + _T("\\week") + Utils::ToString(startdate) + _T(".xml"));
@@ -284,15 +284,15 @@ XmlBase::eRESULT XmlWriter::WriteWeeks(const std::tstring & aDirectory)
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::Portie & aPortie, WW_GENERATED_NAMESPACE::XmlPortie & anXmlPortie)
+XmlBase::Result XmlWriter::Create(const WW::Portie & aPortie, WW_GENERATED_NAMESPACE::XmlPortie & anXmlPortie)
 {
   anXmlPortie.Seteenheden(Str::ToTString(aPortie.GetUnits()));
   anXmlPortie.Setnaam(aPortie.GetName().Get());
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::CalculatedLot & aLot, WW_GENERATED_NAMESPACE::XmlStandardlot & anXmlLot)
+XmlBase::Result XmlWriter::Create(const WW::CalculatedLot & aLot, WW_GENERATED_NAMESPACE::XmlStandardlot & anXmlLot)
 {
   anXmlLot.Sethoeveelheid(Str::ToTString(aLot.GetNumberOfPortions()));
 
@@ -309,11 +309,11 @@ XmlBase::eRESULT XmlWriter::Create(const WW::CalculatedLot & aLot, WW_GENERATED_
   anXmlLot.Add(xmlVoedingswaarde);
 
   Create(aLot.GetPortie(), anXmlLot.GetPortie());
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::FixedLot & aLot, WW_GENERATED_NAMESPACE::XmlStandardlot & anXmlLot)
+XmlBase::Result XmlWriter::Create(const WW::FixedLot & aLot, WW_GENERATED_NAMESPACE::XmlStandardlot & anXmlLot)
 {
   anXmlLot.Sethoeveelheid(Str::ToTString(aLot.GetNumberOfPortions()));
 
@@ -325,18 +325,18 @@ XmlBase::eRESULT XmlWriter::Create(const WW::FixedLot & aLot, WW_GENERATED_NAMES
   anXmlLot.Add(xmlpuntenper100);
 
   Create(aLot.GetPortie(), anXmlLot.GetPortie());
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::FreeLot & aLot, WW_GENERATED_NAMESPACE::XmlFreelot & anXmlLot)
+XmlBase::Result XmlWriter::Create(const WW::FreeLot & aLot, WW_GENERATED_NAMESPACE::XmlFreelot & anXmlLot)
 {
   anXmlLot.Setpunten(Str::ToTString(aLot.GetPoints()));
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::Voedingsmiddel &   aMiddel,
+XmlBase::Result XmlWriter::Create(const WW::Voedingsmiddel &   aMiddel,
                                    WW_GENERATED_NAMESPACE::XmlVoedingsmiddel &  anXmlMiddel)
 {
   anXmlMiddel.Setnaam(aMiddel.GetName());
@@ -346,41 +346,41 @@ XmlBase::eRESULT XmlWriter::Create(const WW::Voedingsmiddel &   aMiddel,
   XmlLotCreateVisitor visitor(*this, anXmlMiddel);
   const_cast<WW::Voedingsmiddel &>(aMiddel).GetLot().Accept(visitor);
 
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::Recept &   aRecept,
+XmlBase::Result XmlWriter::Create(const WW::Recept &   aRecept,
                                    WW_GENERATED_NAMESPACE::XmlRecept &  anXmlRecept)
 {
   anXmlRecept.Setnaam(aRecept.GetName());
   anXmlRecept.Sethoeveelheid(Str::ToTString(aRecept.GetNumberOfPortions()));
   anXmlRecept.Setpunten(Str::ToTString(aRecept.GetPointsPerPortion()));
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::Gerecht &                  aGerecht,
+XmlBase::Result XmlWriter::Create(const WW::Gerecht &                  aGerecht,
                                    WW_GENERATED_NAMESPACE::XmlGerecht & anXmlGerecht)
 {
   anXmlGerecht.Setnaam(aGerecht.GetName());
   anXmlGerecht.Sethoeveelheid(Str::ToTString(aGerecht.GetNumberOfPortions()));
   anXmlGerecht.Setpunten(Str::ToTString(aGerecht.GetPointsPerPortion()));
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::ManualItem &                     anItem,
+XmlBase::Result XmlWriter::Create(const WW::ManualItem &                     anItem,
                                    WW_GENERATED_NAMESPACE::XmlHandmatigitem & anXmlItem)
 {
   anXmlItem.Setnaam(anItem.GetName());
   anXmlItem.Sethoeveelheid(Str::ToTString(anItem.GetAmount()));
   anXmlItem.Setpunten(Str::ToTString(anItem.GetPoints()));
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Create(const WW::Day &  aDay,
+XmlBase::Result XmlWriter::Create(const WW::Day &  aDay,
                                    WW_GENERATED_NAMESPACE::XmlDag & aDag)
 {
   aDag.Setdatum(Utils::ToString(aDay.GetDate()));
@@ -421,11 +421,11 @@ XmlBase::eRESULT XmlWriter::Create(const WW::Day &  aDay,
   for (size_t i = 0; i < items.size(); ++i)
     items[i]->Accept(visitor);
 
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
-XmlBase::eRESULT XmlWriter::Write(WW::Week & aWeek, const std::tstring & aFilename)
+XmlBase::Result XmlWriter::Write(WW::Week & aWeek, const std::tstring & aFilename)
 {
   WW_GENERATED_NAMESPACE::XmlWeek * xmlweek = new WW_GENERATED_NAMESPACE::XmlWeek;
 
@@ -467,7 +467,7 @@ XmlBase::eRESULT XmlWriter::Write(WW::Week & aWeek, const std::tstring & aFilena
   xmlwriter.Write(aFilename, *xmlweek);
   delete xmlweek;
 
-  return RESULT_Ok;
+  return Result::RESULT_Ok;
 }
 
 
