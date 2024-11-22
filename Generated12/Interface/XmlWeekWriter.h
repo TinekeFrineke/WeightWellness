@@ -1,12 +1,12 @@
 #pragma once
-#include "stdafx.h"
+#include "../Interface\Generated\stdafx.h"
 
 #include <xercesc/util/xercesdefs.hpp>
 
-#include "XmlClass.h"
+#include "../Interface\Generated\XmlClass.h"
 
 // forward declarations
-namespace ww2015 { class XmlWeek; }
+namespace ww_1_2 { class XmlWeek; }
 
 XERCES_CPP_NAMESPACE_BEGIN
 class DOMElement;
@@ -14,7 +14,7 @@ class DOMNode;
 class DOMDocument;
 XERCES_CPP_NAMESPACE_END
 
-namespace ww2015
+namespace ww_1_2
 {
 class XmlWeekWriter : public XmlClass
 {

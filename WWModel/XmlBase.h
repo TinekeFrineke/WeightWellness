@@ -9,7 +9,7 @@
 class XmlBase
 {
 public:
-  enum class Result { RESULT_Ok, RESULT_FileNotFound, RESULT_ErrorInFilename,
-                       RESULT_FileOpenError,
-                       RESULT_ErrorInFile, RESULT_ParserError, RESULT_InterpretError };
+  enum class Result { Ok, FileNotFound, ErrorInFilename,
+                       FileOpenError,
+                       ErrorInFile, ParserError, InterpretError };
 };

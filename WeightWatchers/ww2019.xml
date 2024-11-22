@@ -88,10 +88,10 @@
       <child name="puntenper100" number="ZeroOrOne"/>
     </children>
     <attributes>
-      <attribute name="favoriet" type="enum" default="false">
+      <attribute name="favoriet" type="enum" default="no">
         <enumvalues>
-          <enumvalue value="true"/>
-          <enumvalue value="false"/>
+          <enumvalue value="yes"/>
+          <enumvalue value="no"/>
         </enumvalues>
       </attribute>
     </attributes>
@@ -221,17 +221,5 @@
       <attribute name="minuten" required="true" type="int"/>
       <attribute name="punten" required="true" type="int"/>
     </attributes>
-  </element>
-  <element name="kcal" root="true">
-    <children>
-      <child name="strategybase" number="One"/>
-    </children>
-  </element>
-  <element name="koolhydraten" root="true">
-    <children>
-      <child name="strategybase" number="One"/>
-    </children>
-  </element>
-  <element name="strategybase">
   </element>
 </elements>

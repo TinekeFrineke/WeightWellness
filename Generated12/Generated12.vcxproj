@@ -81,12 +81,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019\WW\Generated12\Interface\Generated;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
@@ -108,8 +107,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -221,83 +219,83 @@
     <ClCompile Include="Source\XmlWeekWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Interface\stdafx.h" />
-    <ClInclude Include="Interface\XmlBonuscell.h" />
-    <ClInclude Include="Interface\XmlBonuscellReader.h" />
-    <ClInclude Include="Interface\XmlBonuscellWriter.h" />
-    <ClInclude Include="Interface\XmlBonuslist.h" />
-    <ClInclude Include="Interface\XmlBonuslistReader.h" />
-    <ClInclude Include="Interface\XmlBonuslistWriter.h" />
-    <ClInclude Include="Interface\XmlClass.h" />
-    <ClInclude Include="Interface\XmlDag.h" />
-    <ClInclude Include="Interface\XmlDagReader.h" />
-    <ClInclude Include="Interface\XmlDagWriter.h" />
-    <ClInclude Include="Interface\XmlFreelot.h" />
-    <ClInclude Include="Interface\XmlFreelotReader.h" />
-    <ClInclude Include="Interface\XmlFreelotWriter.h" />
-    <ClInclude Include="Interface\XmlGerecht.h" />
-    <ClInclude Include="Interface\XmlGerechtdef.h" />
-    <ClInclude Include="Interface\XmlGerechtdefReader.h" />
-    <ClInclude Include="Interface\XmlGerechtdefs.h" />
-    <ClInclude Include="Interface\XmlGerechtdefsReader.h" />
-    <ClInclude Include="Interface\XmlGerechtdefsWriter.h" />
-    <ClInclude Include="Interface\XmlGerechtdefWriter.h" />
-    <ClInclude Include="Interface\XmlGerechtReader.h" />
-    <ClInclude Include="Interface\XmlGerechtWriter.h" />
-    <ClInclude Include="Interface\XmlHandmatigitem.h" />
-    <ClInclude Include="Interface\XmlHandmatigitemReader.h" />
-    <ClInclude Include="Interface\XmlHandmatigitemWriter.h" />
-    <ClInclude Include="Interface\XmlPersonalia.h" />
-    <ClInclude Include="Interface\XmlPersonaliaReader.h" />
-    <ClInclude Include="Interface\XmlPersonaliaWriter.h" />
-    <ClInclude Include="Interface\XmlPortie.h" />
-    <ClInclude Include="Interface\XmlPortieomschrijving.h" />
-    <ClInclude Include="Interface\XmlPortieomschrijvingReader.h" />
-    <ClInclude Include="Interface\XmlPortieomschrijvingWriter.h" />
-    <ClInclude Include="Interface\XmlPortieReader.h" />
-    <ClInclude Include="Interface\XmlPortieWriter.h" />
-    <ClInclude Include="Interface\XmlPuntenper100.h" />
-    <ClInclude Include="Interface\XmlPuntenper100Reader.h" />
-    <ClInclude Include="Interface\XmlPuntenper100Writer.h" />
-    <ClInclude Include="Interface\XmlRecept.h" />
-    <ClInclude Include="Interface\XmlReceptdef.h" />
-    <ClInclude Include="Interface\XmlReceptdefReader.h" />
-    <ClInclude Include="Interface\XmlReceptdefs.h" />
-    <ClInclude Include="Interface\XmlReceptdefsReader.h" />
-    <ClInclude Include="Interface\XmlReceptdefsWriter.h" />
-    <ClInclude Include="Interface\XmlReceptdefWriter.h" />
-    <ClInclude Include="Interface\XmlReceptReader.h" />
-    <ClInclude Include="Interface\XmlReceptWriter.h" />
-    <ClInclude Include="Interface\XmlStandardlot.h" />
-    <ClInclude Include="Interface\XmlStandardlotReader.h" />
-    <ClInclude Include="Interface\XmlStandardlotWriter.h" />
-    <ClInclude Include="Interface\XmlUnit.h" />
-    <ClInclude Include="Interface\XmlUnitReader.h" />
-    <ClInclude Include="Interface\XmlUnits.h" />
-    <ClInclude Include="Interface\XmlUnitsReader.h" />
-    <ClInclude Include="Interface\XmlUnitsWriter.h" />
-    <ClInclude Include="Interface\XmlUnitWriter.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddel.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelbasis.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelbasisReader.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelbasisWriter.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddeldef.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddeldefReader.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddeldefs.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddeldefsReader.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddeldefsWriter.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddeldefWriter.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelheader.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelheaderReader.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelheaderWriter.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelReader.h" />
-    <ClInclude Include="Interface\XmlVoedingsmiddelWriter.h" />
-    <ClInclude Include="Interface\XmlVoedingswaarde.h" />
-    <ClInclude Include="Interface\XmlVoedingswaardeReader.h" />
-    <ClInclude Include="Interface\XmlVoedingswaardeWriter.h" />
-    <ClInclude Include="Interface\XmlWeek.h" />
-    <ClInclude Include="Interface\XmlWeekReader.h" />
-    <ClInclude Include="Interface\XmlWeekWriter.h" />
+    <ClInclude Include="Interface\Generated\stdafx.h" />
+    <ClInclude Include="Interface\Generated\XmlBonuscell.h" />
+    <ClInclude Include="Interface\Generated\XmlBonuscellReader.h" />
+    <ClInclude Include="Interface\Generated\XmlBonuscellWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlBonuslist.h" />
+    <ClInclude Include="Interface\Generated\XmlBonuslistReader.h" />
+    <ClInclude Include="Interface\Generated\XmlBonuslistWriter.h" />
+    <ClInclude Include="Interface\Generated\XMLClass.h" />
+    <ClInclude Include="Interface\Generated\XmlDag.h" />
+    <ClInclude Include="Interface\Generated\XmlDagReader.h" />
+    <ClInclude Include="Interface\Generated\XmlDagWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlFreelot.h" />
+    <ClInclude Include="Interface\Generated\XmlFreelotReader.h" />
+    <ClInclude Include="Interface\Generated\XmlFreelotWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlGerecht.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtdef.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtdefReader.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtdefs.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtdefsReader.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtdefsWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtdefWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtReader.h" />
+    <ClInclude Include="Interface\Generated\XmlGerechtWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlHandmatigitem.h" />
+    <ClInclude Include="Interface\Generated\XmlHandmatigitemReader.h" />
+    <ClInclude Include="Interface\Generated\XmlHandmatigitemWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlPersonalia.h" />
+    <ClInclude Include="Interface\Generated\XmlPersonaliaReader.h" />
+    <ClInclude Include="Interface\Generated\XmlPersonaliaWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlPortie.h" />
+    <ClInclude Include="Interface\Generated\XmlPortieomschrijving.h" />
+    <ClInclude Include="Interface\Generated\XmlPortieomschrijvingReader.h" />
+    <ClInclude Include="Interface\Generated\XmlPortieomschrijvingWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlPortieReader.h" />
+    <ClInclude Include="Interface\Generated\XmlPortieWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlPuntenper100.h" />
+    <ClInclude Include="Interface\Generated\XmlPuntenper100Reader.h" />
+    <ClInclude Include="Interface\Generated\XmlPuntenper100Writer.h" />
+    <ClInclude Include="Interface\Generated\XmlRecept.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptdef.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptdefReader.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptdefs.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptdefsReader.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptdefsWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptdefWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptReader.h" />
+    <ClInclude Include="Interface\Generated\XmlReceptWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlStandardlot.h" />
+    <ClInclude Include="Interface\Generated\XmlStandardlotReader.h" />
+    <ClInclude Include="Interface\Generated\XmlStandardlotWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlUnit.h" />
+    <ClInclude Include="Interface\Generated\XmlUnitReader.h" />
+    <ClInclude Include="Interface\Generated\XmlUnits.h" />
+    <ClInclude Include="Interface\Generated\XmlUnitsReader.h" />
+    <ClInclude Include="Interface\Generated\XmlUnitsWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlUnitWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddel.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelbasis.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelbasisReader.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelbasisWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddeldef.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddeldefReader.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddeldefs.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddeldefsReader.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddeldefsWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddeldefWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelheader.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelheaderReader.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelheaderWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelReader.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingsmiddelWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingswaarde.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingswaardeReader.h" />
+    <ClInclude Include="Interface\Generated\XmlVoedingswaardeWriter.h" />
+    <ClInclude Include="Interface\Generated\XmlWeek.h" />
+    <ClInclude Include="Interface\Generated\XmlWeekReader.h" />
+    <ClInclude Include="Interface\Generated\XmlWeekWriter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -40,21 +40,21 @@ class XmlReader : public XmlBase
 public:
                               XmlReader(WW::Model & aModel);
 
-  Result                     Read(const std::tstring & aDirectory);
+  Result                      Read(const std::tstring & aDirectory);
 
-  Result                     ReadPersonalia(const std::tstring & aDirectory);
-  Result                     ReadUnits(const std::tstring & aDirectory);
-  Result                     ReadVoedingsmiddelDefinities(const std::tstring & aDirectory);
-  Result                     ReadRecepten(const std::tstring & aDirectory);
-  Result                     ReadGerechten(const std::tstring & aDirectory);
-  Result                     ReadWeeks(const std::tstring & aDirectory);
-  Result                     ReadBonusCells(const std::tstring & aDirectory);
+  Result                      ReadPersonalia(const std::tstring & aDirectory);
+  Result                      ReadUnits(const std::tstring & aDirectory);
+  Result                      ReadVoedingsmiddelDefinities(const std::tstring & aDirectory);
+  Result                      ReadRecepten(const std::tstring & aDirectory);
+  Result                      ReadGerechten(const std::tstring & aDirectory);
+  Result                      ReadWeeks(const std::tstring & aDirectory);
+  Result                      ReadBonusCells(const std::tstring & aDirectory);
 
 private:
   XmlReader &                 operator=(const XmlReader &);
                               XmlReader(const XmlReader &);
 
-  Result                     ReadWeek(const std::tstring & aDirectory);
+  Result                      ReadWeek(const std::tstring & aDirectory);
 
   WW::Portie                  Create(const WW_GENERATED_NAMESPACE::XmlPortie & aPortie);
   WW::Voedingsmiddel *        Create(const WW_GENERATED_NAMESPACE::XmlVoedingsmiddel & aVoedingsmiddel);

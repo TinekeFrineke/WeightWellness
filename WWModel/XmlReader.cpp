@@ -64,17 +64,17 @@ XmlReader::XmlReader(WW::Model & aModel)
 XmlBase::Result XmlReader::Read(const std::tstring & aDirectory)
 {
   Result result = ReadPersonalia(aDirectory + _T("\\personalia.xml"));
-  if (result == Result::RESULT_Ok)
+  if (result == Result::Ok)
     result = ReadVoedingsmiddelDefinities(aDirectory + _T("\\voedingsmiddeldefinities.xml"));
-  if (result == Result::RESULT_Ok)
+  if (result == Result::Ok)
     result = ReadUnits(aDirectory + _T("\\units.xml"));
-  if (result == Result::RESULT_Ok)
+  if (result == Result::Ok)
     result = ReadRecepten(aDirectory + _T("\\recepten.xml"));
-  if (result == Result::RESULT_Ok)
+  if (result == Result::Ok)
     result = ReadGerechten(aDirectory + _T("\\restaurantgerechten.xml"));
-  if (result == Result::RESULT_Ok)
+  if (result == Result::Ok)
     result = ReadWeeks(aDirectory);
-  if (result == Result::RESULT_Ok)
+  if (result == Result::Ok)
     result = ReadBonusCells(aDirectory);
 
   return result;
@@ -89,22 +89,22 @@ XmlBase::Result XmlReader::ReadPersonalia(const std::tstring & aDirectory)
   {
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_Ok:
     if (xmlpersonalia == NULL)
-      return Result::RESULT_Ok;
+      return Result::Ok;
     break;
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_FileNotFound:
-    return Result::RESULT_FileNotFound;
+    return Result::FileNotFound;
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_ErrorInFilename:
-    return Result::RESULT_ErrorInFilename;
+    return Result::ErrorInFilename;
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_FileOpenError:
-    return Result::RESULT_FileOpenError;
+    return Result::FileOpenError;
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_ErrorInFile:
-    return Result::RESULT_ErrorInFile;
+    return Result::ErrorInFile;
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_ParserError:
-    return Result::RESULT_ParserError;
+    return Result::ParserError;
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_InterpretError:
   case WW_GENERATED_NAMESPACE::XmlPersonaliaReader::RESULT_WriteError:
   default:
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
     break;
   }
 
@@ -158,14 +158,14 @@ XmlBase::Result XmlReader::ReadPersonalia(const std::tstring & aDirectory)
     personalia->SetStrategy(WW::STRATEGY_TYPE::CarboHydrates);
     break;
   default:
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
   }
 
   mModel.Add(personalia);
 
   delete xmlpersonalia;
 
-  return Result::RESULT_Ok;
+  return Result::Ok;
 
 }
 
@@ -177,22 +177,22 @@ XmlBase::Result XmlReader::ReadUnits(const std::tstring & aDirectory)
   {
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_Ok:
     if (xmlunits == NULL)
-      return Result::RESULT_Ok;
+      return Result::Ok;
     break;
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_FileNotFound:
-    return Result::RESULT_FileNotFound;
+    return Result::FileNotFound;
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_ErrorInFilename:
-    return Result::RESULT_ErrorInFilename;
+    return Result::ErrorInFilename;
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_FileOpenError:
-    return Result::RESULT_FileOpenError;
+    return Result::FileOpenError;
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_ErrorInFile:
-    return Result::RESULT_ErrorInFile;
+    return Result::ErrorInFile;
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_ParserError:
-    return Result::RESULT_ParserError;
+    return Result::ParserError;
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_InterpretError:
   case WW_GENERATED_NAMESPACE::XmlUnitsReader::RESULT_WriteError:
   default:
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
     break;
   }
 
@@ -202,7 +202,7 @@ XmlBase::Result XmlReader::ReadUnits(const std::tstring & aDirectory)
 
   delete xmlunits;
 
-  return Result::RESULT_Ok;
+  return Result::Ok;
 }
 
 
@@ -214,22 +214,22 @@ XmlBase::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring & aDi
   {
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_Ok:
     if (xmlvoedingsmiddeldefs == NULL)
-      return Result::RESULT_Ok;
+      return Result::Ok;
     break;
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_FileNotFound:
-    return Result::RESULT_FileNotFound;
+    return Result::FileNotFound;
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_ErrorInFilename:
-    return Result::RESULT_ErrorInFilename;
+    return Result::ErrorInFilename;
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_FileOpenError:
-    return Result::RESULT_FileOpenError;
+    return Result::FileOpenError;
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_ErrorInFile:
-    return Result::RESULT_ErrorInFile;
+    return Result::ErrorInFile;
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_ParserError:
-    return Result::RESULT_ParserError;
+    return Result::ParserError;
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_InterpretError:
   case WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldefsReader::RESULT_WriteError:
   default:
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
     break;
   }
 
@@ -257,7 +257,7 @@ XmlBase::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring & aDi
     else
     {
       assert(false);
-      return Result::RESULT_InterpretError;
+      return Result::InterpretError;
     }
 
     WW::VMDefinitie * definitie = new WW::VMDefinitie(mModel.GetCalculator(),
@@ -295,7 +295,7 @@ XmlBase::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring & aDi
 
   delete xmlvoedingsmiddeldefs;
 
-  return Result::RESULT_Ok;
+  return Result::Ok;
 }
 
 
@@ -307,22 +307,22 @@ XmlBase::Result XmlReader::ReadRecepten(const std::tstring & aDirectory)
   {
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_Ok:
     if (xmlreceptdefs == NULL)
-      return Result::RESULT_Ok;
+      return Result::Ok;
     break;
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_FileNotFound:
-    return Result::RESULT_FileNotFound;
+    return Result::FileNotFound;
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_ErrorInFilename:
-    return Result::RESULT_ErrorInFilename;
+    return Result::ErrorInFilename;
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_FileOpenError:
-    return Result::RESULT_FileOpenError;
+    return Result::FileOpenError;
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_ErrorInFile:
-    return Result::RESULT_ErrorInFile;
+    return Result::ErrorInFile;
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_ParserError:
-    return Result::RESULT_ParserError;
+    return Result::ParserError;
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_InterpretError:
   case WW_GENERATED_NAMESPACE::XmlReceptdefsReader::RESULT_WriteError:
   default:
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
     break;
   }
 
@@ -344,7 +344,7 @@ XmlBase::Result XmlReader::ReadRecepten(const std::tstring & aDirectory)
 
   delete xmlreceptdefs;
 
-  return Result::RESULT_Ok;
+  return Result::Ok;
 }
 
 
@@ -363,7 +363,7 @@ XmlBase::Result XmlReader::ReadWeeks(const std::tstring & aDirectory)
 
   FindClose(hFind);
 
-  return Result::RESULT_Ok;
+  return Result::Ok;
 }
 
 
@@ -375,22 +375,22 @@ XmlBase::Result XmlReader::ReadWeek(const std::tstring & aDirectory)
   {
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_Ok:
     if (xmlweek == NULL)
-      return Result::RESULT_Ok;
+      return Result::Ok;
     break;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_FileNotFound:
-    return Result::RESULT_FileNotFound;
+    return Result::FileNotFound;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_ErrorInFilename:
-    return Result::RESULT_ErrorInFilename;
+    return Result::ErrorInFilename;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_FileOpenError:
-    return Result::RESULT_FileOpenError;
+    return Result::FileOpenError;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_ErrorInFile:
-    return Result::RESULT_ErrorInFile;
+    return Result::ErrorInFile;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_ParserError:
-    return Result::RESULT_ParserError;
+    return Result::ParserError;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_InterpretError:
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_WriteError:
   default:
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
     break;
   }
 
@@ -419,7 +419,7 @@ XmlBase::Result XmlReader::ReadWeek(const std::tstring & aDirectory)
   if (!mModel.Add(week))
   {
     delete week;
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
   }
 
   const std::vector<WW_GENERATED_NAMESPACE::XmlDag *> dagen(xmlweek->GetDagList());
@@ -429,13 +429,13 @@ XmlBase::Result XmlReader::ReadWeek(const std::tstring & aDirectory)
     if (!week->Add(dag))
     {
       delete dag;
-      return Result::RESULT_InterpretError;
+      return Result::InterpretError;
     }
   }
 
   delete xmlweek;
 
-  return Result::RESULT_Ok;
+  return Result::Ok;
 }
 
 
@@ -443,7 +443,7 @@ XmlBase::Result XmlReader::ReadGerechten(const std::tstring & aDirectory)
 {
   (void)aDirectory;
 
-  return Result::RESULT_Ok;
+  return Result::Ok;
 }
 
 
@@ -456,28 +456,28 @@ XmlBase::Result XmlReader::ReadBonusCells(const std::tstring & aDirectory)
   {
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_Ok:
     if (xmlbonuslist == NULL)
-      return Result::RESULT_Ok;
+      return Result::Ok;
     break;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_FileNotFound:
     delete xmlbonuslist;
-    return Result::RESULT_FileNotFound;
+    return Result::FileNotFound;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_ErrorInFilename:
     delete xmlbonuslist;
-    return Result::RESULT_ErrorInFilename;
+    return Result::ErrorInFilename;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_FileOpenError:
     delete xmlbonuslist;
-    return Result::RESULT_FileOpenError;
+    return Result::FileOpenError;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_ErrorInFile:
     delete xmlbonuslist;
-    return Result::RESULT_ErrorInFile;
+    return Result::ErrorInFile;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_ParserError:
     delete xmlbonuslist;
-    return Result::RESULT_ParserError;
+    return Result::ParserError;
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_InterpretError:
   case WW_GENERATED_NAMESPACE::XmlWeekReader::RESULT_WriteError:
   default:
     delete xmlbonuslist;
-    return Result::RESULT_InterpretError;
+    return Result::InterpretError;
     break;
   }
 
@@ -498,7 +498,7 @@ XmlBase::Result XmlReader::ReadBonusCells(const std::tstring & aDirectory)
       break;
     default:
       delete xmlbonuslist;
-      return Result::RESULT_InterpretError;
+      return Result::InterpretError;
     }
 
     mModel.GetBonusPointsMap()[intensity][cell->Getgewicht()][(cell->Getminuten())] = cell->Getpunten();
@@ -506,7 +506,7 @@ XmlBase::Result XmlReader::ReadBonusCells(const std::tstring & aDirectory)
 
   //mModel.GetBonusPointsMap().Debug();
   delete xmlbonuslist;
-  return Result::RESULT_Ok;
+  return Result::Ok;
 }
 
 

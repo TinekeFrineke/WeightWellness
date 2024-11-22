@@ -37,3 +37,7 @@ WeightWatchers/.vs/
 /Conversion/Conversion/Debug/
 /WWGenerated2019/Debug/
 /WWGenerated2019/Release/
+BuildLog.htm
+*.lastbuildstate
+*.recipe
+*.FileListAbsolute.txt
