@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "WW/WWModel/Day.h"
+#include "model/Day.h"
 #include "doubleedit.h"
 #include "intedit.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WW/WWModel/Item.h"
+#include "model/Item.h"
 
 namespace WW
 {

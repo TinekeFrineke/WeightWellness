@@ -4,7 +4,7 @@
 #include "resource.h"
 #include "stringedit.h"
 
-#include "WW/WWModel/lot.h"
+#include "model/lot.h"
 #include "afxwin.h"
 
 

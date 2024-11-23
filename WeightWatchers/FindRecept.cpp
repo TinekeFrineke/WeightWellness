@@ -6,10 +6,10 @@
 
 #include <assert.h>
 #include "WeightWatchers.h"
-#include "WW/WWModel/Day.h"
-#include "WW/WWModel/Portie.h"
-#include "WW/WWModel/Recept.h"
-#include "WW/WWModel/ReceptDefinitie.h"
+#include "model/Day.h"
+#include "model/Portie.h"
+#include "model/Recept.h"
+#include "model/ReceptDefinitie.h"
 
 // CFindRecept dialog
 

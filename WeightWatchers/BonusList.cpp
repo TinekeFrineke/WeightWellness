@@ -22,7 +22,7 @@
 /////////////////////////////////////////////////////
 
 
-#include "WW/WWModel/Day.h"
+#include "model/Day.h"
 //#include "WW/WWModel/Bonus.h"
 
 /*

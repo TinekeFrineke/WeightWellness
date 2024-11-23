@@ -5,7 +5,7 @@
 #include "WeightWatchers.h"
 #include ".\editreceptdialog.h"
 
-#include "WW/WWModel/Recept.h"
+#include "model/Recept.h"
 
 // EditReceptDialog dialog
 

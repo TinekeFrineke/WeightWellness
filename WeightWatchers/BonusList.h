@@ -4,7 +4,7 @@
 
 #include "ItemList.h"
 
-#include "WW/WWModel/Day.h"
+#include "model/Day.h"
 
 namespace WW
 {

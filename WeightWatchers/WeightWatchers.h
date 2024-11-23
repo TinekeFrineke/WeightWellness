@@ -9,7 +9,7 @@
 
 #include "resource.h"		// main symbols
 
-#include "WW/WWModel/WWModel.h"
+#include "model/WWModel.h"
 
 
 // CWWApplication:

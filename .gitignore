@@ -42,3 +42,7 @@ BuildLog.htm
 *.recipe
 *.FileListAbsolute.txt
 /_WWModel/
+Browse.VC.db-shm
+Browse.VC.db-wal
+Solution.VC.db-shm
+Solution.VC.db-wal

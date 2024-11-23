@@ -2,6 +2,7 @@
 
 #include "afxcmn.h"
 
+#include <memory>
 #include <vector>
 
 #include "resource.h"
@@ -44,16 +45,15 @@ public:
 
   void                          SetDefinition(WW::VMDefinitie * aDefinitie) { mDefinitie = aDefinitie; }
   // Transfers ownership
-  void                          SetPorties(const std::vector<WW::Portie *> & aPortieList);
+  void                          SetPorties(const std::vector<std::unique_ptr<WW::Portie>> & aPortieList);
   //
-  const std::vector<WW::Portie *> &
-                                GetPorties() const { return mPorties; }
+  const std::vector<std::unique_ptr<WW::Portie>>& GetPorties() const { return mPorties; }
   //
   bool                          AddPortie(WW::Portie * aPortie);
   // Destroys the removed portie
   bool                          RemovePortie(WW::Portie * aPortie);
   // Copies porties to aPortieList, clears itemlist
-  void                          ReleasePorties(std::vector<WW::Portie *> & aPortieList);
+  void                          ReleasePorties(std::vector<std::unique_ptr<WW::Portie>> & aPortieList);
   // Clears itemlist and porties with it.
   void                          DeletePorties();
 
@@ -75,7 +75,7 @@ private:
   std::vector<PortieListItem *> mItems;
   WW::Model &                   mModel;
   WW::VMDefinitie * mDefinitie;
-  std::vector<WW::Portie *>     mPorties;
+  std::vector<std::unique_ptr<WW::Portie>> mPorties;
 };
 
 // NM_DBLCLK

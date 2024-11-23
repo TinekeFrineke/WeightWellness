@@ -7,6 +7,7 @@
 #include "Portie.h"
 #include "PortieNaam.h"
 #include "Unit.h"
+#include "VoedingsMiddelDefinitionVisitor.h"
 #include "WWDefinitions.h"
 
 namespace WW
@@ -88,19 +89,21 @@ private:
 class CalculatedVMDef;
 class FixedVMDef;
 
+
 class VMDefBase
 {
 public:
-    virtual                   ~VMDefBase() {}
+    virtual                   ~VMDefBase() = default;
+
+    virtual void Accept(VoedingsMiddelDefinitionVisitor& visitor) = 0;
+    virtual VMDefBase* Copy() const = 0;
+    virtual double            GetPointsPer100Units() const = 0;
 
     virtual bool              IsCalculated() const { return false; }
     virtual bool              IsFixed() const { return false; }
 
-    virtual CalculatedVMDef* GetCalculatedVMDef() { return NULL; }
-    virtual FixedVMDef* GetFixedVMDef() { return NULL; }
-
-    virtual VMDefBase* Copy() const = 0;
-    virtual double            GetPointsPer100Units() const = 0;
+    virtual CalculatedVMDef* GetCalculatedVMDef() { return nullptr; }
+    virtual FixedVMDef* GetFixedVMDef() { return nullptr; }
 };
 
 class CalculatedVMDef: public VMDefBase, public Entity<CalculatedVMDef>
@@ -111,6 +114,8 @@ public:
     CalculatedVMDef& operator=(const CalculatedVMDef&);
 
     virtual                   ~CalculatedVMDef();
+
+    void Accept(VoedingsMiddelDefinitionVisitor& visitor) override;
 
     void                      SetParameters(const FoodParameters& aParameters)
     {
@@ -151,6 +156,8 @@ public:
     FixedVMDef();
     FixedVMDef(const FixedVMDef&);
     virtual                   ~FixedVMDef();
+
+    void Accept(VoedingsMiddelDefinitionVisitor& visitor) override;
 
     void                      SetPointsPer100Units(double aPoints) { mPointsPer100Units = aPoints; }
     double                    GetPointsPer100Units() const { return mPointsPer100Units; }

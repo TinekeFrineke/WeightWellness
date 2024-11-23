@@ -220,6 +220,11 @@ CalculatedVMDef::~CalculatedVMDef()
 #endif
 }
 
+void CalculatedVMDef::Accept(VMDefinitionBaseVisitor& visitor)
+{
+    visitor.Visit* this);
+}
+
 
 VMDefBase* CalculatedVMDef::Copy() const
 {
@@ -251,6 +256,11 @@ FixedVMDef::~FixedVMDef()
 #ifdef FIND_LEAKS
     Unregister();
 #endif
+}
+
+void FixedVMDef::Accept(VMDefinitionBaseVisitor& visitor)
+{
+    visitor.Visit(*this);
 }
 
 

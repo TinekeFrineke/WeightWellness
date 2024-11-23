@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "WW/WWModel/WWModel.h"
-#include "WW/WWModel/Portie.h"
+#include "model/WWModel.h"
+#include "model/Portie.h"
 #include "afxwin.h"
 
 #include "DoubleEdit.h"
@@ -19,7 +19,7 @@ class CEditPortieDialog : public CDialog
 public:
                     CEditPortieDialog(WW::Model & aModel, WW::VMDefinitie & aDefinitie,
                                       WW::Portie * aPortie,
-                                      const std::vector<WW::Portie *> & aPorties,
+                                      const std::vector<std::unique_ptr<WW::Portie>> & aPorties,
                                       CWnd* pParent = NULL);   // standard constructor
 	virtual           ~CEditPortieDialog();
 

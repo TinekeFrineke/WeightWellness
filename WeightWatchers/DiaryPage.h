@@ -5,7 +5,7 @@
 #include "afxdtctl.h"
 #include "resource.h"
 
-#include "WW/WWModel/WWModel.h"
+#include "model/WWModel.h"
 
 #include "TabPage.h"
 #include "DiaryItemList.h"

@@ -52,7 +52,7 @@ PortieList::PortieList(WW::Model &                    aModel,
 }
 
 
-void PortieList::SetPorties(const std::vector<WW::Portie *> & aPortieList)
+void PortieList::SetPorties(const std::vector<WW::Portie> & aPortieList)
 {
   // Destroys the current portions inside.
   for (size_t i = 0; i < mPorties.size(); ++i)
@@ -96,7 +96,7 @@ bool PortieList::RemovePortie(WW::Portie * aPortie)
 }
 
 
-void PortieList::ReleasePorties(std::vector<WW::Portie *> & aPortieList)
+void PortieList::ReleasePorties(std::vector<std::unique_ptr<WW::Portie> & aPortieList)
 {
   // Releases the portions without destroying them.
   aPortieList = mPorties;

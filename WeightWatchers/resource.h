@@ -92,11 +92,7 @@
 #define IDC_ADD_RECEPT                  1078
 #define IDC_ADD_GERECHT                 1079
 #define IDC_WEIGHT                      1083
-#define IDC_VRIJEPORTIECHECK            1084
 #define IDC_PUNTEN_STATIC               1085
-#define IDC_VRIJEPORTIE_CHECK           1086
-#define IDC_STERREPORTIECHECK           1089
-#define IDC_STERREPORTIE                1090
 #define IDC_ADD_HANDMATIG               1091
 #define IDC_TOTAAL                      1092
 #define IDC_EIWITTEN_PER_100            1093
