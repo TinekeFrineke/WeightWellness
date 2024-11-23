@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{677819B0-97DC-4CE3-8737-B21C7C78C6E8}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>Model</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)Generated2019\Interface\;C:\Projects\VC2019\WWConversion\WWModel\interface\model;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;$(ProjectDir)interface\model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;UNICODE;_UNICODE;CRTDBG_MAP_ALLOC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <SDLCheck>true</SDLCheck>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)Model.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Generated2019\Interface\;C:\Projects\VC2019\WWConversion\WWModel\interface\model;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;$(ProjectDir)interface\model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)Model.lib</OutputFile>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="interface\model\BonusPointsMap.h" />
+    <ClInclude Include="interface\model\CategorieNaam.h" />
+    <ClInclude Include="interface\model\Day.h" />
+    <ClInclude Include="interface\model\Entity.h" />
+    <ClInclude Include="interface\model\Gerecht.h" />
+    <ClInclude Include="interface\model\GerechtDefinitie.h" />
+    <ClInclude Include="interface\model\Item.h" />
+    <ClInclude Include="interface\model\Lot.h" />
+    <ClInclude Include="interface\model\ManualItem.h" />
+    <ClInclude Include="interface\model\MerkNaam.h" />
+    <ClInclude Include="interface\model\ModelException.h" />
+    <ClInclude Include="interface\model\Naam.h" />
+    <ClInclude Include="interface\model\Personalia.h" />
+    <ClInclude Include="interface\model\PointsCalculator.h" />
+    <ClInclude Include="interface\model\Portie.h" />
+    <ClInclude Include="interface\model\PortieNaam.h" />
+    <ClInclude Include="interface\model\Recept.h" />
+    <ClInclude Include="interface\model\ReceptDefinitie.h" />
+    <ClInclude Include="interface\model\Unit.h" />
+    <ClInclude Include="interface\model\Voedingsmiddel.h" />
+    <ClInclude Include="interface\model\VoedingsmiddelDefinitie.h" />
+    <ClInclude Include="interface\model\Week.h" />
+    <ClInclude Include="interface\model\WWDefinitions.h" />
+    <ClInclude Include="interface\model\WWModel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\BonusPointsMap.cpp" />
+    <ClCompile Include="source\CategorieNaam.cpp" />
+    <ClCompile Include="source\Day.cpp" />
+    <ClCompile Include="source\Entity.cpp" />
+    <ClCompile Include="source\Gerecht.cpp" />
+    <ClCompile Include="source\Lot.cpp" />
+    <ClCompile Include="source\MerkNaam.cpp" />
+    <ClCompile Include="source\ModelException.cpp" />
+    <ClCompile Include="source\Personalia.cpp" />
+    <ClCompile Include="source\PointsCalculator.cpp" />
+    <ClCompile Include="source\Portie.cpp" />
+    <ClCompile Include="source\PortieNaam.cpp" />
+    <ClCompile Include="source\Recept.cpp" />
+    <ClCompile Include="source\ReceptDefinitie.cpp" />
+    <ClCompile Include="source\Unit.cpp" />
+    <ClCompile Include="source\Voedingsmiddel.cpp" />
+    <ClCompile Include="source\VoedingsmiddelDefinitie.cpp" />
+    <ClCompile Include="source\Week.cpp" />
+    <ClCompile Include="source\WWModel.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

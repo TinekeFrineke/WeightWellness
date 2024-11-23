@@ -270,6 +270,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src\;$(ProjectDir)Interface</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -287,6 +288,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src\;$(ProjectDir)Interface</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
