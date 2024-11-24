@@ -10,6 +10,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Model", "Model\Model.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeightWatchers", "WeightWatchers\WeightWatchers\WeightWatchers.vcxproj", "{4137DBBA-1CBF-4A01-BD08-4D8F97BB55DC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlReader2019", "XmlReader2019\XmlReader2019.vcxproj", "{6B0971EF-0237-4CC6-9630-999FF0C63F4B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlWriter2019", "XmlWriter2019\XmlWriter2019.vcxproj", "{41E6295B-8926-41A8-AA34-EB2461ACE736}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -100,6 +104,46 @@ Global
 		{4137DBBA-1CBF-4A01-BD08-4D8F97BB55DC}.Template|Win32.Build.0 = Debug|Win32
 		{4137DBBA-1CBF-4A01-BD08-4D8F97BB55DC}.Template|x64.ActiveCfg = Debug|Win32
 		{4137DBBA-1CBF-4A01-BD08-4D8F97BB55DC}.Template|x64.Build.0 = Debug|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Debug|Win32.Build.0 = Debug|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Debug|x64.ActiveCfg = Debug|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Debug|x64.Build.0 = Debug|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Release|Win32.ActiveCfg = Release|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Release|Win32.Build.0 = Release|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Release|x64.ActiveCfg = Release|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Release|x64.Build.0 = Release|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Debug|Win32.ActiveCfg = Debug|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Debug|Win32.Build.0 = Debug|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Debug|x64.ActiveCfg = Debug|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Debug|x64.Build.0 = Debug|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Release|Win32.ActiveCfg = Release|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Release|Win32.Build.0 = Release|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Release|x64.ActiveCfg = Release|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Static Release|x64.Build.0 = Release|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Template|Win32.ActiveCfg = Debug|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Template|Win32.Build.0 = Debug|Win32
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Template|x64.ActiveCfg = Debug|x64
+		{6B0971EF-0237-4CC6-9630-999FF0C63F4B}.Template|x64.Build.0 = Debug|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Debug|Win32.ActiveCfg = Debug|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Debug|Win32.Build.0 = Debug|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Debug|x64.ActiveCfg = Debug|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Debug|x64.Build.0 = Debug|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Release|Win32.ActiveCfg = Release|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Release|Win32.Build.0 = Release|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Release|x64.ActiveCfg = Release|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Release|x64.Build.0 = Release|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Debug|Win32.ActiveCfg = Debug|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Debug|Win32.Build.0 = Debug|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Debug|x64.ActiveCfg = Debug|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Debug|x64.Build.0 = Debug|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Release|Win32.ActiveCfg = Release|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Release|Win32.Build.0 = Release|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Release|x64.ActiveCfg = Release|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Static Release|x64.Build.0 = Release|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Template|Win32.ActiveCfg = Debug|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Template|Win32.Build.0 = Debug|Win32
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Template|x64.ActiveCfg = Debug|x64
+		{41E6295B-8926-41A8-AA34-EB2461ACE736}.Template|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

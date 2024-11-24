@@ -17,75 +17,74 @@ class VMDefinitie;
 class VMDefinitiesFilter
 {
 public:
-                              VMDefinitiesFilter() : mFavouritesOnly(false) {}
-                              VMDefinitiesFilter(const std::tstring & aDescription,
-                                                 const std::tstring & aCategory,
-                                                 const std::tstring & aMerk);
+    VMDefinitiesFilter() : mFavouritesOnly(false) {}
+    VMDefinitiesFilter(const std::tstring& aDescription,
+                       const std::tstring& aCategory,
+                       const std::tstring& aMerk);
 
-  std::tstring                GetDescription() const    { return mDescription; }
-  std::tstring                GetCategory() const       { return mCategory; }
-  std::tstring                GetBrand() const          { return mMerk; }
+    std::tstring                GetDescription() const { return mDescription; }
+    std::tstring                GetCategory() const { return mCategory; }
+    std::tstring                GetBrand() const { return mMerk; }
 
-  bool                        IsFavouritesOnly() const  { return mFavouritesOnly; }
-  void                        SetFavouritesOnly(bool bFilter);
+    bool                        IsFavouritesOnly() const { return mFavouritesOnly; }
+    void                        SetFavouritesOnly(bool bFilter);
 
 private:
-  std::tstring                mDescription;
-  std::tstring                mCategory;
-  std::tstring                mMerk;
-  bool                        mFavouritesOnly;
+    std::tstring                mDescription;
+    std::tstring                mCategory;
+    std::tstring                mMerk;
+    bool                        mFavouritesOnly;
 };
 
 class VMDefinitiesListItem
 {
 public:
-                                VMDefinitiesListItem(WW::VMDefinitie * anItem)
-                                  : mItem(anItem) {}
+    VMDefinitiesListItem(WW::VMDefinitie* anItem)
+        : mItem(anItem) {}
 
-  void                          Write(CListCtrl & aControl, int iItemIndex);
+    void                          Write(CListCtrl& aControl, int iItemIndex);
 
-  WW::VMDefinitie * GetItem() { return mItem; }
+    WW::VMDefinitie* GetItem() { return mItem; }
 
-  bool                          Complies(const VMDefinitiesFilter & aFilter) const; 
+    bool                          Complies(const VMDefinitiesFilter& aFilter) const;
 
 private:
-  WW::VMDefinitie * mItem;
+    WW::VMDefinitie* mItem;
 };
 
 
-class VMDefinitiesList : public CListCtrl
+class VMDefinitiesList: public CListCtrl
 {
 public:
-                              VMDefinitiesList(WW::Model & aModel);
-                              ~VMDefinitiesList();
+    VMDefinitiesList(WW::Model& aModel);
+    ~VMDefinitiesList();
 
-  void                        Initialize();
-  void                        SetFilter(const VMDefinitiesFilter & aFilter);
-  void                        Fill();
+    void                        Initialize();
+    void                        SetFilter(const VMDefinitiesFilter& aFilter);
+    void                        Fill();
 
-  VMDefinitiesListItem *      GetSelectedItem();
-  void                        SelectItem(WW::VMDefinitie & aDefinition);
-  void                        SelectItem(int iIndex, bool bSelect);
+    VMDefinitiesListItem* GetSelectedItem();
+    void                        SelectItem(WW::VMDefinitie& aDefinition);
+    void                        SelectItem(int iIndex, bool bSelect);
 
-  void                        SetFavouritesOnly(bool bFilter);
+    void                        SetFavouritesOnly(bool bFilter);
 
-	//{{AFX_MSG(VMDefinitiesList)
+    //{{AFX_MSG(VMDefinitiesList)
   //afx_msg void OnLButtonDblClk( UINT, CPoint );
-	//}}AFX_MSG
+    //}}AFX_MSG
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
-// afx_msg void OnNMDblclkItemlist(NMHDR *pNMHDR, LRESULT *pResult);
+    // afx_msg void OnNMDblclkItemlist(NMHDR *pNMHDR, LRESULT *pResult);
 
 private:
-  void                        ClearItems();
-  static bool                 Complies(const WW::VMDefinitie & anItem,
-                                       const VMDefinitiesFilter & aFilter);
+    void                        ClearItems();
+    static bool                 Complies(const WW::VMDefinitie& anItem,
+                                         const VMDefinitiesFilter& aFilter);
 
-  std::vector<VMDefinitiesListItem *>
-                              mItems;
-  WW::Model &                 mModel;
-  VMDefinitiesFilter          mFilter;
+    std::vector<std::unique_ptr<VMDefinitiesListItem>> mItems;
+    WW::Model& mModel;
+    VMDefinitiesFilter mFilter;
 };
 
 // NM_DBLCLK

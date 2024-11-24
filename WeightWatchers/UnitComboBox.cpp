@@ -4,8 +4,8 @@
 
 #include <assert.h>
 
-#include "WW/WWmodel/Unit.h"
-#include "WW/WWmodel/WWModel.h"
+#include "model/Unit.h"
+#include "model/WWModel.h"
 
 BEGIN_MESSAGE_MAP(UnitComboBox, CComboBox)
 	//{{AFX_MSG_MAP(UnitComboBox)

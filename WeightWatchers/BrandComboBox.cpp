@@ -4,8 +4,8 @@
 
 #include <assert.h>
 
-#include "WW/WWmodel/Unit.h"
-#include "WW/WWmodel/WWModel.h"
+#include "model/Unit.h"
+#include "model/WWModel.h"
 
 
 BrandComboBox::BrandComboBox(const WW::Model &    aModel,
