@@ -42,6 +42,5 @@ END_MESSAGE_MAP()
 void NewNameDialog::OnBnClickedOk()
 {
 	m_Name = mName.GetValue();
-	// TODO: Add your control notification handler code here
 	CDialogEx::OnOK();
 }

@@ -80,7 +80,6 @@ void CEditBonuses::OnBnClickedEdit()
 
 void CEditBonuses::OnBnClickedDelete()
 {
-  // TODO: Add your control notification handler code here
 }
 
 

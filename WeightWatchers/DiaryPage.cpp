@@ -265,7 +265,6 @@ void CDiaryPage::OnBnClickedAddRecept()
 
 void CDiaryPage::OnBnClickedAddGerecht()
 {
-    // TODO: Add your control notification handler code here
 }
 
 
@@ -314,7 +313,6 @@ void CDiaryPage::OnBnClickedAddHandmatig()
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
-        // TODO: Place code here to handle when the dialog is
         //  dismissed with OK
         if (dialog.GetItem() != nullptr)
         {

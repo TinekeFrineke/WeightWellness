@@ -125,7 +125,6 @@ void CPersonaliaDialog::OnCancel()
 
 void CPersonaliaDialog::OnBnClickedMannelijk()
 {
-    // TODO: Add your control notification handler code here
     mGeslacht = GS_Mannelijk;
     mButtonVrouwelijk.SetCheck(BST_UNCHECKED);
 }

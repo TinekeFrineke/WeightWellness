@@ -15,44 +15,44 @@ class Voedingsmiddel;
 
 // EditReceptDefDialog dialog
 
-class EditReceptDefDialog : public CDialog
+class EditReceptDefDialog: public CDialog
 {
-	DECLARE_DYNAMIC(EditReceptDefDialog)
+    DECLARE_DYNAMIC(EditReceptDefDialog)
 
 public:
-  EditReceptDefDialog(WW::Model & aModel, WW::ReceptDefinitie * aRecept, CWnd* pParent = NULL);   // standard constructor
-	virtual ~EditReceptDefDialog();
+    EditReceptDefDialog(WW::Model& aModel, WW::ReceptDefinitie* aRecept, CWnd* pParent = NULL);   // standard constructor
+    virtual ~EditReceptDefDialog();
 
-// Dialog Data
-	enum { IDD = IDD_EDITRECEPT_DIALOG };
+    // Dialog Data
+    enum { IDD = IDD_EDITRECEPT_DIALOG };
 
-  WW::ReceptDefinitie * GetRecept() { return mRecept; }
+    std::unique_ptr<WW::ReceptDefinitie> ExtractRecept();
 
 protected:
-	virtual void          DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    virtual void          DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
-  BOOL                  OnInitDialog();
+    BOOL                  OnInitDialog();
 
-  afx_msg void          OnBnClickedAdd();
-  afx_msg void          OnBnClickedEdit();
-  afx_msg void          OnBnClickedOk();
+    afx_msg void          OnBnClickedAdd();
+    afx_msg void          OnBnClickedEdit();
+    afx_msg void          OnBnClickedOk();
 
 private:
-  void                  EditSelectedItem();
+    void                  EditSelectedItem();
 
-  WW::Model &           mModel;
-  WW::ReceptDefinitie * mRecept;
+    WW::Model& mModel;
+    std::unique_ptr<WW::ReceptDefinitie> mRecept;
 
-  ItemList              mItemList;
-  CStringEdit           mName;
-  CDoubleEdit           mPointsPerPortion;
+    ItemList              mItemList;
+    CStringEdit           mName;
+    CDoubleEdit           mPointsPerPortion;
 public:
-  afx_msg void OnLvnItemchangedItemsList(NMHDR *pNMHDR, LRESULT *pResult);
-  // // Aantal porties in het recept
-  CIntEdit mPorties;
-  afx_msg void OnNMDblclkItemsList(NMHDR *pNMHDR, LRESULT *pResult);
-  afx_msg void OnEnChangePorties();
-  afx_msg void OnBnClickedDelete();
+    afx_msg void OnLvnItemchangedItemsList(NMHDR* pNMHDR, LRESULT* pResult);
+    // // Aantal porties in het recept
+    CIntEdit mPorties;
+    afx_msg void OnNMDblclkItemsList(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void OnEnChangePorties();
+    afx_msg void OnBnClickedDelete();
 };

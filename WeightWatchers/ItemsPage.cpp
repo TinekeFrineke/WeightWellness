@@ -110,8 +110,8 @@ void CItemsPage::EditItem()
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
         {
-            // TODO: Place code here to handle when the dialog is
-            //  dismissed with OK
+            // TODO ww2019: Place code here to handle when the dialog is
+            // dismissed with OK
         }
     }
 }

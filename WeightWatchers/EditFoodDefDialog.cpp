@@ -211,7 +211,6 @@ void CEditFoodDefDialog::OnBnClickedEdit()
     if (!FinalizeData())
         return;
 
-    // TODO: Add your control notification handler code here
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {
@@ -227,7 +226,6 @@ void CEditFoodDefDialog::OnBnClickedDelete()
     if (!FinalizeData())
         return;
 
-    // TODO: Add your control notification handler code here
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {

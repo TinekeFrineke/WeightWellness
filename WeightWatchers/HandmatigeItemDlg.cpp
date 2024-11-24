@@ -60,7 +60,6 @@ BOOL HandmatigeItemDlg::OnInitDialog()
 
 void HandmatigeItemDlg::OnBnClickedOk()
 {
-    // TODO: Add your control notification handler code here
     if (mItem == NULL)
         mItem = std::make_unique<WW::ManualItem>(mName.GetValue(), mPoints.GetValue());
 

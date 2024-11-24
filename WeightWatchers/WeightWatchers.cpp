@@ -98,7 +98,7 @@ BOOL CWWApplication::InitInstance()
                 MessageBox(0, _T("Invalid personalia"), terror.c_str(), MB_OK);
                 return FALSE;
             }
-            // TODO: Place code here to handle when the dialog is
+            // TODO ww2019: Place code here to handle when the dialog is
             //  dismissed with OK
         }
         else if (nResponse == IDCANCEL)
@@ -115,12 +115,12 @@ BOOL CWWApplication::InitInstance()
     INT_PTR nResponse = dlg.DoModal();
     if (nResponse == IDOK)
     {
-        // TODO: Place code here to handle when the dialog is
+        // TODO ww2019: Place code here to handle when the dialog is
         //  dismissed with OK
     }
     else if (nResponse == IDCANCEL)
     {
-        // TODO: Place code here to handle when the dialog is
+        // TODO ww2019: Place code here to handle when the dialog is
         //  dismissed with Cancel
     }
 

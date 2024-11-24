@@ -43,6 +43,5 @@ protected:
 
 private:
     WW::Model& mModel;
-    std::vector<WW::ReceptDefinitie*> mRecepten;
-    ReceptDefinitiesList      mReceptenList;
+    ReceptDefinitiesList mReceptenList;
 };

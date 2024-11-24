@@ -102,7 +102,6 @@ void CEditPortieDialog::OnBnClickedOk()
 
     mPortie->SetUnits(mUnitAmount.GetValue());
 
-    // TODO: Add your control notification handler code here
     OnOK();
 }
 

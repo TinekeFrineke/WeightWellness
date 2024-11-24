@@ -26,6 +26,11 @@ EditReceptDefDialog::~EditReceptDefDialog()
 {
 }
 
+std::unique_ptr<WW::ReceptDefinitie> EditReceptDefDialog::ExtractRecept()
+{
+    return std::move(mRecept);
+}
+
 void EditReceptDefDialog::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
@@ -102,7 +107,7 @@ void EditReceptDefDialog::OnBnClickedAdd()
             return;
         }
 
-        mRecept = new WW::ReceptDefinitie(mName.GetValue());
+        mRecept = std::make_unique<WW::ReceptDefinitie>(mName.GetValue());
     }
 
     CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<WW::LotFactory>(mModel.GetCalculator()), this);
@@ -140,7 +145,6 @@ void EditReceptDefDialog::OnLvnItemchangedItemsList(NMHDR* pNMHDR, LRESULT* pRes
 {
     LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
     (void)pNMLV;
-    // TODO: Add your control notification handler code here
     *pResult = 0;
 }
 

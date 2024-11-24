@@ -125,8 +125,8 @@ void PortieList::ClearItems()
 
 void PortieList::Update(PortieListItem* anItem)
 {
-    // TODO: Place code here to handle when the dialog is
-    //  dismissed with OK
+    // TODO ww2019: Place code here to handle when the dialog is
+    // dismissed with OK
     for (size_t i = 0; i < mItems.size(); ++i)
     {
         if (mItems[i].get() == anItem)
