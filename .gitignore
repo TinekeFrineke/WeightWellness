@@ -46,3 +46,6 @@ Browse.VC.db-shm
 Browse.VC.db-wal
 Solution.VC.db-shm
 Solution.VC.db-wal
+*.ilk
+*.res
+*.exe

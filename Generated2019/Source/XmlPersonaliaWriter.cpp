@@ -49,9 +49,10 @@ void XmlPersonaliaWriter::Fill(XERCES_CPP_NAMESPACE::DOMDocument & aDocument, co
     (void)anElement;
   anElement.setAttribute(_T("naam"), aPersonalia.Getnaam().c_str());
   anElement.setAttribute(_T("gebruikersnaam"), aPersonalia.Getgebruikersnaam().c_str());
-  anElement.setAttribute(_T("punten"), aPersonalia.Getpunten().c_str());
   anElement.setAttribute(_T("kcpunten"), aPersonalia.Getkcpunten().c_str());
   anElement.setAttribute(_T("kcweekpunten"), aPersonalia.Getkcweekpunten().c_str());
+  anElement.setAttribute(_T("chpunten"), aPersonalia.Getchpunten().c_str());
+  anElement.setAttribute(_T("chweekpunten"), aPersonalia.Getchweekpunten().c_str());
   anElement.setAttribute(_T("geboren"), aPersonalia.Getgeboren().c_str());
     switch (aPersonalia.Getgeslacht())
     {

@@ -33,7 +33,7 @@ public:
         WriteError
     };
 
-    virtual ~XmlClass();
+    virtual ~XmlClass() = default;
 
     class ParseErrorHandler: public XERCES_CPP_NAMESPACE::ErrorHandler
     {

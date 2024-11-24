@@ -46,6 +46,8 @@ public:
     std::wstring Getpunten() const;
     std::wstring Getkcpunten() const;
     std::wstring Getkcweekpunten() const;
+    std::wstring Getchpunten() const;
+    std::wstring Getchweekpunten() const;
     std::wstring Getgeboren() const;
     geslacht Getgeslacht() const;
     werk Getwerk() const;
@@ -60,6 +62,8 @@ public:
     void Setpunten(const std::wstring & apunten);
     void Setkcpunten(const std::wstring & akcpunten);
     void Setkcweekpunten(const std::wstring & akcweekpunten);
+    void Setchpunten(const std::wstring & achpunten);
+    void Setchweekpunten(const std::wstring & achweekpunten);
     void Setgeboren(const std::wstring & ageboren);
     void Setgeslacht(geslacht ageslacht);
     void Setwerk(werk awerk);
@@ -79,6 +83,8 @@ private:
     std::wstring mpunten;
     std::wstring mkcpunten;
     std::wstring mkcweekpunten;
+    std::wstring mchpunten;
+    std::wstring mchweekpunten;
     std::wstring mgeboren;
     geslacht mgeslacht;
     werk mwerk;

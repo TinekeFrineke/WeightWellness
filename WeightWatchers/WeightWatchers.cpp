@@ -15,8 +15,8 @@
 #include "WWDialog.h"
 
 #include "model/Personalia.h"
-#include "model/XmlReader.h"
-#include "model/XmlWriter.h"
+#include "xmlreader/XmlReader.h"
+#include "xmlwriter/XmlWriter.h"
 
 #include "NewNameDialog.h"
 
