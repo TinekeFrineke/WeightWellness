@@ -6,6 +6,7 @@
 #include ".\diarypage.h"
 
 #include "model/Day.h"
+#include "model/LotFactory.h"
 #include "model/ManualItem.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
@@ -24,11 +25,10 @@
 // CDiaryPage dialog
 
 IMPLEMENT_DYNAMIC(CDiaryPage, CDialog)
-CDiaryPage::CDiaryPage(WW::Model& aModel, CWnd* pParent /*=NULL*/)
+CDiaryPage::CDiaryPage(WW::Model& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CDiaryPage::IDD, pParent),
     mModel(aModel),
-    mItemList(aModel),
-    mDay(nullptr)
+    mItemList(aModel)
 {
 }
 
@@ -100,7 +100,7 @@ void CDiaryPage::OnCancel()
 bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
 {
     mWeek = mModel.FindWeek(aDate);
-    if (mWeek == NULL)
+    if (mWeek == nullptr)
     {
         Utils::Date enddate(aDate);
         enddate.AddDays(6);
@@ -131,7 +131,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     mEndOfWeek.SetValue(Utils::ToString(mWeek->GetEndDate()));
 
     mDay = mWeek->GetDay(aDate);
-    if (mDay == NULL)
+    if (mDay == nullptr)
     {
         auto day = std::make_unique<WW::Day>(aDate);
         mDay = day.get();
@@ -160,21 +160,20 @@ void CDiaryPage::OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CDiaryPage::OnBnClickedAddFood()
 {
-    CFindVoedingsmiddel dialog(mModel, NULL, this);
+    CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<WW::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
-        if (dialog.GetVoedingsMiddel() != NULL)
+        if (dialog.ExtractVoedingsMiddel() != nullptr)
         {
-            mDay->Add(dialog.GetVoedingsMiddel());
+            mDay->Add(dialog.ExtractVoedingsMiddel());
             mItemList.View(mDay);
             UpdatePointsLeft();
         }
     }
     else
     {
-        if (dialog.GetVoedingsMiddel() != NULL)
-            delete dialog.GetVoedingsMiddel();
+        auto vm(dialog.ExtractVoedingsMiddel());
     }
 }
 
@@ -219,7 +218,7 @@ void CDiaryPage::OnDeltaposSpinWeekEinde(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CDiaryPage::UpdatePointsLeft()
 {
-    if (mWeek == NULL || mDay == NULL)
+    if (mWeek == nullptr || mDay == nullptr)
         return;
 
     mPointsLeft.SetValue(mWeek->GetPointsLeft(mDay->GetDate()));
@@ -250,21 +249,17 @@ void CDiaryPage::OnBnClickedDayPlus()
 
 void CDiaryPage::OnBnClickedAddRecept()
 {
-    CFindRecept dialog(mModel, NULL, this);
+    CFindRecept dialog(mModel, nullptr, this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
-        if (dialog.GetRecept() != NULL)
+        auto recept = dialog.ExtractRecept();
+        if (recept != nullptr)
         {
-            mDay->Add(dialog.GetRecept());
+            mDay->Add(std::move(recept));
             mItemList.View(mDay);
             UpdatePointsLeft();
         }
-    }
-    else
-    {
-        if (dialog.GetRecept() != NULL)
-            delete dialog.GetRecept();
     }
 }
 
@@ -287,7 +282,7 @@ void CDiaryPage::EditItem(WW::Item& item)
 void CDiaryPage::OnBnClickedEdit()
 {
     ItemListItem* item = mItemList.GetSelectedItem();
-    if (item == NULL || item->GetItem() == NULL)
+    if (item == nullptr || item->GetItem() == nullptr)
         return;
 
     EditItem(*item->GetItem());
@@ -296,7 +291,7 @@ void CDiaryPage::OnBnClickedEdit()
 void CDiaryPage::OnBnClickedDelete()
 {
     ItemListItem* item = mItemList.GetSelectedItem();
-    if (item == NULL)
+    if (item == nullptr)
         return;
 
     mDay->Remove(item->GetItem());
@@ -315,23 +310,18 @@ void CDiaryPage::OnEnChangeWeight()
 
 void CDiaryPage::OnBnClickedAddHandmatig()
 {
-    HandmatigeItemDlg dialog(NULL, this);
+    HandmatigeItemDlg dialog(nullptr, this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
         // TODO: Place code here to handle when the dialog is
         //  dismissed with OK
-        if (dialog.GetItem() != NULL)
+        if (dialog.GetItem() != nullptr)
         {
-            mDay->Add(dialog.GetItem());
+            mDay->Add(std::move(dialog.GetItem()));
             mItemList.View(mDay);
             UpdatePointsLeft();
         }
-    }
-    else
-    {
-        if (dialog.GetItem() != NULL)
-            delete dialog.GetItem();
     }
 }
 
@@ -342,7 +332,7 @@ void CDiaryPage::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
     *pResult = 0;
 
     ItemListItem* item = mItemList.GetItemAt(pNMLV->iItem);
-    if (item == NULL || item->GetItem() == 0)
+    if (item == nullptr || item->GetItem() == 0)
         return;
 
     EditItem(*item->GetItem());
@@ -364,8 +354,8 @@ void CDiaryPage::OnShowWindow(BOOL bShow, UINT nStatus)
     mCalculatedBonusPoints.SetValue(mDay->GetCalculatedBonusPoints());
     mWeight.SetValue(mDay->GetWeight());
 
-    mWeekpuntenStatic.ShowWindow(mWeek->GetStrategy() != WW::STRATEGY_TYPE::FlexiPoints ? SW_SHOW : SW_HIDE);
-    mWeekPunten.ShowWindow(mWeek->GetStrategy() != WW::STRATEGY_TYPE::FlexiPoints ? SW_SHOW : SW_HIDE);
+    mWeekpuntenStatic.ShowWindow(SW_SHOW);
+    mWeekPunten.ShowWindow(SW_SHOW);
     mItemList.View(mDay);
 }
 

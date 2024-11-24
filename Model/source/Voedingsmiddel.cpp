@@ -11,19 +11,19 @@ namespace WW
 
 
 Voedingsmiddel::Voedingsmiddel(const std::tstring& aName,
-                               Lot* aLot,
+                               std::unique_ptr<Lot> aLot,
                                const Unit& aUnit)
     : mName(aName),
-    mLot(aLot),
+    mLot(std::move(aLot)),
     mUnit(aUnit)
 {
     assert(mLot != NULL);
 }
 
 
-Voedingsmiddel::Voedingsmiddel(Lot* aLot,
+Voedingsmiddel::Voedingsmiddel(std::unique_ptr<Lot> aLot,
                                const VMDefinitie& aDefinitie)
-    : mLot(aLot),
+    : mLot(std::move(aLot)),
     mUnit(aDefinitie.GetUnit()),
     mName(aDefinitie.GetName()),
     mCategory(aDefinitie.GetCategory())

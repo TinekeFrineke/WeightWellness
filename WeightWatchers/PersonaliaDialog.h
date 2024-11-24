@@ -64,8 +64,6 @@ public:
   afx_msg void      OnEnKillfocusPuntentotaal();
   afx_msg void      OnEnChangeStartgewicht();
   afx_msg void      OnEnKillfocusStartgewicht();
-  afx_msg void      OnBnClickedRadioFlexipoints();
-  afx_msg void      OnBnClickedRadioPropoints();
   afx_msg void      OnEnKillfocusWeekpunten();
   afx_msg void      OnBnClickedRadioKcal();
   afx_msg void OnBnClickedCarbohydrates();

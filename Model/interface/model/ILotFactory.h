@@ -4,7 +4,7 @@
 
 namespace WW {
 
-class Lot;
+class PortionedLot;
 class Portie;
 class VMDefinitie;
 
@@ -13,7 +13,7 @@ class ILotFactory
 public:
     virtual ~ILotFactory() = default;
 
-    virtual std::unique_ptr<Lot> Create(VMDefinitie& aDefinitie, Portie& aPortie) = 0;
+    virtual std::unique_ptr<PortionedLot> Create(VMDefinitie& aDefinitie, Portie& aPortie) = 0;
 };
 
 } // namespace WW

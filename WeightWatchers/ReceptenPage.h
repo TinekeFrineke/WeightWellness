@@ -1,7 +1,7 @@
 #pragma once
 
 #include "tabpage.h"
-#include "WW/WWModel/WWModel.h"
+#include "model/WWModel.h"
 #include "ReceptDefinitiesList.h"
 
 // ReceptenPage dialog
@@ -11,40 +11,38 @@ namespace WW
 class ReceptDefinitie;
 }
 
-class ReceptenPage : public CDialog, public TabPage
+class ReceptenPage: public CDialog, public TabPage
 {
-	DECLARE_DYNAMIC(ReceptenPage)
+    DECLARE_DYNAMIC(ReceptenPage)
 
 public:
-                            ReceptenPage(WW::Model & aModel, CWnd* pParent = NULL);   // standard constructor
-	virtual                   ~ReceptenPage();
+    ReceptenPage(WW::Model& aModel, CWnd* pParent = NULL);   // standard constructor
+    virtual                   ~ReceptenPage();
 
-  virtual CDialog *         GetDialog() { return this; }
+    virtual CDialog* GetDialog() { return this; }
 
-  virtual void              OnCancel()  {}
-  virtual void              OnOK()      {}
+    virtual void              OnCancel() {}
+    virtual void              OnOK() {}
 
-  BOOL                      OnInitDialog();
+    BOOL                      OnInitDialog();
 
-// Dialog Data
-	enum { IDD = IDD_RECEPTEN_PAGE };
+    // Dialog Data
+    enum { IDD = IDD_RECEPTEN_PAGE };
 
 protected:
-	virtual void              DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    virtual void              DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
-  afx_msg void              OnBnClickedAdd();
+    afx_msg void              OnBnClickedAdd();
+    afx_msg void OnBnClickedEdit();
+    afx_msg void OnNMDblclkList1(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void OnBnClickedDelete();
 
-  void                      View(const std::vector<WW::ReceptDefinitie *> & aRecepten);
+    void                      View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>>& aRecepten);
 
 private:
-  WW::Model &               mModel;
-  std::vector<WW::ReceptDefinitie *>
-                            mRecepten;
-  ReceptDefinitiesList      mReceptenList;
-public:
-  afx_msg void OnBnClickedEdit();
-  afx_msg void OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult);
-  afx_msg void OnBnClickedDelete();
+    WW::Model& mModel;
+    std::vector<WW::ReceptDefinitie*> mRecepten;
+    ReceptDefinitiesList      mReceptenList;
 };

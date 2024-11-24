@@ -22,161 +22,166 @@
 /////////////////////////////////////////////////////
 
 
-#include "WW/WWModel/Day.h"
-#include "WW/WWModel/Item.h"
+#include "model/Day.h"
+#include "model/Item.h"
 
 
 ListControl::ListControl()
-: mNumberOfColumns(0)
+    : mNumberOfColumns(0)
 {
 }
 
 
 void ListControl::SetNumberOfColumns(int aColumns)
 {
-  mNumberOfColumns = aColumns;
-  mColumnInfo.resize(aColumns);
+    mNumberOfColumns = aColumns;
+    mColumnInfo.resize(aColumns);
 }
 
 
-void ListControl::SetColumnInfo(int iColumn, const ColInfo & aInfo)
+void ListControl::SetColumnInfo(int iColumn, const ColInfo& aInfo)
 {
-  if (iColumn >= mNumberOfColumns)
-    throw 0;
+    if (iColumn >= mNumberOfColumns)
+        throw 0;
 
-  mColumnInfo[iColumn] = aInfo;
+    mColumnInfo[iColumn] = aInfo;
 }
 
 
 void ListControl::Initialize()
 {
-  for (int i = 0; i < mNumberOfColumns; ++i)
-    InsertColumn(i + 1, mColumnInfo[i].mHeader, mColumnInfo[i].mAlignment, mColumnInfo[i].mMinWidth);
+    for (int i = 0; i < mNumberOfColumns; ++i)
+        InsertColumn(i + 1, mColumnInfo[i].mHeader, mColumnInfo[i].mAlignment, mColumnInfo[i].mMinWidth);
 }
 
 
-void ItemListItem::Write(CListCtrl & aControl, int iItemIndex)
+ItemListItem::ItemListItem(WW::Item* anItem)
+    : mItem(anItem) {}
+
+void ItemListItem::Write(CListCtrl& aControl, int iItemIndex)
 {
-  LV_ITEM lvi;
-  memset(&lvi, 0, sizeof(LV_ITEM));
+    LV_ITEM lvi;
+    memset(&lvi, 0, sizeof(LV_ITEM));
 
-	lvi.mask = LVIF_TEXT | LVIF_PARAM/* | LVIF_IMAGE | LVIF_STATE*/;
-	lvi.iItem = iItemIndex;
-	lvi.iSubItem = 0;
-  TCHAR * name = _tcsdup(mItem->GetName().c_str());
-  lvi.pszText = name;
-  lvi.lParam = (LPARAM)mItem;
+    lvi.mask = LVIF_TEXT | LVIF_PARAM/* | LVIF_IMAGE | LVIF_STATE*/;
+    lvi.iItem = iItemIndex;
+    lvi.iSubItem = 0;
+    TCHAR* name = _tcsdup(mItem->GetName().c_str());
+    lvi.pszText = name;
+    lvi.lParam = (LPARAM)mItem;
 
-	int index = aControl.InsertItem(&lvi);
+    int index = aControl.InsertItem(&lvi);
 
-  TCHAR points[256];
-  _stprintf_s(points, _T("%.2f"), mItem->GetPoints());
-  aControl.SetItemText(index, 1, points);
-  aControl.SetItemData(index, (DWORD_PTR)this);
+    TCHAR points[256];
+    _stprintf_s(points, _T("%.2f"), mItem->GetPoints());
+    aControl.SetItemText(index, 1, points);
+    aControl.SetItemData(index, (DWORD_PTR)this);
 
-  delete name;
+    delete name;
+}
+
+WW::Item* ItemListItem::GetItem()
+{
+    return mItem;
 }
 
 
 /////////////////////////////////////////////////////////////////////////////
 // ItemList
 
-ItemList::ItemList(WW::Model & aModel)
-: mModel(aModel)
+ItemList::ItemList(WW::Model& aModel)
+    : mModel(aModel)
 {
-  SetNumberOfColumns(2);
-  SetColumnInfo     (0, ColInfo(80,  LVCFMT_LEFT,  _T("Naam")));
-  SetColumnInfo     (1, ColInfo(100, LVCFMT_RIGHT, _T("Punten")));
+    SetNumberOfColumns(2);
+    SetColumnInfo(0, ColInfo(80, LVCFMT_LEFT, _T("Naam")));
+    SetColumnInfo(1, ColInfo(100, LVCFMT_RIGHT, _T("Punten")));
 }
 
 ItemList::~ItemList()
 {
-  ClearItems();
+    ClearItems();
 }
 
 
-void ItemList::View(const std::vector<WW::Item *> & aItems)
+void ItemList::View(const std::vector<std::unique_ptr<WW::Item>>& aItems)
 {
-  DeleteAllItems();
-  ClearItems();
+    DeleteAllItems();
+    ClearItems();
 
-  SetItemCount((int)aItems.size());
-  for (size_t i = 0; i < aItems.size(); ++i)
-    mItems.push_back(new ItemListItem(aItems[i]));
+    SetItemCount((int)aItems.size());
+    for (size_t i = 0; i < aItems.size(); ++i)
+        mItems.push_back(std::make_unique<ItemListItem>(aItems[i].get()));
 
-  for (size_t i = 0; i < mItems.size(); ++i)
-    mItems[i]->Write(*this, (int)i);
+    for (size_t i = 0; i < mItems.size(); ++i)
+        mItems[i]->Write(*this, (int)i);
 
-  if (mItems.size() > 0)
-  {
-    LVITEM item;
-    item.iItem = 0;
-    item.mask = LVIF_STATE;
-    SelectItem(0, true);
-  }
+    if (mItems.size() > 0)
+    {
+        LVITEM item;
+        item.iItem = 0;
+        item.mask = LVIF_STATE;
+        SelectItem(0, true);
+    }
 
-  for (int i = 0; i < 2; ++i)
-    SetColumnWidth(i, LVSCW_AUTOSIZE_USEHEADER);
+    for (int i = 0; i < 2; ++i)
+        SetColumnWidth(i, LVSCW_AUTOSIZE_USEHEADER);
 }
 
 
-ItemListItem * ItemList::GetItemAt(int iIndex)
+ItemListItem* ItemList::GetItemAt(int iIndex)
 {
-  if (iIndex >= static_cast<int>(mItems.size()))
-    return NULL;
+    if (iIndex >= static_cast<int>(mItems.size()))
+        return NULL;
 
-  return mItems[iIndex];
+    return mItems[iIndex].get();
 }
 
 
-void ItemList::SelectItem(const WW::Item & anItem)
+void ItemList::SelectItem(const WW::Item& anItem)
 {
-  for (size_t i = 0; i < mItems.size(); ++i)
-    SelectItem(static_cast<int>(i), mItems[i]->GetItem()->GetName() == anItem.GetName());
+    for (size_t i = 0; i < mItems.size(); ++i)
+        SelectItem(static_cast<int>(i), mItems[i]->GetItem()->GetName() == anItem.GetName());
 }
 
 
 void ItemList::SelectItem(int iIndex, bool bSelect)
 {
-  if (iIndex >= static_cast<int>(mItems.size()))
-    return;
+    if (iIndex >= static_cast<int>(mItems.size()))
+        return;
 
-  LVITEM item;
-  item.iItem = iIndex;
-  item.mask = LVIF_STATE;
-  item.state = bSelect ? 1/*LIS_FOCUSED*/ : 0;
-  SetItem(&item);
+    LVITEM item;
+    item.iItem = iIndex;
+    item.mask = LVIF_STATE;
+    item.state = bSelect ? 1/*LIS_FOCUSED*/ : 0;
+    SetItem(&item);
 }
 
 
 void ItemList::ClearItems()
 {
-  for (size_t i = 0; i < mItems.size(); ++i)
-    delete mItems[i];
-
-  mItems.clear();
+    mItems.clear();
 }
 
 
-ItemListItem * ItemList::GetSelectedItem()
+ItemListItem* ItemList::GetSelectedItem()
 {
-  POSITION pos = GetFirstSelectedItemPosition();
-  if (pos == NULL)
+    POSITION pos = GetFirstSelectedItemPosition();
+    if (pos == NULL)
+        return NULL;
+
+    int nItem = GetNextSelectedItem(pos);
+
+    if (nItem >= 0 && nItem < int(mItems.size()))
+        return (ItemListItem*)GetItemData(nItem);
+
     return NULL;
-
-  int nItem = GetNextSelectedItem(pos);
-
-  if (nItem >= 0 && nItem < int(mItems.size()))
-    return (ItemListItem *)GetItemData(nItem);
-  
-  return NULL;
 }
 
 
 BEGIN_MESSAGE_MAP(ItemList, CListCtrl)
-	//{{AFX_MSG_MAP(ItemList)
-	//ON_WM_LBUTTONDOWN()
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(ItemList)
+    //ON_WM_LBUTTONDOWN()
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

@@ -30,7 +30,7 @@ public:
     CEditFoodDefDialog(WW::Model& aModel,
                        WW::VMDefinitie* aDefinitie,
                        CWnd* pParent = NULL);   // standard constructor
-    virtual           ~CEditFoodDefDialog();
+    virtual ~CEditFoodDefDialog();
 
     // Dialog Data
     enum { IDD = IDD_EDITFOOD_DIALOG };
@@ -67,7 +67,7 @@ private:
     bool                      CreateCommonFoodParts();
     bool                      CreateCalculatedFood();
     bool                      CreateFixedFood();
-    void                      SetCalculated(bool bCalculated);
+    void                      UpdateUiCalculated(bool bCalculated);
 
     bool                      OnCalculatedOk();
     bool                      OnFixedOk();
@@ -96,11 +96,11 @@ private:
     CIntEdit                  mEenheden;
     BrandComboBox             mMerk;
 
-    WW::VMDefinitie* mChangedDefinitie;
-    std::unique_ptr< WW::VMDefinitie> mDefinitie;
+    std::unique_ptr<WW::VMDefinitie> mChangedDefinitieAbc;
+    std::unique_ptr<WW::VMDefinitie> mDefinitieAbc;
     WW::Model& mModel;
 
-    std::vector<WW::Portie*> mOriginalPorties;
+    std::vector<std::unique_ptr<WW::Portie>> mOriginalPorties;
 
 public:
     afx_msg void OnCbnSelchangeUnit();

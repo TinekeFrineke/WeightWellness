@@ -1,7 +1,7 @@
 #pragma once
 
 #include "afxcmn.h"
-
+#include <memory>
 #include <vector>
 
 #include "Utilities/StrUtils.h"
@@ -51,7 +51,7 @@ public:
 
   void                        Initialize();
   void                        SetFilter(const ReceptDefinitiesFilter & aFilter);
-  void                        View(const std::vector<WW::ReceptDefinitie *> & aItems);
+  void                        View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>> & aItems);
 
   ReceptDefinitiesListItem *  GetSelectedItem();
   void                        SelectItem(WW::ReceptDefinitie & aDefinition);
@@ -59,21 +59,14 @@ public:
   int                         IndexOf(const ReceptDefinitiesListItem * item) const;
   void                        DeleteItem(const ReceptDefinitiesListItem * item);
 
-	//{{AFX_MSG(ReceptDefinitiesList)
-  //afx_msg void OnLButtonDblClk( UINT, CPoint );
-	//}}AFX_MSG
-
 	DECLARE_MESSAGE_MAP()
-
-// afx_msg void OnNMDblclkItemlist(NMHDR *pNMHDR, LRESULT *pResult);
 
 private:
   void                        ClearItems();
   static bool                 Complies(const WW::ReceptDefinitie & anItem,
                                        const ReceptDefinitiesFilter & aFilter);
 
-  std::vector<ReceptDefinitiesListItem *>
-                              mItems;
+  std::vector<std::unique_ptr<ReceptDefinitiesListItem>> mItems;
   WW::Model &                 mModel;
   ReceptDefinitiesFilter      mFilter;
 };

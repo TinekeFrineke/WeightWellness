@@ -19,28 +19,28 @@ class Model;
 /////////////////////////////////////////////////////////////////////////////
 // CDiaryItemList window
 
-class CDiaryItemList : public ItemList , public Observer
+class CDiaryItemList: public ItemList, public Observer
 {
-// Construction
+    // Construction
 public:
-                                  CDiaryItemList(WW::Model & aModel);
-	virtual                         ~CDiaryItemList();
+    CDiaryItemList(WW::Model& aModel);
+    virtual                         ~CDiaryItemList();
 
-  void                            View(WW::Day * aDay);
+    void                            View(WW::Day* aDay);
 
-  virtual void                    Update(Subject * aSubject);
-  virtual void                    Destroyed(Subject * aSubject);
+    virtual void                    Update(Subject* aSubject);
+    virtual void                    Destroyed(Subject* aSubject);
 
-  // Implementation
+    // Implementation
 
-	// Generated message map functions
+      // Generated message map functions
 protected:
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
 private:
-  Utils::Date                     mDate;
-  WW::Day *                       mDay;
+    Utils::Date mDate;
+    WW::Day* mDay{};
 };
 
 /////////////////////////////////////////////////////////////////////////////

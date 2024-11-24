@@ -20,7 +20,7 @@ public:
         , m_portie(aPortie)
     {}
 
-    std::unique_ptr<WW::Lot> Create(VMDefBase& base)
+    std::unique_ptr<WW::PortionedLot> Create(VMDefBase& base)
     {
         base.Accept(*this);
         return std::move(m_createdLot);
@@ -45,21 +45,21 @@ private:
 
     const WW::PointsCalculator& m_calculator;
     WW::Portie& m_portie;
-    std::unique_ptr<WW::Lot> m_createdLot;
+    std::unique_ptr<WW::PortionedLot> m_createdLot;
 };
 
 }
 
-LotFactory::LotFactory(const PointsCalculator& aCalculator)
+LotFactory::LotFactory(const PointsCalculator& aCalculator) noexcept
     : m_calculator(aCalculator)
 {
 }
 
 
-std::unique_ptr<Lot> LotFactory::Create(VMDefinitie& aDefinitie, Portie& aPortie)
+std::unique_ptr<PortionedLot> LotFactory::Create(VMDefinitie& aDefinitie, Portie& aPortie)
 {
     VMDefLotVisitor lotVisitor(m_calculator, aPortie);
-    return lotVisitor.Create(aDefinitie);
+    return lotVisitor.Create(*aDefinitie.GetVMDef());
 }
 
 

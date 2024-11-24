@@ -21,55 +21,55 @@
 /////////////////////////////////////////////////////
 
 
-#include "WW/WWModel/Day.h"
-#include "WW/WWModel/Item.h"
+#include "model/Day.h"
+#include "model/Item.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CDiaryItemList
 
-CDiaryItemList::CDiaryItemList(WW::Model & aModel)
-: ItemList(aModel),
-  mDate   (Utils::Date::Today()),
-  mDay    (NULL)
+CDiaryItemList::CDiaryItemList(WW::Model& aModel)
+    : ItemList(aModel),
+    mDate(Utils::Date::Today()),
+    mDay(NULL)
 {
 }
 
 CDiaryItemList::~CDiaryItemList()
 {
-  ClearItems();
-}
-
-
-void CDiaryItemList::View(WW::Day * aDay)
-{
-  if (aDay == NULL)
-  {
-    DeleteAllItems();
     ClearItems();
-  }
-  else
-  {
-    ItemList::View(aDay->GetItems());
-  }
 }
 
 
-void CDiaryItemList::Update(Subject * aSubject)
+void CDiaryItemList::View(WW::Day* aDay)
 {
-  (void)aSubject;
+    if (aDay == NULL)
+    {
+        DeleteAllItems();
+        ClearItems();
+    }
+    else
+    {
+        ItemList::View(aDay->GetItems());
+    }
 }
 
 
-void CDiaryItemList::Destroyed(Subject * aSubject)
+void CDiaryItemList::Update(Subject* aSubject)
 {
-  (void)aSubject;
+    (void)aSubject;
+}
+
+
+void CDiaryItemList::Destroyed(Subject* aSubject)
+{
+    (void)aSubject;
 }
 
 
 BEGIN_MESSAGE_MAP(CDiaryItemList, CListCtrl)
-	//{{AFX_MSG_MAP(CDiaryItemList)
-	//ON_WM_LBUTTONDOWN()
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CDiaryItemList)
+    //ON_WM_LBUTTONDOWN()
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
 #include "afxcmn.h"
 
 #include "MyTabControl.h"
-#include "WW/WWModel/WWModel.h"
+#include "model/WWModel.h"
 
 
 // CWWDialog dialog

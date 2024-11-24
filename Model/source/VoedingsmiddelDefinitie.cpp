@@ -20,12 +20,12 @@ int   Entity<FixedVMDef>::mNumberOfInstances = 0;
 VMDefinitie::VMDefinitie(const PointsCalculator& aCalculator,
                          const std::tstring& aName,
                          const Unit& aUnit,
-                         VMDefBase* aDefinition)
+                         std::unique_ptr<VMDefBase> aDefinition)
     : mCalculator(aCalculator),
     mName(aName),
     mUnit(aUnit),
     mFavourite(false),
-    mPoints(aDefinition)
+    mPoints(std::move(aDefinition))
 {
     assert(mPoints != NULL);
 #ifdef FIND_LEAKS
@@ -58,7 +58,7 @@ VMDefinitie& VMDefinitie::operator=(const VMDefinitie& aDefinitie)
     if (&aDefinitie == this)
         return *this;
 
-    mPoints.reset(aDefinitie.mPoints->Copy());
+    mPoints = aDefinitie.mPoints->Copy();
 
     mCategory = aDefinitie.mCategory;
     mMerk = aDefinitie.mMerk;
@@ -220,15 +220,20 @@ CalculatedVMDef::~CalculatedVMDef()
 #endif
 }
 
-void CalculatedVMDef::Accept(VMDefinitionBaseVisitor& visitor)
+void CalculatedVMDef::Accept(VoedingsMiddelDefinitionVisitor& visitor)
 {
-    visitor.Visit* this);
+    visitor.Visit(* this);
+}
+
+void CalculatedVMDef::SetParameters(const FoodParameters& aParameters)
+{
+    mParameters = aParameters;
 }
 
 
-VMDefBase* CalculatedVMDef::Copy() const
+std::unique_ptr<VMDefBase> CalculatedVMDef::Copy() const
 {
-    return new CalculatedVMDef(*this);
+    return std::make_unique<CalculatedVMDef>(*this);
 }
 
 
@@ -258,15 +263,15 @@ FixedVMDef::~FixedVMDef()
 #endif
 }
 
-void FixedVMDef::Accept(VMDefinitionBaseVisitor& visitor)
+void FixedVMDef::Accept(VoedingsMiddelDefinitionVisitor& visitor)
 {
     visitor.Visit(*this);
 }
 
 
-VMDefBase* FixedVMDef::Copy() const
+std::unique_ptr<VMDefBase> FixedVMDef::Copy() const
 {
-    return new FixedVMDef(*this);
+    return std::make_unique<FixedVMDef>(*this);
 }
 
 

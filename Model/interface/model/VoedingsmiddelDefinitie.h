@@ -26,7 +26,7 @@ public:
     VMDefinitie(const PointsCalculator& aCalculator,
                 const std::tstring& aName,
                 const Unit& aUnit,
-                VMDefBase* aDefinition);
+                std::unique_ptr<VMDefBase> aDefinition);
     VMDefinitie(const VMDefinitie&);
     VMDefinitie& operator=(const VMDefinitie&);
 
@@ -96,7 +96,7 @@ public:
     virtual                   ~VMDefBase() = default;
 
     virtual void Accept(VoedingsMiddelDefinitionVisitor& visitor) = 0;
-    virtual VMDefBase* Copy() const = 0;
+    virtual std::unique_ptr<VMDefBase> Copy() const = 0;
     virtual double            GetPointsPer100Units() const = 0;
 
     virtual bool              IsCalculated() const { return false; }
@@ -117,10 +117,7 @@ public:
 
     void Accept(VoedingsMiddelDefinitionVisitor& visitor) override;
 
-    void                      SetParameters(const FoodParameters& aParameters)
-    {
-        mParameters = aParameters;
-    }
+    void                      SetParameters(const FoodParameters& aParameters);
     void                      SetKCalPer100Units(double aKCalPer100) { mParameters.SetKCalPer100Units(aKCalPer100); }
     void                      SetVetPer100Units(double aVetPer100) { mParameters.SetVetPer100Units(aVetPer100); }
     void                      SetEiwitPer100Units(double anEiwit) { mParameters.SetEiwitPer100Units(anEiwit); }
@@ -137,7 +134,7 @@ public:
 
     virtual bool              IsCalculated() const { return true; }
     virtual CalculatedVMDef* GetCalculatedVMDef() { return this; }
-    virtual VMDefBase* Copy() const override;
+    virtual std::unique_ptr<VMDefBase> Copy() const override;
 
     // Entity overrides
     virtual std::tstring      GetInstanceName() const { return _T("None"); }
@@ -162,9 +159,9 @@ public:
     void                      SetPointsPer100Units(double aPoints) { mPointsPer100Units = aPoints; }
     double                    GetPointsPer100Units() const { return mPointsPer100Units; }
 
-    virtual bool              IsFixed() const { return true; }
+    virtual bool              IsFixed() const override { return true; }
     virtual FixedVMDef* GetFixedVMDef() { return this; }
-    virtual VMDefBase* Copy() const override;
+    virtual std::unique_ptr<VMDefBase> Copy() const override;
 
     // Entity overrides
     virtual std::tstring      GetInstanceName() const { return _T("None"); }

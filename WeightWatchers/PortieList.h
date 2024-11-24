@@ -43,13 +43,13 @@ public:
   void                          Initialize();
   void                          Fill();
 
-  void                          SetDefinition(WW::VMDefinitie * aDefinitie) { mDefinitie = aDefinitie; }
+  void                          SetDefinition(WW::VMDefinitie* aDefinitie);
   // Transfers ownership
-  void                          SetPorties(const std::vector<std::unique_ptr<WW::Portie>> & aPortieList);
+  void SetPorties(std::vector<std::unique_ptr<WW::Portie>>& aPortieList);
   //
   const std::vector<std::unique_ptr<WW::Portie>>& GetPorties() const { return mPorties; }
   //
-  bool                          AddPortie(WW::Portie * aPortie);
+  bool                          AddPortie(std::unique_ptr<WW::Portie> aPortie);
   // Destroys the removed portie
   bool                          RemovePortie(WW::Portie * aPortie);
   // Copies porties to aPortieList, clears itemlist
@@ -72,8 +72,8 @@ public:
 private:
   void                          ClearItems();
 
-  std::vector<PortieListItem *> mItems;
-  WW::Model &                   mModel;
+  std::vector<std::unique_ptr<PortieListItem>> mItems;
+  WW::Model& mModel;
   WW::VMDefinitie * mDefinitie;
   std::vector<std::unique_ptr<WW::Portie>> mPorties;
 };

@@ -7,7 +7,7 @@
 #include ".\receptenpage.h"
 
 #include "EditReceptDefDialog.h"
-#include "WW/WWModel/ReceptDefinitie.h"
+#include "model/ReceptDefinitie.h"
 
 
 // ReceptenPage dialog
@@ -74,7 +74,7 @@ void ReceptenPage::OnBnClickedAdd()
 }
 
 
-void ReceptenPage::View(const std::vector<WW::ReceptDefinitie *> & aRecepten)
+void ReceptenPage::View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>> & aRecepten)
 {
   mRecepten.clear();
   for (size_t i = 0; i < aRecepten.size(); ++i)

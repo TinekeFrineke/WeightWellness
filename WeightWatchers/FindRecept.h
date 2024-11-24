@@ -19,52 +19,52 @@ class ReceptDefinitie;
 
 // CFindRecept dialog
 
-class CFindRecept : public CDialog
+class CFindRecept: public CDialog
 {
-	DECLARE_DYNAMIC(CFindRecept)
+    DECLARE_DYNAMIC(CFindRecept)
 
 public:
-                        CFindRecept(WW::Model &            aModel,
-                                    WW::ReceptDefinitie * aDefinitie,
-                                    CWnd *                pParent = NULL);   // standard constructor
-	virtual               ~CFindRecept();
+    CFindRecept(WW::Model& aModel,
+                WW::ReceptDefinitie* aDefinitie,
+                CWnd* pParent = NULL);   // standard constructor
+    virtual               ~CFindRecept();
 
-// Dialog Data
-	enum { IDD = IDD_FIND_RECEPT };
+    // Dialog Data
+    enum { IDD = IDD_FIND_RECEPT };
 
-  WW::Recept *          GetRecept() { return mRecept; }
+    std::unique_ptr<WW::Recept> ExtractRecept() { return std::move(mRecept); }
 
 protected:
-	virtual void          DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    virtual void          DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
-  BOOL                  OnInitDialog();
+    BOOL                  OnInitDialog();
 
-  afx_msg void          OnBnClickedOk();
-  afx_msg void          OnBnClickedCancel();
-  afx_msg void          OnEnChangeNaam();
-//  afx_msg void          OnCbnSelchangeCombo1();
-  afx_msg void          OnLvnItemchangedItemlist(NMHDR *pNMHDR, LRESULT *pResult);
-  afx_msg void          OnEnChangePorties();
-  afx_msg void          OnNMDblclkItemlist(NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg void          OnBnClickedOk();
+    afx_msg void          OnBnClickedCancel();
+    afx_msg void          OnEnChangeNaam();
+    //  afx_msg void          OnCbnSelchangeCombo1();
+    afx_msg void          OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void          OnEnChangePorties();
+    afx_msg void          OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult);
 
 private:
-  void                  UpdateItemFilter();
+    void                  UpdateItemFilter();
 
-  CStringEdit           mNaam;
-  // Food items to pick from
-  ReceptDefinitiesList  mItemList;
-  // The number of porties
-  CDoubleEdit           mPorties;
-  CDoubleEdit           mPoints;
+    CStringEdit           mNaam;
+    // Food items to pick from
+    ReceptDefinitiesList  mItemList;
+    // The number of porties
+    CDoubleEdit           mPorties;
+    CDoubleEdit           mPoints;
 
-  WW::Model &           mModel;
-  WW::Recept *          mRecept;
-  WW::ReceptDefinitie * mDefinitie;
+    WW::Model& mModel;
+    std::unique_ptr<WW::Recept> mRecept;
+    WW::ReceptDefinitie* mDefinitie;
 
-  bool                  mUpdating;
-  bool                  mUpdatingFilter;
+    bool                  mUpdating;
+    bool                  mUpdatingFilter;
 };
 
 

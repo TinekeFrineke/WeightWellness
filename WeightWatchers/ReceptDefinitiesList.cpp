@@ -2,187 +2,186 @@
 
 #include "ReceptDefinitiesList.h"
 
-#include "WW/WWModel/WWModel.h"
-#include "WW/WWModel/ReceptDefinitie.h"
+#include "model/WWModel.h"
+#include "model/ReceptDefinitie.h"
 
 #include "EditFoodDefDialog.h"
 
 //   ON_NOTIFY(NM_DBLCLK, IDC_ITEMLIST, OnNMDblclkItemlist)
 
 BEGIN_MESSAGE_MAP(ReceptDefinitiesList, CListCtrl)
-	//{{AFX_MSG_MAP(ReceptDefinitiesList)
-  ON_WM_LBUTTONDBLCLK()
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(ReceptDefinitiesList)
+    ON_WM_LBUTTONDBLCLK()
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 
-ReceptDefinitiesFilter::ReceptDefinitiesFilter(const std::tstring &     aDescription)
-: mDescription(aDescription)
+ReceptDefinitiesFilter::ReceptDefinitiesFilter(const std::tstring& aDescription)
+    : mDescription(aDescription)
 {
 }
 
 
-bool ReceptDefinitiesList::Complies(const WW::ReceptDefinitie &   anItem,
+bool ReceptDefinitiesList::Complies(const WW::ReceptDefinitie& anItem,
                                     const ReceptDefinitiesFilter& aFilter)
 {
-  bool bDescriptionComplies = aFilter.GetDescription().empty() || 
-                              Str::ToUpper(anItem.GetName()).find(Str::ToUpper(aFilter.GetDescription())) != std::tstring::npos;
+    bool bDescriptionComplies = aFilter.GetDescription().empty() ||
+        Str::ToUpper(anItem.GetName()).find(Str::ToUpper(aFilter.GetDescription())) != std::tstring::npos;
 
-  return bDescriptionComplies;
+    return bDescriptionComplies;
 }
 
 
-void ReceptDefinitiesListItem::Write(CListCtrl & aControl, int iItemIndex)
+void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 {
-  LV_ITEM lvi;
-	lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
-	lvi.iItem = iItemIndex;
-	lvi.iSubItem = 0;
-  TCHAR * name = _tcsdup(mItem->GetName().c_str());
-  lvi.pszText = name;
-	lvi.iImage = 0;
-	lvi.stateMask = LVIS_STATEIMAGEMASK;
-	lvi.state = INDEXTOSTATEIMAGEMASK(1);
+    LV_ITEM lvi;
+    lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
+    lvi.iItem = iItemIndex;
+    lvi.iSubItem = 0;
+    TCHAR* name = _tcsdup(mItem->GetName().c_str());
+    lvi.pszText = name;
+    lvi.iImage = 0;
+    lvi.stateMask = LVIS_STATEIMAGEMASK;
+    lvi.state = INDEXTOSTATEIMAGEMASK(1);
 
-	int item = aControl.InsertItem(&lvi);
+    int item = aControl.InsertItem(&lvi);
 
-  TCHAR points[256];
-  _stprintf_s(points, _T("%.2f"), mItem->GetPointsPerPortion());
-  aControl.SetItemText(iItemIndex, 1, points);
-  //_stprintf_s(points, _T("%d"), mItem->GetPortions());
-  //aControl.SetItemText(iItemIndex, 2, points);
-  aControl.SetItemData(item, (DWORD_PTR)this);
+    TCHAR points[256];
+    _stprintf_s(points, _T("%.2f"), mItem->GetPointsPerPortion());
+    aControl.SetItemText(iItemIndex, 1, points);
+    //_stprintf_s(points, _T("%d"), mItem->GetPortions());
+    //aControl.SetItemText(iItemIndex, 2, points);
+    aControl.SetItemData(item, (DWORD_PTR)this);
 
 
-  delete name;
+    delete name;
 }
 
 
-ReceptDefinitiesList::ReceptDefinitiesList(WW::Model & aModel)
-: mModel(aModel)
+ReceptDefinitiesList::ReceptDefinitiesList(WW::Model& aModel)
+    : mModel(aModel)
 {
 }
 
 
 ReceptDefinitiesList::~ReceptDefinitiesList()
 {
-  ClearItems();
+    ClearItems();
 }
 
 
 void ReceptDefinitiesList::Initialize()
 {
-  InsertColumn(1, _T("Naam"),   LVCFMT_LEFT, 200);
-  InsertColumn(2, _T("Punten/portie"), LVCFMT_RIGHT, 80);
+    InsertColumn(1, _T("Naam"), LVCFMT_LEFT, 200);
+    InsertColumn(2, _T("Punten/portie"), LVCFMT_RIGHT, 80);
 }
 
 
 void ReceptDefinitiesList::ClearItems()
 {
-  for (size_t i = 0; i < mItems.size(); ++i)
-    delete mItems[i];
-
-  mItems.clear();
+    mItems.clear();
 }
 
 
-void ReceptDefinitiesList::View(const std::vector<WW::ReceptDefinitie *> & aItems)
+void ReceptDefinitiesList::View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>>& aItems)
 {
-  DeleteAllItems();
-  ClearItems();
+    DeleteAllItems();
+    ClearItems();
 
-  SetItemCount((int)aItems.size());
+    SetItemCount((int)aItems.size());
 
-  for (size_t i = 0; i < aItems.size(); ++i)
-    if (Complies(*aItems[i], mFilter))
-      mItems.push_back(new ReceptDefinitiesListItem(aItems[i]));
+    for (size_t i = 0; i < aItems.size(); ++i)
+        if (Complies(*aItems[i], mFilter))
+            mItems.push_back(std::make_unique<ReceptDefinitiesListItem>(aItems[i].get()));
 
-  int inIndex = 0;
-  for (size_t i = 0; i < mItems.size(); ++i)
-  {
-    mItems[i]->Write(*this, inIndex);
-    inIndex++;
-  }
-
-  if (mItems.size() > 0)
-    SelectItem(0);
-}
-
-
-void ReceptDefinitiesList::SelectItem(WW::ReceptDefinitie & aDefinition)
-{
-  for (size_t i = 0; i < mItems.size(); ++i)
-  {
-    if (mItems[i]->GetItem()->GetName() == aDefinition.GetName())
+    int inIndex = 0;
+    for (size_t i = 0; i < mItems.size(); ++i)
     {
-      SelectItem(static_cast<int>(i));
-      return;
+        mItems[i]->Write(*this, inIndex);
+        inIndex++;
     }
-  }
+
+    if (mItems.size() > 0)
+        SelectItem(0);
+}
+
+
+void ReceptDefinitiesList::SelectItem(WW::ReceptDefinitie& aDefinition)
+{
+    for (size_t i = 0; i < mItems.size(); ++i)
+    {
+        if (mItems[i]->GetItem()->GetName() == aDefinition.GetName())
+        {
+            SelectItem(static_cast<int>(i));
+            return;
+        }
+    }
 }
 
 
 void ReceptDefinitiesList::SelectItem(int iIndex)
 {
-  if (iIndex >= static_cast<int>(mItems.size()))
+    if (iIndex >= static_cast<int>(mItems.size()))
+        return;
+
+    LVITEM item;
+    item.iItem = iIndex;
+    item.mask = LVIF_STATE;
+    item.state = 1;//bSelect ? 1/*LIS_FOCUSED*/ : 0;
+    SetItem(&item);
+}
+
+
+void ReceptDefinitiesList::SetFilter(const ReceptDefinitiesFilter& aFilter)
+{
+    mFilter = aFilter;
+}
+
+void ReceptDefinitiesList::DeleteItem(const ReceptDefinitiesListItem* item)
+{
+    auto iter = std::find_if(mItems.begin(), mItems.end(), [item] (const std::unique_ptr< ReceptDefinitiesListItem>& anItem) {
+        return item == anItem.get();
+    });
+    if (iter == mItems.end())
+        return;
+
+    mModel.Remove((*iter)->GetItem());
+    int index = iter - mItems.begin();
+    mItems.erase(iter);
+    CListCtrl::DeleteItem(index);
     return;
-
-  LVITEM item;
-  item.iItem = iIndex;
-  item.mask = LVIF_STATE;
-  item.state = 1;//bSelect ? 1/*LIS_FOCUSED*/ : 0;
-  SetItem(&item);
 }
 
 
-void ReceptDefinitiesList::SetFilter(const ReceptDefinitiesFilter & aFilter)
+int ReceptDefinitiesList::IndexOf(const ReceptDefinitiesListItem* anItem) const
 {
-  mFilter = aFilter;
+    int nItem = GetNextItem(-1, LVNI_ALL);
+
+    while (nItem >= 0 && nItem < int(mItems.size()))
+    {
+        ReceptDefinitiesListItem* item = (ReceptDefinitiesListItem*)GetItemData(nItem);
+        if (item == anItem)
+            return nItem;
+
+        nItem = GetNextItem(nItem, LVNI_ALL);
+    }
+
+    return -1;
 }
 
-void ReceptDefinitiesList::DeleteItem(const ReceptDefinitiesListItem * item)
+ReceptDefinitiesListItem* ReceptDefinitiesList::GetSelectedItem()
 {
-  std::vector<ReceptDefinitiesListItem *>::iterator iter = std::find(mItems.begin(), mItems.end(), item);
-  if (iter == mItems.end())
-    return;
+    POSITION pos = GetFirstSelectedItemPosition();
+    if (pos == NULL)
+        return NULL;
 
-  mModel.Remove((*iter)->GetItem());
-  int index = iter - mItems.begin();
-  mItems.erase(iter);
-  CListCtrl::DeleteItem(index);
-  return;
-}
+    int nItem = GetNextSelectedItem(pos);
 
+    if (nItem >= 0 && nItem < int(mItems.size()))
+    {
+        ReceptDefinitiesListItem* item = (ReceptDefinitiesListItem*)GetItemData(nItem);
+        return item;
+    }
 
-int ReceptDefinitiesList::IndexOf(const ReceptDefinitiesListItem * anItem) const
-{
-  int nItem = GetNextItem(-1, LVNI_ALL);
-
-  while (nItem >= 0 && nItem < int(mItems.size()))
-  {
-    ReceptDefinitiesListItem * item = (ReceptDefinitiesListItem *)GetItemData(nItem);
-    if (item == anItem)
-      return nItem;
-
-    nItem = GetNextItem(nItem, LVNI_ALL);
-  }
-
- return -1;
-}
-
-ReceptDefinitiesListItem * ReceptDefinitiesList::GetSelectedItem()
-{
-  POSITION pos = GetFirstSelectedItemPosition();
-  if (pos == NULL)
     return NULL;
-
-  int nItem = GetNextSelectedItem(pos);
-
-  if (nItem >= 0 && nItem < int(mItems.size()))
-  {
-    ReceptDefinitiesListItem * item = (ReceptDefinitiesListItem *)GetItemData(nItem);
-    return item;
-  }
-  
-  return NULL;
 }

@@ -11,11 +11,8 @@ namespace WW
 Personalia::Personalia(const std::tstring& aUserName)
     : mUserName(aUserName),
     mDateOfBirth(Utils::Date::Today()),
-    mFPPuntenTotaal(0),
-    mPPPuntenTotaal(0),
     mKCPuntenTotaal(0),
     mCHPuntenTotaal(0),
-    mPPWeekPuntenTotaal(0),
     mKCWeekPuntenTotaal(0),
     mCHWeekPuntenTotaal(0),
     mStreefGewicht(0),

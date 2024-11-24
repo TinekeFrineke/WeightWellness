@@ -10,13 +10,14 @@
 #include "model/Portie.h"
 #include "model/Voedingsmiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"
-//#include "model/XmlVMCreateVisitor.h"
+#include "model/ILotFactory.h"
 
 // CFindVoedingsmiddel dialog
 
 IMPLEMENT_DYNAMIC(CFindVoedingsmiddel, CDialog)
 CFindVoedingsmiddel::CFindVoedingsmiddel(WW::Model& aModel,
                                          WW::VMDefinitie* aDefinitie,
+                                         std::unique_ptr<WW::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindVoedingsmiddel::IDD, pParent),
     mItemList(aModel),
@@ -25,6 +26,7 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(WW::Model& aModel,
     mModel(aModel),
     mFood(nullptr),
     mState(nullptr),
+    m_lotFactory(std::move(lotFactory)),
     mDefinitie(aDefinitie),
     mPortieNaam(mModel, _T("")),
     mUpdating(false),
@@ -34,6 +36,11 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(WW::Model& aModel,
 
 CFindVoedingsmiddel::~CFindVoedingsmiddel() = default;
 
+
+std::unique_ptr<WW::Voedingsmiddel> CFindVoedingsmiddel::ExtractVoedingsMiddel()
+{
+    return std::move(mFood);
+}
 
 void CFindVoedingsmiddel::DoDataExchange(CDataExchange* pDX)
 {
@@ -107,11 +114,10 @@ void CFindVoedingsmiddel::OnBnClickedOk()
         return;
     }
 
-    WW_NAMESPACE::CreateLotFromVMDef creator(mModel.GetCalculator());
-    WW::PortionedLot* lot = creator.Create(*mDefinitie, *portie);
+    auto lot = m_lotFactory->Create(*mDefinitie, *portie);
     assert(lot != nullptr);
     lot->SetNumberOfPortions(mPorties.GetValue());
-    mFood = new WW::Voedingsmiddel(lot, *mDefinitie);
+    mFood = std::make_unique<WW::Voedingsmiddel>(std::move(lot), *mDefinitie);
 
     OnOK();
 }
@@ -162,12 +168,7 @@ void CFindVoedingsmiddel::OnCbnSelchangePortienaam()
         mPorties.SetValue(1);
 
         if (mDefinitie != nullptr)
-        {
-            if (mDefinitie->IsSterrePortion(portie))
-                mPoints.SetValue(0);
-            else
-                mPoints.SetValue((mUnits.GetValue() * mDefinitie->GetPointsPer100Units()) / 100);
-        }
+            mPoints.SetValue((mUnits.GetValue() * mDefinitie->GetPointsPer100Units()) / 100);
     }
 }
 
@@ -183,12 +184,7 @@ void CFindVoedingsmiddel::OnEnChangePorties()
             mUnits.SetValue(mPorties.GetValue() * portie->GetUnits());
 
             if (mDefinitie != nullptr)
-            {
-                if (mDefinitie->IsSterrePortion(portie))
-                    mPoints.SetValue(0);
-                else
-                    mPoints.SetValue((mUnits.GetValue() * mDefinitie->GetPointsPer100Units()) / 100);
-            }
+                mPoints.SetValue((mUnits.GetValue() * mDefinitie->GetPointsPer100Units()) / 100);
         }
 
         mUpdating = false;
@@ -206,12 +202,7 @@ void CFindVoedingsmiddel::OnEnChangeUnits()
             mPorties.SetValue(mUnits.GetValue() / portie->GetUnits());
 
             if (mDefinitie != nullptr)
-            {
-                if (mDefinitie->IsSterrePortion(portie))
-                    mPoints.SetValue(0);
-                else
-                    mPoints.SetValue((mUnits.GetValue() * mDefinitie->GetPointsPer100Units()) / 100);
-            }
+                mPoints.SetValue((mUnits.GetValue() * mDefinitie->GetPointsPer100Units()) / 100);
         }
 
         mUpdating = false;
@@ -230,10 +221,9 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
         return;
     }
 
-    WW_NAMESPACE::CreateLotFromVMDef creator(mModel.GetCalculator());
-    WW::PortionedLot* lot = creator.Create(*mDefinitie, *portie);
+    auto lot = m_lotFactory->Create(*mDefinitie, *portie);
     lot->SetNumberOfPortions(mPorties.GetValue());
-    mFood = new WW::Voedingsmiddel(lot, *mDefinitie);
+    mFood = std::make_unique<WW::Voedingsmiddel>(std::move(lot), *mDefinitie);
 
     OnOK();
 
@@ -241,7 +231,7 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
 }
 
 
-std::unique_ptr<VMState> CFindVoedingsmiddel::CreateState(WW::VMDefinitie& aDefinitie) const
+std::unique_ptr<VMState> CFindVoedingsmiddel::CreateState(WW::VMDefinitie& aDefinitie)
 {
     if (aDefinitie.GetPortieList().empty())
         return std::make_unique<VMNoPortionsState>(*this, aDefinitie, mModel);

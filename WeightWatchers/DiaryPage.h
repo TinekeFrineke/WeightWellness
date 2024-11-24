@@ -56,24 +56,24 @@ private:
   bool              ProcessDate(const Utils::Date & aDate);
   void              UpdatePointsLeft();
 
-  CDiaryItemList    mItemList;
+  CDiaryItemList mItemList;
 
-  WW::Model &       mModel;
-  WW::Week *        mWeek;
-  WW::Day *         mDay;
+  WW::Model& mModel;
+  WW::Week* mWeek{};
+  WW::Day* mDay{};
 
-  CStringEdit       mDate;
-  CDoubleEdit       mPunten;
-  CStringEdit       mStartOfWeek;
-  CStringEdit       mEndOfWeek;
-  CDoubleEdit       mBonusPoints;
-  CDoubleEdit       mCalculatedBonusPoints;
-  CDoubleEdit       mPointsLeft;
-  CDoubleEdit       mWeight;
-  CDoubleEdit       mTotaal;
-  CStringEdit       mStrategie;
-  CDoubleEdit       mWeekPunten;
-  CStatic           mWeekpuntenStatic;
+  CStringEdit mDate;
+  CDoubleEdit mPunten;
+  CStringEdit mStartOfWeek;
+  CStringEdit mEndOfWeek;
+  CDoubleEdit mBonusPoints;
+  CDoubleEdit mCalculatedBonusPoints;
+  CDoubleEdit mPointsLeft;
+  CDoubleEdit mWeight;
+  CDoubleEdit mTotaal;
+  CStringEdit mStrategie;
+  CDoubleEdit mWeekPunten;
+  CStatic     mWeekpuntenStatic;
 
 public:
   afx_msg void OnNMDblclkItemlist(NMHDR *pNMHDR, LRESULT *pResult);

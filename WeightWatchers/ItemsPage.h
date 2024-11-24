@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WW/WWModel/WWModel.h"
+#include "model/WWModel.h"
 #include "afxcmn.h"
 
 #include "TabPage.h"

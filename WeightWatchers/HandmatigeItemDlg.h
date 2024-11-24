@@ -5,33 +5,33 @@
 
 // HandmatigeItemDlg dialog
 
-namespace WW { class ManualItem; } 
+namespace WW { class ManualItem; }
 
-class HandmatigeItemDlg : public CDialog
+class HandmatigeItemDlg: public CDialog
 {
-	DECLARE_DYNAMIC(HandmatigeItemDlg)
+    DECLARE_DYNAMIC(HandmatigeItemDlg)
 
 public:
-	HandmatigeItemDlg(WW::ManualItem * anItem = NULL, CWnd* pParent = NULL);   // standard constructor
-	virtual ~HandmatigeItemDlg();
+    HandmatigeItemDlg(WW::ManualItem* anItem = nullptr, CWnd* pParent = nullptr);   // standard constructor
+    virtual ~HandmatigeItemDlg();
 
-// Dialog Data
-	enum { IDD = IDD_HANDMATIG_ITEM };
+    // Dialog Data
+    enum { IDD = IDD_HANDMATIG_ITEM };
 
-  WW::ManualItem *  GetItem() { return mItem; }
+    std::unique_ptr<WW::ManualItem>  GetItem() { return std::move(mItem); }
 
 protected:
-	virtual void      DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-  BOOL              OnInitDialog();
+    virtual void      DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    BOOL              OnInitDialog();
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
-  afx_msg void      OnBnClickedOk();
+    afx_msg void      OnBnClickedOk();
 
 private:
-  CStringEdit       mName;
-  CDoubleEdit       mAmount;
-  CDoubleEdit       mPoints;
+    CStringEdit       mName;
+    CDoubleEdit       mAmount;
+    CDoubleEdit       mPoints;
 
-  WW::ManualItem *  mItem;
+    std::unique_ptr<WW::ManualItem>  mItem;
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "resource.h"
 #include "categorycombobox.h"
 #include "stringedit.h"
@@ -15,6 +17,7 @@ class VMState;
 namespace WW
 {
 class Day;
+class ILotFactory;
 class Voedingsmiddel;
 }
 
@@ -27,13 +30,14 @@ class CFindVoedingsmiddel: public CDialog
 public:
     CFindVoedingsmiddel(WW::Model& aModel,
                         WW::VMDefinitie* aDefinitie,
+                        std::unique_ptr<WW::ILotFactory> lotFactory,
                         CWnd* pParent = nullptr);   // standard constructor
     virtual ~CFindVoedingsmiddel();
 
     // Dialog Data
     enum { IDD = IDD_FIND_VOEDINGSMIDDEL };
 
-    WW::Voedingsmiddel* GetVoedingsMiddel() { return mFood; }
+    std::unique_ptr<WW::Voedingsmiddel> ExtractVoedingsMiddel();
 
 protected:
     virtual void        DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -54,7 +58,7 @@ protected:
     afx_msg void        OnCbnSelchangeBrand();
     afx_msg void        OnBnClickedCheckFavourites();
 
-    std::unique_ptr<VMState> CreateState(WW::VMDefinitie& aDefinitie) const;
+    std::unique_ptr<VMState> CreateState(WW::VMDefinitie& aDefinitie);
     void SetState(std::unique_ptr<VMState> aState);
 
 private:
@@ -76,15 +80,14 @@ private:
     CDoubleEdit         mPoints;
 
     WW::Model& mModel;
-    WW::Voedingsmiddel*
-        mFood;
-    WW::VMDefinitie*
-        mDefinitie;
+    std::unique_ptr<WW::Voedingsmiddel> mFood;
+    WW::VMDefinitie* mDefinitie;
 
     bool                mUpdating;
     bool                mUpdatingFilter;
 
     std::unique_ptr<VMState> mState;
+    std::unique_ptr<WW::ILotFactory> m_lotFactory;
 };
 
 

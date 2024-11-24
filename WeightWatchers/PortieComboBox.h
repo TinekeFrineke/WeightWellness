@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "afxcmn.h"
 #include "Utilities/StrUtils.h"
 
@@ -17,7 +19,7 @@ public:
                                              const std::tstring & aPortie);
   void                        Initialize();
   void                        Fill(const std::vector<WW::PortieNaam> & aNames, const std::tstring & aPortie = _T(""));
-  void                        Fill(const std::vector<WW::Portie *> & aList, const std::tstring & aPortie = _T(""));
+  void                        Fill(const std::vector<std::unique_ptr<WW::Portie>> & aList, const std::tstring & aPortie = _T(""));
 
   std::tstring                GetString() const;
   void                        SetString(const std::tstring & aString);

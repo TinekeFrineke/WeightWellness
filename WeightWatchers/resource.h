@@ -97,9 +97,7 @@
 #define IDC_TOTAAL                      1092
 #define IDC_EIWITTEN_PER_100            1093
 #define IDC_KOOLHYDRATEN_PER_100        1094
-#define IDC_RADIO_FLEXIPOINTS           1094
 #define IDC_VEZELS_PER_100              1095
-#define IDC_RADIO_PROPOINTS             1095
 #define IDC_WEEKPUNTENSTATIC            1096
 #define IDC_STRATEGIE                   1097
 #define IDC_RADIO_KCAL                  1097

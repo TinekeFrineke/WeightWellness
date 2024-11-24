@@ -16,9 +16,9 @@ class Voedingsmiddel: public Item
 {
 public:
     Voedingsmiddel(const std::tstring& aName,
-                   Lot* aLot,
+                   std::unique_ptr<Lot> aLot,
                    const Unit& aUnit);
-    Voedingsmiddel(Lot* aLot,
+    Voedingsmiddel(std::unique_ptr<Lot> aLot,
                    const VMDefinitie& aDefinitie);
     virtual               ~Voedingsmiddel();
 
