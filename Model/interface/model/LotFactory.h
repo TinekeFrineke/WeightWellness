@@ -4,7 +4,7 @@
 #include "ILotFactory.h"
 #include "VoedingsMiddelDefinitionVisitor.h"
 
-namespace WW {
+namespace weight {
 
 class PointsCalculator;
 
@@ -20,4 +20,4 @@ private:
     const PointsCalculator& m_calculator;
 };
 
-} // namespace WW
+} // namespace weight

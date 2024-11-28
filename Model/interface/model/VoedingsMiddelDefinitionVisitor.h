@@ -1,6 +1,6 @@
 #pragma once
 
-namespace WW {
+namespace weight {
 
 class CalculatedVMDef;
 class FixedVMDef;
@@ -15,4 +15,4 @@ public:
 };
 
 
-}
+} // namespace weight

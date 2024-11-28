@@ -14,8 +14,8 @@
 // CFindRecept dialog
 
 IMPLEMENT_DYNAMIC(CFindRecept, CDialog)
-CFindRecept::CFindRecept(WW::Model& aModel,
-                         WW::ReceptDefinitie* aDefinitie,
+CFindRecept::CFindRecept(weight::Model& aModel,
+                         weight::ReceptDefinitie* aDefinitie,
                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindRecept::IDD, pParent),
     mItemList(aModel),
@@ -89,8 +89,8 @@ void CFindRecept::OnBnClickedOk()
         return;
     }
 
-    WW::ReceptDefinitie* definitie = item->GetItem();
-    mRecept = std::make_unique<WW::Recept>(definitie->GetName());
+    weight::ReceptDefinitie* definitie = item->GetItem();
+    mRecept = std::make_unique<weight::Recept>(definitie->GetName());
     mRecept->SetNumberOfPortions(mPorties.GetValue());
     mRecept->SetPointsPerPortion(definitie->GetPointsPerPortion());
 
@@ -154,8 +154,8 @@ void CFindRecept::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
         return;
     }
 
-    WW::ReceptDefinitie* definitie = item->GetItem();
-    mRecept = std::make_unique<WW::Recept>(definitie->GetName());
+    weight::ReceptDefinitie* definitie = item->GetItem();
+    mRecept = std::make_unique<weight::Recept>(definitie->GetName());
     mRecept->SetNumberOfPortions(mPorties.GetValue());
     mRecept->SetPointsPerPortion(definitie->GetPointsPerPortion());
 

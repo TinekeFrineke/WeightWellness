@@ -5,7 +5,7 @@
 #include "WWDefinitions.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -123,4 +123,4 @@ public:
 };
 
 
-}
+} // namespace weight

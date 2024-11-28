@@ -9,7 +9,7 @@
 
 #include "resource.h"		// main symbols
 
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 
 // CWWApplication:
@@ -34,7 +34,7 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
-  WW::Model         mModel;
+  weight::Model         mModel;
   std::tstring      mDataDirectory;
 };
 

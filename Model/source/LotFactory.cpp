@@ -6,7 +6,7 @@
 #include "Portie.h"
 #include "VoedingsMiddelDefinitie.h"
 
-namespace WW {
+namespace weight {
 
 class PointsCalculator;
 
@@ -15,12 +15,12 @@ namespace {
 class VMDefLotVisitor: public VoedingsMiddelDefinitionVisitor
 {
 public:
-    VMDefLotVisitor(const WW::PointsCalculator& aCalculator, WW::Portie& aPortie)
+    VMDefLotVisitor(const PointsCalculator& aCalculator, Portie& aPortie)
         : m_calculator(aCalculator)
         , m_portie(aPortie)
     {}
 
-    std::unique_ptr<WW::PortionedLot> Create(VMDefBase& base)
+    std::unique_ptr<PortionedLot> Create(VMDefBase& base)
     {
         base.Accept(*this);
         return std::move(m_createdLot);
@@ -29,7 +29,7 @@ public:
 private:
     void Visit(CalculatedVMDef& definition) override
     {
-        auto clot = std::make_unique<WW::CalculatedLot>(m_calculator, m_portie);
+        auto clot = std::make_unique<CalculatedLot>(m_calculator, m_portie);
         clot->SetParameters(definition.GetParameters());
         clot->SetNumberOfPortions(1);
         m_createdLot = std::move(clot);
@@ -37,15 +37,15 @@ private:
 
     void Visit(FixedVMDef& definition) override
     {
-        auto flot = std::make_unique<WW::FixedLot>(m_portie);
+        auto flot = std::make_unique<FixedLot>(m_portie);
         flot->SetPointsPer100Units(definition.GetPointsPer100Units());
         flot->SetNumberOfPortions(1);
         m_createdLot = std::move(flot);
     }
 
-    const WW::PointsCalculator& m_calculator;
-    WW::Portie& m_portie;
-    std::unique_ptr<WW::PortionedLot> m_createdLot;
+    const PointsCalculator& m_calculator;
+    Portie& m_portie;
+    std::unique_ptr<PortionedLot> m_createdLot;
 };
 
 }
@@ -63,4 +63,4 @@ std::unique_ptr<PortionedLot> LotFactory::Create(VMDefinitie& aDefinitie, Portie
 }
 
 
-} // namespace WW
+} // namespace weight

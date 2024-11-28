@@ -55,7 +55,7 @@ void ListControl::Initialize()
 }
 
 
-ItemListItem::ItemListItem(WW::Item* anItem)
+ItemListItem::ItemListItem(weight::Item* anItem)
     : mItem(anItem) {}
 
 void ItemListItem::Write(CListCtrl& aControl, int iItemIndex)
@@ -80,7 +80,7 @@ void ItemListItem::Write(CListCtrl& aControl, int iItemIndex)
     delete name;
 }
 
-WW::Item* ItemListItem::GetItem()
+weight::Item* ItemListItem::GetItem()
 {
     return mItem;
 }
@@ -89,7 +89,7 @@ WW::Item* ItemListItem::GetItem()
 /////////////////////////////////////////////////////////////////////////////
 // ItemList
 
-ItemList::ItemList(WW::Model& aModel)
+ItemList::ItemList(weight::Model& aModel)
     : mModel(aModel)
 {
     SetNumberOfColumns(2);
@@ -103,7 +103,7 @@ ItemList::~ItemList()
 }
 
 
-void ItemList::View(const std::vector<std::unique_ptr<WW::Item>>& aItems)
+void ItemList::View(const std::vector<std::unique_ptr<weight::Item>>& aItems)
 {
     DeleteAllItems();
     ClearItems();
@@ -137,7 +137,7 @@ ItemListItem* ItemList::GetItemAt(int iIndex)
 }
 
 
-void ItemList::SelectItem(const WW::Item& anItem)
+void ItemList::SelectItem(const weight::Item& anItem)
 {
     for (size_t i = 0; i < mItems.size(); ++i)
         SelectItem(static_cast<int>(i), mItems[i]->GetItem()->GetName() == anItem.GetName());

@@ -1,5 +1,5 @@
 
-#include "WWModel.h"
+#include "Model.h"
 
 #include <tchar.h>
 #include <assert.h>
@@ -12,7 +12,7 @@
 #include "VoedingsmiddelDefinitie.h"
 #include "Week.h"
 
-namespace WW
+namespace weight
 {
 
 
@@ -25,7 +25,7 @@ Model::Model()
 
 Model::~Model()
 {
-    Clear();
+    //Clear();
 }
 
 

@@ -8,7 +8,7 @@
 #include "resource.h"
 
 
-namespace WW
+namespace weight
 {
 class Model;
 class Portie;
@@ -19,46 +19,46 @@ class VMDefinitie;
 class PortieListItem
 {
 public:
-                      PortieListItem(const WW::VMDefinitie & aDefinitie, WW::Portie * aPortie)
+                      PortieListItem(const weight::VMDefinitie & aDefinitie, weight::Portie * aPortie)
                         : mDefinitie(aDefinitie), mPortie(aPortie) {}
 
   void                Write(CListCtrl & aControl, int iItemIndex);
 
-  WW::Portie *        GetPortie() { return mPortie; }
+  weight::Portie *        GetPortie() { return mPortie; }
 
 private:
-  const WW::VMDefinitie &
+  const weight::VMDefinitie &
                       mDefinitie;
-  WW::Portie *        mPortie;
+  weight::Portie *        mPortie;
 };
 
 
 class PortieList : public CListCtrl
 {
 public:
-                                PortieList(WW::Model &                   aModel,
-                                           WW::VMDefinitie * aDefinitie);
+                                PortieList(weight::Model &                   aModel,
+                                           weight::VMDefinitie * aDefinitie);
                                 ~PortieList();
 
   void                          Initialize();
   void                          Fill();
 
-  void                          SetDefinition(WW::VMDefinitie* aDefinitie);
+  void                          SetDefinition(weight::VMDefinitie* aDefinitie);
   // Transfers ownership
-  void SetPorties(std::vector<std::unique_ptr<WW::Portie>>& aPortieList);
+  void SetPorties(std::vector<std::unique_ptr<weight::Portie>>& aPortieList);
   //
-  const std::vector<std::unique_ptr<WW::Portie>>& GetPorties() const { return mPorties; }
+  const std::vector<std::unique_ptr<weight::Portie>>& GetPorties() const { return mPorties; }
   //
-  bool                          AddPortie(std::unique_ptr<WW::Portie> aPortie);
+  bool                          AddPortie(std::unique_ptr<weight::Portie> aPortie);
   // Destroys the removed portie
-  bool                          RemovePortie(WW::Portie * aPortie);
+  bool                          RemovePortie(weight::Portie * aPortie);
   // Copies porties to aPortieList, clears itemlist
-  void                          ReleasePorties(std::vector<std::unique_ptr<WW::Portie>> & aPortieList);
+  void                          ReleasePorties(std::vector<std::unique_ptr<weight::Portie>> & aPortieList);
   // Clears itemlist and porties with it.
   void                          DeletePorties();
 
   PortieListItem *              GetSelectedItem();
-  void                          SelectItem(WW::Portie & aPortie);
+  void                          SelectItem(weight::Portie & aPortie);
   void                          SelectItem(int iIndex);
 
   void                          Update(PortieListItem * anItem);
@@ -73,9 +73,9 @@ private:
   void                          ClearItems();
 
   std::vector<std::unique_ptr<PortieListItem>> mItems;
-  WW::Model& mModel;
-  WW::VMDefinitie * mDefinitie;
-  std::vector<std::unique_ptr<WW::Portie>> mPorties;
+  weight::Model& mModel;
+  weight::VMDefinitie * mDefinitie;
+  std::vector<std::unique_ptr<weight::Portie>> mPorties;
 };
 
 // NM_DBLCLK

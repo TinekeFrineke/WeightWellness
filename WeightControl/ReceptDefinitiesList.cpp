@@ -2,7 +2,7 @@
 
 #include "ReceptDefinitiesList.h"
 
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "model/ReceptDefinitie.h"
 
 #include "EditFoodDefDialog.h"
@@ -22,7 +22,7 @@ ReceptDefinitiesFilter::ReceptDefinitiesFilter(const std::tstring& aDescription)
 }
 
 
-bool ReceptDefinitiesList::Complies(const WW::ReceptDefinitie& anItem,
+bool ReceptDefinitiesList::Complies(const weight::ReceptDefinitie& anItem,
                                     const ReceptDefinitiesFilter& aFilter)
 {
     bool bDescriptionComplies = aFilter.GetDescription().empty() ||
@@ -58,7 +58,7 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 }
 
 
-ReceptDefinitiesList::ReceptDefinitiesList(WW::Model& aModel)
+ReceptDefinitiesList::ReceptDefinitiesList(weight::Model& aModel)
     : mModel(aModel)
 {
 }
@@ -83,7 +83,7 @@ void ReceptDefinitiesList::ClearItems()
 }
 
 
-void ReceptDefinitiesList::View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>>& aItems)
+void ReceptDefinitiesList::View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aItems)
 {
     DeleteAllItems();
     ClearItems();
@@ -106,7 +106,7 @@ void ReceptDefinitiesList::View(const std::vector<std::unique_ptr<WW::ReceptDefi
 }
 
 
-void ReceptDefinitiesList::SelectItem(WW::ReceptDefinitie& aDefinition)
+void ReceptDefinitiesList::SelectItem(weight::ReceptDefinitie& aDefinition)
 {
     for (size_t i = 0; i < mItems.size(); ++i)
     {

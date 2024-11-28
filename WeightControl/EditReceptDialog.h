@@ -12,7 +12,7 @@ class EditReceptDialog : public CDialog
 	DECLARE_DYNAMIC(EditReceptDialog)
 
 public:
-  EditReceptDialog(WW::Model & aModel, WW::Recept & aRecept, CWnd * pParent = NULL);   // standard constructor
+  EditReceptDialog(weight::Model & aModel, weight::Recept & aRecept, CWnd * pParent = NULL);   // standard constructor
 	virtual ~EditReceptDialog();
 
 // Dialog Data
@@ -33,6 +33,6 @@ private:
   CDoubleEdit                   mPorties;
   CDoubleEdit                   mPunten;
 
-  WW::Model &                   mModel;
-  WW::Recept &                  mRecept;
+  weight::Model &                   mModel;
+  weight::Recept &                  mRecept;
 };

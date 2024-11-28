@@ -2,7 +2,7 @@
 
 #include "model/VoedingsmiddelDefinitie.h"
 
-namespace WW
+namespace weight
 {
 class PortionedLot;
 }
@@ -12,7 +12,7 @@ namespace ww2019
 class XmlVoedingsmiddeldef;
 
 
-//class XmlVMCreateVisitor : public WW::VMDefVisitor
+//class XmlVMCreateVisitor : public weight::VMDefVisitor
 //{
 //public:
 //                                XmlVMCreateVisitor(WW_GENERATED_NAMESPACE::XmlVoedingsmiddeldef & aDefinition)
@@ -20,8 +20,8 @@ class XmlVoedingsmiddeldef;
 //                                {
 //                                }
 //
-//  virtual void                  Visit(WW::CalculatedVMDef & aDefinitie);
-//  virtual void                  Visit(WW::FixedVMDef & aDefinitie);
+//  virtual void                  Visit(weight::CalculatedVMDef & aDefinitie);
+//  virtual void                  Visit(weight::FixedVMDef & aDefinitie);
 //
 //private:
 //                                XmlVMCreateVisitor(const XmlVMCreateVisitor &);
@@ -32,22 +32,22 @@ class XmlVoedingsmiddeldef;
 //};
 
 
-class CreateLotFromVMDef/* : public WW::VMDefVisitor*/
+class CreateLotFromVMDef/* : public weight::VMDefVisitor*/
 {
 public:
-    CreateLotFromVMDef(const WW::PointsCalculator& aCalculator)
+    CreateLotFromVMDef(const weight::PointsCalculator& aCalculator)
         : mCalculator(aCalculator)
     {
     }
 
-    WW::PortionedLot* Create(WW::VMDefinitie& aDefinitie,
-                             WW::Portie& aPortie);
+    weight::PortionedLot* Create(weight::VMDefinitie& aDefinitie,
+                             weight::Portie& aPortie);
 
 private:
     CreateLotFromVMDef(const CreateLotFromVMDef&) = delete;
     CreateLotFromVMDef& operator=(const CreateLotFromVMDef&) = delete;
 
-    const WW::PointsCalculator& mCalculator;
+    const weight::PointsCalculator& mCalculator;
 };
 
 } // namespace ww2019

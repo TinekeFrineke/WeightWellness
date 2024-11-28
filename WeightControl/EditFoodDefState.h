@@ -2,9 +2,9 @@
 //#define WW_WEIGHTWATCHERS_EDITFOODDEFSTATE_H__
 //
 //
-////#include "WW/WWModel/VoedingsmiddelDefinitie.h"
+////#include "weight/WWModel/VoedingsmiddelDefinitie.h"
 //
-//namespace WW
+//namespace weight
 //{
 //class CalculatedVMDef;
 //class FixedVMDef;
@@ -22,28 +22,28 @@
 //class CEditCalculatedFoodDefState : public CEditFoodDefState
 //{
 //public:
-//                              CEditCalculatedFoodDefState(WW::CalculatedVMDef & aDefinitie);
+//                              CEditCalculatedFoodDefState(weight::CalculatedVMDef & aDefinitie);
 //
 //  virtual void                Accept();
 //  virtual void                RollBack();
 //
 //private:
-//  WW::FoodParameters          mOriginalParameters;
-//  WW::CalculatedVMDef &       mDefinitie;
+//  weight::FoodParameters          mOriginalParameters;
+//  weight::CalculatedVMDef &       mDefinitie;
 //};
 //
 //
 //class CEditFixedFoodDefState : public CEditFoodDefState
 //{
 //public:
-//                              CEditFixedFoodDefState(WW::FixedVMDef & aDefinitie);
+//                              CEditFixedFoodDefState(weight::FixedVMDef & aDefinitie);
 //
 //  virtual void                Accept();
 //  virtual void                RollBack();
 //
 //private:
 //  double                      mOldPointsPerPortie;
-//  WW::FixedVMDef &            mDefinitie;
+//  weight::FixedVMDef &            mDefinitie;
 //};
 //
 //

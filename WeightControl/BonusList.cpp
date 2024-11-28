@@ -23,7 +23,7 @@
 
 
 #include "model/Day.h"
-//#include "WW/WWModel/Bonus.h"
+//#include "WW/Model/Bonus.h"
 
 /*
 ListControl::ListControl()
@@ -68,15 +68,15 @@ void BonusListItem::Write(CListCtrl & aControl, int iItemIndex)
   //TCHAR intensity[256];
   switch (mBonus.GetIntensity())
   {
-  case WW::Bonus::INTENSITY::Low:
+  case weight::Bonus::INTENSITY::Low:
     lvi.pszText = _T("low");
     break;
 
-  case WW::Bonus::INTENSITY::Medium:
+  case weight::Bonus::INTENSITY::Medium:
     lvi.pszText = _T("medium");
     break;
 
-  case WW::Bonus::INTENSITY::High:
+  case weight::Bonus::INTENSITY::High:
     lvi.pszText = _T("high");
     break;
   }
@@ -104,7 +104,7 @@ void BonusListItem::Write(CListCtrl & aControl, int iItemIndex)
 /////////////////////////////////////////////////////////////////////////////
 // BonusList
 
-BonusList::BonusList(WW::Model & aModel)
+BonusList::BonusList(weight::Model & aModel)
 : mModel(aModel)
 {
   SetNumberOfColumns(3);
@@ -119,12 +119,12 @@ BonusList::~BonusList()
 }
 
 
-void BonusList::View(const std::list<WW::Bonus> & aBonuses)
+void BonusList::View(const std::list<weight::Bonus> & aBonuses)
 {
   DeleteAllItems();
   ClearItems();
 
-  for (std::list<WW::Bonus>::const_iterator citer = aBonuses.begin();
+  for (std::list<weight::Bonus>::const_iterator citer = aBonuses.begin();
        citer != aBonuses.end();
        ++citer)
     mItems.push_back(new BonusListItem(*citer));
@@ -156,7 +156,7 @@ BonusListItem * BonusList::GetItemAt(int iIndex)
 }
 
 
-//void BonusList::SelectItem(const WW::Bonus & aBonus)
+//void BonusList::SelectItem(const weight::Bonus & aBonus)
 //{
 //  //for (size_t i = 0; i < mItems.size(); ++i)
 //  //  SelectItem(static_cast<int>(i), mItems[i]->GetBonus()->GetName() == aBonus.GetName());

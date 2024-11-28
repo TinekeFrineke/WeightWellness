@@ -4,7 +4,7 @@
 #include "PortieNaam.h"
 #include "Unit.h"
 
-namespace WW
+namespace weight
 {
 
 
@@ -36,4 +36,4 @@ private:
 };
 
 
-}
+} // namespace weight

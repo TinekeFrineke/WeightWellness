@@ -16,7 +16,7 @@
 // It would be better if this happens only when the user presses "OK".
 
 IMPLEMENT_DYNAMIC(ReceptenPage, CDialog)
-ReceptenPage::ReceptenPage(WW::Model& aModel, CWnd* pParent)
+ReceptenPage::ReceptenPage(weight::Model& aModel, CWnd* pParent)
     : CDialog(ReceptenPage::IDD, pParent),
     mReceptenList(aModel),
     mModel(aModel)
@@ -69,7 +69,7 @@ void ReceptenPage::OnBnClickedAdd()
 }
 
 
-void ReceptenPage::View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>>& aRecepten)
+void ReceptenPage::View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aRecepten)
 {
     mReceptenList.View(aRecepten);
 }

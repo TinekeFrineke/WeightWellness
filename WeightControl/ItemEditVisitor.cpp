@@ -6,7 +6,7 @@
 #include "ItemEditVisitor.h"
 
 #include "model/ManualItem.h"
-#include "model/WWmodel.h"
+#include "model/Model.h"
 #include "model/Recept.h"
 #include "model/ReceptDefinitie.h"
 #include "model/Voedingsmiddel.h"
@@ -18,15 +18,15 @@
 
 
 
-void ItemEditVisitor::Visit(WW::Recept& aRecept)
+void ItemEditVisitor::Visit(weight::Recept& aRecept)
 {
-    WW::ReceptDefinitie* definitie = mModel.FindReceptDefinitie(aRecept.GetName());
+    weight::ReceptDefinitie* definitie = mModel.FindReceptDefinitie(aRecept.GetName());
     if (definitie == NULL)
     {
-        auto newDefinition = std::make_unique<WW::ReceptDefinitie>(aRecept.GetName());
+        auto newDefinition = std::make_unique<weight::ReceptDefinitie>(aRecept.GetName());
         definitie = newDefinition.get();
         definitie->SetPortions(1);
-        definitie->Add(std::make_unique<WW::ManualItem>(aRecept.GetName(), aRecept.GetPoints()));
+        definitie->Add(std::make_unique<weight::ManualItem>(aRecept.GetName(), aRecept.GetPoints()));
 
         mModel.Add(std::move(newDefinition));
     }
@@ -36,19 +36,19 @@ void ItemEditVisitor::Visit(WW::Recept& aRecept)
 }
 
 
-void ItemEditVisitor::Visit(WW::Gerecht& aGerecht)
+void ItemEditVisitor::Visit(weight::Gerecht& aGerecht)
 {
     (void)&aGerecht;
 }
 
 
-void ItemEditVisitor::Visit(WW::Voedingsmiddel& aVoedingsmiddel)
+void ItemEditVisitor::Visit(weight::Voedingsmiddel& aVoedingsmiddel)
 {
-    WW::VMDefinitie* definitie = mModel.FindVoedingsmiddelDefinitie(aVoedingsmiddel.GetName());
+    weight::VMDefinitie* definitie = mModel.FindVoedingsmiddelDefinitie(aVoedingsmiddel.GetName());
     if (definitie == NULL)
     {
-        auto fixedDefinition = std::make_unique<WW::FixedVMDef>();
-        auto newDefinition = std::make_unique<WW::VMDefinitie>(mModel.GetCalculator(),
+        auto fixedDefinition = std::make_unique<weight::FixedVMDef>();
+        auto newDefinition = std::make_unique<weight::VMDefinitie>(mModel.GetCalculator(),
                                                       aVoedingsmiddel.GetName(),
                                                       aVoedingsmiddel.GetUnit(),
                                                       std::move(fixedDefinition));
@@ -62,7 +62,7 @@ void ItemEditVisitor::Visit(WW::Voedingsmiddel& aVoedingsmiddel)
 }
 
 
-void ItemEditVisitor::Visit(WW::ManualItem& anItem)
+void ItemEditVisitor::Visit(weight::ManualItem& anItem)
 {
     HandmatigeItemDlg dialog(&anItem, mParent);
     dialog.DoModal();

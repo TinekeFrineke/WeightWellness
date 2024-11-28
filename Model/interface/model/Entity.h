@@ -4,7 +4,7 @@
 
 // Clas should be useful for detecting memory leaks
 
-namespace WW
+namespace weight
 {
 
 class EntityBase
@@ -47,4 +47,4 @@ void Entity<CLASS>::Unregister()
     EntityBase::Unregister(CLASS::GetClassName(), GetInstanceName(), --mNumberOfInstances);
 }
 
-} // namespace WW
+} // namespace weight

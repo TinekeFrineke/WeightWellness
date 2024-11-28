@@ -6,7 +6,7 @@
 #include "doubleedit.h"
 #include "intedit.h"
 
-namespace WW
+namespace weight
 {
 class ReceptDefinitie;
 class Model;
@@ -20,13 +20,13 @@ class EditReceptDefDialog: public CDialog
     DECLARE_DYNAMIC(EditReceptDefDialog)
 
 public:
-    EditReceptDefDialog(WW::Model& aModel, WW::ReceptDefinitie* aRecept, CWnd* pParent = NULL);   // standard constructor
+    EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie* aRecept, CWnd* pParent = NULL);   // standard constructor
     virtual ~EditReceptDefDialog();
 
     // Dialog Data
     enum { IDD = IDD_EDITRECEPT_DIALOG };
 
-    std::unique_ptr<WW::ReceptDefinitie> ExtractRecept();
+    std::unique_ptr<weight::ReceptDefinitie> ExtractRecept();
 
 protected:
     virtual void          DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -42,8 +42,8 @@ protected:
 private:
     void                  EditSelectedItem();
 
-    WW::Model& mModel;
-    std::unique_ptr<WW::ReceptDefinitie> mRecept;
+    weight::Model& mModel;
+    std::unique_ptr<weight::ReceptDefinitie> mRecept;
 
     ItemList              mItemList;
     CStringEdit           mName;

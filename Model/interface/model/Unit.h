@@ -3,7 +3,7 @@
 #include "Utilities/StrUtils.h"
 
 
-namespace WW
+namespace weight
 {
 
 class Model;
@@ -11,7 +11,7 @@ class Model;
 class Unit
 {
 public:
-                        Unit(WW::Model & aModel, const std::tstring & aName);
+                        Unit(Model & aModel, const std::tstring & aName);
 
   std::tstring          GetName() const { return mName; }
 
@@ -20,10 +20,10 @@ private:
 };
 
 
-} // namespace WW
+} // namespace weight
 
 
-inline bool operator==(const WW::Unit & aUnit1, const WW::Unit & aUnit2)
+inline bool operator==(const weight::Unit & aUnit1, const weight::Unit & aUnit2)
 {
   return aUnit1.GetName() == aUnit2.GetName();
 }

@@ -10,7 +10,7 @@
 
 class VMState;
 
-namespace WW
+namespace weight
 {
 class Day;
 class Recept;
@@ -24,15 +24,15 @@ class CFindRecept: public CDialog
     DECLARE_DYNAMIC(CFindRecept)
 
 public:
-    CFindRecept(WW::Model& aModel,
-                WW::ReceptDefinitie* aDefinitie,
+    CFindRecept(weight::Model& aModel,
+                weight::ReceptDefinitie* aDefinitie,
                 CWnd* pParent = NULL);   // standard constructor
     virtual               ~CFindRecept();
 
     // Dialog Data
     enum { IDD = IDD_FIND_RECEPT };
 
-    std::unique_ptr<WW::Recept> ExtractRecept() { return std::move(mRecept); }
+    std::unique_ptr<weight::Recept> ExtractRecept() { return std::move(mRecept); }
 
 protected:
     virtual void          DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -59,9 +59,9 @@ private:
     CDoubleEdit           mPorties;
     CDoubleEdit           mPoints;
 
-    WW::Model& mModel;
-    std::unique_ptr<WW::Recept> mRecept;
-    WW::ReceptDefinitie* mDefinitie;
+    weight::Model& mModel;
+    std::unique_ptr<weight::Recept> mRecept;
+    weight::ReceptDefinitie* mDefinitie;
 
     bool                  mUpdating;
     bool                  mUpdatingFilter;
@@ -72,8 +72,8 @@ private:
 //{
 //public:
 //                            VMState(CFindRecept &         aDialog,
-//                                    WW::ReceptDefinitie & aDefinitie,
-//                                    WW::Model &                   aModel)
+//                                    weight::ReceptDefinitie & aDefinitie,
+//                                    weight::Model &                   aModel)
 //                                    : mDialog   (aDialog),
 //                                      mDefinitie(aDefinitie),
 //                                      mModel    (aModel)
@@ -83,7 +83,7 @@ private:
 //  virtual void              OnCheckFreePortion() = 0;
 //
 //  void                      UpdateFreeStateValues();
-//  void                      UpdatePortionValues(const WW::Portie & aPortie);
+//  void                      UpdatePortionValues(const weight::Portie & aPortie);
 //
 //protected:
 //  CFindRecept &     GetDialog()           { return mDialog; }
@@ -97,15 +97,15 @@ private:
 //  CDoubleEdit &             GetPoints()           { return mDialog.mPoints; }
 //  CButton &                 GetVrijePortieCheck() { return mDialog.mVrijePortieCheck; }
 //
-//  WW::ReceptDefinitie &
+//  weight::ReceptDefinitie &
 //                            GetDefinitie()        { return mDefinitie; }
-//  const WW::Model &         GetModel() const      { return mModel; }
+//  const weight::Model &         GetModel() const      { return mModel; }
 //
 //private:
 //  CFindRecept &     mDialog;
-//  WW::ReceptDefinitie &
+//  weight::ReceptDefinitie &
 //                            mDefinitie;
-//  WW::Model &               mModel;
+//  weight::Model &               mModel;
 //};
 
 
@@ -113,8 +113,8 @@ private:
 //{
 //public:
 //                            VMNoPortionsState(CFindRecept &         aDialog,
-//                                              WW::ReceptDefinitie & aDefinitie,
-//                                              WW::Model &                   aModel)
+//                                              weight::ReceptDefinitie & aDefinitie,
+//                                              weight::Model &                   aModel)
 //                            : VMState(aDialog, aDefinitie, aModel) {}
 //
 //  virtual void              Initialize();
@@ -126,8 +126,8 @@ private:
 //{
 //public:
 //                            VMFreePortionState(CFindRecept &         aDialog,
-//                                               WW::ReceptDefinitie & aDefinitie,
-//                                               WW::Model &                   aModel)
+//                                               weight::ReceptDefinitie & aDefinitie,
+//                                               weight::Model &                   aModel)
 //                            : VMState(aDialog, aDefinitie, aModel) {}
 //
 //  virtual void              Initialize();
@@ -139,8 +139,8 @@ private:
 //{
 //public:
 //                            VMStandardPortionsState(CFindRecept &         aDialog,
-//                                                    WW::ReceptDefinitie & aDefinitie,
-//                                                    WW::Model &                   aModel)
+//                                                    weight::ReceptDefinitie & aDefinitie,
+//                                                    weight::Model &                   aModel)
 //                            : VMState(aDialog, aDefinitie, aModel) {}
 //
 //  virtual void              Initialize();
@@ -152,8 +152,8 @@ private:
 //{
 //public:
 //                            VMBothState(CFindRecept &         aDialog,
-//                                        WW::ReceptDefinitie & aDefinitie,
-//                                        WW::Model &                   aModel)
+//                                        weight::ReceptDefinitie & aDefinitie,
+//                                        weight::Model &                   aModel)
 //                            : VMState(aDialog, aDefinitie, aModel) {}
 //
 //  virtual void              Initialize();

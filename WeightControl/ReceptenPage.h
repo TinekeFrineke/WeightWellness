@@ -1,12 +1,12 @@
 #pragma once
 
 #include "tabpage.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "ReceptDefinitiesList.h"
 
 // ReceptenPage dialog
 
-namespace WW
+namespace weight
 {
 class ReceptDefinitie;
 }
@@ -16,7 +16,7 @@ class ReceptenPage: public CDialog, public TabPage
     DECLARE_DYNAMIC(ReceptenPage)
 
 public:
-    ReceptenPage(WW::Model& aModel, CWnd* pParent = NULL);   // standard constructor
+    ReceptenPage(weight::Model& aModel, CWnd* pParent = NULL);   // standard constructor
     virtual                   ~ReceptenPage();
 
     virtual CDialog* GetDialog() { return this; }
@@ -39,9 +39,9 @@ protected:
     afx_msg void OnNMDblclkList1(NMHDR* pNMHDR, LRESULT* pResult);
     afx_msg void OnBnClickedDelete();
 
-    void                      View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>>& aRecepten);
+    void                      View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aRecepten);
 
 private:
-    WW::Model& mModel;
+    weight::Model& mModel;
     ReceptDefinitiesList mReceptenList;
 };

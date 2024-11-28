@@ -13,10 +13,10 @@
 // CEditPortieDialog dialog
 
 IMPLEMENT_DYNAMIC(CEditPortieDialog, CDialog)
-CEditPortieDialog::CEditPortieDialog(WW::Model& aModel,
-                                     WW::VMDefinitie& aDefinitie,
-                                     WW::Portie* aPortie,
-                                     const std::vector<std::unique_ptr<WW::Portie>>& aPorties,
+CEditPortieDialog::CEditPortieDialog(weight::Model& aModel,
+                                     weight::VMDefinitie& aDefinitie,
+                                     weight::Portie* aPortie,
+                                     const std::vector<std::unique_ptr<weight::Portie>>& aPorties,
                                      CWnd* pParent)
     : CDialog(CEditPortieDialog::IDD, pParent),
     mModel(aModel),
@@ -96,9 +96,9 @@ void CEditPortieDialog::OnBnClickedOk()
     mNaam.GetWindowText(text, 1024);
 
     if (mPortie == nullptr)
-        mPortie = new WW::Portie(WW::PortieNaam(mModel, text));
+        mPortie = new weight::Portie(weight::PortieNaam(mModel, text));
     else
-        mPortie->SetName(WW::PortieNaam(mModel, text));
+        mPortie->SetName(weight::PortieNaam(mModel, text));
 
     mPortie->SetUnits(mUnitAmount.GetValue());
 

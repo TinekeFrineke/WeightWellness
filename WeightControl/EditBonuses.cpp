@@ -12,7 +12,7 @@
 // CEditBonuses dialog
 
 IMPLEMENT_DYNAMIC(CEditBonuses, CDialog)
-CEditBonuses::CEditBonuses(WW::Model & aModel, const std::list<WW::Bonus> & aBonuses, double aWeight, CWnd* pParent /*=NULL*/)
+CEditBonuses::CEditBonuses(weight::Model & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent /*=NULL*/)
 : CDialog(CEditBonuses::IDD, pParent),
   mBonuses  (aBonuses),
   mModel    (aModel),

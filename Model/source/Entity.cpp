@@ -5,7 +5,7 @@
 #endif
 
 
-namespace WW
+namespace weight
 {
 
 void EntityBase::Register(const std::tstring& aClassName,
@@ -28,7 +28,7 @@ void EntityBase::Register(const std::tstring& aClassName,
 
 void EntityBase::Unregister(const std::tstring& aClassName,
                             const std::tstring& anInstanceName,
-                            int                  aNumberOfInstances)
+                            int                 aNumberOfInstances)
 {
 #ifdef FIND_LEAKS
     TCHAR smsg[1024];
@@ -37,11 +37,11 @@ void EntityBase::Unregister(const std::tstring& aClassName,
               this, aNumberOfInstances);
     OutputDebugString(smsg);
 #else
-    (void)aClassName;
-    (void)anInstanceName;
-    (void)aNumberOfInstances;
+    std::ignore = aClassName;
+    std::ignore = anInstanceName;
+    std::ignore = aNumberOfInstances;
 #endif
 }
 
 
-} // namespace WW
+} // namespace weight

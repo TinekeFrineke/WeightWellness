@@ -2,7 +2,7 @@
 
 #include "Item.h"
 
-namespace WW
+namespace weight
 {
 
   
@@ -33,4 +33,4 @@ private:
 };
 
 
-}
+} // namespace weight

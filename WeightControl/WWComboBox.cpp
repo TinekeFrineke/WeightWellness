@@ -5,19 +5,19 @@
 #include <assert.h>
 
 #include "model/Unit.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
-BEGIN_MESSAGE_MAP(WW::ComboBox, CComboBox)
+BEGIN_MESSAGE_MAP(weight::ComboBox, CComboBox)
 	//{{AFX_MSG_MAP(VMDefinitiesList)
   //ON_WM_CREATE()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 
-namespace WW
+namespace weight
 {
 
-ComboBox::ComboBox(const WW::Model & aModel, const std::tstring & anInitialText)
+ComboBox::ComboBox(const weight::Model & aModel, const std::tstring & anInitialText)
 : mModel      (aModel),
   mInitialText(anInitialText)
 {

@@ -5,7 +5,7 @@
 #include "Utilities/StrUtils.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -27,4 +27,4 @@ inline bool operator==(const Naam& aName1, const Naam& aName2)
 }
 
 
-} // namespace WW
+} // namespace weight

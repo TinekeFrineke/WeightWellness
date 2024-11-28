@@ -2,7 +2,7 @@
 
 #include <memory>
 
-namespace WW {
+namespace weight {
 
 class PortionedLot;
 class Portie;
@@ -16,4 +16,4 @@ public:
     virtual std::unique_ptr<PortionedLot> Create(VMDefinitie& aDefinitie, Portie& aPortie) = 0;
 };
 
-} // namespace WW
+} // namespace weight

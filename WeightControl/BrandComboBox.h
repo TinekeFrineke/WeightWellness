@@ -3,15 +3,15 @@
 #include "WWCombobox.h"
 #include "Utilities/StrUtils.h"
 
-namespace WW
+namespace weight
 {
   class Model;
 }
 
-class BrandComboBox : public WW::ComboBox
+class BrandComboBox : public weight::ComboBox
 {
 public:
-                              BrandComboBox(const WW::Model &     aModel,
+                              BrandComboBox(const weight::Model &     aModel,
                                             bool                  aIsForFiltering,
                                             const std::tstring &  anInitialBrand = _T(""));
 

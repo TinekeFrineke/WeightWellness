@@ -1,6 +1,6 @@
 #pragma once
 
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "afxwin.h"
 #include "afxcmn.h"
 
@@ -16,7 +16,7 @@
 
 // CEditFoodDefDialog dialog
 
-namespace WW
+namespace weight
 {
 class CalculatedVMDef;
 class FixedVMDef;
@@ -27,8 +27,8 @@ class CEditFoodDefDialog: public CDialog
     DECLARE_DYNAMIC(CEditFoodDefDialog)
 
 public:
-    CEditFoodDefDialog(WW::Model& aModel,
-                       WW::VMDefinitie* aDefinitie,
+    CEditFoodDefDialog(weight::Model& aModel,
+                       weight::VMDefinitie* aDefinitie,
                        CWnd* pParent = NULL);   // standard constructor
     virtual ~CEditFoodDefDialog();
 
@@ -96,11 +96,11 @@ private:
     CIntEdit                  mEenheden;
     BrandComboBox             mMerk;
 
-    std::unique_ptr<WW::VMDefinitie> mChangedDefinitieAbc;
-    std::unique_ptr<WW::VMDefinitie> mDefinitieAbc;
-    WW::Model& mModel;
+    std::unique_ptr<weight::VMDefinitie> mChangedDefinitieAbc;
+    std::unique_ptr<weight::VMDefinitie> mDefinitieAbc;
+    weight::Model& mModel;
 
-    std::vector<std::unique_ptr<WW::Portie>> mOriginalPorties;
+    std::vector<std::unique_ptr<weight::Portie>> mOriginalPorties;
 
 public:
     afx_msg void OnCbnSelchangeUnit();

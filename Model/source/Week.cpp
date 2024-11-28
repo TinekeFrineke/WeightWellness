@@ -4,7 +4,7 @@
 #include <assert.h>
 
 #include "Day.h"
-#include "WWModel.h"
+#include "Model.h"
 
 #ifdef min
 # undef min
@@ -14,7 +14,7 @@
 # undef max
 #endif
 
-namespace WW
+namespace weight
 {
 
 
@@ -158,4 +158,4 @@ bool Week::SetEndDate(const Utils::Date& aDate)
 }
 
 
-} // namespace WW
+} // namespace weight

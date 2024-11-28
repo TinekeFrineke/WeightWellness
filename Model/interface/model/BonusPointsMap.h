@@ -4,7 +4,7 @@
 #include <map>
 
 
-namespace WW
+namespace weight
 {
 class PointsPerDuration
 {
@@ -75,4 +75,4 @@ private:
   IntensityPointsMap          mPointsMap;
 };
 
-} // namespace WW
+} // namespace weight

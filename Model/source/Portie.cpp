@@ -7,7 +7,7 @@
 
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -42,4 +42,4 @@ Portie::~Portie()
 }
 
 
-} // namespace WW
+} // namespace weight

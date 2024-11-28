@@ -1,6 +1,6 @@
 #pragma once
 
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "afxcmn.h"
 
 #include "TabPage.h"
@@ -17,7 +17,7 @@ class CItemsPage : public CDialog, public TabPage
 	DECLARE_DYNAMIC(CItemsPage)
 
 public:
-	CItemsPage(WW::Model & aModel, CWnd* pParent = NULL);   // standard constructor
+	CItemsPage(weight::Model & aModel, CWnd* pParent = NULL);   // standard constructor
 	virtual ~CItemsPage();
 
 // Dialog Data
@@ -50,7 +50,7 @@ private:
   CategoryComboBox    mCategory;
   BrandComboBox       mMerk;
 
-  WW::Model &         mModel;
+  weight::Model &         mModel;
   VMDefinitiesList    mItemsList;
 
   bool                mUpdatingFilter;

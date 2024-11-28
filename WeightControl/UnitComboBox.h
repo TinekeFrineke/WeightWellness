@@ -4,15 +4,15 @@
 #include "Utilities/StrUtils.h"
 #include "wwcombobox.h"
 
-namespace WW
+namespace weight
 {
   class Model;
 }
 
-class UnitComboBox : public WW::ComboBox
+class UnitComboBox : public weight::ComboBox
 {
 public:
-                              UnitComboBox(const WW::Model & aModel,
+                              UnitComboBox(const weight::Model & aModel,
                                            const std::tstring & aUnitName);
   void                        AddLines();
 

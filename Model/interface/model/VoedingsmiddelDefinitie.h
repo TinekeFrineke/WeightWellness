@@ -10,7 +10,7 @@
 #include "VoedingsMiddelDefinitionVisitor.h"
 #include "WWDefinitions.h"
 
-namespace WW
+namespace weight
 {
 
 class CalculatedVMDef;
@@ -93,17 +93,17 @@ class FixedVMDef;
 class VMDefBase
 {
 public:
-    virtual                   ~VMDefBase() = default;
+    virtual                   ~VMDefBase() noexcept = default;
 
     virtual void Accept(VoedingsMiddelDefinitionVisitor& visitor) = 0;
     virtual std::unique_ptr<VMDefBase> Copy() const = 0;
     virtual double            GetPointsPer100Units() const = 0;
 
-    virtual bool              IsCalculated() const { return false; }
-    virtual bool              IsFixed() const { return false; }
+    virtual bool              IsCalculated() const noexcept { return false; }
+    virtual bool              IsFixed() const noexcept { return false; }
 
-    virtual CalculatedVMDef* GetCalculatedVMDef() { return nullptr; }
-    virtual FixedVMDef* GetFixedVMDef() { return nullptr; }
+    virtual CalculatedVMDef* GetCalculatedVMDef() noexcept { return nullptr; }
+    virtual FixedVMDef* GetFixedVMDef() noexcept { return nullptr; }
 };
 
 class CalculatedVMDef: public VMDefBase, public Entity<CalculatedVMDef>
@@ -113,37 +113,39 @@ public:
     CalculatedVMDef(const CalculatedVMDef&);
     CalculatedVMDef& operator=(const CalculatedVMDef&);
 
-    virtual                   ~CalculatedVMDef();
+    ~CalculatedVMDef() override;
 
+    // VMDefBase
     void Accept(VoedingsMiddelDefinitionVisitor& visitor) override;
+    const FoodParameters& GetParameters() const noexcept { return mParameters; }
+    double GetPointsPer100Units() const override { return mCalculator.GetPointsPer100Units(mParameters); }
 
-    void                      SetParameters(const FoodParameters& aParameters);
-    void                      SetKCalPer100Units(double aKCalPer100) { mParameters.SetKCalPer100Units(aKCalPer100); }
-    void                      SetVetPer100Units(double aVetPer100) { mParameters.SetVetPer100Units(aVetPer100); }
-    void                      SetEiwitPer100Units(double anEiwit) { mParameters.SetEiwitPer100Units(anEiwit); }
-    void                      SetKoolhydratenPer100Units(double akh) { mParameters.SetKoolhydratenPer100Units(akh); }
-    void                      SetVezelsPer100Units(double aVezels) { mParameters.SetVezelsPer100Units(aVezels); }
-
-    const FoodParameters& GetParameters() const { return mParameters; }
-    double                    GetPointsPer100Units() const { return mCalculator.GetPointsPer100Units(mParameters); }
-    double                    GetKCalPer100Units() const { return mParameters.GetKCalPer100Units(); }
-    double                    GetVetPer100Units() const { return mParameters.GetVetPer100Units(); }
-    double                    GetEiwitPer100Units() const { return mParameters.GetEiwitPer100Units(); }
-    double                    GetKoolhydratenPer100Units() const { return mParameters.GetKoolhydratenPer100Units(); }
-    double                    GetVezelsPer100Units() const { return mParameters.GetVezelsPer100Units(); }
-
-    virtual bool              IsCalculated() const { return true; }
-    virtual CalculatedVMDef* GetCalculatedVMDef() { return this; }
-    virtual std::unique_ptr<VMDefBase> Copy() const override;
+    bool              IsCalculated() const noexcept override { return true; }
+    CalculatedVMDef* GetCalculatedVMDef() noexcept override { return this; }
+    std::unique_ptr<VMDefBase> Copy() const override;
 
     // Entity overrides
-    virtual std::tstring      GetInstanceName() const { return _T("None"); }
+    std::tstring GetInstanceName() const override { return _T("None"); }
+
+    void SetParameters(const FoodParameters& aParameters);
+    void SetKCalPer100Units(double aKCalPer100) { mParameters.SetKCalPer100Units(aKCalPer100); }
+    void SetVetPer100Units(double aVetPer100) { mParameters.SetVetPer100Units(aVetPer100); }
+    void SetEiwitPer100Units(double anEiwit) { mParameters.SetEiwitPer100Units(anEiwit); }
+    void SetKoolhydratenPer100Units(double akh) { mParameters.SetKoolhydratenPer100Units(akh); }
+    void SetVezelsPer100Units(double aVezels) { mParameters.SetVezelsPer100Units(aVezels); }
+
+    double GetKCalPer100Units() const { return mParameters.GetKCalPer100Units(); }
+    double GetVetPer100Units() const { return mParameters.GetVetPer100Units(); }
+    double GetEiwitPer100Units() const { return mParameters.GetEiwitPer100Units(); }
+    double GetKoolhydratenPer100Units() const { return mParameters.GetKoolhydratenPer100Units(); }
+    double GetVezelsPer100Units() const { return mParameters.GetVezelsPer100Units(); }
+
     static std::tstring       GetClassName() { return _T("CalculatedVMDef"); }
 
 private:
 
     const PointsCalculator& mCalculator;
-    FoodParameters            mParameters;
+    FoodParameters mParameters;
 };
 
 
@@ -152,19 +154,21 @@ class FixedVMDef: public VMDefBase, public Entity<FixedVMDef>
 public:
     FixedVMDef();
     FixedVMDef(const FixedVMDef&);
-    virtual                   ~FixedVMDef();
+    ~FixedVMDef() override;
 
+    // VMDefBase
     void Accept(VoedingsMiddelDefinitionVisitor& visitor) override;
 
-    void                      SetPointsPer100Units(double aPoints) { mPointsPer100Units = aPoints; }
-    double                    GetPointsPer100Units() const { return mPointsPer100Units; }
-
-    virtual bool              IsFixed() const override { return true; }
-    virtual FixedVMDef* GetFixedVMDef() { return this; }
-    virtual std::unique_ptr<VMDefBase> Copy() const override;
+    double GetPointsPer100Units() const noexcept override { return mPointsPer100Units; }
+    bool IsFixed() const noexcept override { return true; }
+    FixedVMDef* GetFixedVMDef() noexcept override { return this; }
+    std::unique_ptr<VMDefBase> Copy() const override;
 
     // Entity overrides
-    virtual std::tstring      GetInstanceName() const { return _T("None"); }
+    std::tstring      GetInstanceName() const override { return _T("None"); }
+
+    void SetPointsPer100Units(double aPoints) noexcept { mPointsPer100Units = aPoints; }
+
     static std::tstring       GetClassName() { return _T("FixedVMDef"); }
 
 private:
@@ -172,4 +176,4 @@ private:
 };
 
 
-} // namespace WW
+} // namespace weight

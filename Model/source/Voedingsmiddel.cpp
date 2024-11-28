@@ -6,7 +6,7 @@
 #include "VoedingsmiddelDefinitie.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -55,4 +55,4 @@ void Voedingsmiddel::Accept(ItemVisitor& aVisitor)
 }
 
 
-} // namespace WW
+} // namespace weight

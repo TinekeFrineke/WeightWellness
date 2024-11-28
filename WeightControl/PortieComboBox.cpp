@@ -6,7 +6,7 @@
 
 #include "model/Portie.h"
 #include "model/PortieNaam.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 BEGIN_MESSAGE_MAP(PortieComboBox, CComboBox)
     //{{AFX_MSG_MAP(PortieComboBox)
@@ -15,7 +15,7 @@ BEGIN_MESSAGE_MAP(PortieComboBox, CComboBox)
 END_MESSAGE_MAP()
 
 
-PortieComboBox::PortieComboBox(const WW::Model& aModel, const std::tstring& aPortie)
+PortieComboBox::PortieComboBox(const weight::Model& aModel, const std::tstring& aPortie)
     : mModel(aModel),
     mInitialPortie(aPortie)
 {
@@ -30,7 +30,7 @@ void PortieComboBox::Initialize()
 }
 
 
-void PortieComboBox::Fill(const std::vector<WW::PortieNaam>& aNames, const std::tstring& aPortie)
+void PortieComboBox::Fill(const std::vector<weight::PortieNaam>& aNames, const std::tstring& aPortie)
 {
     ResetContent();
 
@@ -49,7 +49,7 @@ void PortieComboBox::Fill(const std::vector<WW::PortieNaam>& aNames, const std::
 }
 
 
-void PortieComboBox::Fill(const std::vector<std::unique_ptr<WW::Portie>>& aList, const std::tstring& aPortie)
+void PortieComboBox::Fill(const std::vector<std::unique_ptr<weight::Portie>>& aList, const std::tstring& aPortie)
 {
     ResetContent();
 
@@ -68,13 +68,13 @@ void PortieComboBox::Fill(const std::vector<std::unique_ptr<WW::Portie>>& aList,
 }
 
 
-WW::Portie* PortieComboBox::GetSelectedPortie()
+weight::Portie* PortieComboBox::GetSelectedPortie()
 {
     int index = GetCurSel();
     if (index == CB_ERR)
         return NULL;
 
-    return static_cast<WW::Portie*>(GetItemDataPtr(index));
+    return static_cast<weight::Portie*>(GetItemDataPtr(index));
 }
 
 

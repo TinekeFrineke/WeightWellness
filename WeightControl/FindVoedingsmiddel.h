@@ -14,7 +14,7 @@
 
 class VMState;
 
-namespace WW
+namespace weight
 {
 class Day;
 class ILotFactory;
@@ -28,16 +28,16 @@ class CFindVoedingsmiddel: public CDialog
     DECLARE_DYNAMIC(CFindVoedingsmiddel)
 
 public:
-    CFindVoedingsmiddel(WW::Model& aModel,
-                        WW::VMDefinitie* aDefinitie,
-                        std::unique_ptr<WW::ILotFactory> lotFactory,
+    CFindVoedingsmiddel(weight::Model& aModel,
+                        weight::VMDefinitie* aDefinitie,
+                        std::unique_ptr<weight::ILotFactory> lotFactory,
                         CWnd* pParent = nullptr);   // standard constructor
     virtual ~CFindVoedingsmiddel();
 
     // Dialog Data
     enum { IDD = IDD_FIND_VOEDINGSMIDDEL };
 
-    std::unique_ptr<WW::Voedingsmiddel> ExtractVoedingsMiddel();
+    std::unique_ptr<weight::Voedingsmiddel> ExtractVoedingsMiddel();
 
 protected:
     virtual void        DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -58,7 +58,7 @@ protected:
     afx_msg void        OnCbnSelchangeBrand();
     afx_msg void        OnBnClickedCheckFavourites();
 
-    std::unique_ptr<VMState> CreateState(WW::VMDefinitie& aDefinitie);
+    std::unique_ptr<VMState> CreateState(weight::VMDefinitie& aDefinitie);
     void SetState(std::unique_ptr<VMState> aState);
 
 private:
@@ -79,15 +79,15 @@ private:
     CStringEdit         mUnitNaam;
     CDoubleEdit         mPoints;
 
-    WW::Model& mModel;
-    std::unique_ptr<WW::Voedingsmiddel> mFood;
-    WW::VMDefinitie* mDefinitie;
+    weight::Model& mModel;
+    std::unique_ptr<weight::Voedingsmiddel> mFood;
+    weight::VMDefinitie* mDefinitie;
 
     bool                mUpdating;
     bool                mUpdatingFilter;
 
     std::unique_ptr<VMState> mState;
-    std::unique_ptr<WW::ILotFactory> m_lotFactory;
+    std::unique_ptr<weight::ILotFactory> m_lotFactory;
 };
 
 
@@ -95,8 +95,8 @@ class VMState
 {
 public:
     VMState(CFindVoedingsmiddel& aDialog,
-            WW::VMDefinitie& aDefinitie,
-            WW::Model& aModel)
+            weight::VMDefinitie& aDefinitie,
+            weight::Model& aModel)
         : mDialog(aDialog),
         mDefinitie(aDefinitie),
         mModel(aModel)
@@ -104,7 +104,7 @@ public:
 
     virtual void              Initialize() = 0;
 
-    void                      UpdatePortionValues(const WW::Portie& aPortie);
+    void                      UpdatePortionValues(const weight::Portie& aPortie);
 
 protected:
     CFindVoedingsmiddel& GetDialog() { return mDialog; }
@@ -117,13 +117,13 @@ protected:
     PortieComboBox& GetPortieBox() { return mDialog.mPortieNaam; }
     CDoubleEdit& GetPoints() { return mDialog.mPoints; }
 
-    WW::VMDefinitie& GetDefinitie() { return mDefinitie; }
-    const WW::Model& GetModel() const { return mModel; }
+    weight::VMDefinitie& GetDefinitie() { return mDefinitie; }
+    const weight::Model& GetModel() const { return mModel; }
 
 private:
     CFindVoedingsmiddel& mDialog;
-    WW::VMDefinitie& mDefinitie;
-    WW::Model& mModel;
+    weight::VMDefinitie& mDefinitie;
+    weight::Model& mModel;
 };
 
 
@@ -131,8 +131,8 @@ class VMNoPortionsState: public VMState
 {
 public:
     VMNoPortionsState(CFindVoedingsmiddel& aDialog,
-                      WW::VMDefinitie& aDefinitie,
-                      WW::Model& aModel)
+                      weight::VMDefinitie& aDefinitie,
+                      weight::Model& aModel)
         : VMState(aDialog, aDefinitie, aModel) {}
 
     virtual void              Initialize() override;
@@ -143,8 +143,8 @@ class VMStandardPortionsState: public VMState
 {
 public:
     VMStandardPortionsState(CFindVoedingsmiddel& aDialog,
-                            WW::VMDefinitie& aDefinitie,
-                            WW::Model& aModel)
+                            weight::VMDefinitie& aDefinitie,
+                            weight::Model& aModel)
         : VMState(aDialog, aDefinitie, aModel) {}
 
     void Initialize() override;

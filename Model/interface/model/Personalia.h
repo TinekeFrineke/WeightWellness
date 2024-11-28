@@ -3,7 +3,7 @@
 #include "Utilities/Date.h"
 #include "WWDefinitions.h"
 
-namespace WW
+namespace weight
 {
 
 

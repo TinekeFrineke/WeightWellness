@@ -6,15 +6,15 @@
 #include "intedit.h"
 
 // EditBonusDialog dialog
-namespace WW { class BonusPointsMap; }
+namespace weight { class BonusPointsMap; }
 
 class EditBonusDialog : public CDialog
 {
 	DECLARE_DYNAMIC(EditBonusDialog)
 
 public:
-  EditBonusDialog(const WW::BonusPointsMap & aMap, double aWeight, CWnd* pParent = NULL);   // standard constructor
-  EditBonusDialog(const WW::BonusPointsMap & aMap, double aWeight, const WW::Bonus & aBonus, CWnd* pParent = NULL);   // standard constructor
+  EditBonusDialog(const weight::BonusPointsMap & aMap, double aWeight, CWnd* pParent = NULL);   // standard constructor
+  EditBonusDialog(const weight::BonusPointsMap & aMap, double aWeight, const weight::Bonus & aBonus, CWnd* pParent = NULL);   // standard constructor
 
   virtual ~EditBonusDialog();
 
@@ -28,7 +28,7 @@ public:
   afx_msg void OnBnClickedRadioHigh();
   afx_msg void OnEnChangeGewicht();
 
-  const WW::Bonus &   GetBonus() const { return mBonus; }
+  const weight::Bonus &   GetBonus() const { return mBonus; }
 
 protected:
 	virtual void        DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -36,9 +36,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
-  WW::Bonus           mBonus;
+  weight::Bonus           mBonus;
   double              mWeight;
-  const WW::BonusPointsMap &
+  const weight::BonusPointsMap &
                       mBonusMap;
   CDoubleEdit         mWeightEdit;
   CIntEdit            mDurationEdit;

@@ -44,7 +44,7 @@
 #include "model/Unit.h"
 #include "model/VoedingsmiddelDefinitie.h"
 #include "model/Week.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 #include "XmlItemCreateVisitor.h"
 #include "XmlLotCreateVisitor.h"
@@ -54,39 +54,39 @@ namespace ww2019
 {
 
 
-WW::Result XmlWriter::Write(const std::tstring& aDirectory)
+weight::Result XmlWriter::Write(const std::tstring& aDirectory)
 {
-    WW::Result result = WritePersonalia(aDirectory + _T("\\personalia.xml"));
-    if (result == WW::Result::Ok)
+    weight::Result result = WritePersonalia(aDirectory + _T("\\personalia.xml"));
+    if (result == weight::Result::Ok)
         result = WriteUnits(aDirectory + _T("\\units.xml"));
-    if (result == WW::Result::Ok)
+    if (result == weight::Result::Ok)
         result = WriteVoedingsmiddelDefinities(aDirectory + _T("\\voedingsmiddeldefinities.xml"));
-    if (result == WW::Result::Ok)
+    if (result == weight::Result::Ok)
         result = WriteRecepten(aDirectory + _T("\\recepten.xml"));
-    if (result == WW::Result::Ok)
+    if (result == weight::Result::Ok)
         result = WriteGerechten(aDirectory + _T("\\restaurantgerechten.xml"));
-    if (result == WW::Result::Ok)
+    if (result == weight::Result::Ok)
         result = WriteWeeks(aDirectory);
 
     return result;
 }
 
 
-WW::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
+weight::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
 {
     if (mModel.GetPersonalia().empty())
-        return WW::Result::Ok;
+        return weight::Result::Ok;
 
-    WW::Personalia* personalia = mModel.GetActivePersonalia();
+    weight::Personalia* personalia = mModel.GetActivePersonalia();
 
     if (personalia->GetUserName().empty())
-        return WW::Result::Ok;
+        return weight::Result::Ok;
 
     XmlPersonalia* xmlpersonalia = new XmlPersonalia;
     xmlpersonalia->Setgebruikersnaam(personalia->GetUserName());
     xmlpersonalia->Setnaam(personalia->GetName());
     xmlpersonalia->Setgeboren(Utils::ToString(personalia->GetDateOfBirth()));
-    xmlpersonalia->Setgeslacht(personalia->GetGeslacht() == WW::Personalia::GESLACHT::Mannelijk
+    xmlpersonalia->Setgeslacht(personalia->GetGeslacht() == weight::Personalia::GESLACHT::Mannelijk
                                ? XmlPersonalia::geslacht::Mannelijk
                                : XmlPersonalia::geslacht::Vrouwelijk);
     xmlpersonalia->Setgewicht(Str::ToTString(personalia->GetStreefGewicht()));
@@ -98,14 +98,14 @@ WW::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
     xmlpersonalia->Sethuidiggewicht(Str::ToTString(personalia->GetHuidigGewicht()));
     switch (personalia->GetStrategy())
     {
-        case WW::STRATEGY_TYPE::KCal:
+        case weight::STRATEGY_TYPE::KCal:
             xmlpersonalia->Setstrategie(XmlPersonalia::strategie::KCal);
             break;
-        case WW::STRATEGY_TYPE::CarboHydrates:
+        case weight::STRATEGY_TYPE::CarboHydrates:
             xmlpersonalia->Setstrategie(XmlPersonalia::strategie::CarboHydrates);
             break;
         default:
-            return WW::Result::InterpretError;
+            return weight::Result::InterpretError;
     }
 
     XmlPersonaliaWriter writer;
@@ -113,11 +113,11 @@ WW::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
 
     delete xmlpersonalia;
 
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::WriteUnits(const std::tstring& aFilename)
+weight::Result XmlWriter::WriteUnits(const std::tstring& aFilename)
 {
     XmlUnits* xmlunits = new XmlUnits;
 
@@ -134,11 +134,11 @@ WW::Result XmlWriter::WriteUnits(const std::tstring& aFilename)
 
     delete xmlunits;
 
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFilename)
+weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFilename)
 {
     auto xmlvmdefinities = std::make_unique<XmlVoedingsmiddeldefs>();
 
@@ -154,7 +154,7 @@ WW::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFilenam
 
         if (vmdefinities[i]->IsCalculated())
         {
-            WW::CalculatedVMDef* definitie = vmdefinities[i]->GetCalculatedVMDef();
+            weight::CalculatedVMDef* definitie = vmdefinities[i]->GetCalculatedVMDef();
             assert(definitie != NULL);
             auto xmlwaarde = std::make_unique<XmlVoedingswaarde>();
             xmlwaarde->Setkcalper100(Str::ToTString(definitie->GetKCalPer100Units()));
@@ -167,7 +167,7 @@ WW::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFilenam
         }
         else if (vmdefinities[i]->IsFixed())
         {
-            WW::FixedVMDef* definitie = vmdefinities[i]->GetFixedVMDef();
+            weight::FixedVMDef* definitie = vmdefinities[i]->GetFixedVMDef();
             assert(definitie != NULL);
 
             auto xmlpuntenper100 = std::make_unique<XmlPuntenper100>();
@@ -181,7 +181,7 @@ WW::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFilenam
                                     ? XmlVoedingsmiddeldef::favoriet::yes
                                     : XmlVoedingsmiddeldef::favoriet::no);
 
-        const std::vector<std::unique_ptr<WW::Portie>>& portielist = vmdefinities[i]->GetPortieList();
+        const std::vector<std::unique_ptr<weight::Portie>>& portielist = vmdefinities[i]->GetPortieList();
         for (size_t p = 0; p < vmdefinities[i]->GetPortieList().size(); ++p) {
             auto portie = std::make_unique<XmlPortie>();
             portie->Setnaam(portielist[p]->GetName().Get());
@@ -195,11 +195,11 @@ WW::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFilenam
     XmlVoedingsmiddeldefsWriter writer;
     writer.Write(aFilename, *xmlvmdefinities);
 
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
+weight::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
 {
     XmlReceptdefs* xmlrecepten = new XmlReceptdefs;
 
@@ -222,11 +222,11 @@ WW::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
     writer.Write(aFilename, *xmlrecepten);
     delete xmlrecepten;
 
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::WriteGerechten(const std::tstring& aFilename)
+weight::Result XmlWriter::WriteGerechten(const std::tstring& aFilename)
 {
     XmlGerechtdefs* xmlgerechten = new XmlGerechtdefs;
 
@@ -241,16 +241,16 @@ WW::Result XmlWriter::WriteGerechten(const std::tstring& aFilename)
     XmlGerechtdefsWriter xmlwriter;
     xmlwriter.Write(aFilename, *xmlgerechten);
     delete xmlgerechten;
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::WriteWeeks(const std::tstring& aDirectory)
+weight::Result XmlWriter::WriteWeeks(const std::tstring& aDirectory)
 {
-    WW::Result result = WW::Result::Ok;
+    weight::Result result = weight::Result::Ok;
 
     const auto& weeks = mModel.GetWeeks();
-    for (size_t i = 0; i < weeks.size() && result == WW::Result::Ok; ++i)
+    for (size_t i = 0; i < weeks.size() && result == weight::Result::Ok; ++i)
     {
         Utils::Date startdate = weeks[i]->GetStartDate();
         result = Write(*weeks[i], aDirectory + _T("\\week") + Utils::ToString(startdate) + _T(".xml"));
@@ -260,15 +260,15 @@ WW::Result XmlWriter::WriteWeeks(const std::tstring& aDirectory)
 }
 
 
-WW::Result XmlWriter::Create(const WW::Portie& aPortie, XmlPortie& anXmlPortie)
+weight::Result XmlWriter::Create(const weight::Portie& aPortie, XmlPortie& anXmlPortie)
 {
     anXmlPortie.Seteenheden(Str::ToTString(aPortie.GetUnits()));
     anXmlPortie.Setnaam(aPortie.GetName().Get());
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Create(const WW::CalculatedLot& aLot, XmlStandardlot& anXmlLot)
+weight::Result XmlWriter::Create(const weight::CalculatedLot& aLot, XmlStandardlot& anXmlLot)
 {
     anXmlLot.Sethoeveelheid(Str::ToTString(aLot.GetNumberOfPortions()));
 
@@ -285,11 +285,11 @@ WW::Result XmlWriter::Create(const WW::CalculatedLot& aLot, XmlStandardlot& anXm
     anXmlLot.Add(std::move(xmlVoedingswaarde));
 
     Create(aLot.GetPortie(), anXmlLot.GetPortie());
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Create(const WW::FixedLot& aLot, XmlStandardlot& anXmlLot)
+weight::Result XmlWriter::Create(const weight::FixedLot& aLot, XmlStandardlot& anXmlLot)
 {
     anXmlLot.Sethoeveelheid(Str::ToTString(aLot.GetNumberOfPortions()));
 
@@ -301,11 +301,11 @@ WW::Result XmlWriter::Create(const WW::FixedLot& aLot, XmlStandardlot& anXmlLot)
     anXmlLot.Add(std::move(xmlpuntenper100));
 
     Create(aLot.GetPortie(), anXmlLot.GetPortie());
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Create(const WW::Voedingsmiddel& aMiddel,
+weight::Result XmlWriter::Create(const weight::Voedingsmiddel& aMiddel,
                              XmlVoedingsmiddel& anXmlMiddel)
 {
     anXmlMiddel.Setnaam(aMiddel.GetName());
@@ -313,43 +313,43 @@ WW::Result XmlWriter::Create(const WW::Voedingsmiddel& aMiddel,
     anXmlMiddel.Setunit(aMiddel.GetUnit().GetName());
 
     XmlLotCreateVisitor visitor(*this, anXmlMiddel);
-    const_cast<WW::Voedingsmiddel&>(aMiddel).GetLot().Accept(visitor);
+    const_cast<weight::Voedingsmiddel&>(aMiddel).GetLot().Accept(visitor);
 
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Create(const WW::Recept& aRecept,
+weight::Result XmlWriter::Create(const weight::Recept& aRecept,
                              XmlRecept& anXmlRecept)
 {
     anXmlRecept.Setnaam(aRecept.GetName());
     anXmlRecept.Sethoeveelheid(Str::ToTString(aRecept.GetNumberOfPortions()));
     anXmlRecept.Setpunten(Str::ToTString(aRecept.GetPointsPerPortion()));
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Create(const WW::Gerecht& aGerecht,
+weight::Result XmlWriter::Create(const weight::Gerecht& aGerecht,
                              XmlGerecht& anXmlGerecht)
 {
     anXmlGerecht.Setnaam(aGerecht.GetName());
     anXmlGerecht.Sethoeveelheid(Str::ToTString(aGerecht.GetNumberOfPortions()));
     anXmlGerecht.Setpunten(Str::ToTString(aGerecht.GetPointsPerPortion()));
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Create(const WW::ManualItem& anItem,
+weight::Result XmlWriter::Create(const weight::ManualItem& anItem,
                              XmlHandmatigitem& anXmlItem)
 {
     anXmlItem.Setnaam(anItem.GetName());
     anXmlItem.Sethoeveelheid(Str::ToTString(anItem.GetAmount()));
     anXmlItem.Setpunten(Str::ToTString(anItem.GetPoints()));
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Create(const WW::Day& aDay,
+weight::Result XmlWriter::Create(const weight::Day& aDay,
                              XmlDag& aDag)
 {
     aDag.Setdatum(Utils::ToString(aDay.GetDate()));
@@ -358,7 +358,7 @@ WW::Result XmlWriter::Create(const WW::Day& aDay,
     if (!Math::Equals(aDay.GetFreeBonusPoints(), 0))
         aDag.Setbonuspunten(Str::ToTString(aDay.GetFreeBonusPoints()));
 
-    for (std::list<WW::Bonus>::const_iterator citer = aDay.GetBonuses().begin();
+    for (std::list<weight::Bonus>::const_iterator citer = aDay.GetBonuses().begin();
          citer != aDay.GetBonuses().end();
          ++citer)
     {
@@ -366,13 +366,13 @@ WW::Result XmlWriter::Create(const WW::Day& aDay,
         xmlcell->Setgewicht((int)aDay.GetWeight());
         switch (citer->GetIntensity())
         {
-            case WW::Bonus::INTENSITY::High:
+            case weight::Bonus::INTENSITY::High:
                 xmlcell->Setintensiteit(XmlBonuscell::intensiteit::hoog);
                 break;
-            case WW::Bonus::INTENSITY::Medium:
+            case weight::Bonus::INTENSITY::Medium:
                 xmlcell->Setintensiteit(XmlBonuscell::intensiteit::middel);
                 break;
-            case WW::Bonus::INTENSITY::Low:
+            case weight::Bonus::INTENSITY::Low:
                 xmlcell->Setintensiteit(XmlBonuscell::intensiteit::laag);
                 break;
         }
@@ -385,16 +385,16 @@ WW::Result XmlWriter::Create(const WW::Day& aDay,
 
     aDag.Setbonuspunten(Str::ToTString(aDay.GetFreeBonusPoints()));
 
-    const std::vector<std::unique_ptr<WW::Item>>& items = aDay.GetItems();
+    const std::vector<std::unique_ptr<weight::Item>>& items = aDay.GetItems();
     XmlDagItemCreateVisitor visitor(*this, aDag);
     for (auto& item : items)
         item->Accept(visitor);
 
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 
-WW::Result XmlWriter::Write(WW::Week& aWeek, const std::tstring& aFilename)
+weight::Result XmlWriter::Write(weight::Week& aWeek, const std::tstring& aFilename)
 {
     XmlWeek* xmlweek = new XmlWeek;
 
@@ -406,17 +406,17 @@ WW::Result XmlWriter::Write(WW::Week& aWeek, const std::tstring& aFilename)
 
     switch (aWeek.GetStrategy())
     {
-        case WW::STRATEGY_TYPE::KCal:
+        case weight::STRATEGY_TYPE::KCal:
             xmlweek->Setstrategie(XmlWeek::strategie::KCal);
             break;
-        case WW::STRATEGY_TYPE::CarboHydrates:
+        case weight::STRATEGY_TYPE::CarboHydrates:
             xmlweek->Setstrategie(XmlWeek::strategie::Koolhydraten);
             break;
         default:
             assert(false);
     }
 
-    const std::vector<std::unique_ptr<WW::Day>>& days = aWeek.GetDays();
+    const std::vector<std::unique_ptr<weight::Day>>& days = aWeek.GetDays();
     for (size_t i = 0; i < days.size(); ++i)
     {
         if (days[i]->IsEmpty())
@@ -430,7 +430,7 @@ WW::Result XmlWriter::Write(WW::Week& aWeek, const std::tstring& aFilename)
     xmlwriter.Write(aFilename, *xmlweek);
     delete xmlweek;
 
-    return WW::Result::Ok;
+    return weight::Result::Ok;
 }
 
 

@@ -10,16 +10,16 @@
 // EditBonusDialog dialog
 
 IMPLEMENT_DYNAMIC(EditBonusDialog, CDialog)
-EditBonusDialog::EditBonusDialog(const WW::BonusPointsMap & aMap, double aWeight, CWnd* pParent /*=NULL*/)
+EditBonusDialog::EditBonusDialog(const weight::BonusPointsMap & aMap, double aWeight, CWnd* pParent /*=NULL*/)
 : CDialog(EditBonusDialog::IDD, pParent),
-  mBonus    (WW::Bonus::INTENSITY::Low, static_cast<int>(aWeight), 0, aMap),
+  mBonus    (weight::Bonus::INTENSITY::Low, static_cast<int>(aWeight), 0, aMap),
   mBonusMap (aMap),
   mWeight   (aWeight)
 {
 }
 
 
-EditBonusDialog::EditBonusDialog(const WW::BonusPointsMap & aMap, double aWeight, const WW::Bonus & aBonus, CWnd* pParent)
+EditBonusDialog::EditBonusDialog(const weight::BonusPointsMap & aMap, double aWeight, const weight::Bonus & aBonus, CWnd* pParent)
 : CDialog(EditBonusDialog::IDD, pParent),
   mBonus    (aBonus),
   mBonusMap (aMap),
@@ -58,13 +58,13 @@ BOOL EditBonusDialog::OnInitDialog()
   mDurationEdit.SetValue(mBonus.GetDuration());
   switch (mBonus.GetIntensity())
   {
-  case WW::Bonus::INTENSITY::Low:
+  case weight::Bonus::INTENSITY::Low:
     CheckDlgButton(IDC_RADIO_LOW, 1);
     break;
-  case WW::Bonus::INTENSITY::Medium:
+  case weight::Bonus::INTENSITY::Medium:
     CheckDlgButton(IDC_RADIO_MEDIUM, 1);
     break;
-  case WW::Bonus::INTENSITY::High:
+  case weight::Bonus::INTENSITY::High:
     CheckDlgButton(IDC_RADIO_HIGH, 1);
     break;
   }
@@ -78,21 +78,21 @@ BOOL EditBonusDialog::OnInitDialog()
 
 void EditBonusDialog::OnBnClickedRadioLow()
 {
-  mBonus.Set(WW::Bonus::INTENSITY::Low, static_cast<int>(mWeight), mBonus.GetDuration(), mBonusMap);
+  mBonus.Set(weight::Bonus::INTENSITY::Low, static_cast<int>(mWeight), mBonus.GetDuration(), mBonusMap);
   mPointsEdit.SetValue(mBonus.GetPoints());
   mPointsEdit.UpdateWindow();
 }
 
 void EditBonusDialog::OnBnClickedRadioMedium()
 {
-  mBonus.Set(WW::Bonus::INTENSITY::Medium, static_cast<int>(mWeight), mBonus.GetDuration(), mBonusMap);
+  mBonus.Set(weight::Bonus::INTENSITY::Medium, static_cast<int>(mWeight), mBonus.GetDuration(), mBonusMap);
   mPointsEdit.SetValue(mBonus.GetPoints());
   mPointsEdit.UpdateWindow();
 }
 
 void EditBonusDialog::OnBnClickedRadioHigh()
 {
-  mBonus.Set(WW::Bonus::INTENSITY::High, static_cast<int>(mWeight), mBonus.GetDuration(), mBonusMap);
+  mBonus.Set(weight::Bonus::INTENSITY::High, static_cast<int>(mWeight), mBonus.GetDuration(), mBonusMap);
   mPointsEdit.SetValue(mBonus.GetPoints());
   mPointsEdit.UpdateWindow();
 }

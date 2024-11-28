@@ -3,7 +3,7 @@
 #include "WWDefinitions.h"
 
 
-namespace WW
+namespace weight
 {
 
 struct FoodParameters
@@ -121,4 +121,4 @@ private:
     STRATEGY_TYPE         mStrategy;
 };
 
-} // namespace WW
+} // namespace weight

@@ -2,7 +2,7 @@
 #include "Lot.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -31,4 +31,4 @@ void FixedLot::Accept(LotVisitor& aVisitor)
 }
 
 
-} // namespace WW
+} // namespace weight

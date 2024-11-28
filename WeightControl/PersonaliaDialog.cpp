@@ -5,7 +5,7 @@
 #include "WeightControl.h"
 
 #include "model/Personalia.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 #include ".\personaliadialog.h"
 
@@ -13,7 +13,7 @@
 // CPersonaliaDialog dialog
 
 IMPLEMENT_DYNAMIC(CPersonaliaDialog, CDialog)
-CPersonaliaDialog::CPersonaliaDialog(WW::Model& aModel, CWnd* pParent /*=nullptr*/)
+CPersonaliaDialog::CPersonaliaDialog(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CPersonaliaDialog::IDD, pParent),
     mModel(aModel),
     mGeslacht(GS_Mannelijk),
@@ -81,15 +81,15 @@ BOOL CPersonaliaDialog::OnInitDialog()
     {
         mNaam.SetValue(mPersonalia->GetName());
         mUsername.SetValue(mPersonalia->GetUserName());
-        mButtonMannelijk.SetCheck(mPersonalia->GetGeslacht() == WW::Personalia::GESLACHT::Mannelijk);
-        mButtonVrouwelijk.SetCheck(mPersonalia->GetGeslacht() == WW::Personalia::GESLACHT::Vrouwelijk);
+        mButtonMannelijk.SetCheck(mPersonalia->GetGeslacht() == weight::Personalia::GESLACHT::Mannelijk);
+        mButtonVrouwelijk.SetCheck(mPersonalia->GetGeslacht() == weight::Personalia::GESLACHT::Vrouwelijk);
 
         switch (mModel.GetStrategy())
         {
-            case WW::STRATEGY_TYPE::KCal:
+            case weight::STRATEGY_TYPE::KCal:
                 mWeekPunten.SetValue(mPersonalia->GetKCWeekPuntenTotaal());
                 break;
-            case WW::STRATEGY_TYPE::CarboHydrates:
+            case weight::STRATEGY_TYPE::CarboHydrates:
                 mWeekPunten.SetValue(mPersonalia->GetCHWeekPuntenTotaal());
                 break;
         }
@@ -103,10 +103,10 @@ BOOL CPersonaliaDialog::OnInitDialog()
 
     switch (mModel.GetStrategy())
     {
-        case WW::STRATEGY_TYPE::KCal:
+        case weight::STRATEGY_TYPE::KCal:
             CheckDlgButton(IDC_RADIO_KCAL, 1);
             break;
-        case WW::STRATEGY_TYPE::CarboHydrates:
+        case weight::STRATEGY_TYPE::CarboHydrates:
             CheckDlgButton(IDC_RADIO_CARBOHYDRATES, 1);
             break;
     }
@@ -151,7 +151,7 @@ void CPersonaliaDialog::OnEnKillfocusUserNaam()
         if (mUsername.GetValue().empty())
             return;
 
-        auto personalia = std::make_unique< WW::Personalia>(mUsername.GetValue());
+        auto personalia = std::make_unique< weight::Personalia>(mUsername.GetValue());
         mPersonalia = personalia.get();
         mPersonalia->SetName(mNaam.GetValue());
 
@@ -206,10 +206,10 @@ void CPersonaliaDialog::OnEnKillfocusWeekpunten()
 {
     if (mPersonalia != nullptr) {
         switch (mModel.GetStrategy()) {
-            case WW::STRATEGY_TYPE::KCal:
+            case weight::STRATEGY_TYPE::KCal:
                 mPersonalia->SetKCWeekPuntenTotaal(static_cast<int>(mWeekPunten.GetValue()));
                 break;
-            case WW::STRATEGY_TYPE::CarboHydrates:
+            case weight::STRATEGY_TYPE::CarboHydrates:
                 mPersonalia->SetCHWeekPuntenTotaal(mWeekPunten.GetValue());
                 break;
         }
@@ -219,7 +219,7 @@ void CPersonaliaDialog::OnEnKillfocusWeekpunten()
 
 void CPersonaliaDialog::OnBnClickedRadioKcal()
 {
-    mModel.SetStrategy(WW::STRATEGY_TYPE::KCal);
+    mModel.SetStrategy(weight::STRATEGY_TYPE::KCal);
     mPuntenTotaal.SetValue(mPersonalia->GetKCPuntenTotaal());
     mWeekPunten.SetReadOnly(FALSE);
     mWeekPunten.SetValue(mPersonalia->GetKCWeekPuntenTotaal());
@@ -229,7 +229,7 @@ void CPersonaliaDialog::OnBnClickedRadioKcal()
 
 void CPersonaliaDialog::OnBnClickedCarbohydrates()
 {
-    mModel.SetStrategy(WW::STRATEGY_TYPE::CarboHydrates);
+    mModel.SetStrategy(weight::STRATEGY_TYPE::CarboHydrates);
     mPuntenTotaal.SetValue(mPersonalia->GetCHPuntenTotaal());
     mWeekPunten.SetReadOnly(FALSE);
     mWeekPunten.SetValue(mPersonalia->GetCHWeekPuntenTotaal());

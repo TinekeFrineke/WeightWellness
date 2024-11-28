@@ -4,7 +4,7 @@
 #include <assert.h>
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -52,4 +52,4 @@ void Personalia::SetPuntenTotaal(STRATEGY_TYPE eType, double aValue)
 }
 
 
-} // namespace WW
+} // namespace weight

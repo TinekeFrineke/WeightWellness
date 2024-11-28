@@ -1,7 +1,7 @@
 
 #include "pointscalculator.h"
 
-namespace WW
+namespace weight
 {
 
 
@@ -81,4 +81,4 @@ double CarboHydratesCalculator::GetPointsPer100Units(const FoodParameters& aPara
     return aParameters.GetKoolhydratenPer100Units();
 }
 
-} // namespace WW
+} // namespace weight

@@ -2,7 +2,7 @@
 #include "Recept.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -21,4 +21,4 @@ void Recept::Accept(ItemVisitor& aVisitor)
 }
 
 
-} // namespace WW
+} // namespace weight

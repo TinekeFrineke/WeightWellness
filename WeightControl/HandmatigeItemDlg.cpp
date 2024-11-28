@@ -11,7 +11,7 @@
 // HandmatigeItemDlg dialog
 
 IMPLEMENT_DYNAMIC(HandmatigeItemDlg, CDialog)
-HandmatigeItemDlg::HandmatigeItemDlg(WW::ManualItem* anItem, CWnd* pParent /*=NULL*/)
+HandmatigeItemDlg::HandmatigeItemDlg(weight::ManualItem* anItem, CWnd* pParent /*=NULL*/)
     : CDialog(HandmatigeItemDlg::IDD, pParent),
     mItem(anItem)
 {
@@ -61,7 +61,7 @@ BOOL HandmatigeItemDlg::OnInitDialog()
 void HandmatigeItemDlg::OnBnClickedOk()
 {
     if (mItem == NULL)
-        mItem = std::make_unique<WW::ManualItem>(mName.GetValue(), mPoints.GetValue());
+        mItem = std::make_unique<weight::ManualItem>(mName.GetValue(), mPoints.GetValue());
 
     mItem->Set(mPoints.GetValue(), mAmount.GetValue());
     OnOK();

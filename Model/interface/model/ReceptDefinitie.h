@@ -3,7 +3,7 @@
 #include "Portie.h"
 #include "Voedingsmiddel.h"
 
-namespace WW
+namespace weight
 {
 
 
@@ -32,4 +32,4 @@ private:
 };
 
 
-} // namespace WW
+} // namespace weight

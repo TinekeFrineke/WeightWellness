@@ -5,7 +5,7 @@
 #include "afxdtctl.h"
 #include "resource.h"
 
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 #include "TabPage.h"
 #include "DiaryItemList.h"
@@ -21,7 +21,7 @@ class CDiaryPage : public CDialog, public TabPage
 	DECLARE_DYNAMIC(CDiaryPage)
 
 public:
-                    CDiaryPage(WW::Model & aModel, CWnd* pParent = NULL);   // standard constructor
+                    CDiaryPage(weight::Model & aModel, CWnd* pParent = NULL);   // standard constructor
 	virtual           ~CDiaryPage();
 
 // Dialog Data
@@ -52,15 +52,15 @@ protected:
   afx_msg void      OnBnClickedAddHandmatig();
 
 private:
-  void              EditItem(WW::Item & item);
+  void              EditItem(weight::Item & item);
   bool              ProcessDate(const Utils::Date & aDate);
   void              UpdatePointsLeft();
 
   CDiaryItemList mItemList;
 
-  WW::Model& mModel;
-  WW::Week* mWeek{};
-  WW::Day* mDay{};
+  weight::Model& mModel;
+  weight::Week* mWeek{};
+  weight::Day* mDay{};
 
   CStringEdit mDate;
   CDoubleEdit mPunten;

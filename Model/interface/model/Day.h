@@ -6,7 +6,7 @@
 #include "Utilities/Date.h"
 
 
-namespace WW
+namespace weight
 {
 
 class BonusPointsMap;
@@ -47,7 +47,7 @@ public:
     Day(const Utils::Date& aDate);
     ~Day();
 
-    void                      Add(std::unique_ptr<WW::Item> anItem);
+    void                      Add(std::unique_ptr<Item> anItem);
     void                      Remove(Item* anItem);
 
     void                      SetWeight(double aWeight) { mWeight = aWeight; }
@@ -58,13 +58,13 @@ public:
 
     bool                      IsEmpty() const;
 
-    const std::vector<std::unique_ptr<WW::Item>>& GetItems() const { return mItems; }
-    //std::vector<std::unique_ptr<WW::Item>>& GetItems() { return mItems; }
+    const std::vector<std::unique_ptr<Item>>& GetItems() const { return mItems; }
+    //std::vector<std::unique_ptr<Item>>& GetItems() { return mItems; }
 
     Utils::Date               GetDate() const { return mDate; }
     double                    GetWeight() const { return mWeight; }
-    const std::list<WW::Bonus>& GetBonuses() const { return mBonuses; }
-    void                      SetBonuses(const std::list<WW::Bonus>& aBonuses);
+    const std::list<Bonus>& GetBonuses() const { return mBonuses; }
+    void                      SetBonuses(const std::list<Bonus>& aBonuses);
 
     double                    GetCalculatedBonusPoints() const;
     double                    GetFreeBonusPoints() const { return mBonusPoints; }
@@ -85,9 +85,9 @@ private:
     // 0 == no weight
     double                    mWeight;
     double                    mBonusPoints;
-    std::vector<std::unique_ptr<WW::Item>>   mItems;
-    std::list<WW::Bonus>      mBonuses;
+    std::vector<std::unique_ptr<Item>>   mItems;
+    std::list<Bonus>      mBonuses;
 };
 
 
-} // namespace WW
+} // namespace weight

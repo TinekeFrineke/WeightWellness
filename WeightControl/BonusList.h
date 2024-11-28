@@ -6,7 +6,7 @@
 
 #include "model/Day.h"
 
-namespace WW
+namespace weight
 {
 class Bonus;
 class Model;
@@ -16,14 +16,14 @@ class Model;
 class BonusListItem
 {
 public:
-                                  BonusListItem(const WW::Bonus & aBonus) : mBonus(aBonus) {}
+                                  BonusListItem(const weight::Bonus & aBonus) : mBonus(aBonus) {}
 
   void                            Write(CListCtrl & aControl, int iItemIndex);
 
-  WW::Bonus &                     GetBonus() { return mBonus; }
+  weight::Bonus &                     GetBonus() { return mBonus; }
 
 private:
-  WW::Bonus                       mBonus;
+  weight::Bonus                       mBonus;
 };
 
 
@@ -31,15 +31,15 @@ class BonusList : public ListControl/* , public Observer*/
 {
 // Construction
 public:
-                                  BonusList(WW::Model & aModel);
+                                  BonusList(weight::Model & aModel);
 	virtual                         ~BonusList();
 
  // // Operations
-  void                            View(const std::list<WW::Bonus> & aBonuses);
+  void                            View(const std::list<weight::Bonus> & aBonuses);
 
   BonusListItem *                 GetItemAt(int iIndex);
   BonusListItem *                 GetSelectedItem();
-  //void                            SelectItem(const WW::Bonus & anItem);
+  //void                            SelectItem(const weight::Bonus & anItem);
   void                            SelectItem(int iIndex, bool bSelect);
 
 protected:
@@ -49,10 +49,10 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
-  WW::Model &                     GetModel() { return mModel; }
+  weight::Model &                     GetModel() { return mModel; }
   void                            ClearItems();
 
 private:
   std::vector<BonusListItem *>    mItems;
-  WW::Model &                     mModel;
+  weight::Model &                     mModel;
 };

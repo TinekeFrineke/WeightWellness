@@ -5,11 +5,11 @@
 #include <assert.h>
 
 #include "model/Unit.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 
-CategoryComboBox::CategoryComboBox(const WW::Model & aModel, const std::tstring & anInitialCategory)
-: WW::ComboBox(aModel, anInitialCategory)
+CategoryComboBox::CategoryComboBox(const weight::Model & aModel, const std::tstring & anInitialCategory)
+: weight::ComboBox(aModel, anInitialCategory)
 {
 }
 

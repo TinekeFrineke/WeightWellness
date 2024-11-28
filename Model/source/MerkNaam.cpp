@@ -1,14 +1,14 @@
 
 #include "MerkNaam.h"
 
-#include "WWModel.h"
+#include "Model.h"
 
 
-namespace WW
+namespace weight
 {
 
 
-MerkNaam::MerkNaam(WW::Model& aModel, const std::tstring& aName)
+MerkNaam::MerkNaam(Model& aModel, const std::tstring& aName)
     : Naam(aName)
 {
     if (!aName.empty())
@@ -16,4 +16,4 @@ MerkNaam::MerkNaam(WW::Model& aModel, const std::tstring& aName)
 }
 
 
-} // namespace WW
+} // namespace weight

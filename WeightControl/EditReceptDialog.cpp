@@ -10,7 +10,7 @@
 // EditReceptDialog dialog
 
 IMPLEMENT_DYNAMIC(EditReceptDialog, CDialog)
-EditReceptDialog::EditReceptDialog(WW::Model & aModel, WW::Recept & aRecept, CWnd* pParent /*=NULL*/)
+EditReceptDialog::EditReceptDialog(weight::Model & aModel, weight::Recept & aRecept, CWnd* pParent /*=NULL*/)
 : CDialog (EditReceptDialog::IDD, pParent),
   mModel  (aModel),
   mRecept (aRecept)

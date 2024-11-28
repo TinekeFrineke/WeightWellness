@@ -2,7 +2,7 @@
 #include "ReceptDefinitie.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -38,4 +38,4 @@ void ReceptDefinitie::Remove(Item* anItem)
 }
 
 
-} // namespace WW
+} // namespace weight

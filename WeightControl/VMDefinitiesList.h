@@ -6,7 +6,7 @@
 
 #include "Utilities/StrUtils.h"
 
-namespace WW
+namespace weight
 {
 class CategorieNaam;
 class Model;
@@ -39,24 +39,24 @@ private:
 class VMDefinitiesListItem
 {
 public:
-    VMDefinitiesListItem(WW::VMDefinitie* anItem)
+    VMDefinitiesListItem(weight::VMDefinitie* anItem)
         : mItem(anItem) {}
 
     void                          Write(CListCtrl& aControl, int iItemIndex);
 
-    WW::VMDefinitie* GetItem() { return mItem; }
+    weight::VMDefinitie* GetItem() { return mItem; }
 
     bool                          Complies(const VMDefinitiesFilter& aFilter) const;
 
 private:
-    WW::VMDefinitie* mItem;
+    weight::VMDefinitie* mItem;
 };
 
 
 class VMDefinitiesList: public CListCtrl
 {
 public:
-    VMDefinitiesList(WW::Model& aModel);
+    VMDefinitiesList(weight::Model& aModel);
     ~VMDefinitiesList();
 
     void                        Initialize();
@@ -64,7 +64,7 @@ public:
     void                        Fill();
 
     VMDefinitiesListItem* GetSelectedItem();
-    void                        SelectItem(WW::VMDefinitie& aDefinition);
+    void                        SelectItem(weight::VMDefinitie& aDefinition);
     void                        SelectItem(int iIndex, bool bSelect);
 
     void                        SetFavouritesOnly(bool bFilter);
@@ -79,11 +79,11 @@ public:
 
 private:
     void                        ClearItems();
-    static bool                 Complies(const WW::VMDefinitie& anItem,
+    static bool                 Complies(const weight::VMDefinitie& anItem,
                                          const VMDefinitiesFilter& aFilter);
 
     std::vector<std::unique_ptr<VMDefinitiesListItem>> mItems;
-    WW::Model& mModel;
+    weight::Model& mModel;
     VMDefinitiesFilter mFilter;
 };
 

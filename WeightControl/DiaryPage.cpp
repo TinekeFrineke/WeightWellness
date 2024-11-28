@@ -25,7 +25,7 @@
 // CDiaryPage dialog
 
 IMPLEMENT_DYNAMIC(CDiaryPage, CDialog)
-CDiaryPage::CDiaryPage(WW::Model& aModel, CWnd* pParent /*=nullptr*/)
+CDiaryPage::CDiaryPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CDiaryPage::IDD, pParent),
     mModel(aModel),
     mItemList(aModel)
@@ -104,7 +104,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     {
         Utils::Date enddate(aDate);
         enddate.AddDays(6);
-        auto week = std::make_unique<WW::Week>(aDate, enddate);
+        auto week = std::make_unique<weight::Week>(aDate, enddate);
         mWeek = week.get();
         mWeek->SetPoints(mModel.GetActivePersonalia()->GetPuntenTotaal(mModel.GetStrategy()));
         mWeek->SetSaveablePoints(mModel.GetVrijePunten());
@@ -115,10 +115,10 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
 
     switch (mWeek->GetStrategy())
     {
-        case WW::STRATEGY_TYPE::KCal:
+        case weight::STRATEGY_TYPE::KCal:
             mStrategie.SetValue(_T("KCal"));
             break;
-        case WW::STRATEGY_TYPE::CarboHydrates:
+        case weight::STRATEGY_TYPE::CarboHydrates:
             mStrategie.SetValue(_T("CarboHydrates"));
             break;
         default:
@@ -133,7 +133,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     mDay = mWeek->GetDay(aDate);
     if (mDay == nullptr)
     {
-        auto day = std::make_unique<WW::Day>(aDate);
+        auto day = std::make_unique<weight::Day>(aDate);
         mDay = day.get();
         mDay->SetWeight(mModel.GetActivePersonalia()->GetHuidigGewicht());
         mWeek->Add(std::move(day));
@@ -160,7 +160,7 @@ void CDiaryPage::OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CDiaryPage::OnBnClickedAddFood()
 {
-    CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<WW::LotFactory>(mModel.GetCalculator()), this);
+    CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
@@ -268,7 +268,7 @@ void CDiaryPage::OnBnClickedAddGerecht()
 }
 
 
-void CDiaryPage::EditItem(WW::Item& item)
+void CDiaryPage::EditItem(weight::Item& item)
 {
     ItemEditVisitor visitor(mModel, this);
     item.Accept(visitor);
@@ -385,8 +385,8 @@ void CDiaryPage::OnBnClickedAddbonus()
     BewegingDialog dialog(mDay->GetCalculatedBonusPoints(), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK) {
-        WW::Bonus bonus{ WW::Bonus::INTENSITY::Medium, 1, static_cast<int>(dialog.GetBewegingsPunten()) };
-        mDay->SetBonuses(std::list<WW::Bonus>({ bonus }));
+        weight::Bonus bonus{ weight::Bonus::INTENSITY::Medium, 1, static_cast<int>(dialog.GetBewegingsPunten()) };
+        mDay->SetBonuses(std::list<weight::Bonus>({ bonus }));
         mCalculatedBonusPoints.SetValue(mDay->GetCalculatedBonusPoints());
     }
 }

@@ -8,7 +8,7 @@
 #include "afxwin.h"
 
 
-namespace WW
+namespace weight
 {
 class Model;
 class Voedingsmiddel;
@@ -25,16 +25,16 @@ public:
     {
     public:
         EditState(EditVoedingsmiddelDialog& aDialog,
-                  WW::VMDefinitie& aDefinitie,
-                  WW::Voedingsmiddel& aMiddel,
-                  WW::Model& aModel)
+                  weight::VMDefinitie& aDefinitie,
+                  weight::Voedingsmiddel& aMiddel,
+                  weight::Model& aModel)
             : mDialog(aDialog),
             mDefinitie(aDefinitie),
             mMiddel(aMiddel),
             mModel(aModel)
         {}
 
-        void                          UpdatePortionValues(const WW::PortionedLot& aLot);
+        void                          UpdatePortionValues(const weight::PortionedLot& aLot);
         virtual void                  Initialize() = 0;
 
     protected:
@@ -43,19 +43,19 @@ public:
         CDoubleEdit& GetPunten() { return mDialog.mPunten; }
         PortieComboBox& GetPortieBox() { return mDialog.mPortie; }
 
-        WW::VMDefinitie& GetDefinitie() { return mDefinitie; }
-        WW::Voedingsmiddel& GetVoedingsMiddel() { return mMiddel; }
+        weight::VMDefinitie& GetDefinitie() { return mDefinitie; }
+        weight::Voedingsmiddel& GetVoedingsMiddel() { return mMiddel; }
 
     private:
         EditVoedingsmiddelDialog& mDialog;
-        WW::VMDefinitie& mDefinitie;
-        WW::Voedingsmiddel& mMiddel;
-        WW::Model& mModel;
+        weight::VMDefinitie& mDefinitie;
+        weight::Voedingsmiddel& mMiddel;
+        weight::Model& mModel;
     };
 
-    EditVoedingsmiddelDialog(WW::Model& aModel,
-                             WW::Voedingsmiddel& aVoedingsmiddel,
-                             WW::VMDefinitie& aDefinitie,
+    EditVoedingsmiddelDialog(weight::Model& aModel,
+                             weight::Voedingsmiddel& aVoedingsmiddel,
+                             weight::VMDefinitie& aDefinitie,
                              CWnd* pParent = NULL);
 
     virtual                       ~EditVoedingsmiddelDialog();
@@ -79,9 +79,9 @@ private:
     void                          SetState(std::unique_ptr<EditState> aState);
     std::unique_ptr<EditState>    CreateState();
 
-    WW::Model& mModel;
-    WW::Voedingsmiddel& mVoedingsmiddel;
-    WW::VMDefinitie& mVoedingsmiddelDef;
+    weight::Model& mModel;
+    weight::Voedingsmiddel& mVoedingsmiddel;
+    weight::VMDefinitie& mVoedingsmiddelDef;
 
     CStringEdit                   mNaam;
     CDoubleEdit                   mAantalPorties;
@@ -98,9 +98,9 @@ class EditNoPortionsState: public EditVoedingsmiddelDialog::EditState
 {
 public:
     EditNoPortionsState(EditVoedingsmiddelDialog& aDialog,
-                        WW::VMDefinitie& aDefinitie,
-                        WW::Voedingsmiddel& aMiddel,
-                        WW::Model& aModel)
+                        weight::VMDefinitie& aDefinitie,
+                        weight::Voedingsmiddel& aMiddel,
+                        weight::Model& aModel)
         : EditVoedingsmiddelDialog::EditState(aDialog, aDefinitie, aMiddel, aModel) {}
 
     void Initialize() override;
@@ -111,9 +111,9 @@ class EditStandardPortionsState: public EditVoedingsmiddelDialog::EditState
 {
 public:
     EditStandardPortionsState(EditVoedingsmiddelDialog& aDialog,
-                              WW::VMDefinitie& aDefinitie,
-                              WW::Voedingsmiddel& aMiddel,
-                              WW::Model& aModel)
+                              weight::VMDefinitie& aDefinitie,
+                              weight::Voedingsmiddel& aMiddel,
+                              weight::Model& aModel)
         : EditVoedingsmiddelDialog::EditState(aDialog, aDefinitie, aMiddel, aModel) {}
 
     void Initialize() override;

@@ -8,7 +8,7 @@
 #include "Utilities/Observer.h"
 #include "itemlist.h"
 
-namespace WW
+namespace weight
 {
 class Day;
 class Item;
@@ -23,10 +23,10 @@ class CDiaryItemList: public ItemList, public Observer
 {
     // Construction
 public:
-    CDiaryItemList(WW::Model& aModel);
+    CDiaryItemList(weight::Model& aModel);
     virtual                         ~CDiaryItemList();
 
-    void                            View(WW::Day* aDay);
+    void                            View(weight::Day* aDay);
 
     virtual void                    Update(Subject* aSubject);
     virtual void                    Destroyed(Subject* aSubject);
@@ -40,7 +40,7 @@ protected:
 
 private:
     Utils::Date mDate;
-    WW::Day* mDay{};
+    weight::Day* mDay{};
 };
 
 /////////////////////////////////////////////////////////////////////////////

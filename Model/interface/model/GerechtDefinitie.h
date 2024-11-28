@@ -2,7 +2,7 @@
 
 #include "Utilities/StrUtils.h"
 
-namespace WW
+namespace weight
 {
 
 
@@ -21,4 +21,4 @@ private:
 };
 
 
-}
+} // namespace weight

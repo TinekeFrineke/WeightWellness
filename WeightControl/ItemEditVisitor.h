@@ -2,24 +2,24 @@
 
 #include "model/Item.h"
 
-namespace WW
+namespace weight
 {
 class Model;
 }
 
 class CWnd;
 
-class ItemEditVisitor : public WW::ItemVisitor
+class ItemEditVisitor : public weight::ItemVisitor
 {
 public:
-                        ItemEditVisitor(WW::Model & aModel, CWnd * aParent) : mModel(aModel), mParent(aParent) {}
+                        ItemEditVisitor(weight::Model & aModel, CWnd * aParent) : mModel(aModel), mParent(aParent) {}
 
-  virtual void          Visit(WW::Recept & aRecept);
-  virtual void          Visit(WW::Gerecht & aGerecht);
-  virtual void          Visit(WW::Voedingsmiddel & aVoedingsmiddel);
-  virtual void          Visit(WW::ManualItem & anItem);
+  virtual void          Visit(weight::Recept & aRecept);
+  virtual void          Visit(weight::Gerecht & aGerecht);
+  virtual void          Visit(weight::Voedingsmiddel & aVoedingsmiddel);
+  virtual void          Visit(weight::ManualItem & anItem);
 
 private:
-  WW::Model &           mModel;
+  weight::Model &           mModel;
   CWnd *                mParent;
 };

@@ -1,17 +1,17 @@
 
 #include "Unit.h"
 
-#include "WWModel.h"
+#include "Model.h"
 
-namespace WW
+namespace weight
 {
 
 
-Unit::Unit(WW::Model& aModel, const std::tstring& aName)
+Unit::Unit(Model& aModel, const std::tstring& aName)
     : mName(aName)
 {
     aModel.Add(*this);
 }
 
 
-} // namespace WW
+} // namespace weight

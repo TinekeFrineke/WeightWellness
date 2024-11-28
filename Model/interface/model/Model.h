@@ -11,7 +11,7 @@
 #include "PointsCalculator.h"
 #include "PortieNaam.h"
 
-namespace WW
+namespace weight
 {
 
 class CategorieNaam;

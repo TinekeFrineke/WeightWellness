@@ -5,7 +5,7 @@
 #include <assert.h>
 
 #include "model/Unit.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 BEGIN_MESSAGE_MAP(UnitComboBox, CComboBox)
 	//{{AFX_MSG_MAP(UnitComboBox)
@@ -14,8 +14,8 @@ BEGIN_MESSAGE_MAP(UnitComboBox, CComboBox)
 END_MESSAGE_MAP()
 
 
-UnitComboBox::UnitComboBox(const WW::Model & aModel, const std::tstring & aUnitName)
-: WW::ComboBox    (aModel, aUnitName)
+UnitComboBox::UnitComboBox(const weight::Model & aModel, const std::tstring & aUnitName)
+: weight::ComboBox    (aModel, aUnitName)
 {
 }
 

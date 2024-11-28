@@ -5,13 +5,13 @@
 #include <assert.h>
 
 #include "model/Unit.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 
-BrandComboBox::BrandComboBox(const WW::Model &    aModel,
+BrandComboBox::BrandComboBox(const weight::Model &    aModel,
                              bool                 aIsForFiltering,
                              const std::tstring & anInitialBrand)
-: WW::ComboBox    (aModel, anInitialBrand),
+: weight::ComboBox    (aModel, anInitialBrand),
   mIsForFiltering (aIsForFiltering)
 {
 }

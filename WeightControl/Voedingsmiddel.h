@@ -1,6 +1,6 @@
 #pragma once
 
-namespace WW
+namespace weight
 {
   class Voedingsmiddel : public Item
   {

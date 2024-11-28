@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-namespace WW
+namespace weight
 {
 class Item;
 class Model;
@@ -41,14 +41,14 @@ private:
 class ItemListItem
 {
 public:
-    ItemListItem(WW::Item* anItem);
+    ItemListItem(weight::Item* anItem);
 
     void Write(CListCtrl& aControl, int iItemIndex);
 
-    WW::Item* GetItem();
+    weight::Item* GetItem();
 
 private:
-    WW::Item* mItem;
+    weight::Item* mItem;
 };
 
 
@@ -56,24 +56,24 @@ class ItemList: public ListControl/* , public Observer*/
 {
     // Construction
 public:
-    ItemList(WW::Model& aModel);
+    ItemList(weight::Model& aModel);
     virtual                         ~ItemList();
 
     // // Operations
-    void                            View(const std::vector<std::unique_ptr<WW::Item>>& aItems);
+    void                            View(const std::vector<std::unique_ptr<weight::Item>>& aItems);
 
     ItemListItem* GetItemAt(int iIndex);
     ItemListItem* GetSelectedItem();
-    void SelectItem(const WW::Item& anItem);
+    void SelectItem(const weight::Item& anItem);
     void SelectItem(int iIndex, bool bSelect);
 
 protected:
     DECLARE_MESSAGE_MAP()
 
-    WW::Model& GetModel() { return mModel; }
+    weight::Model& GetModel() { return mModel; }
     void                            ClearItems();
 
 private:
     std::vector<std::unique_ptr<ItemListItem>>     mItems;
-    WW::Model& mModel;
+    weight::Model& mModel;
 };

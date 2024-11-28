@@ -9,15 +9,15 @@
 
 #include "model/Voedingsmiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "model/LotFactory.h"
 
 // EditVoedingsmiddelDialog dialog
 
 IMPLEMENT_DYNAMIC(EditVoedingsmiddelDialog, CDialog)
-EditVoedingsmiddelDialog::EditVoedingsmiddelDialog(WW::Model& aModel,
-                                                   WW::Voedingsmiddel& aVoedingsmiddel,
-                                                   WW::VMDefinitie& aDefinitie,
+EditVoedingsmiddelDialog::EditVoedingsmiddelDialog(weight::Model& aModel,
+                                                   weight::Voedingsmiddel& aVoedingsmiddel,
+                                                   weight::VMDefinitie& aDefinitie,
                                                    CWnd* aParent)
     : CDialog(EditVoedingsmiddelDialog::IDD, aParent),
     mModel(aModel),
@@ -59,13 +59,13 @@ BOOL EditVoedingsmiddelDialog::OnInitDialog()
 
     mNaam.SetValue(mVoedingsmiddel.GetName());
     mPortie.Initialize();
-    WW::PortionedLot* dlot = mVoedingsmiddel.GetLot().GetPortionedLot();
+    weight::PortionedLot* dlot = mVoedingsmiddel.GetLot().GetPortionedLot();
     if (dlot != nullptr)
         mPortie.Fill(mVoedingsmiddelDef.GetPortieList(), dlot->GetPortie().GetName().Get());
     else
         mPortie.Fill(mVoedingsmiddelDef.GetPortieList());
 
-    WW::Portie* portie = mPortie.GetSelectedPortie();
+    weight::Portie* portie = mPortie.GetSelectedPortie();
     (void)portie;
 
     return TRUE;
@@ -101,7 +101,7 @@ void EditVoedingsmiddelDialog::OnEnChangeAantalPorties()
         mUpdating = true;
         if (mPortie.GetSelectedPortie() != nullptr)
         {
-            WW::Portie* portie = mPortie.GetSelectedPortie();
+            weight::Portie* portie = mPortie.GetSelectedPortie();
             mAantalEenheden.SetValue(mAantalPorties.GetValue() * portie->GetUnits());
 
             mPunten.SetValue((mAantalEenheden.GetValue()
@@ -134,7 +134,7 @@ void EditVoedingsmiddelDialog::OnCbnSelchangePortienaam()
     if (!mUpdating)
     {
         mUpdating = true;
-        WW::Portie* portie = mPortie.GetSelectedPortie();
+        weight::Portie* portie = mPortie.GetSelectedPortie();
         if (portie != nullptr)
         {
             mAantalEenheden.SetValue(portie->GetUnits() * mAantalPorties.GetValue());
@@ -161,7 +161,7 @@ void EditVoedingsmiddelDialog::OnBnClickedOk()
     }
     else
     {
-        WW::LotFactory lotFactory(mModel.GetCalculator());
+        weight::LotFactory lotFactory(mModel.GetCalculator());
         auto lot = lotFactory.Create(mVoedingsmiddelDef, *mPortie.GetSelectedPortie());
         if (lot != nullptr)
         {
@@ -174,7 +174,7 @@ void EditVoedingsmiddelDialog::OnBnClickedOk()
 }
 
 
-void EditVoedingsmiddelDialog::EditState::UpdatePortionValues(const WW::PortionedLot& aLot)
+void EditVoedingsmiddelDialog::EditState::UpdatePortionValues(const weight::PortionedLot& aLot)
 {
     GetAantalEenheden().SetValue(aLot.GetPortie().GetUnits() * aLot.GetNumberOfPortions());
     GetAantalPorties().SetValue(aLot.GetNumberOfPortions());

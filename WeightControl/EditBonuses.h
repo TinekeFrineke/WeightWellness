@@ -4,20 +4,20 @@
 
 // CEditBonuses dialog
 
-namespace WW { class Model; }
+namespace weight { class Model; }
 
 class CEditBonuses : public CDialog
 {
 	DECLARE_DYNAMIC(CEditBonuses)
 
 public:
-	CEditBonuses(WW::Model & aModel, const std::list<WW::Bonus> & aBonuses, double aWeight, CWnd* pParent = NULL);   // standard constructor
+	CEditBonuses(weight::Model & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent = NULL);   // standard constructor
 	virtual ~CEditBonuses();
 
 // Dialog Data
 	enum { IDD = IDD_BONUSLIST };
 
-  const std::list<WW::Bonus> &  GetBonuses() const { return mBonuses; }
+  const std::list<weight::Bonus> &  GetBonuses() const { return mBonuses; }
 
 protected:
 	virtual void                  DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -34,9 +34,9 @@ public:
 private:
   void                  EditBonus();
 
-  WW::Model &           mModel;
+  weight::Model &           mModel;
   double                mWeight;
-  std::list<WW::Bonus>  mBonuses;
+  std::list<weight::Bonus>  mBonuses;
   BonusList             mBonusList;
 public:
   afx_msg void OnNMDblclkBonuslistjbj(NMHDR *pNMHDR, LRESULT *pResult);

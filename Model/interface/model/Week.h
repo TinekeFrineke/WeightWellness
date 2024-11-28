@@ -7,7 +7,7 @@
 #include "WWDefinitions.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -64,4 +64,4 @@ private:
 };
 
 
-} // namespace WW
+} // namespace weight

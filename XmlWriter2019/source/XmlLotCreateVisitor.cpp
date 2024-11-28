@@ -10,7 +10,7 @@
 namespace ww2019
 {
 
-void XmlLotCreateVisitor::Visit(WW::CalculatedLot& aLot)
+void XmlLotCreateVisitor::Visit(weight::CalculatedLot& aLot)
 {
     auto lot = std::make_unique<XmlStandardlot>();
     mWriter.Create(aLot, *lot);
@@ -19,7 +19,7 @@ void XmlLotCreateVisitor::Visit(WW::CalculatedLot& aLot)
 }
 
 
-void XmlLotCreateVisitor::Visit(WW::FixedLot& aLot)
+void XmlLotCreateVisitor::Visit(weight::FixedLot& aLot)
 {
     auto lot = std::make_unique<XmlStandardlot>();
     mWriter.Create(aLot, *lot);

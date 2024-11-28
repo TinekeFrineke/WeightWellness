@@ -4,7 +4,7 @@
 
 #include "BonusPointsMap.h"
 
-namespace WW
+namespace weight
 {
 
 
@@ -187,4 +187,4 @@ const PointsPerDurationAndWeight& BonusPointsMap::operator[](MOVEMENT_INTENSITY 
 //}
 
 
-} // namespace WW
+} // namespace weight

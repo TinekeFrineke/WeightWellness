@@ -9,7 +9,7 @@
 #include "Item.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -73,7 +73,7 @@ double Day::GetCalculatedBonusPoints() const
 }
 
 
-void Day::Add(std::unique_ptr<WW::Item> anItem)
+void Day::Add(std::unique_ptr<Item> anItem)
 {
     assert(anItem != NULL);
     mItems.push_back(std::move(anItem));
@@ -82,7 +82,7 @@ void Day::Add(std::unique_ptr<WW::Item> anItem)
 
 void Day::Remove(Item* anItem)
 {
-    for (std::vector<std::unique_ptr<WW::Item>>::iterator i = mItems.begin(); i != mItems.end(); ++i)
+    for (std::vector<std::unique_ptr<Item>>::iterator i = mItems.begin(); i != mItems.end(); ++i)
     {
         if (i->get() == anItem)
         {
@@ -100,10 +100,10 @@ void Day::Recalculate(Model& aModel, const PointsCalculator& aCalculator)
 }
 
 
-void Day::SetBonuses(const std::list<WW::Bonus>& aBonuses)
+void Day::SetBonuses(const std::list<Bonus>& aBonuses)
 {
     mBonuses = aBonuses;
 }
 
 
-} // namespace WW
+} // namespace weight

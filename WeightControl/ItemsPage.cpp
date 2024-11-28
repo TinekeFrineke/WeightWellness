@@ -15,7 +15,7 @@
 // CItemsPage dialog
 
 IMPLEMENT_DYNAMIC(CItemsPage, CDialog)
-CItemsPage::CItemsPage(WW::Model& aModel, CWnd* pParent /*=nullptr*/)
+CItemsPage::CItemsPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CItemsPage::IDD, pParent),
     mModel(aModel),
     mCategory(aModel),

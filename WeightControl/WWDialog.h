@@ -5,7 +5,7 @@
 #include "afxcmn.h"
 
 #include "MyTabControl.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 
 
 // CWWDialog dialog
@@ -13,7 +13,7 @@ class CWWDialog : public CDialog
 {
 // Construction
 public:
-	CWWDialog(WW::Model & aModel, CWnd* pParent = NULL);	// standard constructor
+	CWWDialog(weight::Model & aModel, CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data
 	enum { IDD = IDD_WEIGHTWATCHERS_DIALOG };
@@ -38,5 +38,5 @@ public:
 private:
   CMyTabControl mTabControl;
 
-  WW::Model &     mModel;
+  weight::Model &     mModel;
 };

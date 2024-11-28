@@ -1,18 +1,18 @@
 
 #include "CategorieNaam.h"
 
-#include "WWModel.h"
+#include "Model.h"
 
 
-namespace WW
+namespace weight
 {
 
 
-CategorieNaam::CategorieNaam(WW::Model& aModel, const std::tstring& aName)
+CategorieNaam::CategorieNaam(Model& aModel, const std::tstring& aName)
     : Naam(aName)
 {
     if (!aName.empty())
         aModel.Add(*this);
 }
 
-} // namespace WW
+} // namespace weight

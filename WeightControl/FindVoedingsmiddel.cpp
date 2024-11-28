@@ -15,9 +15,9 @@
 // CFindVoedingsmiddel dialog
 
 IMPLEMENT_DYNAMIC(CFindVoedingsmiddel, CDialog)
-CFindVoedingsmiddel::CFindVoedingsmiddel(WW::Model& aModel,
-                                         WW::VMDefinitie* aDefinitie,
-                                         std::unique_ptr<WW::ILotFactory> lotFactory,
+CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
+                                         weight::VMDefinitie* aDefinitie,
+                                         std::unique_ptr<weight::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindVoedingsmiddel::IDD, pParent),
     mItemList(aModel),
@@ -37,7 +37,7 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(WW::Model& aModel,
 CFindVoedingsmiddel::~CFindVoedingsmiddel() = default;
 
 
-std::unique_ptr<WW::Voedingsmiddel> CFindVoedingsmiddel::ExtractVoedingsMiddel()
+std::unique_ptr<weight::Voedingsmiddel> CFindVoedingsmiddel::ExtractVoedingsMiddel()
 {
     return std::move(mFood);
 }
@@ -107,7 +107,7 @@ BOOL CFindVoedingsmiddel::OnInitDialog()
 
 void CFindVoedingsmiddel::OnBnClickedOk()
 {
-    WW::Portie* portie = mPortieNaam.GetSelectedPortie();
+    weight::Portie* portie = mPortieNaam.GetSelectedPortie();
     if (portie == nullptr)
     {
         ::MessageBox(m_hWnd, _T("Pick a valid portion"), _T("ERROR"), MB_OK);
@@ -117,7 +117,7 @@ void CFindVoedingsmiddel::OnBnClickedOk()
     auto lot = m_lotFactory->Create(*mDefinitie, *portie);
     assert(lot != nullptr);
     lot->SetNumberOfPortions(mPorties.GetValue());
-    mFood = std::make_unique<WW::Voedingsmiddel>(std::move(lot), *mDefinitie);
+    mFood = std::make_unique<weight::Voedingsmiddel>(std::move(lot), *mDefinitie);
 
     OnOK();
 }
@@ -161,7 +161,7 @@ void CFindVoedingsmiddel::OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResu
 
 void CFindVoedingsmiddel::OnCbnSelchangePortienaam()
 {
-    WW::Portie* portie = mPortieNaam.GetSelectedPortie();
+    weight::Portie* portie = mPortieNaam.GetSelectedPortie();
     if (portie != nullptr)
     {
         mUnits.SetValue(portie->GetUnits());
@@ -178,7 +178,7 @@ void CFindVoedingsmiddel::OnEnChangePorties()
     {
         mUpdating = true;
 
-        WW::Portie* portie = mPortieNaam.GetSelectedPortie();
+        weight::Portie* portie = mPortieNaam.GetSelectedPortie();
         if (portie != nullptr)
         {
             mUnits.SetValue(mPorties.GetValue() * portie->GetUnits());
@@ -196,7 +196,7 @@ void CFindVoedingsmiddel::OnEnChangeUnits()
     if (!mUpdating)
     {
         mUpdating = true;
-        WW::Portie* portie = mPortieNaam.GetSelectedPortie();
+        weight::Portie* portie = mPortieNaam.GetSelectedPortie();
         if (portie != nullptr)
         {
             mPorties.SetValue(mUnits.GetValue() / portie->GetUnits());
@@ -214,7 +214,7 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
 {
     (void)pNMHDR;
 
-    WW::Portie* portie = mPortieNaam.GetSelectedPortie();
+    weight::Portie* portie = mPortieNaam.GetSelectedPortie();
     if (portie == nullptr)
     {
         ::MessageBox(m_hWnd, _T("Pick a valid portion"), _T("ERROR"), MB_OK);
@@ -223,7 +223,7 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
 
     auto lot = m_lotFactory->Create(*mDefinitie, *portie);
     lot->SetNumberOfPortions(mPorties.GetValue());
-    mFood = std::make_unique<WW::Voedingsmiddel>(std::move(lot), *mDefinitie);
+    mFood = std::make_unique<weight::Voedingsmiddel>(std::move(lot), *mDefinitie);
 
     OnOK();
 
@@ -231,7 +231,7 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
 }
 
 
-std::unique_ptr<VMState> CFindVoedingsmiddel::CreateState(WW::VMDefinitie& aDefinitie)
+std::unique_ptr<VMState> CFindVoedingsmiddel::CreateState(weight::VMDefinitie& aDefinitie)
 {
     if (aDefinitie.GetPortieList().empty())
         return std::make_unique<VMNoPortionsState>(*this, aDefinitie, mModel);
@@ -248,7 +248,7 @@ void CFindVoedingsmiddel::SetState(std::unique_ptr<VMState> aState)
 }
 
 
-void VMState::UpdatePortionValues(const WW::Portie& aPortie)
+void VMState::UpdatePortionValues(const weight::Portie& aPortie)
 {
     GetUnits().SetValue(aPortie.GetUnits());
     GetPorties().SetValue(1);

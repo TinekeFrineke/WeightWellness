@@ -1,6 +1,11 @@
 #pragma once
 
-namespace WW
+namespace weight
 {
-  enum class STRATEGY_TYPE { KCal, CarboHydrates };
-}
+
+enum class STRATEGY_TYPE {
+    KCal,
+    CarboHydrates
+};
+
+} // namespace weights

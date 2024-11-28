@@ -2,7 +2,7 @@
 
 #include "VMDefinitiesList.h"
 
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "EditFoodDefDialog.h"
@@ -64,7 +64,7 @@ void VMDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 }
 
 
-VMDefinitiesList::VMDefinitiesList(WW::Model& aModel)
+VMDefinitiesList::VMDefinitiesList(weight::Model& aModel)
     : mModel(aModel)
 {
 }
@@ -140,7 +140,7 @@ VMDefinitiesListItem* VMDefinitiesList::GetSelectedItem()
 }
 
 
-void VMDefinitiesList::SelectItem(WW::VMDefinitie& aDefinition)
+void VMDefinitiesList::SelectItem(weight::VMDefinitie& aDefinition)
 {
     for (size_t i = 0; i < mItems.size(); ++i)
         SelectItem(static_cast<int>(i), mItems[i]->GetItem()->GetName() == aDefinition.GetName());
@@ -160,7 +160,7 @@ void VMDefinitiesList::SelectItem(int iIndex, bool bSelect)
 }
 
 
-bool VMDefinitiesList::Complies(const WW::VMDefinitie& anItem,
+bool VMDefinitiesList::Complies(const weight::VMDefinitie& anItem,
                                 const VMDefinitiesFilter& aFilter)
 {
     if (aFilter.IsFavouritesOnly() && !anItem.IsFavourite())

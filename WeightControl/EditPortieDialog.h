@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "model/Portie.h"
 #include "afxwin.h"
 
@@ -17,13 +17,13 @@ class CEditPortieDialog : public CDialog
 	DECLARE_DYNAMIC(CEditPortieDialog)
 
 public:
-                    CEditPortieDialog(WW::Model & aModel, WW::VMDefinitie & aDefinitie,
-                                      WW::Portie * aPortie,
-                                      const std::vector<std::unique_ptr<WW::Portie>> & aPorties,
+                    CEditPortieDialog(weight::Model & aModel, weight::VMDefinitie & aDefinitie,
+                                      weight::Portie * aPortie,
+                                      const std::vector<std::unique_ptr<weight::Portie>> & aPorties,
                                       CWnd* pParent = NULL);   // standard constructor
 	virtual           ~CEditPortieDialog();
 
-  WW::Portie *      GetPortie() { return mPortie; }
+  weight::Portie *      GetPortie() { return mPortie; }
 
 // Dialog Data
 	enum { IDD = IDD_EDITPORTIE_DIALOG };
@@ -43,12 +43,12 @@ private:
 
   void              UpdatePoints();
 
-  WW::Model &       mModel;
-  WW::VMDefinitie & mDefinitie;
-  WW::Portie *      mPortie;
+  weight::Model &       mModel;
+  weight::VMDefinitie & mDefinitie;
+  weight::Portie *      mPortie;
   bool              mMyPortion;
 
-  std::vector<WW::PortieNaam>
+  std::vector<weight::PortieNaam>
                     mPortienames;
 
   CDoubleEdit       mPoints;

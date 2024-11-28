@@ -120,7 +120,7 @@
     <ClInclude Include="interface\model\VoedingsMiddelDefinitionVisitor.h" />
     <ClInclude Include="interface\model\Week.h" />
     <ClInclude Include="interface\model\WWDefinitions.h" />
-    <ClInclude Include="interface\model\WWModel.h" />
+    <ClInclude Include="interface\model\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\BonusPointsMap.cpp" />
@@ -142,7 +142,7 @@
     <ClCompile Include="source\Voedingsmiddel.cpp" />
     <ClCompile Include="source\VoedingsmiddelDefinitie.cpp" />
     <ClCompile Include="source\Week.cpp" />
-    <ClCompile Include="source\WWModel.cpp" />
+    <ClCompile Include="source\Model.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

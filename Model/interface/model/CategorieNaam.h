@@ -6,7 +6,7 @@
 
 #include "Naam.h"
 
-namespace WW
+namespace weight
 {
 
 class Model;
@@ -15,8 +15,8 @@ class Model;
 class CategorieNaam: public Naam
 {
 public:
-    CategorieNaam(WW::Model& aModel, const std::tstring& aName);
+    CategorieNaam(Model& aModel, const std::tstring& aName);
     CategorieNaam() : Naam(_T("")) {}
 };
 
-} // namespace WW
+} // namespace weight

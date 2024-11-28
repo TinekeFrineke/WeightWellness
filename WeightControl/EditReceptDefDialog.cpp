@@ -14,7 +14,7 @@
 // EditReceptDefDialog dialog
 
 IMPLEMENT_DYNAMIC(EditReceptDefDialog, CDialog)
-EditReceptDefDialog::EditReceptDefDialog(WW::Model& aModel, WW::ReceptDefinitie* aRecept, CWnd* pParent /*=nullptr*/)
+EditReceptDefDialog::EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie* aRecept, CWnd* pParent /*=nullptr*/)
     : CDialog(EditReceptDefDialog::IDD, pParent),
     mModel(aModel),
     mItemList(aModel),
@@ -26,7 +26,7 @@ EditReceptDefDialog::~EditReceptDefDialog()
 {
 }
 
-std::unique_ptr<WW::ReceptDefinitie> EditReceptDefDialog::ExtractRecept()
+std::unique_ptr<weight::ReceptDefinitie> EditReceptDefDialog::ExtractRecept()
 {
     return std::move(mRecept);
 }
@@ -107,10 +107,10 @@ void EditReceptDefDialog::OnBnClickedAdd()
             return;
         }
 
-        mRecept = std::make_unique<WW::ReceptDefinitie>(mName.GetValue());
+        mRecept = std::make_unique<weight::ReceptDefinitie>(mName.GetValue());
     }
 
-    CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<WW::LotFactory>(mModel.GetCalculator()), this);
+    CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {

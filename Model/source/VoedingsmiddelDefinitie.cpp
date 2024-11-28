@@ -8,7 +8,7 @@
 #include <windows.h>
 #endif
 
-namespace WW
+namespace weight
 {
 
 
@@ -275,4 +275,4 @@ std::unique_ptr<VMDefBase> FixedVMDef::Copy() const
 }
 
 
-} // namespace WW
+} // namespace weight

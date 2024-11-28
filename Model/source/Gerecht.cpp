@@ -2,7 +2,7 @@
 #include "Gerecht.h"
 
 
-namespace WW
+namespace weight
 {
 
 
@@ -18,4 +18,4 @@ void Gerecht::Accept(ItemVisitor & aVisitor)
 }
 
 
-} // namespace WW
+} // namespace weight

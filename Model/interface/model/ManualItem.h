@@ -3,7 +3,7 @@
 
 #include "Item.h"
 
-namespace WW
+namespace weight
 {
 
 // A manual item has a fixed number of points for a fixed amount of food.
@@ -34,4 +34,4 @@ inline void ManualItem::Accept(ItemVisitor& aVisitor)
     aVisitor.Visit(*this);
 }
 
-}
+} // namespace weight

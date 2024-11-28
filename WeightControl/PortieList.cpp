@@ -5,7 +5,7 @@
 #include <algorithm>
 
 #include "model/Portie.h"
-#include "model/WWModel.h"
+#include "model/Model.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "EditPortieDialog.h"
@@ -44,15 +44,15 @@ void PortieListItem::Write(CListCtrl& aControl, int iItemIndex)
 }
 
 
-PortieList::PortieList(WW::Model& aModel,
-                       WW::VMDefinitie* aDefinitie)
+PortieList::PortieList(weight::Model& aModel,
+                       weight::VMDefinitie* aDefinitie)
     : mModel(aModel),
     mDefinitie(aDefinitie)
 {
 }
 
 
-bool PortieList::AddPortie(std::unique_ptr<WW::Portie> aPortie)
+bool PortieList::AddPortie(std::unique_ptr<weight::Portie> aPortie)
 {
     if (aPortie == nullptr)
         return false;
@@ -67,13 +67,13 @@ bool PortieList::AddPortie(std::unique_ptr<WW::Portie> aPortie)
 }
 
 
-bool PortieList::RemovePortie(WW::Portie* aPortie)
+bool PortieList::RemovePortie(weight::Portie* aPortie)
 {
     if (aPortie == nullptr)
         return false;
 
-    std::vector<std::unique_ptr<WW::Portie>>::iterator iter
-        = std::find_if(mPorties.begin(), mPorties.end(), [aPortie] (const std::unique_ptr<WW::Portie>& portie) {
+    std::vector<std::unique_ptr<weight::Portie>>::iterator iter
+        = std::find_if(mPorties.begin(), mPorties.end(), [aPortie] (const std::unique_ptr<weight::Portie>& portie) {
         return aPortie == portie.get();
     });
     if (iter != mPorties.end())
@@ -88,7 +88,7 @@ bool PortieList::RemovePortie(WW::Portie* aPortie)
 }
 
 
-void PortieList::ReleasePorties(std::vector<std::unique_ptr<WW::Portie>>& aPortieList)
+void PortieList::ReleasePorties(std::vector<std::unique_ptr<weight::Portie>>& aPortieList)
 {
     // Releases the portions without destroying them.
     aPortieList = std::move(mPorties);
@@ -143,7 +143,7 @@ void PortieList::OnLButtonDblClk(UINT, CPoint)
     PortieListItem* item = GetSelectedItem();
     if (item != nullptr)
     {
-        WW::Portie* portie = item->GetPortie();
+        weight::Portie* portie = item->GetPortie();
         CEditPortieDialog dlg(mModel, *mDefinitie, portie, mPorties, this);
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
@@ -167,14 +167,14 @@ void PortieList::Fill()
         mItems[i]->Write(*this, (int)i);
 }
 
-void PortieList::SetDefinition(WW::VMDefinitie* aDefinitie)
+void PortieList::SetDefinition(weight::VMDefinitie* aDefinitie)
 {
     mDefinitie = aDefinitie;
 }
 
 // Transfers ownership
 
-void PortieList::SetPorties(std::vector<std::unique_ptr<WW::Portie>>& aPortieList)
+void PortieList::SetPorties(std::vector<std::unique_ptr<weight::Portie>>& aPortieList)
 {
     // Destroys the current portions inside.
 

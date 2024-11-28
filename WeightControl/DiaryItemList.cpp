@@ -27,7 +27,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CDiaryItemList
 
-CDiaryItemList::CDiaryItemList(WW::Model& aModel)
+CDiaryItemList::CDiaryItemList(weight::Model& aModel)
     : ItemList(aModel),
     mDate(Utils::Date::Today()),
     mDay(NULL)
@@ -40,7 +40,7 @@ CDiaryItemList::~CDiaryItemList()
 }
 
 
-void CDiaryItemList::View(WW::Day* aDay)
+void CDiaryItemList::View(weight::Day* aDay)
 {
     if (aDay == NULL)
     {

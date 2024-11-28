@@ -14,7 +14,7 @@ namespace ww2019
 {
 
 
-//void XmlVMCreateVisitor::Visit(WW::CalculatedVMDef & aDefinitie)
+//void XmlVMCreateVisitor::Visit(weight::CalculatedVMDef & aDefinitie)
 //{
 //  WW_GENERATED_NAMESPACE::XmlVoedingswaarde * xmlvoedingswaarde = new WW_GENERATED_NAMESPACE::XmlVoedingswaarde;
 //  mDefinition.Add(xmlvoedingswaarde);
@@ -26,7 +26,7 @@ namespace ww2019
 //}
 //
 //
-//void XmlVMCreateVisitor::Visit(WW::FixedVMDef & aDefinitie)
+//void XmlVMCreateVisitor::Visit(weight::FixedVMDef & aDefinitie)
 //{
 //  WW_GENERATED_NAMESPACE::XmlPuntenper100 * xmlpuntenper100 = new WW_GENERATED_NAMESPACE::XmlPuntenper100;
 //  mDefinition.Add(xmlpuntenper100);
@@ -34,30 +34,30 @@ namespace ww2019
 //}
 
 
-WW::PortionedLot* CreateLotFromVMDef::Create(WW::VMDefinitie& aDefinitie,
-                                             WW::Portie& aPortie)
+weight::PortionedLot* CreateLotFromVMDef::Create(weight::VMDefinitie& aDefinitie,
+                                             weight::Portie& aPortie)
 {
-    WW::PortionedLot* lot;
+    weight::PortionedLot* lot;
 
     if (aDefinitie.IsCalculated())
     {
-        WW::CalculatedVMDef* def = aDefinitie.GetCalculatedVMDef();
+        weight::CalculatedVMDef* def = aDefinitie.GetCalculatedVMDef();
         assert(def != NULL);
-        WW::CalculatedLot* clot = new WW::CalculatedLot(mCalculator, aPortie);
+        weight::CalculatedLot* clot = new weight::CalculatedLot(mCalculator, aPortie);
         clot->SetParameters(def->GetParameters());
         lot = clot;
     }
     else if (aDefinitie.IsFixed())
     {
-        WW::FixedVMDef* def = aDefinitie.GetFixedVMDef();
+        weight::FixedVMDef* def = aDefinitie.GetFixedVMDef();
         assert(def != NULL);
-        WW::FixedLot* flot = new WW::FixedLot(aPortie);
+        weight::FixedLot* flot = new weight::FixedLot(aPortie);
         flot->SetPointsPer100Units(def->GetPointsPer100Units());
         lot = flot;
     }
     else
     {
-        WW::FixedLot* flot = new WW::FixedLot(aPortie);
+        weight::FixedLot* flot = new weight::FixedLot(aPortie);
         lot = flot;
     }
 

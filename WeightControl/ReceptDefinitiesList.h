@@ -6,7 +6,7 @@
 
 #include "Utilities/StrUtils.h"
 
-namespace WW
+namespace weight
 {
 class CategorieNaam;
 class Model;
@@ -29,30 +29,30 @@ private:
 class ReceptDefinitiesListItem
 {
 public:
-    ReceptDefinitiesListItem(WW::ReceptDefinitie* anItem)
+    ReceptDefinitiesListItem(weight::ReceptDefinitie* anItem)
         : mItem(anItem) {}
 
     void Write(CListCtrl& aControl, int iItemIndex);
 
-    WW::ReceptDefinitie* GetItem() { return mItem; }
+    weight::ReceptDefinitie* GetItem() { return mItem; }
 
 private:
-    WW::ReceptDefinitie* mItem;
+    weight::ReceptDefinitie* mItem;
 };
 
 
 class ReceptDefinitiesList: public CListCtrl
 {
 public:
-    ReceptDefinitiesList(WW::Model& aModel);
+    ReceptDefinitiesList(weight::Model& aModel);
     ~ReceptDefinitiesList() override;
 
     void Initialize();
     void SetFilter(const ReceptDefinitiesFilter& aFilter);
-    void View(const std::vector<std::unique_ptr<WW::ReceptDefinitie>>& aItems);
+    void View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aItems);
 
     ReceptDefinitiesListItem* GetSelectedItem();
-    void  SelectItem(WW::ReceptDefinitie& aDefinition);
+    void  SelectItem(weight::ReceptDefinitie& aDefinition);
     void  SelectItem(int iIndex);
     int  IndexOf(const ReceptDefinitiesListItem* item) const;
     void  DeleteItem(const ReceptDefinitiesListItem* item);
@@ -61,11 +61,11 @@ public:
 
 private:
     void                        ClearItems();
-    static bool                 Complies(const WW::ReceptDefinitie& anItem,
+    static bool                 Complies(const weight::ReceptDefinitie& anItem,
                                          const ReceptDefinitiesFilter& aFilter);
 
     std::vector<std::unique_ptr<ReceptDefinitiesListItem>> mItems;
-    WW::Model& mModel;
+    weight::Model& mModel;
     ReceptDefinitiesFilter      mFilter;
 };
 

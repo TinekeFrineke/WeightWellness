@@ -46,7 +46,7 @@ END_MESSAGE_MAP()
 
 
 
-CWWDialog::CWWDialog(WW::Model& aModel, CWnd* pParent /*=NULL*/)
+CWWDialog::CWWDialog(weight::Model& aModel, CWnd* pParent /*=NULL*/)
     : CDialog(CWWDialog::IDD, pParent),
     mModel(aModel)
 {
