@@ -10,11 +10,11 @@ namespace weight
 
 void EntityBase::Register(const std::tstring& aClassName,
                           const std::tstring& anInstanceName,
-                          int                  aNumberOfInstances)
+                          int                 aNumberOfInstances)
 {
 #ifdef FIND_LEAKS
     TCHAR smsg[1024];
-    _stprintf(smsg, _T("%s::%s %s 0x%08x: mNumberOfPorties == %d\n"),
+    _stprintf(smsg, _T("%s::%s %s 0x%08x: aNumberOfInstances == %d\n"),
               aClassName.c_str(), aClassName.c_str(), anInstanceName.c_str(),
               this, aNumberOfInstances);
     OutputDebugString(smsg);
@@ -32,7 +32,7 @@ void EntityBase::Unregister(const std::tstring& aClassName,
 {
 #ifdef FIND_LEAKS
     TCHAR smsg[1024];
-    _stprintf(smsg, _T("%s::~%s %s 0x%08x: mNumberOfPorties == %d\n"),
+    _stprintf(smsg, _T("%s::~%s %s 0x%08x: aNumberOfInstances == %d\n"),
               aClassName.c_str(), aClassName.c_str(), anInstanceName.c_str(),
               this, aNumberOfInstances);
     OutputDebugString(smsg);

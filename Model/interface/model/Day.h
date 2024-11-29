@@ -27,17 +27,17 @@ public:
         Set(anIntensity, aWeight, aDuration, aMap);
     }
 
-    void                      Set(INTENSITY anIntensity, int aDuration, int aPoints);
-    void                      Set(INTENSITY anIntensity, int aWeight, int aDuration, const BonusPointsMap& aMap);
+    void Set(INTENSITY anIntensity, int aDuration, int aPoints);
+    void Set(INTENSITY anIntensity, int aWeight, int aDuration, const BonusPointsMap& aMap);
 
-    INTENSITY                 GetIntensity() const { return mIntensity; }
-    int                       GetDuration() const { return mDuration; }
-    int                       GetPoints() const { return mPoints; }
+    INTENSITY GetIntensity() const noexcept { return mIntensity; }
+    int GetDuration() const noexcept { return mDuration; }
+    int GetPoints() const noexcept { return mPoints; }
 
 private:
-    INTENSITY                 mIntensity;
-    int                       mDuration;
-    int                       mPoints;
+    INTENSITY mIntensity;
+    int mDuration;
+    int mPoints;
 };
 
 
@@ -50,24 +50,23 @@ public:
     void                      Add(std::unique_ptr<Item> anItem);
     void                      Remove(Item* anItem);
 
-    void                      SetWeight(double aWeight) { mWeight = aWeight; }
+    void                      SetWeight(double aWeight) noexcept { mWeight = aWeight; }
     void                      Add(const Bonus& aBonus) { mBonuses.push_back(aBonus); }
-    void                      SetFreeBonusPoints(double aPoints) { mBonusPoints = aPoints; }
+    void                      SetFreeBonusPoints(double aPoints) noexcept  { mBonusPoints = aPoints; }
 
     double                    GetPoints() const;
 
     bool                      IsEmpty() const;
 
-    const std::vector<std::unique_ptr<Item>>& GetItems() const { return mItems; }
-    //std::vector<std::unique_ptr<Item>>& GetItems() { return mItems; }
+    const std::vector<std::unique_ptr<Item>>& GetItems() const noexcept  { return mItems; }
 
-    Utils::Date               GetDate() const { return mDate; }
-    double                    GetWeight() const { return mWeight; }
-    const std::list<Bonus>& GetBonuses() const { return mBonuses; }
+    Utils::Date               GetDate() const noexcept  { return mDate; }
+    double                    GetWeight() const noexcept { return mWeight; }
+    const std::list<Bonus>& GetBonuses() const noexcept { return mBonuses; }
     void                      SetBonuses(const std::list<Bonus>& aBonuses);
 
     double                    GetCalculatedBonusPoints() const;
-    double                    GetFreeBonusPoints() const { return mBonusPoints; }
+    double                    GetFreeBonusPoints() const noexcept { return mBonusPoints; }
     double                    GetTotalBonusPoints() const { return GetCalculatedBonusPoints() + GetFreeBonusPoints(); }
 
     // Recalculates the points for the items in the day

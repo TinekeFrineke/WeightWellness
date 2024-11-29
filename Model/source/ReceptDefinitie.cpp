@@ -8,14 +8,14 @@ namespace weight
 
 double ReceptDefinitie::GetPointsPerPortion() const
 {
-    if (mPorties == 0)
+    if (mPorties.Get() == 0)
         return 0;
 
     double points = 0;
     for (const auto& item : mItems)
         points += item->GetPoints();
 
-    return points / (double)mPorties;
+    return points / (double)mPorties.Get();
 }
 
 
