@@ -2,8 +2,8 @@
 
 
 #include "model/Day.h"
-#include "doubleedit.h"
-#include "intedit.h"
+#include "controls/doubleedit.h"
+#include "controls/intedit.h"
 
 // EditBonusDialog dialog
 namespace weight { class BonusPointsMap; }

@@ -6,7 +6,7 @@
 #include "afxdtctl.h"
 #include "resource.h"
 
-#include "StringEdit.h"
+#include "controls/StringEdit.h"
 
 
 // NewNameDialog dialog

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tabpage.h"
+#include "controls/tabpage.h"
 #include "model/Model.h"
 #include "ReceptDefinitiesList.h"
 

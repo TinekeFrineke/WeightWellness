@@ -1,8 +1,8 @@
 #pragma once
 
 #include "resource.h"
-#include "stringedit.h"
-#include "doubleedit.h"
+#include "controls/stringedit.h"
+#include "controls/doubleedit.h"
 
 
 // EditReceptDialog dialog

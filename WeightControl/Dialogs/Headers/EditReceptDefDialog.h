@@ -1,10 +1,10 @@
 #pragma once
 #include "itemlist.h"
 #include "afxwin.h"
-#include "stringedit.h"
+#include "controls/stringedit.h"
 #include "resource.h"
-#include "doubleedit.h"
-#include "intedit.h"
+#include "controls/doubleedit.h"
+#include "controls/intedit.h"
 
 namespace weight
 {

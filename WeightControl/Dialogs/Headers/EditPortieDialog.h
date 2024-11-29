@@ -5,10 +5,11 @@
 #include "model/Portie.h"
 #include "afxwin.h"
 
-#include "DoubleEdit.h"
-#include "IntEdit.h"
+#include "controls/DoubleEdit.h"
+#include "controls/IntEdit.h"
+#include "controls/StringEdit.h"
+
 #include "PortieComboBox.h"
-#include "StringEdit.h"
 
 // CEditPortieDialog dialog
 

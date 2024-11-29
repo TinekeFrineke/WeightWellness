@@ -4,15 +4,16 @@
 #include "afxwin.h"
 #include "afxcmn.h"
 
+#include "controls/DoubleEdit.h"
+#include "controls/intedit.h"
+#include "controls/StringEdit.h"
+
 #include "CategoryComboBox.h"
-#include "DoubleEdit.h"
 #include "PortieList.h"
-#include "StringEdit.h"
 #include "UnitComboBox.h"
 #include "resource.h" 
 #include "portiecombobox.h"
 #include "brandcombobox.h"
-#include "intedit.h"
 
 // CEditFoodDefDialog dialog
 

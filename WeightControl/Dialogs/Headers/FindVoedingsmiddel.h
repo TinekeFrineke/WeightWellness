@@ -1,14 +1,15 @@
 #pragma once
 
+#include "afxwin.h"
 #include <memory>
+
+#include "controls/doubleedit.h"
+#include "controls/stringedit.h"
 
 #include "resource.h"
 #include "categorycombobox.h"
-#include "stringedit.h"
 #include "vmdefinitieslist.h"
-#include "doubleedit.h"
 #include "portiecombobox.h"
-#include "afxwin.h"
 #include "brandcombobox.h"
 
 

@@ -11,91 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BewegingDialog.h" />
-    <ClInclude Include="BonusList.h" />
-    <ClInclude Include="BrandComboBox.h" />
-    <ClInclude Include="CategoryComboBox.h" />
-    <ClInclude Include="DiaryItemList.h" />
-    <ClInclude Include="DiaryPage.h" />
-    <ClInclude Include="DoubleEdit.h" />
-    <ClInclude Include="EditBonusDialog.h" />
-    <ClInclude Include="EditBonuses.h" />
-    <ClInclude Include="EditFoodDefDialog.h" />
-    <ClInclude Include="EditFoodDefState.h" />
-    <ClInclude Include="EditPortieDialog.h" />
-    <ClInclude Include="EditReceptDefDialog.h" />
-    <ClInclude Include="EditReceptDialog.h" />
-    <ClInclude Include="EditVoedingsmiddelDialog.h" />
-    <ClInclude Include="FindRecept.h" />
-    <ClInclude Include="FindVoedingsmiddel.h" />
-    <ClInclude Include="HandmatigeItemDlg.h" />
-    <ClInclude Include="IntEdit.h" />
-    <ClInclude Include="ItemEditVisitor.h" />
-    <ClInclude Include="ItemList.h" />
-    <ClInclude Include="ItemsPage.h" />
-    <ClInclude Include="MyTabControl.h" />
-    <ClInclude Include="NewNameDialog.h" />
-    <ClInclude Include="PersonaliaDialog.h" />
-    <ClInclude Include="PointsPerDay.h" />
-    <ClInclude Include="PortieComboBox.h" />
-    <ClInclude Include="PortieList.h" />
-    <ClInclude Include="ReceptDefinitiesList.h" />
-    <ClInclude Include="ReceptenPage.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="StringEdit.h" />
-    <ClInclude Include="TabPage.h" />
-    <ClInclude Include="UnitComboBox.h" />
-    <ClInclude Include="VMDefinitiesList.h" />
-    <ClInclude Include="Voedingsmiddel.h" />
-    <ClInclude Include="VoedingsMiddelDlg.h" />
-    <ClInclude Include="WeightControl.h" />
-    <ClInclude Include="WWComboBox.h" />
-    <ClInclude Include="WWDialog.h" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="dikkie.bmp" />
     <Image Include="naamloos.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="BewegingDialog.cpp" />
-    <ClCompile Include="BonusList.cpp" />
-    <ClCompile Include="BrandComboBox.cpp" />
-    <ClCompile Include="CategoryComboBox.cpp" />
-    <ClCompile Include="DiaryItemList.cpp" />
-    <ClCompile Include="DiaryPage.cpp" />
-    <ClCompile Include="DoubleEdit.cpp" />
-    <ClCompile Include="EditBonusDialog.cpp" />
-    <ClCompile Include="EditBonuses.cpp" />
-    <ClCompile Include="EditFoodDefDialog.cpp" />
-    <ClCompile Include="EditFoodDefState.cpp" />
-    <ClCompile Include="EditPortieDialog.cpp" />
-    <ClCompile Include="EditReceptDefDialog.cpp" />
-    <ClCompile Include="EditReceptDialog.cpp" />
-    <ClCompile Include="EditVoedingsmiddelDialog.cpp" />
-    <ClCompile Include="FindRecept.cpp" />
-    <ClCompile Include="FindVoedingsmiddel.cpp" />
-    <ClCompile Include="HandmatigeItemDlg.cpp" />
-    <ClCompile Include="IntEdit.cpp" />
-    <ClCompile Include="ItemEditVisitor.cpp" />
-    <ClCompile Include="ItemList.cpp" />
-    <ClCompile Include="ItemsPage.cpp" />
-    <ClCompile Include="MyTabControl.cpp" />
-    <ClCompile Include="NewNameDialog.cpp" />
-    <ClCompile Include="PersonaliaDialog.cpp" />
-    <ClCompile Include="PointsPerDay.cpp" />
-    <ClCompile Include="PortieComboBox.cpp" />
-    <ClCompile Include="PortieList.cpp" />
-    <ClCompile Include="ReceptDefinitiesList.cpp" />
-    <ClCompile Include="ReceptenPage.cpp" />
-    <ClCompile Include="StringEdit.cpp" />
-    <ClCompile Include="TabPage.cpp" />
-    <ClCompile Include="UnitComboBox.cpp" />
-    <ClCompile Include="VMDefinitiesList.cpp" />
-    <ClCompile Include="VoedingsMiddelDlg.cpp" />
-    <ClCompile Include="WeightControl.cpp" />
-    <ClCompile Include="WWComboBox.cpp" />
-    <ClCompile Include="WWDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Analyse.txt" />
@@ -106,7 +23,76 @@
     <None Include="ww.dtd" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="WeightWatchers.rc" />
+    <ResourceCompile Include="WeightControl.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Controls\Headers\BonusList.h" />
+    <ClInclude Include="Controls\Headers\BrandComboBox.h" />
+    <ClInclude Include="Controls\Headers\CategoryComboBox.h" />
+    <ClInclude Include="Controls\Headers\DiaryItemList.h" />
+    <ClInclude Include="Controls\Headers\ItemList.h" />
+    <ClInclude Include="Controls\Headers\MyTabControl.h" />
+    <ClInclude Include="Controls\Headers\PortieComboBox.h" />
+    <ClInclude Include="Controls\Headers\PortieList.h" />
+    <ClInclude Include="Controls\Headers\ReceptDefinitiesList.h" />
+    <ClInclude Include="Controls\Headers\UnitComboBox.h" />
+    <ClInclude Include="Controls\Headers\VMDefinitiesList.h" />
+    <ClInclude Include="Controls\Headers\WWComboBox.h" />
+    <ClInclude Include="Dialogs\Headers\BewegingDialog.h" />
+    <ClInclude Include="Dialogs\Headers\DiaryPage.h" />
+    <ClInclude Include="Dialogs\Headers\EditBonusDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditBonuses.h" />
+    <ClInclude Include="Dialogs\Headers\EditFoodDefDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditPortieDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditReceptDefDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditReceptDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditVoedingsmiddelDialog.h" />
+    <ClInclude Include="Dialogs\Headers\FindRecept.h" />
+    <ClInclude Include="Dialogs\Headers\FindVoedingsmiddel.h" />
+    <ClInclude Include="Dialogs\Headers\HandmatigeItemDlg.h" />
+    <ClInclude Include="Dialogs\Headers\ItemsPage.h" />
+    <ClInclude Include="Dialogs\Headers\NewNameDialog.h" />
+    <ClInclude Include="Dialogs\Headers\PersonaliaDialog.h" />
+    <ClInclude Include="Dialogs\Headers\PointsPerDay.h" />
+    <ClInclude Include="Dialogs\Headers\ReceptenPage.h" />
+    <ClInclude Include="Dialogs\Headers\WWDialog.h" />
+    <ClInclude Include="General\Headers\ItemEditVisitor.h" />
+    <ClInclude Include="General\Headers\stdafx.h" />
+    <ClInclude Include="General\Headers\WeightControl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Controls\Sources\BonusList.cpp" />
+    <ClCompile Include="Controls\Sources\BrandComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\CategoryComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\DiaryItemList.cpp" />
+    <ClCompile Include="Controls\Sources\ItemList.cpp" />
+    <ClCompile Include="Controls\Sources\MyTabControl.cpp" />
+    <ClCompile Include="Controls\Sources\PortieComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\PortieList.cpp" />
+    <ClCompile Include="Controls\Sources\ReceptDefinitiesList.cpp" />
+    <ClCompile Include="Controls\Sources\UnitComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\VMDefinitiesList.cpp" />
+    <ClCompile Include="Controls\Sources\WWComboBox.cpp" />
+    <ClCompile Include="Dialogs\Sources\BewegingDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\DiaryPage.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditBonusDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditBonuses.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditFoodDefDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditPortieDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditReceptDefDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditReceptDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditVoedingsmiddelDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\FindRecept.cpp" />
+    <ClCompile Include="Dialogs\Sources\FindVoedingsmiddel.cpp" />
+    <ClCompile Include="Dialogs\Sources\HandmatigeItemDlg.cpp" />
+    <ClCompile Include="Dialogs\Sources\ItemsPage.cpp" />
+    <ClCompile Include="Dialogs\Sources\NewNameDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\PersonaliaDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\PointsPerDay.cpp" />
+    <ClCompile Include="Dialogs\Sources\ReceptenPage.cpp" />
+    <ClCompile Include="Dialogs\Sources\WWDialog.cpp" />
+    <ClCompile Include="General\Sources\ItemEditVisitor.cpp" />
+    <ClCompile Include="General\Sources\WeightControl.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4137DBBA-1CBF-4A01-BD08-4D8F97BB55DC}</ProjectGuid>
@@ -157,13 +143,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;WW_NAMESPACE=ww2019;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2019\interface;$(SolutionDir)XmlWriter2019\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Editor\Headers;$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)General\Headers;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2019\interface;$(SolutionDir)XmlWriter2019\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Projects\VC2019\Utilities\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2019.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2019.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2019.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Debug\xerces-c_2_8D.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;C:\Projects\VC2019\Utilities\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2019.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2019.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2019.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Debug\xerces-c_2_8D.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -184,14 +172,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;WW_NAMESPACE=ww2019;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2019\interface;$(SolutionDir)XmlWriter2019\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Editor\Headers;$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)General\Headers;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2019\interface;$(SolutionDir)XmlWriter2019\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>C:\Projects\VC2019\Utilities\Release\utilities.lib;C:\Projects\VC2019\WW\WWModel\Release\wwmodel.lib;C:\Projects\VC2019\WW\Generated12\Release\wwgenerated.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Release\xerces-c_2_8.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;C:\Projects\VC2019\Utilities\Release\utilities.lib;C:\Projects\VC2019\WW\WWModel\Release\wwmodel.lib;C:\Projects\VC2019\WW\Generated12\Release\wwgenerated.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Release\xerces-c_2_8.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

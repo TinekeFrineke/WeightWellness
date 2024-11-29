@@ -1,10 +1,12 @@
 #pragma once
-#include "doubleedit.h"
+
+#include "controls/doubleedit.h"
+#include "controls/stringedit.h"
+#include "model/lot.h"
+
 #include "portiecombobox.h"
 #include "resource.h"
-#include "stringedit.h"
 
-#include "model/lot.h"
 #include "afxwin.h"
 
 

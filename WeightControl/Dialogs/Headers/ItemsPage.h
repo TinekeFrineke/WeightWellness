@@ -3,10 +3,10 @@
 #include "model/Model.h"
 #include "afxcmn.h"
 
-#include "TabPage.h"
+#include "controls/stringedit.h"
+#include "controls/TabPage.h"
 
 #include "VMDefinitiesList.h"
-#include "stringedit.h"
 #include "categorycombobox.h"
 #include "brandcombobox.h"
 

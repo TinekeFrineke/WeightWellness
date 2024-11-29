@@ -1,7 +1,7 @@
 #pragma once
 
 #include "afxdialogex.h"
-#include "doubleedit.h"
+#include "controls/doubleedit.h"
 
 // BewegingDialog dialog
 

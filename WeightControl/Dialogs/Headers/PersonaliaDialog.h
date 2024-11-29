@@ -1,11 +1,11 @@
 #pragma once
+
 #include "afxwin.h"
 
-#include "TabPage.h"
-
-#include "StringEdit.h"
-#include "intedit.h"
-#include "doubleedit.h"
+#include "controls/TabPage.h"
+#include "controls/StringEdit.h"
+#include "controls/intedit.h"
+#include "controls/doubleedit.h"
 
 namespace weight { class Model; }
 

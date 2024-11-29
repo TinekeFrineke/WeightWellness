@@ -5,13 +5,13 @@
 #include "afxdtctl.h"
 #include "resource.h"
 
+#include "controls/doubleedit.h"
+#include "controls/stringedit.h"
+#include "controls/intedit.h"
+#include "controls/TabPage.h"
 #include "model/Model.h"
 
-#include "TabPage.h"
 #include "DiaryItemList.h"
-#include "doubleedit.h"
-#include "stringedit.h"
-#include "intedit.h"
 
 
 // CDiaryPage dialog

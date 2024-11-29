@@ -1,11 +1,13 @@
 #pragma once
 
-#include "resource.h"
-#include "stringedit.h"
-#include "receptdefinitieslist.h"
-#include "doubleedit.h"
-#include "portiecombobox.h"
 #include "afxwin.h"
+
+#include "controls/doubleedit.h"
+#include "controls/stringedit.h"
+
+#include "receptdefinitieslist.h"
+#include "resource.h"
+#include "portiecombobox.h"
 
 
 class VMState;
