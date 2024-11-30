@@ -46,18 +46,16 @@ public:
     void                      SetMerk(const MerkNaam& aMerk) { mMerk = aMerk; }
     void                      SetUnit(const Unit& aUnit) { mUnit = aUnit; }
 
-    void                      SetFavourite(bool aFavourite) { mFavourite = aFavourite; }
+    void                      SetFavourite(bool aFavourite) noexcept { mFavourite = aFavourite; }
 
-    bool                      ReleasePorties(std::vector<std::unique_ptr<Portie>>& aPorties);
 
     const Unit& GetUnit() const { return mUnit; }
 
-    //std::vector<std::unique_ptr<Portie>>& GetPortieList() { return mPortieList; }
-    const std::vector< std::unique_ptr<Portie>>& GetPortieList() const { return mPortieList; }
+    const std::vector< std::unique_ptr<Portie>>& GetPortieList() const noexcept { return mPortieList; }
 
     bool                      IsCalculated() const;
     bool                      IsFixed() const;
-    bool                      IsFavourite() const { return mFavourite; }
+    bool                      IsFavourite() const noexcept { return mFavourite; }
 
     VMDefBase* GetVMDef() { return mPoints.get(); }
     CalculatedVMDef* GetCalculatedVMDef();
@@ -67,7 +65,7 @@ public:
     void                      SetFixed();
 
     // Entity overrides
-    virtual std::tstring      GetInstanceName() const { return mName; }
+    virtual std::tstring      GetInstanceName() const noexcept { return mName; }
     static std::tstring       GetClassName() { return _T("VMDefinitie"); }
 
 private:
@@ -75,7 +73,7 @@ private:
     std::tstring              mName;
     CategorieNaam             mCategory;
     MerkNaam                  mMerk;
-    std::vector<std::unique_ptr<Portie>>      mPortieList;
+    std::vector<std::unique_ptr<Portie>> mPortieList;
     bool                      mFavourite;
 
     // Can calculate the amount of points based upon the strategy used

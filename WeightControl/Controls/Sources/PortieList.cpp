@@ -38,73 +38,68 @@ void PortieListItem::Write(CListCtrl& aControl, int iItemIndex)
         aControl.SetItem(&lvi);
 
     TCHAR units[256];
-    _stprintf_s(units, _T("%.2f"), (mPortie->GetUnits() * mDefinitie.GetPointsPer100Units()) / 100);
+    _stprintf_s(units, _T("%.2f"), (mPortie->GetUnits() * m_pointsPer100Units) / 100);
     aControl.SetItemText(iItemIndex, 1, units);
 
     delete name;
 }
 
 
-PortieList::PortieList(weight::Model& aModel,
-                       weight::VMDefinitie* aDefinitie)
-    : mModel(aModel)
-    , mDefinitie(aDefinitie)
-{
-}
+PortieList::PortieList() = default;
 
 
-bool PortieList::AddPortie(std::unique_ptr<weight::Portie> aPortie)
-{
-    if (aPortie == nullptr)
-        return false;
-
-    for (size_t i = 0; i < mPorties.size(); ++i)
-        if (mPorties[i].get() == aPortie.get() || mPorties[i]->GetName() == aPortie->GetName())
-            return false;
-
-    mPorties.push_back(std::move(aPortie));
-    Fill();
-    return true;
-}
-
-
-bool PortieList::RemovePortie(weight::Portie* aPortie)
-{
-    if (aPortie == nullptr)
-        return false;
-
-    std::vector<std::unique_ptr<weight::Portie>>::iterator iter
-        = std::find_if(mPorties.begin(), mPorties.end(), [aPortie] (const std::unique_ptr<weight::Portie>& portie) {
-        return aPortie == portie.get();
-    });
-    if (iter != mPorties.end())
-    {
-        ClearItems();
-        mPorties.erase(iter);
-        Fill();
-        return true;
-    }
-
-    return false;
-}
-
-
-void PortieList::ReleasePorties(std::vector<std::unique_ptr<weight::Portie>>& aPortieList)
-{
-    // Releases the portions without destroying them.
-    aPortieList = std::move(mPorties);
-    mPorties.clear();
-    ClearItems();
-}
-
-
-void PortieList::DeletePorties()
-{
-    // Destroys the remaining portions inside.
-    mPorties.clear();
-    ClearItems();
-}
-
+//bool PortieList::AddPortie(std::unique_ptr<weight::Portie> aPortie)
+//{
+//    if (aPortie == nullptr)
+//        return false;
+//
+//    for (size_t i = 0; i < mPorties.size(); ++i)
+//        if (mPorties[i].get() == aPortie.get() || mPorties[i]->GetName() == aPortie->GetName())
+//            return false;
+//
+//    mPorties.push_back(std::move(aPortie));
+//    Fill();
+//    return true;
+//}
+//
+//
+//bool PortieList::RemovePortie(weight::Portie* aPortie)
+//{
+//    if (aPortie == nullptr)
+//        return false;
+//
+//    std::vector<std::unique_ptr<weight::Portie>>::iterator iter
+//        = std::find_if(mPorties.begin(), mPorties.end(), [aPortie] (const std::unique_ptr<weight::Portie>& portie) {
+//        return aPortie == portie.get();
+//    });
+//    if (iter != mPorties.end())
+//    {
+//        ClearItems();
+//        mPorties.erase(iter);
+//        Fill();
+//        return true;
+//    }
+//
+//    return false;
+//}
+//
+//
+//void PortieList::ReleasePorties(std::vector<std::unique_ptr<weight::Portie>>& aPortieList)
+//{
+//    // Releases the portions without destroying them.
+//    aPortieList = std::move(mPorties);
+//    mPorties.clear();
+//    ClearItems();
+//}
+//
+//
+//void PortieList::DeletePorties()
+//{
+//    // Destroys the remaining portions inside.
+//    mPorties.clear();
+//    ClearItems();
+//}
+//
 
 PortieList::~PortieList() = default;
 
@@ -114,7 +109,7 @@ void PortieList::Initialize()
     InsertColumn(1, _T("Naam"), LVCFMT_LEFT, 200);
     InsertColumn(3, _T("Punten/portie"), LVCFMT_RIGHT, 80);
 
-    Fill();
+    //Fill();
 }
 
 
@@ -139,46 +134,39 @@ void PortieList::Update(PortieListItem* anItem)
 }
 
 
-void PortieList::OnLButtonDblClk(UINT, CPoint)
-{
-    PortieListItem* item = GetSelectedItem();
-    if (item != nullptr)
-    {
-        PortieEditor editor(*mDefinitie, GetParent());
-        if (editor.Edit(*item->GetPortie()))
-            Update(item);
-    }
-}
+//void PortieList::Fill()
+//{
+//    if (mDefinitie == nullptr)
+//        return;
+//
+//    DeleteAllItems();
+//    ClearItems();
+//
+//    for (size_t i = 0; i < mPorties.size(); ++i)
+//        mItems.push_back(std::make_unique<PortieListItem>(*mDefinitie, mPorties[i].get()));
+//
+//    for (size_t i = 0; i < mItems.size(); ++i)
+//        mItems[i]->Write(*this, (int)i);
+//}
 
-
-void PortieList::Fill()
-{
-    if (mDefinitie == nullptr)
-        return;
-
-    DeleteAllItems();
-    ClearItems();
-
-    for (size_t i = 0; i < mPorties.size(); ++i)
-        mItems.push_back(std::make_unique<PortieListItem>(*mDefinitie, mPorties[i].get()));
-
-    for (size_t i = 0; i < mItems.size(); ++i)
-        mItems[i]->Write(*this, (int)i);
-}
-
-void PortieList::SetDefinition(weight::VMDefinitie* aDefinitie)
-{
-    mDefinitie = aDefinitie;
-}
+//void PortieList::SetDefinition(weight::VMDefinitie* aDefinitie)
+//{
+//    mDefinitie = aDefinitie;
+//}
 
 // Transfers ownership
 
-void PortieList::SetPorties(std::vector<std::unique_ptr<weight::Portie>>& aPortieList)
+void PortieList::SetPorties(const std::vector<std::reference_wrapper<weight::Portie>>& aPortieList)
 {
-    // Destroys the current portions inside.
+    mPorties = aPortieList;
 
-    mPorties = std::move(aPortieList);
-    aPortieList.clear();
+    DeleteAllItems();
+    ClearItems();
+    for (size_t i = 0; i < mPorties.size(); ++i)
+        mItems.push_back(std::make_unique<PortieListItem>(m_pointsPer100Units, &mPorties[i].get()));
+    
+    for (size_t i = 0; i < mItems.size(); ++i)
+        mItems[i]->Write(*this, (int)i);
 }
 
 
@@ -196,3 +184,14 @@ PortieListItem* PortieList::GetSelectedItem()
     return nullptr;
 }
 
+void PortieList::SetPointsPer100Units(double points)
+{
+    if (m_pointsPer100Units == points)
+        return;
+
+    m_pointsPer100Units = points;
+    for (auto& item : mItems) {
+        item->SetPointsPer100Units(points);
+        Update(item.get());
+    }
+}

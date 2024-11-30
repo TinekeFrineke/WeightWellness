@@ -19,63 +19,52 @@ class VMDefinitie;
 class PortieListItem
 {
 public:
-                      PortieListItem(const weight::VMDefinitie & aDefinitie, weight::Portie * aPortie)
-                        : mDefinitie(aDefinitie), mPortie(aPortie) {}
+    PortieListItem(double pointsPer100Units, weight::Portie* aPortie)
+        : m_pointsPer100Units(pointsPer100Units)
+        , mPortie(aPortie) {}
 
-  void                Write(CListCtrl & aControl, int iItemIndex);
+    void Write(CListCtrl& aControl, int iItemIndex);
 
-  weight::Portie *        GetPortie() { return mPortie; }
+    weight::Portie* GetPortie() { return mPortie; }
+    void SetPointsPer100Units(double points) { m_pointsPer100Units = points; }
 
 private:
-  const weight::VMDefinitie &
-                      mDefinitie;
-  weight::Portie *        mPortie;
+    //const weight::VMDefinitie&
+    //    mDefinitie;
+    double m_pointsPer100Units;
+    weight::Portie* mPortie;
 };
 
 
-class PortieList : public CListCtrl
+class PortieList: public CListCtrl
 {
 public:
-                                PortieList(weight::Model &                   aModel,
-                                           weight::VMDefinitie * aDefinitie);
-                                ~PortieList();
+    PortieList();
+    ~PortieList();
 
-  void                          Initialize();
-  void                          Fill();
+    void Initialize();
 
-  void                          SetDefinition(weight::VMDefinitie* aDefinitie);
-  // Transfers ownership
-  void SetPorties(std::vector<std::unique_ptr<weight::Portie>>& aPortieList);
-  //
-  const std::vector<std::unique_ptr<weight::Portie>>& GetPorties() const { return mPorties; }
-  //
-  bool                          AddPortie(std::unique_ptr<weight::Portie> aPortie);
-  // Destroys the removed portie
-  bool                          RemovePortie(weight::Portie * aPortie);
-  // Copies porties to aPortieList, clears itemlist
-  void                          ReleasePorties(std::vector<std::unique_ptr<weight::Portie>> & aPortieList);
-  // Clears itemlist and porties with it.
-  void                          DeletePorties();
+    void SetPointsPer100Units(double points);
+    void SetPorties(const std::vector<std::reference_wrapper<weight::Portie>>& aPortieList);
 
-  PortieListItem *              GetSelectedItem();
-  void                          SelectItem(weight::Portie & aPortie);
-  void                          SelectItem(int iIndex);
+    PortieListItem* GetSelectedItem();
+    //void SelectItem(weight::Portie& aPortie);
+    //void SelectItem(int iIndex);
 
-  void                          Update(PortieListItem * anItem);
+    void Update(PortieListItem* anItem);
 
-	//{{AFX_MSG(PortieList)
-  afx_msg void OnLButtonDblClk( UINT, CPoint );
-	//}}AFX_MSG
+    ////{{AFX_MSG(PortieList)
+    //afx_msg void OnLButtonDblClk(UINT, CPoint);
+    ////}}AFX_MSG
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
 private:
-  void                          ClearItems();
+    void ClearItems();
 
-  std::vector<std::unique_ptr<PortieListItem>> mItems;
-  weight::Model& mModel;
-  weight::VMDefinitie * mDefinitie;
-  std::vector<std::unique_ptr<weight::Portie>> mPorties;
+    std::vector<std::unique_ptr<PortieListItem>> mItems;
+    double m_pointsPer100Units{};
+    std::vector<std::reference_wrapper<weight::Portie>> mPorties;
 };
 
 // NM_DBLCLK

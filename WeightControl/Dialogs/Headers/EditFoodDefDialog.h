@@ -42,19 +42,22 @@ protected:
 
     DECLARE_MESSAGE_MAP()
 
-    afx_msg void              OnBnClickedAdd();
-    afx_msg void              OnBnClickedEdit();
-    afx_msg void              OnBnClickedDelete();
-    afx_msg void              OnBnClickedOk();
-    afx_msg void              OnEnChangeKcalper100();
-    afx_msg void              OnEnChangeVetper100();
-    afx_msg void              OnEnChangeEiwittenPer100();
-    afx_msg void              OnEnChangeKoolhydratenPer100();
-    afx_msg void              OnEnChangeVezelsPer100();
-    afx_msg void              OnBnClickedRadioBerekend();
-    afx_msg void              OnBnClickedRadioVast();
-    afx_msg void              OnBnClickedCancel();
-    afx_msg void              OnEnChangeEenheden();
+    afx_msg void OnBnClickedAdd();
+    afx_msg void OnBnClickedEdit();
+    afx_msg void OnBnClickedDelete();
+    afx_msg void OnBnClickedOk();
+    afx_msg void OnEnChangeKcalper100();
+    afx_msg void OnEnChangeVetper100();
+    afx_msg void OnEnChangeEiwittenPer100();
+    afx_msg void OnEnChangeKoolhydratenPer100();
+    afx_msg void OnEnChangeVezelsPer100();
+    afx_msg void OnBnClickedRadioBerekend();
+    afx_msg void OnBnClickedRadioVast();
+    afx_msg void OnBnClickedCancel();
+    afx_msg void OnEnChangeEenheden();
+    afx_msg void OnCbnSelchangeUnit();
+    afx_msg void OnCbnEditchangeUnit();
+    afx_msg void OnBnClickedCheckFavourite();
 
 private:
     void                      FillStatics();
@@ -101,9 +104,6 @@ private:
     weight::Model& mModel;
 
     std::vector<std::unique_ptr<weight::Portie>> mOriginalPorties;
-
 public:
-    afx_msg void OnCbnSelchangeUnit();
-    afx_msg void OnCbnEditchangeUnit();
-    afx_msg void OnBnClickedCheckFavourite();
+    afx_msg void OnNMDblclkPortie(NMHDR* pNMHDR, LRESULT* pResult);
 };

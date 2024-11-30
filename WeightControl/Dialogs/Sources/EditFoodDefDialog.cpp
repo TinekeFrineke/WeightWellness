@@ -58,6 +58,7 @@ BEGIN_MESSAGE_MAP(CEditFoodDefDialog, CDialog)
     ON_CBN_SELCHANGE(IDC_UNIT, OnCbnSelchangeUnit)
     ON_CBN_EDITCHANGE(IDC_UNIT, OnCbnEditchangeUnit)
     ON_BN_CLICKED(IDC_CHECK_FAVOURITE, OnBnClickedCheckFavourite)
+    ON_NOTIFY(NM_DBLCLK, IDC_PORTIE, &CEditFoodDefDialog::OnNMDblclkPortie)
 END_MESSAGE_MAP()
 
 
@@ -86,6 +87,16 @@ std::vector<std::wstring> BrandNames(const weight::Model& model)
 
     return names;
 }
+
+std::vector<std::reference_wrapper<weight::Portie>>
+CreateListViewPorties(const std::vector<std::unique_ptr<weight::Portie>>& porties)
+{
+    std::vector<std::reference_wrapper<weight::Portie>> newPorties;
+    for (auto& portie : porties)
+        newPorties.push_back(*portie);
+
+    return newPorties;
+}
 }
 
 CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
@@ -95,23 +106,12 @@ CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
     , mModel(aModel)
     , mDefinitieAbc(aDefinitie)
     , mChangedDefinitieAbc(nullptr)
-    , mPortieListView(aModel, aDefinitie)
     , mUnitBox(UnitNames(aModel), (aDefinitie ? aDefinitie->GetUnit().GetName() : _T("g")))
     , mCategorie(CategoryNames(aModel), (aDefinitie ? aDefinitie->GetCategory().Get() : _T("")))
     , mMerk(BrandNames(aModel), false, (aDefinitie ? aDefinitie->GetMerk().Get() : _T("")))
 {
     if (mDefinitieAbc != nullptr) {
-        // Move the potions from the changed item to the portie list.
-        std::vector<std::unique_ptr<weight::Portie>> porties;
-        mDefinitieAbc->ReleasePorties(porties);
-
-        // Copy the portions to the mOrigialPorties
-        for (size_t i = 0; i < porties.size(); ++i)
-            mOriginalPorties.push_back(std::make_unique<weight::Portie>(*porties[i]));
-
-        mPortieListView.SetPorties(porties);
-
-        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(*aDefinitie);
+        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(*mDefinitieAbc);
     }
 }
 
@@ -125,6 +125,9 @@ BOOL CEditFoodDefDialog::OnInitDialog()
 {
     if (CDialog::OnInitDialog() == FALSE)
         return FALSE;
+
+    mPortieListView.SetPorties(CreateListViewPorties(mChangedDefinitieAbc->GetPortieList()));
+    mPortieListView.SetPointsPer100Units(mDefinitieAbc->GetPointsPer100Units());
 
     UpdateUiCalculated(mChangedDefinitieAbc == nullptr || mChangedDefinitieAbc->IsCalculated());
 
@@ -187,7 +190,6 @@ BOOL CEditFoodDefDialog::OnInitDialog()
     mCategorie.Initialize();
     mMerk.Initialize();
 
-    mPortieListView.Fill();
     mUnitBox.Fill();
     mCategorie.Fill();
     mMerk.Fill();
@@ -228,7 +230,7 @@ void CEditFoodDefDialog::OnBnClickedAdd()
     if (portie != nullptr) {
         mChangedDefinitieAbc->AddPortie(std::move(portie));
         //mPortieListView.AddPortie(std::make_unique<weight::Portie>(*dialog.GetPortie()));
-        mPortieListView.Fill();
+        mPortieListView.SetPorties(CreateListViewPorties(mChangedDefinitieAbc->GetPortieList()));
     }
 }
 
@@ -254,7 +256,8 @@ void CEditFoodDefDialog::OnBnClickedDelete()
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {
-        mPortieListView.RemovePortie(item->GetPortie());
+        mChangedDefinitieAbc->RemovePortie(item->GetPortie());
+        mPortieListView.SetPorties(CreateListViewPorties(mChangedDefinitieAbc->GetPortieList()));
     }
 }
 
@@ -391,7 +394,7 @@ bool CEditFoodDefDialog::FinalizeCalculatedData()
     if (!CreateCalculatedFood())
         return false;
 
-    mPortieListView.SetDefinition(mChangedDefinitieAbc.get());
+    mPortieListView.SetPointsPer100Units(mChangedDefinitieAbc->GetPointsPer100Units());
 
     return true;
 }
@@ -402,7 +405,7 @@ bool CEditFoodDefDialog::FinalizeFixedData()
     if (!CreateFixedFood())
         return false;
 
-    mPortieListView.SetDefinition(mChangedDefinitieAbc.get());
+    mPortieListView.SetPointsPer100Units(mChangedDefinitieAbc->GetPointsPer100Units());
 
     return true;
 }
@@ -437,23 +440,21 @@ void CEditFoodDefDialog::OnBnClickedOk()
     if (!result)
         return;
 
-    std::vector<std::unique_ptr<weight::Portie>> porties;
-    mPortieListView.ReleasePorties(porties);
+    //std::vector<std::unique_ptr<weight::Portie>> porties;
+    //mPortieListView.ReleasePorties(porties);
 
     if (mChangedDefinitieAbc != nullptr)
     {
         if (mDefinitieAbc == nullptr)
         {
             mDefinitieAbc = std::make_unique<weight::VMDefinitie>(*mChangedDefinitieAbc);
+            *mDefinitieAbc = *mChangedDefinitieAbc;
             mModel.Add(std::move(mDefinitieAbc));
         }
         else
         {
             *mDefinitieAbc = *mChangedDefinitieAbc;
         }
-
-        for (size_t i = 0; i < porties.size(); ++i)
-            mDefinitieAbc->AddPortie(std::move(porties[i]));
     }
 
     OnOK();
@@ -465,6 +466,7 @@ void CEditFoodDefDialog::OnEnChangeKcalper100()
     {
         double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
         mChangedDefinitieAbc->GetCalculatedVMDef()->SetKCalPer100Units(mKCalPer100.GetValue() * amountFactor);
+        mPortieListView.SetPointsPer100Units(mKCalPer100.GetValue() * amountFactor);
     }
 }
 
@@ -570,4 +572,23 @@ void CEditFoodDefDialog::OnCbnEditchangeUnit()
 void CEditFoodDefDialog::OnBnClickedCheckFavourite()
 {
     mChangedDefinitieAbc->SetFavourite(IsDlgButtonChecked(IDC_CHECK_FAVOURITE) != FALSE);
+}
+
+
+void CEditFoodDefDialog::OnNMDblclkPortie(NMHDR* pNMHDR, LRESULT* pResult)
+{
+    LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+    // TODO: Add your control notification handler code here
+    *pResult = 0;
+
+    if (!FinalizeData())
+        return;
+
+    PortieListItem* item = mPortieListView.GetSelectedItem();
+    if (item != nullptr)
+    {
+        PortieEditor editor(*mChangedDefinitieAbc, this);
+        if (editor.Edit(*item->GetPortie()))
+            mPortieListView.Update(item);
+    }
 }

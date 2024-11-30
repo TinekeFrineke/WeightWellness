@@ -123,23 +123,6 @@ bool VMDefinitie::AddPortie(std::unique_ptr<Portie> aPortie)
 }
 
 
-bool VMDefinitie::ReleasePorties(std::vector<std::unique_ptr<Portie>>& aPorties)
-{
-    for (size_t i = 0; i < mPortieList.size(); ++i)
-    {
-        for (size_t j = 0; j < aPorties.size(); ++j)
-            if (mPortieList[i]->GetName() == aPorties[j]->GetName())
-                return false;
-    }
-
-    for (size_t i = 0; i < mPortieList.size(); ++i)
-        aPorties.push_back(std::move(mPortieList[i]));
-
-    mPortieList.clear();
-    return true;
-}
-
-
 bool VMDefinitie::RemovePortie(Portie* aPortie)
 {
     for (std::vector<std::unique_ptr<Portie>>::iterator iter = mPortieList.begin(); iter != mPortieList.end(); ++iter)
