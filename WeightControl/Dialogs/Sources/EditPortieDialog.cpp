@@ -13,17 +13,16 @@
 // CEditPortieDialog dialog
 
 IMPLEMENT_DYNAMIC(CEditPortieDialog, CDialog)
-CEditPortieDialog::CEditPortieDialog(weight::Model& aModel,
-                                     weight::VMDefinitie& aDefinitie,
+CEditPortieDialog::CEditPortieDialog(weight::VMDefinitie& aDefinitie,
                                      weight::Portie* aPortie,
                                      const std::vector<std::unique_ptr<weight::Portie>>& aPorties,
                                      CWnd* pParent)
-    : CDialog(CEditPortieDialog::IDD, pParent),
-    mModel(aModel),
-    mDefinitie(aDefinitie),
-    mPortie(aPortie),
-    mMyPortion(aPortie == nullptr),
-    mNaam(aModel, aPortie ? aPortie->GetName().Get() : _T(""))
+    : CDialog(CEditPortieDialog::IDD, pParent)
+    //, mModel(aModel)
+    , mDefinitie(aDefinitie)
+    , mPortie(aPortie)
+    , mMyPortion(aPortie == nullptr)
+    , mNaam(aPortie ? aPortie->GetName() : _T(""))
 {
     for (size_t i = 0; i < aPorties.size(); ++i)
         mPortienames.push_back(aPorties[i]->GetName());
@@ -71,7 +70,7 @@ BOOL CEditPortieDialog::OnInitDialog()
         return FALSE;
 
     mNaam.Initialize();
-    mNaam.Fill(mPortienames, mPortie ? mPortie->GetName().Get() : _T(""));
+    mNaam.Fill(mPortienames, mPortie ? mPortie->GetName() : _T(""));
 
     mUnitStatic.SetWindowText(mDefinitie.GetUnit().GetName().c_str());
     mVoedingsMiddel.SetValue(mDefinitie.GetName());
@@ -96,9 +95,9 @@ void CEditPortieDialog::OnBnClickedOk()
     mNaam.GetWindowText(text, 1024);
 
     if (mPortie == nullptr)
-        mPortie = new weight::Portie(weight::PortieNaam(mModel, text));
+        mPortie = new weight::Portie(text);
     else
-        mPortie->SetName(weight::PortieNaam(mModel, text));
+        mPortie->SetName(text);
 
     mPortie->SetUnits(mUnitAmount.GetValue());
 

@@ -12,16 +12,42 @@
 #include "model/VoedingsmiddelDefinitie.h"
 #include ".\itemspage.h"
 
+namespace {
+std::vector<std::wstring> CategoryNames(const weight::Model& model)
+{
+    std::vector<std::wstring> names;
+    for (auto category : model.GetCategorieNamen())
+        names.push_back(category.Get());
+
+    return names;
+}
+std::vector<std::wstring> BrandNames(const weight::Model& model)
+{
+    std::vector<std::wstring> names;
+    for (auto brand : model.GetMerkNamen())
+        names.push_back(brand.Get());
+
+    return names;
+}
+std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
+{
+    std::vector<weight::VMDefinitie*> definitions;
+    for (auto& definition : model.GetVoedingsmiddelDefinities())
+        definitions.push_back(definition.get());
+    return definitions;
+}
+}
+
 // CItemsPage dialog
 
 IMPLEMENT_DYNAMIC(CItemsPage, CDialog)
 CItemsPage::CItemsPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
-    : CDialog(CItemsPage::IDD, pParent),
-    mModel(aModel),
-    mCategory(aModel),
-    mMerk(aModel, true),
-    mItemsList(aModel),
-    mUpdatingFilter(false)
+    : CDialog(CItemsPage::IDD, pParent)
+    , mModel(aModel)
+    , mCategory(CategoryNames(aModel))
+    , mMerk(BrandNames(aModel), true)
+    , mItemsList(Definitions(aModel))
+    , mUpdatingFilter(false)
 {
 }
 

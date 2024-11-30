@@ -60,17 +60,44 @@ BEGIN_MESSAGE_MAP(CEditFoodDefDialog, CDialog)
 END_MESSAGE_MAP()
 
 
+namespace {
+std::vector<std::wstring> UnitNames(const weight::Model& model)
+{
+    std::vector<std::wstring> names;
+    for (auto unit : model.GetUnits())
+        names.push_back(unit.GetName());
+
+    return names;
+}
+std::vector<std::wstring> CategoryNames(const weight::Model& model)
+{
+    std::vector<std::wstring> names;
+    for (auto category : model.GetCategorieNamen())
+        names.push_back(category.Get());
+
+    return names;
+}
+std::vector<std::wstring> BrandNames(const weight::Model& model)
+{
+    std::vector<std::wstring> names;
+    for (auto brand : model.GetMerkNamen())
+        names.push_back(brand.Get());
+
+    return names;
+}
+}
+
 CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
                                        weight::VMDefinitie* aDefinitie,
                                        CWnd* pParent /*=nullptr*/)
-    : CDialog(CEditFoodDefDialog::IDD, pParent),
-    mModel(aModel),
-    mDefinitieAbc(aDefinitie),
-    mChangedDefinitieAbc(nullptr),
-    mPortieListView(aModel, aDefinitie),
-    mUnitBox(aModel, (aDefinitie ? aDefinitie->GetUnit().GetName() : _T("g"))),
-    mCategorie(aModel, (aDefinitie ? aDefinitie->GetCategory().Get() : _T(""))),
-    mMerk(aModel, false, (aDefinitie ? aDefinitie->GetMerk().Get() : _T("")))
+    : CDialog(CEditFoodDefDialog::IDD, pParent)
+    , mModel(aModel)
+    , mDefinitieAbc(aDefinitie)
+    , mChangedDefinitieAbc(nullptr)
+    , mPortieListView(aModel, aDefinitie)
+    , mUnitBox(UnitNames(aModel), (aDefinitie ? aDefinitie->GetUnit().GetName() : _T("g")))
+    , mCategorie(CategoryNames(aModel), (aDefinitie ? aDefinitie->GetCategory().Get() : _T("")))
+    , mMerk(BrandNames(aModel), false, (aDefinitie ? aDefinitie->GetMerk().Get() : _T("")))
 {
     if (mDefinitieAbc != nullptr) {
         // Move the potions from the changed item to the portie list.
@@ -195,7 +222,7 @@ void CEditFoodDefDialog::OnBnClickedAdd()
         return;
 
     // calculated state
-    CEditPortieDialog dialog(mModel, *mChangedDefinitieAbc, nullptr, mPortieListView.GetPorties(), this);
+    CEditPortieDialog dialog(*mChangedDefinitieAbc, nullptr, mPortieListView.GetPorties(), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
@@ -214,7 +241,7 @@ void CEditFoodDefDialog::OnBnClickedEdit()
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {
-        CEditPortieDialog dialog(mModel, *mChangedDefinitieAbc, item->GetPortie(), mPortieListView.GetPorties(), this);
+        CEditPortieDialog dialog(*mChangedDefinitieAbc, item->GetPortie(), mPortieListView.GetPorties(), this);
         INT_PTR nResponse = dialog.DoModal();
         if (nResponse == IDOK)
             mPortieListView.Update(item);

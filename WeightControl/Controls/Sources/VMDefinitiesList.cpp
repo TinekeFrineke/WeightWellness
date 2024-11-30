@@ -64,8 +64,8 @@ void VMDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 }
 
 
-VMDefinitiesList::VMDefinitiesList(weight::Model& aModel)
-    : mModel(aModel)
+VMDefinitiesList::VMDefinitiesList(const std::vector<weight::VMDefinitie*>& definitions)
+    : m_definitions(definitions)
 {
 }
 
@@ -98,9 +98,9 @@ void VMDefinitiesList::Fill()
     DeleteAllItems();
     ClearItems();
 
-    for (size_t i = 0; i < mModel.GetVoedingsmiddelDefinities().size(); ++i)
-        if (Complies(*mModel.GetVoedingsmiddelDefinities()[i], mFilter))
-            mItems.push_back(std::make_unique<VMDefinitiesListItem>(mModel.GetVoedingsmiddelDefinities()[i].get()));
+    for (auto& definition : m_definitions)
+        if (Complies(*definition, mFilter))
+            mItems.push_back(std::make_unique<VMDefinitiesListItem>(definition));
 
     SetItemCount((int)mItems.size());
 

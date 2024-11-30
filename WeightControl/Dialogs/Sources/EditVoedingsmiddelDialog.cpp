@@ -19,13 +19,13 @@ EditVoedingsmiddelDialog::EditVoedingsmiddelDialog(weight::Model& aModel,
                                                    weight::Voedingsmiddel& aVoedingsmiddel,
                                                    weight::VMDefinitie& aDefinitie,
                                                    CWnd* aParent)
-    : CDialog(EditVoedingsmiddelDialog::IDD, aParent),
-    mModel(aModel),
-    mVoedingsmiddel(aVoedingsmiddel),
-    mVoedingsmiddelDef(aDefinitie),
-    mPortie(aModel, _T("")),
-    mState(nullptr),
-    mUpdating(false)
+    : CDialog(EditVoedingsmiddelDialog::IDD, aParent)
+    , mModel(aModel)
+    , mVoedingsmiddel(aVoedingsmiddel)
+    , mVoedingsmiddelDef(aDefinitie)
+    , mPortie(_T(""))
+    , mState(nullptr)
+    , mUpdating(false)
 {
 }
 
@@ -61,7 +61,7 @@ BOOL EditVoedingsmiddelDialog::OnInitDialog()
     mPortie.Initialize();
     weight::PortionedLot* dlot = mVoedingsmiddel.GetLot().GetPortionedLot();
     if (dlot != nullptr)
-        mPortie.Fill(mVoedingsmiddelDef.GetPortieList(), dlot->GetPortie().GetName().Get());
+        mPortie.Fill(mVoedingsmiddelDef.GetPortieList(), dlot->GetPortie().GetName());
     else
         mPortie.Fill(mVoedingsmiddelDef.GetPortieList());
 
@@ -178,7 +178,7 @@ void EditVoedingsmiddelDialog::EditState::UpdatePortionValues(const weight::Port
 {
     GetAantalEenheden().SetValue(aLot.GetPortie().GetUnits() * aLot.GetNumberOfPortions());
     GetAantalPorties().SetValue(aLot.GetNumberOfPortions());
-    std::tstring name(aLot.GetPortie().GetName().Get());
+    std::tstring name(aLot.GetPortie().GetName());
     int index = GetPortieBox().FindStringExact(0, name.c_str());
     GetPortieBox().SetCurSel(index);
     GetPunten().SetValue(aLot.GetPoints());

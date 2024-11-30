@@ -4,13 +4,13 @@
 #include <memory>
 
 #include "controls/doubleedit.h"
-#include "controls/stringedit.h"
+#include "controls/StringEdit.h"
 
 #include "resource.h"
-#include "categorycombobox.h"
-#include "vmdefinitieslist.h"
-#include "portiecombobox.h"
-#include "brandcombobox.h"
+#include "ComboBox.h"
+#include "VMDefinitiesList.h"
+#include "PortieComboBox.h"
+#include "BrandComboBox.h"
 
 
 class VMState;
@@ -45,19 +45,19 @@ protected:
 
     DECLARE_MESSAGE_MAP()
 
-    BOOL                OnInitDialog();
+    BOOL OnInitDialog();
 
-    afx_msg void        OnBnClickedOk();
-    afx_msg void        OnBnClickedCancel();
-    afx_msg void        OnEnChangeNaam();
-    afx_msg void        OnCbnSelchangeCombo1();
-    afx_msg void        OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResult);
-    afx_msg void        OnCbnSelchangePortienaam();
-    afx_msg void        OnEnChangePorties();
-    afx_msg void        OnEnChangeUnits();
-    afx_msg void        OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult);
-    afx_msg void        OnCbnSelchangeBrand();
-    afx_msg void        OnBnClickedCheckFavourites();
+    afx_msg void OnBnClickedOk();
+    afx_msg void OnBnClickedCancel();
+    afx_msg void OnEnChangeNaam();
+    afx_msg void OnCbnSelchangeCombo1();
+    afx_msg void OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void OnCbnSelchangePortienaam();
+    afx_msg void OnEnChangePorties();
+    afx_msg void OnEnChangeUnits();
+    afx_msg void OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void OnCbnSelchangeBrand();
+    afx_msg void OnBnClickedCheckFavourites();
 
     std::unique_ptr<VMState> CreateState(weight::VMDefinitie& aDefinitie);
     void SetState(std::unique_ptr<VMState> aState);
@@ -67,9 +67,9 @@ private:
 
     void                UpdateItemFilter();
 
-    CategoryComboBox    mCategorieBox;
-    BrandComboBox       mMerkBox;
-    CStringEdit         mNaam;
+    weight::ComboBox mCategorieBox;
+    BrandComboBox mMerkBox;
+    CStringEdit mNaam;
     // Food items to pick from
     VMDefinitiesList    mItemList;
     // The number of porties
@@ -80,7 +80,6 @@ private:
     CStringEdit         mUnitNaam;
     CDoubleEdit         mPoints;
 
-    weight::Model& mModel;
     std::unique_ptr<weight::Voedingsmiddel> mFood;
     weight::VMDefinitie* mDefinitie;
 
@@ -95,17 +94,14 @@ private:
 class VMState
 {
 public:
-    VMState(CFindVoedingsmiddel& aDialog,
-            weight::VMDefinitie& aDefinitie,
-            weight::Model& aModel)
-        : mDialog(aDialog),
-        mDefinitie(aDefinitie),
-        mModel(aModel)
+    VMState(CFindVoedingsmiddel& aDialog, weight::VMDefinitie& aDefinitie)
+        : mDialog(aDialog)
+        , mDefinitie(aDefinitie)
     {}
 
-    virtual void              Initialize() = 0;
+    virtual void Initialize() = 0;
 
-    void                      UpdatePortionValues(const weight::Portie& aPortie);
+    void UpdatePortionValues(const weight::Portie& aPortie);
 
 protected:
     CFindVoedingsmiddel& GetDialog() { return mDialog; }
@@ -119,12 +115,10 @@ protected:
     CDoubleEdit& GetPoints() { return mDialog.mPoints; }
 
     weight::VMDefinitie& GetDefinitie() { return mDefinitie; }
-    const weight::Model& GetModel() const { return mModel; }
 
 private:
     CFindVoedingsmiddel& mDialog;
     weight::VMDefinitie& mDefinitie;
-    weight::Model& mModel;
 };
 
 
@@ -132,9 +126,8 @@ class VMNoPortionsState: public VMState
 {
 public:
     VMNoPortionsState(CFindVoedingsmiddel& aDialog,
-                      weight::VMDefinitie& aDefinitie,
-                      weight::Model& aModel)
-        : VMState(aDialog, aDefinitie, aModel) {}
+                      weight::VMDefinitie& aDefinitie)
+        : VMState(aDialog, aDefinitie) {}
 
     virtual void              Initialize() override;
 };
@@ -144,9 +137,8 @@ class VMStandardPortionsState: public VMState
 {
 public:
     VMStandardPortionsState(CFindVoedingsmiddel& aDialog,
-                            weight::VMDefinitie& aDefinitie,
-                            weight::Model& aModel)
-        : VMState(aDialog, aDefinitie, aModel) {}
+                            weight::VMDefinitie& aDefinitie)
+        : VMState(aDialog, aDefinitie) {}
 
     void Initialize() override;
 };

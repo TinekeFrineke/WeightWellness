@@ -68,7 +68,7 @@ BOOL CWWApplication::InitInstance()
     TCHAR dir[MAX_PATH];
     GetCurrentDirectory(MAX_PATH, dir);
 
-    Inifile inifile(std::tstring(dir) + _T("\\weightwatchers.ini"));
+    Inifile inifile(std::wstring(dir) + L"\\weightcontrol.ini");
 
     if (inifile.empty()) {
         MessageBox(0, _T("Unable to open inifile"), inifile.GetName().c_str(), MB_OK);

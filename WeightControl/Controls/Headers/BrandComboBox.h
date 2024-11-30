@@ -1,22 +1,22 @@
 #pragma once
 
-#include "WWCombobox.h"
 #include "Utilities/StrUtils.h"
+
+#include "Combobox.h"
 
 namespace weight
 {
-  class Model;
+class Model;
 }
 
-class BrandComboBox : public weight::ComboBox
+class BrandComboBox: public weight::ComboBox
 {
 public:
-                              BrandComboBox(const weight::Model &     aModel,
-                                            bool                  aIsForFiltering,
-                                            const std::tstring &  anInitialBrand = _T(""));
+    BrandComboBox(const std::vector<std::wstring>& availableTexts, bool aIsForFiltering,
+                  const std::tstring& anInitialBrand = _T(""));
 
-  void                        AddLines();
+    void AddLines() override;
 
 private:
-  bool                        mIsForFiltering;
+    bool mIsForFiltering;
 };

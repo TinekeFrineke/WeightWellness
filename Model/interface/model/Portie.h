@@ -1,7 +1,8 @@
 #pragma once
 
+#include <string>
+
 #include "Entity.h"
-#include "PortieNaam.h"
 #include "Unit.h"
 
 namespace weight
@@ -14,23 +15,23 @@ namespace weight
 class Portie: public Entity<Portie>
 {
 public:
-    Portie(const PortieNaam& aName);
-    Portie(const Portie& aPortie);
+    Portie(const std::wstring& aName);
+    //Portie(const Portie& aPortie);
     ~Portie();
 
-    double                GetUnits() const noexcept { return mUnits; }
-    PortieNaam            GetName() const { return mName; }
+    double GetUnits() const noexcept { return mUnits; }
+    std::wstring GetName() const { return mName; }
 
     void                  SetUnits(double anAmount) noexcept { mUnits = anAmount; }
-    void                  SetName(const PortieNaam& aName) { mName = aName; }
+    void                  SetName(const std::wstring& aName) { mName = aName; }
 
     // Entity overrides
-    virtual std::tstring  GetInstanceName() const noexcept { return mName.Get(); }
-    static std::tstring   GetClassName() { return _T("Portie"); }
+    virtual std::wstring  GetInstanceName() const noexcept override { return mName; }
+    static std::wstring   GetClassName() { return _T("Portie"); }
 
 private:
-    double                mUnits;
-    PortieNaam            mName;
+    double mUnits;
+    std::wstring mName;
 };
 
 

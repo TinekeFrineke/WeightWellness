@@ -28,16 +28,14 @@
   <ItemGroup>
     <ClInclude Include="Controls\Headers\BonusList.h" />
     <ClInclude Include="Controls\Headers\BrandComboBox.h" />
-    <ClInclude Include="Controls\Headers\CategoryComboBox.h" />
     <ClInclude Include="Controls\Headers\DiaryItemList.h" />
     <ClInclude Include="Controls\Headers\ItemList.h" />
     <ClInclude Include="Controls\Headers\MyTabControl.h" />
     <ClInclude Include="Controls\Headers\PortieComboBox.h" />
     <ClInclude Include="Controls\Headers\PortieList.h" />
     <ClInclude Include="Controls\Headers\ReceptDefinitiesList.h" />
-    <ClInclude Include="Controls\Headers\UnitComboBox.h" />
     <ClInclude Include="Controls\Headers\VMDefinitiesList.h" />
-    <ClInclude Include="Controls\Headers\WWComboBox.h" />
+    <ClInclude Include="Controls\Headers\ComboBox.h" />
     <ClInclude Include="Dialogs\Headers\BewegingDialog.h" />
     <ClInclude Include="Dialogs\Headers\DiaryPage.h" />
     <ClInclude Include="Dialogs\Headers\EditBonusDialog.h" />
@@ -63,16 +61,14 @@
   <ItemGroup>
     <ClCompile Include="Controls\Sources\BonusList.cpp" />
     <ClCompile Include="Controls\Sources\BrandComboBox.cpp" />
-    <ClCompile Include="Controls\Sources\CategoryComboBox.cpp" />
     <ClCompile Include="Controls\Sources\DiaryItemList.cpp" />
     <ClCompile Include="Controls\Sources\ItemList.cpp" />
     <ClCompile Include="Controls\Sources\MyTabControl.cpp" />
     <ClCompile Include="Controls\Sources\PortieComboBox.cpp" />
     <ClCompile Include="Controls\Sources\PortieList.cpp" />
     <ClCompile Include="Controls\Sources\ReceptDefinitiesList.cpp" />
-    <ClCompile Include="Controls\Sources\UnitComboBox.cpp" />
     <ClCompile Include="Controls\Sources\VMDefinitiesList.cpp" />
-    <ClCompile Include="Controls\Sources\WWComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\ComboBox.cpp" />
     <ClCompile Include="Dialogs\Sources\BewegingDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\DiaryPage.cpp" />
     <ClCompile Include="Dialogs\Sources\EditBonusDialog.cpp" />

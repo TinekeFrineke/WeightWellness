@@ -15,9 +15,8 @@ BEGIN_MESSAGE_MAP(PortieComboBox, CComboBox)
 END_MESSAGE_MAP()
 
 
-PortieComboBox::PortieComboBox(const weight::Model& aModel, const std::tstring& aPortie)
-    : mModel(aModel),
-    mInitialPortie(aPortie)
+PortieComboBox::PortieComboBox(const std::wstring& aPortie)
+    : mInitialPortie(aPortie)
 {
 }
 
@@ -30,13 +29,13 @@ void PortieComboBox::Initialize()
 }
 
 
-void PortieComboBox::Fill(const std::vector<weight::PortieNaam>& aNames, const std::tstring& aPortie)
+void PortieComboBox::Fill(const std::vector<std::wstring>& aNames, const std::tstring& aPortie)
 {
     ResetContent();
 
     for (size_t i = 0; i < aNames.size(); ++i)
     {
-        int index = AddString(aNames[i].Get().c_str());
+        int index = AddString(aNames[i].c_str());
         SetItemDataPtr(index, NULL);
     }
 
@@ -55,7 +54,7 @@ void PortieComboBox::Fill(const std::vector<std::unique_ptr<weight::Portie>>& aL
 
     for (size_t i = 0; i < aList.size(); ++i)
     {
-        int index = AddString(aList[i]->GetName().Get().c_str());
+        int index = AddString(aList[i]->GetName().c_str());
         SetItemDataPtr(index, aList[i].get());
     }
 
@@ -78,13 +77,13 @@ weight::Portie* PortieComboBox::GetSelectedPortie()
 }
 
 
-void PortieComboBox::SetString(const std::tstring& aString)
+void PortieComboBox::SetString(const std::wstring& aString)
 {
     SetWindowText(aString.c_str());
 }
 
 
-std::tstring PortieComboBox::GetString() const
+std::wstring PortieComboBox::GetString() const
 {
     assert(m_hWnd != NULL);
     CString text;

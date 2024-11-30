@@ -14,23 +14,48 @@
 
 // CFindVoedingsmiddel dialog
 
+namespace {
+std::vector<std::wstring> CategoryNames(const weight::Model& model)
+{
+    std::vector<std::wstring> names;
+    for (auto category : model.GetCategorieNamen())
+        names.push_back(category.Get());
+
+    return names;
+}
+std::vector<std::wstring> BrandNames(const weight::Model& model)
+{
+    std::vector<std::wstring> names;
+    for (auto brand : model.GetMerkNamen())
+        names.push_back(brand.Get());
+
+    return names;
+}
+std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
+{
+    std::vector<weight::VMDefinitie*> definitions;
+    for (auto& definition : model.GetVoedingsmiddelDefinities())
+        definitions.push_back(definition.get());
+    return definitions;
+}
+}
+
 IMPLEMENT_DYNAMIC(CFindVoedingsmiddel, CDialog)
 CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
                                          weight::VMDefinitie* aDefinitie,
                                          std::unique_ptr<weight::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
-    : CDialog(CFindVoedingsmiddel::IDD, pParent),
-    mItemList(aModel),
-    mCategorieBox(aModel),
-    mMerkBox(aModel, true),
-    mModel(aModel),
-    mFood(nullptr),
-    mState(nullptr),
-    m_lotFactory(std::move(lotFactory)),
-    mDefinitie(aDefinitie),
-    mPortieNaam(mModel, _T("")),
-    mUpdating(false),
-    mUpdatingFilter(false)
+    : CDialog(CFindVoedingsmiddel::IDD, pParent)
+    , mItemList(Definitions(aModel))
+    , mCategorieBox(CategoryNames(aModel))
+    , mMerkBox(BrandNames(aModel), true)
+    , mFood(nullptr)
+    , mState(nullptr)
+    , m_lotFactory(std::move(lotFactory))
+    , mDefinitie(aDefinitie)
+    , mPortieNaam(_T(""))
+    , mUpdating(false)
+    , mUpdatingFilter(false)
 {
 }
 
@@ -95,11 +120,11 @@ BOOL CFindVoedingsmiddel::OnInitDialog()
 
     mCategorieBox.Initialize();
     mCategorieBox.Fill();
-    mCategorieBox.SetString(_T(""));
+    mCategorieBox.SetText(_T(""));
 
     mMerkBox.Initialize();
     mMerkBox.Fill();
-    mMerkBox.SetString(_T(""));
+    mMerkBox.SetText(_T(""));
 
     return TRUE;
 }
@@ -234,9 +259,9 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
 std::unique_ptr<VMState> CFindVoedingsmiddel::CreateState(weight::VMDefinitie& aDefinitie)
 {
     if (aDefinitie.GetPortieList().empty())
-        return std::make_unique<VMNoPortionsState>(*this, aDefinitie, mModel);
+        return std::make_unique<VMNoPortionsState>(*this, aDefinitie);
     else
-        return std::make_unique<VMStandardPortionsState>(*this, aDefinitie, mModel);
+        return std::make_unique<VMStandardPortionsState>(*this, aDefinitie);
 }
 
 
@@ -252,7 +277,7 @@ void VMState::UpdatePortionValues(const weight::Portie& aPortie)
 {
     GetUnits().SetValue(aPortie.GetUnits());
     GetPorties().SetValue(1);
-    GetPortieBox().SetString(aPortie.GetName().Get());
+    GetPortieBox().SetString(aPortie.GetName());
 }
 
 

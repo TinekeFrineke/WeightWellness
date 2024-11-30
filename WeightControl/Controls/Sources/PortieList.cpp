@@ -25,7 +25,7 @@ void PortieListItem::Write(CListCtrl& aControl, int iItemIndex)
     lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
     lvi.iItem = iItemIndex;
     lvi.iSubItem = 0;
-    TCHAR* name = _tcsdup(mPortie->GetName().Get().c_str());
+    TCHAR* name = _tcsdup(mPortie->GetName().c_str());
     lvi.pszText = name;
     lvi.iImage = 0;
     lvi.stateMask = LVIS_STATEIMAGEMASK;
@@ -144,7 +144,7 @@ void PortieList::OnLButtonDblClk(UINT, CPoint)
     if (item != nullptr)
     {
         weight::Portie* portie = item->GetPortie();
-        CEditPortieDialog dlg(mModel, *mDefinitie, portie, mPorties, this);
+        CEditPortieDialog dlg(*mDefinitie, portie, mPorties, this);
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
             Update(item);

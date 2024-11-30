@@ -8,22 +8,20 @@
 #include "model/Model.h"
 
 
-BrandComboBox::BrandComboBox(const weight::Model &    aModel,
-                             bool                 aIsForFiltering,
-                             const std::tstring & anInitialBrand)
-: weight::ComboBox    (aModel, anInitialBrand),
-  mIsForFiltering (aIsForFiltering)
+BrandComboBox::BrandComboBox(const std::vector<std::wstring>& availableTexts, bool aIsForFiltering,
+                             const std::tstring& anInitialBrand)
+    : weight::ComboBox(availableTexts, anInitialBrand)
+    , mIsForFiltering(aIsForFiltering)
 {
 }
 
 
 void BrandComboBox::AddLines()
 {
-  if (mIsForFiltering) {
-    AddString(_T("<alles>"));
-    AddString(_T("<merkloos>"));
-  }
+    if (mIsForFiltering) {
+        AddString(_T("<alles>"));
+        AddString(_T("<merkloos>"));
+    }
 
-  for (size_t i = 0; i < GetModel().GetMerkNamen().size(); ++i)
-    AddString(GetModel().GetMerkNamen()[i].Get().c_str());
+    weight::ComboBox::AddLines();
 }

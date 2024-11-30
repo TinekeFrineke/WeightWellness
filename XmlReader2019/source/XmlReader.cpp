@@ -243,9 +243,8 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
 
             const auto& portielist = vmlist[i]->GetPortieList();
             for (size_t p = 0; p < portielist.size(); ++p) {
-                auto portie = std::make_unique<weight::Portie>(weight::PortieNaam(mModel, portielist[p]->Getnaam()));
+                auto portie = std::make_unique<weight::Portie>(portielist[p]->Getnaam());
                 portie->SetUnits(Str::ToDouble(portielist[p]->Geteenheden().c_str()));
-                mModel.Add(portie->GetName());
                 definitie->AddPortie(std::move(portie));
             }
 
@@ -467,7 +466,7 @@ weight::Result XmlReader::ReadBonusCells(const std::tstring& aDirectory)
 
 weight::Portie XmlReader::Create(const XmlPortie& aPortie)
 {
-    weight::Portie portie(weight::PortieNaam(mModel, aPortie.Getnaam()));
+    weight::Portie portie(aPortie.Getnaam());
     portie.SetUnits(Str::ToDouble(aPortie.Geteenheden()));
 
     return portie;

@@ -3,12 +3,12 @@
 #include "model/Model.h"
 #include "afxcmn.h"
 
-#include "controls/stringedit.h"
+#include "controls/StringEdit.h"
 #include "controls/TabPage.h"
 
 #include "VMDefinitiesList.h"
-#include "categorycombobox.h"
-#include "brandcombobox.h"
+#include "ComboBox.h"
+#include "BrandComboBox.h"
 
 // CItemsPage dialog
 
@@ -47,7 +47,7 @@ private:
   afx_msg void        OnCbnSelchangeBrand();
 
   CStringEdit         mNaam;
-  CategoryComboBox    mCategory;
+  weight::ComboBox    mCategory;
   BrandComboBox       mMerk;
 
   weight::Model &         mModel;

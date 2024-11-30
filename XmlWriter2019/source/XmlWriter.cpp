@@ -184,7 +184,7 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
         const std::vector<std::unique_ptr<weight::Portie>>& portielist = vmdefinities[i]->GetPortieList();
         for (size_t p = 0; p < vmdefinities[i]->GetPortieList().size(); ++p) {
             auto portie = std::make_unique<XmlPortie>();
-            portie->Setnaam(portielist[p]->GetName().Get());
+            portie->Setnaam(portielist[p]->GetName());
             portie->Seteenheden(Str::ToTString(portielist[p]->GetUnits()));
             xmlvmdefinitie->Add(std::move(portie));
         }
@@ -263,7 +263,7 @@ weight::Result XmlWriter::WriteWeeks(const std::tstring& aDirectory)
 weight::Result XmlWriter::Create(const weight::Portie& aPortie, XmlPortie& anXmlPortie)
 {
     anXmlPortie.Seteenheden(Str::ToTString(aPortie.GetUnits()));
-    anXmlPortie.Setnaam(aPortie.GetName().Get());
+    anXmlPortie.Setnaam(aPortie.GetName());
     return weight::Result::Ok;
 }
 

@@ -42,11 +42,11 @@ public:
     VMDefinitiesListItem(weight::VMDefinitie* anItem)
         : mItem(anItem) {}
 
-    void                          Write(CListCtrl& aControl, int iItemIndex);
+    void Write(CListCtrl& aControl, int iItemIndex);
 
     weight::VMDefinitie* GetItem() { return mItem; }
 
-    bool                          Complies(const VMDefinitiesFilter& aFilter) const;
+    bool Complies(const VMDefinitiesFilter& aFilter) const;
 
 private:
     weight::VMDefinitie* mItem;
@@ -56,7 +56,7 @@ private:
 class VMDefinitiesList: public CListCtrl
 {
 public:
-    VMDefinitiesList(weight::Model& aModel);
+    VMDefinitiesList(const std::vector<weight::VMDefinitie*>& definitions);
     ~VMDefinitiesList();
 
     void                        Initialize();
@@ -83,7 +83,7 @@ private:
                                          const VMDefinitiesFilter& aFilter);
 
     std::vector<std::unique_ptr<VMDefinitiesListItem>> mItems;
-    weight::Model& mModel;
+    std::vector<weight::VMDefinitie*> m_definitions;
     VMDefinitiesFilter mFilter;
 };
 

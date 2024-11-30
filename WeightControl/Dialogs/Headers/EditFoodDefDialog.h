@@ -5,15 +5,14 @@
 #include "afxcmn.h"
 
 #include "controls/DoubleEdit.h"
-#include "controls/intedit.h"
+#include "controls/IntEdit.h"
 #include "controls/StringEdit.h"
 
-#include "CategoryComboBox.h"
 #include "PortieList.h"
-#include "UnitComboBox.h"
+#include "ComboBox.h"
 #include "resource.h" 
-#include "portiecombobox.h"
-#include "brandcombobox.h"
+#include "PortieComboBox.h"
+#include "BrandComboBox.h"
 
 // CEditFoodDefDialog dialog
 
@@ -82,8 +81,8 @@ private:
     CStatic                   mEenhedenStatic;
 
     CStringEdit               mName;
-    CategoryComboBox          mCategorie;
-    UnitComboBox              mUnitBox;
+    weight::ComboBox          mCategorie;
+    weight::ComboBox          mUnitBox;
 
     CDoubleEdit               mKCalPer100;
     CDoubleEdit               mVetPer100;
