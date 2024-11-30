@@ -21,12 +21,10 @@ class CEditPortieDialog: public CDialog
 
 public:
     CEditPortieDialog(weight::VMDefinitie& aDefinitie,
-                      weight::Portie* aPortie,
+                      weight::Portie& aPortie,
                       const std::vector<std::unique_ptr<weight::Portie>>& aPorties,
                       CWnd* pParent = nullptr);   // standard constructor
     ~CEditPortieDialog() override;
-
-    weight::Portie* GetPortie() { return mPortie; }
 
     // Dialog Data
     enum { IDD = IDD_EDITPORTIE_DIALOG };
@@ -48,7 +46,6 @@ private:
 
     weight::VMDefinitie& mDefinitie;
     weight::Portie* mPortie;
-    bool              mMyPortion;
 
     std::vector<std::wstring> mPortienames;
 

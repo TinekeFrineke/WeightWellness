@@ -9,6 +9,7 @@
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "EditPortieDialog.h"
+#include "PortieEditor.h"
 
 //   ON_NOTIFY(NM_DBLCLK, IDC_ITEMLIST, OnNMDblclkItemlist)
 
@@ -46,8 +47,8 @@ void PortieListItem::Write(CListCtrl& aControl, int iItemIndex)
 
 PortieList::PortieList(weight::Model& aModel,
                        weight::VMDefinitie* aDefinitie)
-    : mModel(aModel),
-    mDefinitie(aDefinitie)
+    : mModel(aModel)
+    , mDefinitie(aDefinitie)
 {
 }
 
@@ -143,10 +144,8 @@ void PortieList::OnLButtonDblClk(UINT, CPoint)
     PortieListItem* item = GetSelectedItem();
     if (item != nullptr)
     {
-        weight::Portie* portie = item->GetPortie();
-        CEditPortieDialog dlg(*mDefinitie, portie, mPorties, this);
-        INT_PTR nResponse = dlg.DoModal();
-        if (nResponse == IDOK)
+        PortieEditor editor(*mDefinitie, GetParent());
+        if (editor.Edit(*item->GetPortie()))
             Update(item);
     }
 }

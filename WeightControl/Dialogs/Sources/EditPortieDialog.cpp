@@ -14,25 +14,19 @@
 
 IMPLEMENT_DYNAMIC(CEditPortieDialog, CDialog)
 CEditPortieDialog::CEditPortieDialog(weight::VMDefinitie& aDefinitie,
-                                     weight::Portie* aPortie,
+                                     weight::Portie& aPortie,
                                      const std::vector<std::unique_ptr<weight::Portie>>& aPorties,
                                      CWnd* pParent)
     : CDialog(CEditPortieDialog::IDD, pParent)
-    //, mModel(aModel)
     , mDefinitie(aDefinitie)
-    , mPortie(aPortie)
-    , mMyPortion(aPortie == nullptr)
-    , mNaam(aPortie ? aPortie->GetName() : _T(""))
+    , mPortie(&aPortie)
+    , mNaam(aPortie.GetName())
 {
     for (size_t i = 0; i < aPorties.size(); ++i)
         mPortienames.push_back(aPorties[i]->GetName());
 }
 
-CEditPortieDialog::~CEditPortieDialog()
-{
-    if (mMyPortion && mPortie != nullptr)
-        delete mPortie;
-}
+CEditPortieDialog::~CEditPortieDialog() = default;
 
 
 void CEditPortieDialog::DoDataExchange(CDataExchange* pDX)
@@ -70,20 +64,12 @@ BOOL CEditPortieDialog::OnInitDialog()
         return FALSE;
 
     mNaam.Initialize();
-    mNaam.Fill(mPortienames, mPortie ? mPortie->GetName() : _T(""));
+    mNaam.Fill(mPortienames, mPortie->GetName());
 
     mUnitStatic.SetWindowText(mDefinitie.GetUnit().GetName().c_str());
     mVoedingsMiddel.SetValue(mDefinitie.GetName());
 
-    if (mPortie == nullptr)
-    {
-        mUnitAmount.SetValue(1);
-    }
-    else
-    {
-        mUnitAmount.SetValue(mPortie->GetUnits());
-        //mNaam.SelectString(0, mPortie->GetName().Get().c_str());
-    }
+    mUnitAmount.SetValue(mPortie->GetUnits());
 
     UpdatePoints();
     return TRUE;
@@ -94,11 +80,7 @@ void CEditPortieDialog::OnBnClickedOk()
     TCHAR text[1024];
     mNaam.GetWindowText(text, 1024);
 
-    if (mPortie == nullptr)
-        mPortie = new weight::Portie(text);
-    else
-        mPortie->SetName(text);
-
+    mPortie->SetName(text);
     mPortie->SetUnits(mUnitAmount.GetValue());
 
     OnOK();
@@ -118,6 +100,5 @@ void CEditPortieDialog::OnEnChangeUnitamount()
 void CEditPortieDialog::OnCbnSelchangeOmschrijving()
 {
     mPortie = mNaam.GetSelectedPortie();
-    if (mPortie != nullptr)
-        mUnitAmount.SetValue(mPortie->GetUnits());
+    mUnitAmount.SetValue(mPortie->GetUnits());
 }

@@ -8,6 +8,7 @@
 #include ".\editfooddefdialog.h"
 #include "EditPortieDialog.h"
 #include "model/VoedingsmiddelDefinitie.h"
+#include "PortieEditor.h"
 
 
 // CEditFoodDefDialog dialog
@@ -222,14 +223,12 @@ void CEditFoodDefDialog::OnBnClickedAdd()
         return;
 
     // calculated state
-    CEditPortieDialog dialog(*mChangedDefinitieAbc, nullptr, mPortieListView.GetPorties(), this);
-    INT_PTR nResponse = dialog.DoModal();
-    if (nResponse == IDOK)
-    {
-        if (dialog.GetPortie() != nullptr) {
-            mPortieListView.AddPortie(std::make_unique<weight::Portie>(*dialog.GetPortie()));
-            mPortieListView.Fill();
-        }
+    PortieEditor editor(*mChangedDefinitieAbc, this);
+    auto portie = editor.Create();
+    if (portie != nullptr) {
+        mChangedDefinitieAbc->AddPortie(std::move(portie));
+        //mPortieListView.AddPortie(std::make_unique<weight::Portie>(*dialog.GetPortie()));
+        mPortieListView.Fill();
     }
 }
 
@@ -241,9 +240,8 @@ void CEditFoodDefDialog::OnBnClickedEdit()
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {
-        CEditPortieDialog dialog(*mChangedDefinitieAbc, item->GetPortie(), mPortieListView.GetPorties(), this);
-        INT_PTR nResponse = dialog.DoModal();
-        if (nResponse == IDOK)
+        PortieEditor editor(*mChangedDefinitieAbc, this);
+        if (editor.Edit(*item->GetPortie()))
             mPortieListView.Update(item);
     }
 }
