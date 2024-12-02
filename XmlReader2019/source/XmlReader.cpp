@@ -231,14 +231,14 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
 
             weight::VMDefinitie* definitie = new weight::VMDefinitie(mModel.GetCalculator(),
                                                              vmlist[i]->GetVoedingsmiddelheader().Getnaam(),
-                                                             weight::Unit(mModel, vmlist[i]->GetVoedingsmiddelheader().Getunit()),
+                                                             vmlist[i]->GetVoedingsmiddelheader().Getunit(),
                                                              std::move(base));
 
 
             if (!vmlist[i]->GetVoedingsmiddelheader().Getcategorie().empty())
-                definitie->SetCategory(weight::CategorieNaam(mModel, vmlist[i]->GetVoedingsmiddelheader().Getcategorie()));
+                definitie->SetCategory(vmlist[i]->GetVoedingsmiddelheader().Getcategorie());
             if (!vmlist[i]->GetVoedingsmiddelheader().Getmerk().empty())
-                definitie->SetMerk(weight::MerkNaam(mModel, vmlist[i]->GetVoedingsmiddelheader().Getmerk()));
+                definitie->SetMerk(vmlist[i]->GetVoedingsmiddelheader().Getmerk());
             definitie->SetFavourite(vmlist[i]->Getfavoriet() == XmlVoedingsmiddeldef::favoriet::yes);
 
             const auto& portielist = vmlist[i]->GetPortieList();
@@ -540,8 +540,8 @@ std::unique_ptr<weight::Voedingsmiddel> XmlReader::Create(const XmlVoedingsmidde
     }
 
     auto voedingsmiddel = std::make_unique<weight::Voedingsmiddel>(aVoedingsmiddel.Getnaam(), std::move(lot),
-                                                               weight::Unit(mModel, aVoedingsmiddel.Getunit()));
-    voedingsmiddel->SetCategory(weight::CategorieNaam(mModel, aVoedingsmiddel.Getcategorie()));
+                                                                   aVoedingsmiddel.Getunit());
+    voedingsmiddel->SetCategory(aVoedingsmiddel.Getcategorie());
     return std::move(voedingsmiddel);
 }
 

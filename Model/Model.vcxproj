@@ -95,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interface\model\BonusPointsMap.h" />
-    <ClInclude Include="interface\model\CategorieNaam.h" />
     <ClInclude Include="interface\model\Day.h" />
     <ClInclude Include="interface\model\Entity.h" />
     <ClInclude Include="interface\model\Gerecht.h" />
@@ -108,19 +107,16 @@
     <ClInclude Include="interface\model\ILotFactory.h" />
     <ClInclude Include="interface\model\LotFactory.h" />
     <ClInclude Include="interface\model\ManualItem.h" />
-    <ClInclude Include="interface\model\MerkNaam.h" />
     <ClInclude Include="interface\model\ModelException.h" />
     <ClInclude Include="interface\model\Naam.h" />
     <ClInclude Include="interface\model\Observer.h" />
     <ClInclude Include="interface\model\Personalia.h" />
     <ClInclude Include="interface\model\PointsCalculator.h" />
     <ClInclude Include="interface\model\Portie.h" />
-    <ClInclude Include="interface\model\PortieNaam.h" />
     <ClInclude Include="interface\model\Recept.h" />
     <ClInclude Include="interface\model\ReceptDefinitie.h" />
     <ClInclude Include="interface\model\Repository.h" />
     <ClInclude Include="interface\model\Subject.h" />
-    <ClInclude Include="interface\model\Unit.h" />
     <ClInclude Include="interface\model\Voedingsmiddel.h" />
     <ClInclude Include="interface\model\VoedingsmiddelDefinitie.h" />
     <ClInclude Include="interface\model\VoedingsMiddelDefinitionVisitor.h" />
@@ -130,24 +126,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\BonusPointsMap.cpp" />
-    <ClCompile Include="source\CategorieNaam.cpp" />
     <ClCompile Include="source\Day.cpp" />
     <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\Gerecht.cpp" />
     <ClCompile Include="source\Lot.cpp" />
     <ClCompile Include="source\LotFactory.cpp" />
-    <ClCompile Include="source\MerkNaam.cpp" />
     <ClCompile Include="source\ModelException.cpp" />
     <ClCompile Include="source\Observer.cpp" />
     <ClCompile Include="source\Personalia.cpp" />
     <ClCompile Include="source\PointsCalculator.cpp" />
     <ClCompile Include="source\Portie.cpp" />
-    <ClCompile Include="source\PortieNaam.cpp" />
     <ClCompile Include="source\Recept.cpp" />
     <ClCompile Include="source\ReceptDefinitie.cpp" />
     <ClCompile Include="source\Repository.cpp" />
     <ClCompile Include="source\Subject.cpp" />
-    <ClCompile Include="source\Unit.cpp" />
     <ClCompile Include="source\Voedingsmiddel.cpp" />
     <ClCompile Include="source\VoedingsmiddelDefinitie.cpp" />
     <ClCompile Include="source\Week.cpp" />

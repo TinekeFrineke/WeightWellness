@@ -6,7 +6,6 @@
 
 #include "Lot.h"
 #include "Personalia.h"
-#include "PortieNaam.h"
 #include "GerechtDefinitie.h"
 #include "ReceptDefinitie.h"
 #include "Repository.h"
@@ -151,8 +150,8 @@ bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
         }
     }
 
-    AddUnit(aDefinitie->GetUnit().GetName());
-    AddCategory(aDefinitie->GetCategory().Get());
+    AddUnit(aDefinitie->GetUnit());
+    AddCategory(aDefinitie->GetCategory());
     mVMDefinities.push_back(std::move(aDefinitie));
     return true;
 }

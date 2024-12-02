@@ -12,7 +12,7 @@ namespace weight
 
 Voedingsmiddel::Voedingsmiddel(const std::tstring& aName,
                                std::unique_ptr<Lot> aLot,
-                               const Unit& aUnit)
+                               const std::wstring& aUnit)
     : mName(aName),
     mLot(std::move(aLot)),
     mUnit(aUnit)

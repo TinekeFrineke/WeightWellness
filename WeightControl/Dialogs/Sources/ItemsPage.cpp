@@ -8,7 +8,6 @@
 
 #include "EditFoodDefDialog.h"
 
-#include "model/Unit.h"
 #include "model/VoedingsmiddelDefinitie.h"
 #include ".\itemspage.h"
 

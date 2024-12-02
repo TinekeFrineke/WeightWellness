@@ -3,7 +3,6 @@
 #include <string>
 
 #include "Entity.h"
-#include "Unit.h"
 
 namespace weight
 {
@@ -16,7 +15,6 @@ class Portie: public Entity<Portie>
 {
 public:
     Portie(const std::wstring& aName);
-    //Portie(const Portie& aPortie);
     ~Portie();
 
     double GetUnits() const noexcept { return mUnits; }

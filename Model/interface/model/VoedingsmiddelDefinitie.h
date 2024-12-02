@@ -1,12 +1,8 @@
 #pragma once
 
-#include "CategorieNaam.h"
 #include "Entity.h"
-#include "MerkNaam.h"
 #include "PointsCalculator.h"
 #include "Portie.h"
-#include "PortieNaam.h"
-#include "Unit.h"
 #include "VoedingsMiddelDefinitionVisitor.h"
 #include "WWDefinitions.h"
 
@@ -24,17 +20,17 @@ class VMDefinitie: public Entity<VMDefinitie>
 {
 public:
     VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
-                const std::tstring& aName,
-                const Unit& aUnit,
+                const std::wstring& aName,
+                const std::wstring& aUnit,
                 std::unique_ptr<VMDefBase> aDefinition);
     VMDefinitie(const VMDefinitie&);
     VMDefinitie& operator=(const VMDefinitie&);
 
     virtual                   ~VMDefinitie();
 
-    virtual std::tstring      GetName() const { return mName; }
-    const CategorieNaam& GetCategory() const { return mCategory; }
-    const MerkNaam& GetMerk() const { return mMerk; }
+    virtual std::wstring      GetName() const { return mName; }
+    std::wstring GetCategory() const { return mCategory; }
+    std::wstring GetMerk() const { return mMerk; }
 
     virtual double            GetPointsPer100Units() const;
 
@@ -42,14 +38,14 @@ public:
     bool                      AddPortie(std::unique_ptr<Portie> aPortie);
     bool                      RemovePortie(Portie* aPortie);
 
-    void                      SetCategory(const CategorieNaam& aCategory) { mCategory = aCategory; }
-    void                      SetMerk(const MerkNaam& aMerk) { mMerk = aMerk; }
-    void                      SetUnit(const Unit& aUnit) { mUnit = aUnit; }
+    void                      SetCategory(const std::wstring& aCategory) { mCategory = aCategory; }
+    void                      SetMerk(const std::wstring& aMerk) { mMerk = aMerk; }
+    void                      SetUnit(const std::wstring& aUnit) { mUnit = aUnit; }
 
     void                      SetFavourite(bool aFavourite) noexcept { mFavourite = aFavourite; }
 
 
-    const Unit& GetUnit() const { return mUnit; }
+    std::wstring GetUnit() const { return mUnit; }
 
     const std::vector< std::unique_ptr<Portie>>& GetPortieList() const noexcept { return mPortieList; }
 
@@ -69,10 +65,10 @@ public:
     static std::tstring       GetClassName() { return _T("VMDefinitie"); }
 
 private:
-    Unit                      mUnit;
-    std::tstring              mName;
-    CategorieNaam             mCategory;
-    MerkNaam                  mMerk;
+    std::wstring mUnit;
+    std::wstring mName;
+    std::wstring mCategory;
+    std::wstring mMerk;
     std::vector<std::unique_ptr<Portie>> mPortieList;
     bool                      mFavourite;
 

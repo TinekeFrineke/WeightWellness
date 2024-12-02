@@ -6,10 +6,7 @@
 #include "Utilities/StrUtils.h"
 
 #include "BonusPointsMap.h"
-#include "MerkNaam.h"
-#include "CategorieNaam.h"
 #include "PointsCalculator.h"
-#include "PortieNaam.h"
 
 namespace weight
 {

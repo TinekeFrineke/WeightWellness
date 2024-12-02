@@ -4,7 +4,6 @@
 
 #include <assert.h>
 
-#include "model/Unit.h"
 #include "model/Model.h"
 
 

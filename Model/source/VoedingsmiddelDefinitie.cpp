@@ -19,7 +19,7 @@ int   Entity<FixedVMDef>::mNumberOfInstances = 0;
 
 VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
                          const std::tstring& aName,
-                         const Unit& aUnit,
+                         const std::wstring& aUnit,
                          std::unique_ptr<VMDefBase> aDefinition)
     : m_calculator(std::move(calculator)),
     mName(aName),

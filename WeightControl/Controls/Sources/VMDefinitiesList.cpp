@@ -46,10 +46,10 @@ void VMDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 
     int item = aControl.InsertItem(&lvi);
 
-    TCHAR* category = _tcsdup(mItem->GetCategory().Get().c_str());
+    TCHAR* category = _tcsdup(mItem->GetCategory().c_str());
     aControl.SetItemText(item, 1, category);
 
-    TCHAR* unit = _tcsdup(mItem->GetUnit().GetName().c_str());
+    TCHAR* unit = _tcsdup(mItem->GetUnit().c_str());
     aControl.SetItemText(item, 2, unit);
 
     TCHAR points[256];
@@ -166,11 +166,11 @@ bool VMDefinitiesList::Complies(const weight::VMDefinitie& anItem,
     if (aFilter.IsFavouritesOnly() && !anItem.IsFavourite())
         return false;
 
-    bool bCategoryComplies = aFilter.GetCategory().empty() || anItem.GetCategory().Get() == aFilter.GetCategory();
+    bool bCategoryComplies = aFilter.GetCategory().empty() || anItem.GetCategory() == aFilter.GetCategory();
     bool bBrandComplies = aFilter.GetBrand().empty() ||
         aFilter.GetBrand() == _T("<alles>") ||
-        anItem.GetMerk().Get() == aFilter.GetBrand() ||
-        (aFilter.GetBrand() == _T("<merkloos>") && anItem.GetMerk().Get().empty());
+        anItem.GetMerk() == aFilter.GetBrand() ||
+        (aFilter.GetBrand() == _T("<merkloos>") && anItem.GetMerk().empty());
     bool bDescriptionComplies = aFilter.GetDescription().empty() ||
         Str::ToUpper(anItem.GetName()).find(Str::ToUpper(aFilter.GetDescription())) != std::tstring::npos;
 

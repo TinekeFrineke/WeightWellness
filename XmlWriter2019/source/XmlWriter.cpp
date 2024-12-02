@@ -41,7 +41,6 @@
 #include "model/ReceptDefinitie.h"
 #include "model/Gerecht.h"
 #include "model/GerechtDefinitie.h"
-#include "model/Unit.h"
 #include "model/VoedingsmiddelDefinitie.h"
 #include "model/Week.h"
 #include "model/Model.h"
@@ -145,10 +144,10 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
     {
         auto xmlvmdefinitie = std::make_unique<XmlVoedingsmiddeldef>();
         xmlvmdefinitie->GetVoedingsmiddelheader().Setnaam(vmdefinities[i]->GetName());
-        if (!vmdefinities[i]->GetCategory().Get().empty())
-            xmlvmdefinitie->GetVoedingsmiddelheader().Setcategorie(vmdefinities[i]->GetCategory().Get());
-        if (!vmdefinities[i]->GetMerk().Get().empty())
-            xmlvmdefinitie->GetVoedingsmiddelheader().Setmerk(vmdefinities[i]->GetMerk().Get());
+        if (!vmdefinities[i]->GetCategory().empty())
+            xmlvmdefinitie->GetVoedingsmiddelheader().Setcategorie(vmdefinities[i]->GetCategory());
+        if (!vmdefinities[i]->GetMerk().empty())
+            xmlvmdefinitie->GetVoedingsmiddelheader().Setmerk(vmdefinities[i]->GetMerk());
 
         if (vmdefinities[i]->IsCalculated())
         {
@@ -174,7 +173,7 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
             xmlvmdefinitie->Add(std::move(xmlpuntenper100));
         }
 
-        xmlvmdefinitie->GetVoedingsmiddelheader().Setunit(vmdefinities[i]->GetUnit().GetName());
+        xmlvmdefinitie->GetVoedingsmiddelheader().Setunit(vmdefinities[i]->GetUnit());
         xmlvmdefinitie->Setfavoriet(vmdefinities[i]->IsFavourite()
                                     ? XmlVoedingsmiddeldef::favoriet::yes
                                     : XmlVoedingsmiddeldef::favoriet::no);
@@ -307,8 +306,8 @@ weight::Result XmlWriter::Create(const weight::Voedingsmiddel& aMiddel,
                              XmlVoedingsmiddel& anXmlMiddel)
 {
     anXmlMiddel.Setnaam(aMiddel.GetName());
-    anXmlMiddel.Setcategorie(aMiddel.GetCategory().Get());
-    anXmlMiddel.Setunit(aMiddel.GetUnit().GetName());
+    anXmlMiddel.Setcategorie(aMiddel.GetCategory());
+    anXmlMiddel.Setunit(aMiddel.GetUnit());
 
     XmlLotCreateVisitor visitor(*this, anXmlMiddel);
     const_cast<weight::Voedingsmiddel&>(aMiddel).GetLot().Accept(visitor);
