@@ -23,7 +23,7 @@ class VMDefBase;
 class VMDefinitie: public Entity<VMDefinitie>
 {
 public:
-    VMDefinitie(const PointsCalculator& aCalculator,
+    VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
                 const std::tstring& aName,
                 const Unit& aUnit,
                 std::unique_ptr<VMDefBase> aDefinition);
@@ -77,7 +77,7 @@ private:
     bool                      mFavourite;
 
     // Can calculate the amount of points based upon the strategy used
-    const PointsCalculator& mCalculator;
+    std::shared_ptr<PointsCalculator> m_calculator;
     // A voedingsmiddel definition can either be fixed (x points for any amount)
     // or calculated based upon the kcal, fat, protein etc.
     std::unique_ptr<VMDefBase> mPoints;
@@ -107,7 +107,7 @@ public:
 class CalculatedVMDef: public VMDefBase, public Entity<CalculatedVMDef>
 {
 public:
-    explicit CalculatedVMDef(const PointsCalculator& aCalculator);
+    explicit CalculatedVMDef(std::shared_ptr<weight::PointsCalculator> calculator);
     CalculatedVMDef(const CalculatedVMDef&);
     CalculatedVMDef& operator=(const CalculatedVMDef&);
 
@@ -116,7 +116,7 @@ public:
     // VMDefBase
     void Accept(VoedingsMiddelDefinitionVisitor& visitor) override;
     const FoodParameters& GetParameters() const noexcept { return mParameters; }
-    double GetPointsPer100Units() const override { return mCalculator.GetPointsPer100Units(mParameters); }
+    double GetPointsPer100Units() const override { return m_calculator->GetPointsPer100Units(mParameters); }
 
     bool              IsCalculated() const noexcept override { return true; }
     CalculatedVMDef* GetCalculatedVMDef() noexcept override { return this; }
@@ -142,7 +142,7 @@ public:
 
 private:
 
-    const PointsCalculator& mCalculator;
+    std::shared_ptr<weight::PointsCalculator> m_calculator;
     FoodParameters mParameters;
 };
 

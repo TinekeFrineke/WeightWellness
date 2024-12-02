@@ -9,6 +9,7 @@
 #include "PortieNaam.h"
 #include "GerechtDefinitie.h"
 #include "ReceptDefinitie.h"
+#include "Repository.h"
 #include "VoedingsmiddelDefinitie.h"
 #include "Week.h"
 
@@ -19,14 +20,15 @@ namespace weight
 Model::Model()
     : mStrategyType(STRATEGY_TYPE::KCal)
 {
-    mCalculator.SetStrategy(STRATEGY_TYPE::KCal);
+    m_brands = std::make_shared<Repository>();
+    m_categories = std::make_unique<Repository>();
+    m_units = std::make_shared<Repository>();
+    m_portions = std::make_shared<Repository>();
+    m_calculator->SetStrategy(STRATEGY_TYPE::KCal);
 }
 
 
-Model::~Model()
-{
-    //Clear();
-}
+Model::~Model() = default;
 
 
 void Model::SetStrategy(STRATEGY_TYPE eType)
@@ -35,7 +37,7 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
         return;
 
     mStrategyType = eType;
-    mCalculator.SetStrategy(eType);
+    m_calculator->SetStrategy(eType);
     if (GetActivePersonalia() != NULL)
         GetActivePersonalia()->SetStrategy(eType);
 
@@ -53,7 +55,7 @@ void Model::Clear()
     mVMDefinities.clear();
     mGerechtDefinities.clear();
     mReceptDefinities.clear();
-    mUnits.clear();
+    m_units->Clear();
 }
 
 
@@ -92,25 +94,37 @@ ReceptDefinitie* Model::FindReceptDefinitie(const std::tstring& aName)
     return NULL;
 }
 
-
-bool Model::Add(const Unit& aUnit)
+std::vector<std::wstring> Model::GetUnits() const
 {
-    for (size_t i = 0; i < mUnits.size(); ++i)
-    {
-        if (mUnits[i].GetName() == aUnit.GetName())
-            return false;
-    }
+    return m_units->Get();
+}
 
-    mUnits.push_back(aUnit);
-    return true;
+std::vector<std::wstring> Model::GetCategories() const
+{
+    return m_categories->Get();
+}
+
+std::vector<std::wstring> Model::GetBrands() const
+{
+    return m_brands->Get();
+}
+
+std::vector<std::wstring> Model::GetPortions() const
+{
+    return m_portions->Get();
 }
 
 
+void Model::AddUnit(const std::wstring& aUnit)
+{
+    m_units->Add(aUnit);
+}
+
 bool Model::Add(std::unique_ptr<Week> aWeek)
 {
-    for (size_t i = 0; i < mWeeks.size(); ++i)
+    for (const auto& week: mWeeks)
     {
-        if (mWeeks[i]->GetStartDate() == aWeek->GetStartDate())
+        if (week->GetStartDate() == aWeek->GetStartDate())
         {
             TCHAR smsg[1024];
             _stprintf_s(smsg, _T("Could not add week with startdate %s\n"), ToString(aWeek->GetStartDate()).c_str());
@@ -137,7 +151,8 @@ bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
         }
     }
 
-    Add(aDefinitie->GetCategory());
+    AddUnit(aDefinitie->GetUnit().GetName());
+    AddCategory(aDefinitie->GetCategory().Get());
     mVMDefinities.push_back(std::move(aDefinitie));
     return true;
 }
@@ -179,15 +194,15 @@ bool Model::Add(std::unique_ptr<GerechtDefinitie> aGerechtDef)
 }
 
 
-bool Model::Add(const PortieNaam& aOmschrijving)
-{
-    for (size_t i = 0; i < mPortieNamen.size(); ++i)
-        if (mPortieNamen[i].Get() == aOmschrijving.Get())
-            return false;
-
-    mPortieNamen.push_back(aOmschrijving);
-    return true;
-}
+//bool Model::Add(const PortieNaam& aOmschrijving)
+//{
+//    for (size_t i = 0; i < mPortieNamen.size(); ++i)
+//        if (mPortieNamen[i].Get() == aOmschrijving.Get())
+//            return false;
+//
+//    mPortieNamen.push_back(aOmschrijving);
+//    return true;
+//}
 
 
 bool Model::Add(std::unique_ptr<Personalia> aPersonalia)
@@ -203,31 +218,15 @@ bool Model::Add(std::unique_ptr<Personalia> aPersonalia)
 }
 
 
-bool Model::Add(const CategorieNaam& aCategory)
+void Model::AddCategory(const std::wstring& aCategory)
 {
-    if (aCategory.Get().empty())
-        return false;
-
-    for (size_t i = 0; i < mCategorieNamen.size(); ++i)
-        if (mCategorieNamen[i] == aCategory)
-            return false;
-
-    mCategorieNamen.push_back(aCategory);
-    return true;
+    m_categories->Add(aCategory);
 }
 
 
-bool Model::Add(const MerkNaam& aMerk)
+void Model::AddBrand(const std::wstring& brand)
 {
-    if (aMerk.Get().empty())
-        return false;
-
-    for (size_t i = 0; i < mMerkNamen.size(); ++i)
-        if (mMerkNamen[i] == aMerk)
-            return false;
-
-    mMerkNamen.push_back(aMerk);
-    return true;
+    m_brands->Add(brand);
 }
 
 

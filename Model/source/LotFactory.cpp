@@ -15,8 +15,8 @@ namespace {
 class VMDefLotVisitor: public VoedingsMiddelDefinitionVisitor
 {
 public:
-    VMDefLotVisitor(const PointsCalculator& aCalculator, Portie& aPortie)
-        : m_calculator(aCalculator)
+    VMDefLotVisitor(std::shared_ptr<PointsCalculator> calculator, Portie& aPortie)
+        : m_calculator(std::move(calculator))
         , m_portie(aPortie)
     {}
 
@@ -43,15 +43,15 @@ private:
         m_createdLot = std::move(flot);
     }
 
-    const PointsCalculator& m_calculator;
+    std::shared_ptr<PointsCalculator> m_calculator;
     Portie& m_portie;
     std::unique_ptr<PortionedLot> m_createdLot;
 };
 
 }
 
-LotFactory::LotFactory(const PointsCalculator& aCalculator) noexcept
-    : m_calculator(aCalculator)
+LotFactory::LotFactory(std::shared_ptr<PointsCalculator> calculator) noexcept
+    : m_calculator(calculator)
 {
 }
 

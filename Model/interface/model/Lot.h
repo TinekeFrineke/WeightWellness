@@ -56,12 +56,12 @@ private:
 class CalculatedLot: public PortionedLot
 {
 public:
-    CalculatedLot(const PointsCalculator& aCalculator, const Portie& aPortie)
-        : PortionedLot(aPortie),
-        mCalculator(aCalculator) {}
+    CalculatedLot(std::shared_ptr<PointsCalculator> calculator, const Portie& aPortie)
+        : PortionedLot(aPortie)
+        , m_calculator(std::move(calculator)) {}
 
     const FoodParameters& GetParameters() const { return mParameters; }
-    double                  GetPointsPer100Units() const { return mCalculator.GetPointsPer100Units(mParameters); }
+    double                  GetPointsPer100Units() const { return m_calculator->GetPointsPer100Units(mParameters); }
     double                  GetKCalPer100Units() const { return mParameters.GetKCalPer100Units(); }
     double                  GetVetPer100Units() const { return mParameters.GetVetPer100Units(); }
     double                  GetEiwitPer100Units() const { return mParameters.GetEiwitPer100Units(); }
@@ -83,16 +83,16 @@ public:
     virtual CalculatedLot* GetCalculatedLot() { return this; }
 
 protected:
-    const PointsCalculator& GetCalculator() const { return mCalculator; }
-    FoodParameters& GetFoodParameters() { return mParameters; }
-    const FoodParameters& GetFoodParameters() const { return mParameters; }
+    PointsCalculator& GetCalculator() const noexcept { return *m_calculator; }
+    FoodParameters& GetFoodParameters() noexcept { return mParameters; }
+    const FoodParameters& GetFoodParameters() const noexcept { return mParameters; }
 
 private:
-    CalculatedLot(const CalculatedLot&);
-    CalculatedLot& operator=(const CalculatedLot&);
+    CalculatedLot(const CalculatedLot&) = delete;
+    CalculatedLot& operator=(const CalculatedLot&) = delete;
 
     FoodParameters          mParameters;
-    const PointsCalculator& mCalculator;
+    std::shared_ptr<PointsCalculator> m_calculator;
 };
 
 

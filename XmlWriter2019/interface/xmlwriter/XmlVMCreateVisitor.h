@@ -35,8 +35,8 @@ class XmlVoedingsmiddeldef;
 class CreateLotFromVMDef/* : public weight::VMDefVisitor*/
 {
 public:
-    CreateLotFromVMDef(const weight::PointsCalculator& aCalculator)
-        : mCalculator(aCalculator)
+    CreateLotFromVMDef(std::shared_ptr<weight::PointsCalculator> calculator)
+        : m_calculator(calculator)
     {
     }
 
@@ -47,7 +47,7 @@ private:
     CreateLotFromVMDef(const CreateLotFromVMDef&) = delete;
     CreateLotFromVMDef& operator=(const CreateLotFromVMDef&) = delete;
 
-    const weight::PointsCalculator& mCalculator;
+    std::shared_ptr<weight::PointsCalculator> m_calculator;
 };
 
 } // namespace ww2019

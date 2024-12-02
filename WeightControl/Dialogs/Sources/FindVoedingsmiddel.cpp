@@ -15,22 +15,6 @@
 // CFindVoedingsmiddel dialog
 
 namespace {
-std::vector<std::wstring> CategoryNames(const weight::Model& model)
-{
-    std::vector<std::wstring> names;
-    for (auto category : model.GetCategorieNamen())
-        names.push_back(category.Get());
-
-    return names;
-}
-std::vector<std::wstring> BrandNames(const weight::Model& model)
-{
-    std::vector<std::wstring> names;
-    for (auto brand : model.GetMerkNamen())
-        names.push_back(brand.Get());
-
-    return names;
-}
 std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
 {
     std::vector<weight::VMDefinitie*> definitions;
@@ -47,8 +31,8 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
                                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindVoedingsmiddel::IDD, pParent)
     , mItemList(Definitions(aModel))
-    , mCategorieBox(CategoryNames(aModel))
-    , mMerkBox(BrandNames(aModel), true)
+    , mCategorieBox(aModel.GetCategories())
+    , mMerkBox(aModel.GetBrands(), true)
     , mFood(nullptr)
     , mState(nullptr)
     , m_lotFactory(std::move(lotFactory))

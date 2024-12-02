@@ -168,7 +168,7 @@ weight::Result XmlReader::ReadUnits(const std::tstring& aDirectory)
             return weight::Result::Ok;
         const auto& units(xmlunits->GetUnitList());
         for (size_t i = 0; i < units.size(); ++i)
-            mModel.Add(weight::Unit(mModel, units[i]->Getnaam()));
+            mModel.AddUnit(units[i]->Getnaam());
 
         return weight::Result::Ok;
     }

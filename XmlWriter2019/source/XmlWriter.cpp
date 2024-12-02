@@ -119,20 +119,18 @@ weight::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
 
 weight::Result XmlWriter::WriteUnits(const std::tstring& aFilename)
 {
-    XmlUnits* xmlunits = new XmlUnits;
+    XmlUnits xmlunits;
 
     const auto& units = mModel.GetUnits();
-    for (size_t i = 0; i < units.size(); ++i)
+    for (auto unit : units)
     {
-        auto unit = std::make_unique<XmlUnit>();
-        unit->Setnaam(units[i].GetName());
-        xmlunits->Add(std::move(unit));
+        auto xmlUnit = std::make_unique<XmlUnit>();
+        xmlUnit->Setnaam(unit);
+        xmlunits.Add(std::move(xmlUnit));
     }
 
     XmlUnitsWriter writer;
-    writer.Write(aFilename, *xmlunits);
-
-    delete xmlunits;
+    writer.Write(aFilename, xmlunits);
 
     return weight::Result::Ok;
 }

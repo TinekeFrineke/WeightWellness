@@ -17,11 +17,11 @@ int   Entity<CalculatedVMDef>::mNumberOfInstances = 0;
 int   Entity<FixedVMDef>::mNumberOfInstances = 0;
 
 
-VMDefinitie::VMDefinitie(const PointsCalculator& aCalculator,
+VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
                          const std::tstring& aName,
                          const Unit& aUnit,
                          std::unique_ptr<VMDefBase> aDefinition)
-    : mCalculator(aCalculator),
+    : m_calculator(std::move(calculator)),
     mName(aName),
     mUnit(aUnit),
     mFavourite(false),
@@ -35,7 +35,7 @@ VMDefinitie::VMDefinitie(const PointsCalculator& aCalculator,
 
 
 VMDefinitie::VMDefinitie(const VMDefinitie& aDefinitie)
-    : mCalculator(aDefinitie.mCalculator),
+    : m_calculator(aDefinitie.m_calculator),
     mCategory(aDefinitie.mCategory),
     mMerk(aDefinitie.mMerk),
     mName(aDefinitie.mName),
@@ -149,7 +149,7 @@ void VMDefinitie::SetCalculated(const FoodParameters& oParameters)
     if (mPoints->IsCalculated())
         return;
 
-    auto def = std::make_unique<CalculatedVMDef>(mCalculator);
+    auto def = std::make_unique<CalculatedVMDef>(m_calculator);
     def->SetParameters(oParameters);
     mPoints = std::move(def);
 }
@@ -166,8 +166,8 @@ void VMDefinitie::SetFixed()
 }
 
 
-CalculatedVMDef::CalculatedVMDef(const PointsCalculator& aCalculator)
-    : mCalculator(aCalculator)
+CalculatedVMDef::CalculatedVMDef(std::shared_ptr<PointsCalculator> calculator)
+    : m_calculator(calculator)
 {
 #ifdef FIND_LEAKS
     Register();
@@ -176,8 +176,8 @@ CalculatedVMDef::CalculatedVMDef(const PointsCalculator& aCalculator)
 
 
 CalculatedVMDef::CalculatedVMDef(const CalculatedVMDef& aVMDef)
-    : VMDefBase(aVMDef),
-    mCalculator(aVMDef.mCalculator),
+    : VMDefBase(aVMDef)
+    , m_calculator(aVMDef.m_calculator),
     mParameters(aVMDef.mParameters)
 {
 #ifdef FIND_LEAKS

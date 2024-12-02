@@ -10,9 +10,7 @@
 
 namespace weight
 {
-class Model;
 class Portie;
-class VMDefinitie;
 }
 
 
@@ -48,8 +46,6 @@ public:
     void SetPorties(const std::vector<std::reference_wrapper<weight::Portie>>& aPortieList);
 
     PortieListItem* GetSelectedItem();
-    //void SelectItem(weight::Portie& aPortie);
-    //void SelectItem(int iIndex);
 
     void Update(PortieListItem* anItem);
 

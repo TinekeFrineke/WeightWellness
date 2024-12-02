@@ -43,7 +43,7 @@ weight::PortionedLot* CreateLotFromVMDef::Create(weight::VMDefinitie& aDefinitie
     {
         weight::CalculatedVMDef* def = aDefinitie.GetCalculatedVMDef();
         assert(def != NULL);
-        weight::CalculatedLot* clot = new weight::CalculatedLot(mCalculator, aPortie);
+        weight::CalculatedLot* clot = new weight::CalculatedLot(m_calculator, aPortie);
         clot->SetParameters(def->GetParameters());
         lot = clot;
     }

@@ -12,7 +12,7 @@ CategorieNaam::CategorieNaam(Model& aModel, const std::tstring& aName)
     : Naam(aName)
 {
     if (!aName.empty())
-        aModel.Add(*this);
+        aModel.AddCategory(aName);
 }
 
 } // namespace weight

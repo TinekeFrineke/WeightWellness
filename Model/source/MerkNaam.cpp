@@ -12,7 +12,7 @@ MerkNaam::MerkNaam(Model& aModel, const std::tstring& aName)
     : Naam(aName)
 {
     if (!aName.empty())
-        aModel.Add(*this);
+        aModel.AddBrand(aName);
 }
 
 

@@ -20,6 +20,7 @@ namespace weight
 {
 class CalculatedVMDef;
 class FixedVMDef;
+class VMDefinitie;
 }
 
 class CEditFoodDefDialog: public CDialog
@@ -29,6 +30,7 @@ class CEditFoodDefDialog: public CDialog
 public:
     CEditFoodDefDialog(weight::Model& aModel,
                        weight::VMDefinitie* aDefinitie,
+                       std::shared_ptr<weight::PointsCalculator> calculator,
                        CWnd* pParent = NULL);   // standard constructor
     virtual ~CEditFoodDefDialog();
 
@@ -58,6 +60,7 @@ protected:
     afx_msg void OnCbnSelchangeUnit();
     afx_msg void OnCbnEditchangeUnit();
     afx_msg void OnBnClickedCheckFavourite();
+    afx_msg void OnNMDblclkPortie(NMHDR* pNMHDR, LRESULT* pResult);
 
 private:
     void                      FillStatics();
@@ -104,6 +107,5 @@ private:
     weight::Model& mModel;
 
     std::vector<std::unique_ptr<weight::Portie>> mOriginalPorties;
-public:
-    afx_msg void OnNMDblclkPortie(NMHDR* pNMHDR, LRESULT* pResult);
+    std::shared_ptr<weight::PointsCalculator> m_calculator;
 };

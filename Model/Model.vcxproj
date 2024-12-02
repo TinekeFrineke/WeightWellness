@@ -101,6 +101,7 @@
     <ClInclude Include="interface\model\Gerecht.h" />
     <ClInclude Include="interface\model\GerechtDefinitie.h" />
     <ClInclude Include="interface\model\IObserver.h" />
+    <ClInclude Include="interface\model\IRepository.h" />
     <ClInclude Include="interface\model\ISubject.h" />
     <ClInclude Include="interface\model\Item.h" />
     <ClInclude Include="interface\model\Lot.h" />
@@ -117,6 +118,7 @@
     <ClInclude Include="interface\model\PortieNaam.h" />
     <ClInclude Include="interface\model\Recept.h" />
     <ClInclude Include="interface\model\ReceptDefinitie.h" />
+    <ClInclude Include="interface\model\Repository.h" />
     <ClInclude Include="interface\model\Subject.h" />
     <ClInclude Include="interface\model\Unit.h" />
     <ClInclude Include="interface\model\Voedingsmiddel.h" />
@@ -143,6 +145,7 @@
     <ClCompile Include="source\PortieNaam.cpp" />
     <ClCompile Include="source\Recept.cpp" />
     <ClCompile Include="source\ReceptDefinitie.cpp" />
+    <ClCompile Include="source\Repository.cpp" />
     <ClCompile Include="source\Subject.cpp" />
     <ClCompile Include="source\Unit.cpp" />
     <ClCompile Include="source\Voedingsmiddel.cpp" />

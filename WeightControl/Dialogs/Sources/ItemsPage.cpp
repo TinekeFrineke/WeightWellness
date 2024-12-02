@@ -13,22 +13,6 @@
 #include ".\itemspage.h"
 
 namespace {
-std::vector<std::wstring> CategoryNames(const weight::Model& model)
-{
-    std::vector<std::wstring> names;
-    for (auto category : model.GetCategorieNamen())
-        names.push_back(category.Get());
-
-    return names;
-}
-std::vector<std::wstring> BrandNames(const weight::Model& model)
-{
-    std::vector<std::wstring> names;
-    for (auto brand : model.GetMerkNamen())
-        names.push_back(brand.Get());
-
-    return names;
-}
 std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
 {
     std::vector<weight::VMDefinitie*> definitions;
@@ -44,8 +28,8 @@ IMPLEMENT_DYNAMIC(CItemsPage, CDialog)
 CItemsPage::CItemsPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CItemsPage::IDD, pParent)
     , mModel(aModel)
-    , mCategory(CategoryNames(aModel))
-    , mMerk(BrandNames(aModel), true)
+    , mCategory(aModel.GetCategories())
+    , mMerk(aModel.GetBrands(), true)
     , mItemsList(Definitions(aModel))
     , mUpdatingFilter(false)
 {
@@ -100,7 +84,7 @@ BOOL CItemsPage::OnInitDialog()
 
 void CItemsPage::OnBnClickedAdd()
 {
-    CEditFoodDefDialog dialog(mModel, nullptr, this);
+    CEditFoodDefDialog dialog(mModel, nullptr, mModel.GetCalculator(), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
@@ -132,7 +116,7 @@ void CItemsPage::EditItem()
 {
     VMDefinitiesListItem* item = mItemsList.GetSelectedItem();
     if (item != nullptr) {
-        CEditFoodDefDialog dlg(mModel, item->GetItem(), this);
+        CEditFoodDefDialog dlg(mModel, item->GetItem(), mModel.GetCalculator(), this);
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
         {

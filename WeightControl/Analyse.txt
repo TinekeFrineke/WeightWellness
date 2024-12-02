@@ -1,3 +1,14 @@
+CEditFoodDefDialog::mModel:
+
+* Setting Unit
+* Setting Category
+* Setting Brand
+* mModel.GetCalculator()
+* Unit constructor
+* mModel.FindVoedingsmiddelDefinitie(name)
+* mModel.Add(definition)
+
+
 Flexipoints: mSterrePortie (sterreportie: 3 sterretjes per dag) wordt niet meer ondersteund; moet een bestaande portie zijn
 FlexiPoints: mHasFreeFPPortion (vrije portie, in xml "vrijeportie")
                                 met vrijepunten
