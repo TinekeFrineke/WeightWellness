@@ -23,6 +23,7 @@ Model::Model()
     , m_units(std::make_shared<Repository>())
     , m_categories(std::make_shared<Repository>())
     , m_brands(std::make_shared<Repository>())
+    , m_calculator(std::make_shared< PointsCalculator>())
 {
     m_calculator->SetStrategy(STRATEGY_TYPE::KCal);
 }
@@ -124,11 +125,12 @@ bool Model::Add(std::unique_ptr<Week> aWeek)
 
 bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
 {
+    auto definition(aDefinitie.get());
     if (!m_foodDefinitions->Add(std::move(aDefinitie)))
         return false;
 
-    AddUnit(aDefinitie->GetUnit());
-    AddCategory(aDefinitie->GetCategory());
+    AddUnit(definition->GetUnit());
+    AddCategory(definition->GetCategory());
     return true;
 }
 

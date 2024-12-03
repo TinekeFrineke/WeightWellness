@@ -164,16 +164,13 @@ void CDiaryPage::OnBnClickedAddFood()
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
-        if (dialog.ExtractVoedingsMiddel() != nullptr)
+        auto food = dialog.ExtractVoedingsMiddel();
+        if (food != nullptr)
         {
-            mDay->Add(dialog.ExtractVoedingsMiddel());
+            mDay->Add(std::move(food));
             mItemList.View(mDay);
             UpdatePointsLeft();
         }
-    }
-    else
-    {
-        auto vm(dialog.ExtractVoedingsMiddel());
     }
 }
 
