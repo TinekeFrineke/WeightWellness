@@ -57,7 +57,7 @@ private:
     weight::Result WriteUnits(const std::tstring & aFilename);
     weight::Result WriteVoedingsmiddelDefinities(const std::tstring & aFilename);
     weight::Result WriteRecepten(const std::tstring & aFilename);
-    weight::Result WriteGerechten(const std::tstring & aFilename);
+    //weight::Result WriteGerechten(const std::tstring & aFilename);
     weight::Result WriteWeeks(const std::tstring & aDirectory);
 
     weight::Result Write(weight::Week & aWeek, const std::tstring & aFilename);

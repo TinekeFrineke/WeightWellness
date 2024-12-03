@@ -35,6 +35,8 @@
 #include "generated/XmlWeekWriter.h"
 
 #include "model/Day.h"
+#include "model/IFoodDefinitionRepository.h"
+#include "model/IRepository.h"
 #include "model/ManualItem.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
@@ -62,8 +64,8 @@ weight::Result XmlWriter::Write(const std::tstring& aDirectory)
         result = WriteVoedingsmiddelDefinities(aDirectory + _T("\\voedingsmiddeldefinities.xml"));
     if (result == weight::Result::Ok)
         result = WriteRecepten(aDirectory + _T("\\recepten.xml"));
-    if (result == weight::Result::Ok)
-        result = WriteGerechten(aDirectory + _T("\\restaurantgerechten.xml"));
+    //if (result == weight::Result::Ok)
+    //    result = WriteGerechten(aDirectory + _T("\\restaurantgerechten.xml"));
     if (result == weight::Result::Ok)
         result = WriteWeeks(aDirectory);
 
@@ -120,7 +122,7 @@ weight::Result XmlWriter::WriteUnits(const std::tstring& aFilename)
 {
     XmlUnits xmlunits;
 
-    const auto& units = mModel.GetUnits();
+    const auto units = mModel.GetUnitRepository()->Get();
     for (auto unit : units)
     {
         auto xmlUnit = std::make_unique<XmlUnit>();
@@ -139,7 +141,7 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
 {
     auto xmlvmdefinities = std::make_unique<XmlVoedingsmiddeldefs>();
 
-    const auto& vmdefinities = mModel.GetVoedingsmiddelDefinities();
+    auto vmdefinities = mModel.GetFoodDefinitionRepository()->GetAll();
     for (size_t i = 0; i < vmdefinities.size(); ++i)
     {
         auto xmlvmdefinitie = std::make_unique<XmlVoedingsmiddeldef>();
@@ -223,23 +225,23 @@ weight::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
 }
 
 
-weight::Result XmlWriter::WriteGerechten(const std::tstring& aFilename)
-{
-    XmlGerechtdefs* xmlgerechten = new XmlGerechtdefs;
-
-    const auto& restaurantgerechten = mModel.GetGerechtDefs();
-    for (size_t i = 0; i < restaurantgerechten.size(); ++i)
-    {
-        auto restaurantgerecht = std::make_unique<XmlGerechtdef>();
-        restaurantgerecht->Setnaam(restaurantgerechten[i]->GetName());
-        xmlgerechten->Add(std::move(restaurantgerecht));
-    }
-
-    XmlGerechtdefsWriter xmlwriter;
-    xmlwriter.Write(aFilename, *xmlgerechten);
-    delete xmlgerechten;
-    return weight::Result::Ok;
-}
+//weight::Result XmlWriter::WriteGerechten(const std::tstring& aFilename)
+//{
+//    XmlGerechtdefs* xmlgerechten = new XmlGerechtdefs;
+//
+//    const auto& restaurantgerechten = mModel.GetGerechtDefs();
+//    for (size_t i = 0; i < restaurantgerechten.size(); ++i)
+//    {
+//        auto restaurantgerecht = std::make_unique<XmlGerechtdef>();
+//        restaurantgerecht->Setnaam(restaurantgerechten[i]->GetName());
+//        xmlgerechten->Add(std::move(restaurantgerecht));
+//    }
+//
+//    XmlGerechtdefsWriter xmlwriter;
+//    xmlwriter.Write(aFilename, *xmlgerechten);
+//    delete xmlgerechten;
+//    return weight::Result::Ok;
+//}
 
 
 weight::Result XmlWriter::WriteWeeks(const std::tstring& aDirectory)

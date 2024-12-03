@@ -5,20 +5,20 @@ namespace weight {
 
 std::vector<std::wstring> Repository::Get() const
 {
-    return m_units;
+    return m_elements;
 }
 
-void Repository::Add(const std::wstring& unit)
+void Repository::Add(const std::wstring& element)
 {
-    if (std::find(m_units.begin(), m_units.end(), unit) != m_units.end())
+    if (element.empty() || std::find(m_elements.begin(), m_elements.end(), element) != m_elements.end())
         return;
 
-    m_units.push_back(unit);
+    m_elements.push_back(element);
 }
 
 void Repository::Clear()
 {
-    m_units.clear();
+    m_elements.clear();
 }
 
 } // namespace weight

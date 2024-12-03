@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)Generated2019\Interface\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;$(ProjectDir)interface\model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;CRTDBG_MAP_ALLOC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -73,7 +73,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Generated2019\Interface\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;$(ProjectDir)interface\model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -94,12 +94,17 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\FoodDefinitionRepository.h" />
+    <ClInclude Include="header\RecipeRepository.h" />
+    <ClInclude Include="header\UniqueRepository.h" />
     <ClInclude Include="interface\model\BonusPointsMap.h" />
     <ClInclude Include="interface\model\Day.h" />
     <ClInclude Include="interface\model\Entity.h" />
     <ClInclude Include="interface\model\Gerecht.h" />
     <ClInclude Include="interface\model\GerechtDefinitie.h" />
+    <ClInclude Include="interface\model\IFoodDefinitionRepository.h" />
     <ClInclude Include="interface\model\IObserver.h" />
+    <ClInclude Include="interface\model\IRecipeRepository.h" />
     <ClInclude Include="interface\model\IRepository.h" />
     <ClInclude Include="interface\model\ISubject.h" />
     <ClInclude Include="interface\model\Item.h" />
@@ -128,6 +133,7 @@
     <ClCompile Include="source\BonusPointsMap.cpp" />
     <ClCompile Include="source\Day.cpp" />
     <ClCompile Include="source\Entity.cpp" />
+    <ClCompile Include="source\FoodDefinitionRepository.cpp" />
     <ClCompile Include="source\Gerecht.cpp" />
     <ClCompile Include="source\Lot.cpp" />
     <ClCompile Include="source\LotFactory.cpp" />
@@ -138,6 +144,7 @@
     <ClCompile Include="source\Portie.cpp" />
     <ClCompile Include="source\Recept.cpp" />
     <ClCompile Include="source\ReceptDefinitie.cpp" />
+    <ClCompile Include="source\RecipeRepository.cpp" />
     <ClCompile Include="source\Repository.cpp" />
     <ClCompile Include="source\Subject.cpp" />
     <ClCompile Include="source\Voedingsmiddel.cpp" />

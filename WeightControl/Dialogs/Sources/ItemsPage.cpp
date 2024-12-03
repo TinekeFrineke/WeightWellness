@@ -8,17 +8,12 @@
 
 #include "EditFoodDefDialog.h"
 
+#include "model/IFoodDefinitionRepository.h"
+#include "model/IRepository.h"
 #include "model/VoedingsmiddelDefinitie.h"
 #include ".\itemspage.h"
 
 namespace {
-std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
-{
-    std::vector<weight::VMDefinitie*> definitions;
-    for (auto& definition : model.GetVoedingsmiddelDefinities())
-        definitions.push_back(definition.get());
-    return definitions;
-}
 }
 
 // CItemsPage dialog
@@ -27,9 +22,9 @@ IMPLEMENT_DYNAMIC(CItemsPage, CDialog)
 CItemsPage::CItemsPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CItemsPage::IDD, pParent)
     , mModel(aModel)
-    , mCategory(aModel.GetCategories())
-    , mMerk(aModel.GetBrands(), true)
-    , mItemsList(Definitions(aModel))
+    , mCategory(aModel.GetCategoryRepository()->Get())
+    , mMerk(aModel.GetBrandRepository()->Get(), true)
+    , mItemsList(aModel.GetFoodDefinitionRepository()->GetAll())
     , mUpdatingFilter(false)
 {
 }
@@ -83,7 +78,7 @@ BOOL CItemsPage::OnInitDialog()
 
 void CItemsPage::OnBnClickedAdd()
 {
-    CEditFoodDefDialog dialog(mModel, nullptr, mModel.GetCalculator(), this);
+    CEditFoodDefDialog dialog(mModel, mModel.GetUnitRepository(), mModel.GetCategoryRepository(), mModel.GetBrandRepository(), nullptr, mModel.GetCalculator(), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
@@ -115,7 +110,7 @@ void CItemsPage::EditItem()
 {
     VMDefinitiesListItem* item = mItemsList.GetSelectedItem();
     if (item != nullptr) {
-        CEditFoodDefDialog dlg(mModel, item->GetItem(), mModel.GetCalculator(), this);
+        CEditFoodDefDialog dlg(mModel, mModel.GetUnitRepository(), mModel.GetCategoryRepository(), mModel.GetBrandRepository(), item->GetItem(), mModel.GetCalculator(), this);
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
         {

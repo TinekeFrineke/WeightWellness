@@ -7,6 +7,7 @@
 #include "WeightControl.h"
 #include ".\editfooddefdialog.h"
 #include "EditPortieDialog.h"
+#include "model/IRepository.h"
 #include "model/VoedingsmiddelDefinitie.h"
 #include "PortieEditor.h"
 
@@ -76,6 +77,9 @@ CreateListViewPorties(const std::vector<std::unique_ptr<weight::Portie>>& portie
 }
 
 CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
+                                       std::shared_ptr<weight::IRepository> units,
+                                       std::shared_ptr<weight::IRepository> categories,
+                                       std::shared_ptr<weight::IRepository> brands,
                                        weight::VMDefinitie* aDefinitie,
                                        std::shared_ptr<weight::PointsCalculator> calculator,
                                        CWnd* pParent /*=nullptr*/)
@@ -83,9 +87,9 @@ CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
     , mModel(aModel)
     , mDefinitieAbc(aDefinitie)
     , mChangedDefinitieAbc(nullptr)
-    , mUnitBox(aModel.GetUnits(), (aDefinitie ? aDefinitie->GetUnit().GetName() : _T("g")))
-    , mCategorie(aModel.GetCategories(), (aDefinitie ? aDefinitie->GetCategory().Get() : _T("")))
-    , mMerk(aModel.GetBrands(), false, (aDefinitie ? aDefinitie->GetMerk().Get() : _T("")))
+    , mUnitBox(units->Get(), (aDefinitie ? aDefinitie->GetUnit() : _T("g")))
+    , mCategorie(categories->Get(), (aDefinitie ? aDefinitie->GetCategory() : _T("")))
+    , mMerk(brands->Get(), false, (aDefinitie ? aDefinitie->GetMerk() : _T("")))
     , m_calculator(std::move(calculator))
 {
     if (mDefinitieAbc != nullptr) {
@@ -112,7 +116,7 @@ BOOL CEditFoodDefDialog::OnInitDialog()
     mName.SetReadOnly(mChangedDefinitieAbc != nullptr);
     mEenheden.SetValue(100);
 
-    std::tstring eenheden = mChangedDefinitieAbc == nullptr ? _T("eenheden") : mChangedDefinitieAbc->GetUnit().GetName().c_str();
+    std::tstring eenheden = mChangedDefinitieAbc == nullptr ? _T("eenheden") : mChangedDefinitieAbc->GetUnit().c_str();
 
     if (mChangedDefinitieAbc == nullptr)
     {
@@ -244,9 +248,9 @@ bool CEditFoodDefDialog::CreateCommonFoodParts()
 {
     assert(mChangedDefinitieAbc != nullptr);
 
-    mChangedDefinitieAbc->SetUnit(weight::Unit(mModel, mUnitBox.GetString()));
-    mChangedDefinitieAbc->SetCategory(weight::CategorieNaam(mModel, mCategorie.GetString()));
-    mChangedDefinitieAbc->SetMerk(weight::MerkNaam(mModel, mMerk.GetString()));
+    mChangedDefinitieAbc->SetUnit(mUnitBox.GetString());
+    mChangedDefinitieAbc->SetCategory(mCategorie.GetString());
+    mChangedDefinitieAbc->SetMerk(mMerk.GetString());
     return true;
 }
 
@@ -280,15 +284,15 @@ bool CEditFoodDefDialog::CreateCalculatedFood()
     double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
 
     weight::FoodParameters parameters(mKCalPer100.GetValue() * amountFactor,
-                                  mEiwitPer100.GetValue() * amountFactor,
-                                  mVetPer100.GetValue() * amountFactor,
-                                  mVezelsPer100.GetValue() * amountFactor,
-                                  mKoolhydratenPer100.GetValue() * amountFactor);
+                                      mEiwitPer100.GetValue() * amountFactor,
+                                      mVetPer100.GetValue() * amountFactor,
+                                      mVezelsPer100.GetValue() * amountFactor,
+                                      mKoolhydratenPer100.GetValue() * amountFactor);
     if (mChangedDefinitieAbc == nullptr)
     {
         auto vdef = std::make_unique<weight::CalculatedVMDef>(m_calculator);
         vdef->SetParameters(parameters);
-        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(m_calculator, name, weight::Unit(mModel, mUnitBox.GetString()), std::move(vdef));
+        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(m_calculator, name, mUnitBox.GetString(), std::move(vdef));
     }
     else if (!mChangedDefinitieAbc->IsCalculated())
     {
@@ -327,7 +331,7 @@ bool CEditFoodDefDialog::CreateFixedFood()
     {
         auto vdef = std::make_unique<weight::FixedVMDef>();
         vdef->SetPointsPer100Units(mPuntenPer100.GetValue() * amountFactor);
-        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(mModel.GetCalculator(), name, weight::Unit(mModel, mUnitBox.GetString()), std::move(vdef));
+        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(m_calculator, name, mUnitBox.GetString(), std::move(vdef));
     }
     else if (mChangedDefinitieAbc->IsFixed())
     {

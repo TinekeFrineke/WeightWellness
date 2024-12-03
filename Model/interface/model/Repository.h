@@ -11,11 +11,11 @@ class Repository
 {
 public:
     std::vector<std::wstring> Get() const override;
-    void Add(const std::wstring& unit) override;
+    void Add(const std::wstring& element) override;
     void Clear() override;
 
 private:
-    std::vector<std::wstring> m_units;
+    std::vector<std::wstring> m_elements;
 
 };
 

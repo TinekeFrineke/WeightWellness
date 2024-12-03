@@ -20,6 +20,7 @@ namespace weight
 {
 class CalculatedVMDef;
 class FixedVMDef;
+class IRepository;
 class VMDefinitie;
 }
 
@@ -29,6 +30,9 @@ class CEditFoodDefDialog: public CDialog
 
 public:
     CEditFoodDefDialog(weight::Model& aModel,
+                       std::shared_ptr<weight::IRepository> units,
+                       std::shared_ptr<weight::IRepository> categories,
+                       std::shared_ptr<weight::IRepository> brands,
                        weight::VMDefinitie* aDefinitie,
                        std::shared_ptr<weight::PointsCalculator> calculator,
                        CWnd* pParent = NULL);   // standard constructor
@@ -105,6 +109,9 @@ private:
     std::unique_ptr<weight::VMDefinitie> mChangedDefinitieAbc;
     std::unique_ptr<weight::VMDefinitie> mDefinitieAbc;
     weight::Model& mModel;
+    std::shared_ptr<weight::IRepository> m_units;
+    std::shared_ptr<weight::IRepository> m_categories;
+    std::shared_ptr<weight::IRepository> m_brands;
 
     std::vector<std::unique_ptr<weight::Portie>> mOriginalPorties;
     std::shared_ptr<weight::PointsCalculator> m_calculator;

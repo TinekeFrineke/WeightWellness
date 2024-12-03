@@ -4,6 +4,7 @@
 #include <tchar.h>
 #include <assert.h>
 
+#include "FoodDefinitionRepository.h"
 #include "Lot.h"
 #include "Personalia.h"
 #include "GerechtDefinitie.h"
@@ -18,11 +19,11 @@ namespace weight
 
 Model::Model()
     : mStrategyType(STRATEGY_TYPE::KCal)
+    , m_foodDefinitions(std::make_shared<FoodDefinitionRepository>())
+    , m_units(std::make_shared<Repository>())
+    , m_categories(std::make_shared<Repository>())
+    , m_brands(std::make_shared<Repository>())
 {
-    m_brands = std::make_shared<Repository>();
-    m_categories = std::make_unique<Repository>();
-    m_units = std::make_shared<Repository>();
-    m_portions = std::make_shared<Repository>();
     m_calculator->SetStrategy(STRATEGY_TYPE::KCal);
 }
 
@@ -37,24 +38,13 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
 
     mStrategyType = eType;
     m_calculator->SetStrategy(eType);
-    if (GetActivePersonalia() != NULL)
+    if (GetActivePersonalia() != nullptr)
         GetActivePersonalia()->SetStrategy(eType);
 
     Week* week = FindWeek(Utils::Date::Today());
 
-    if (week != NULL)
+    if (week != nullptr)
         week->SetStrategy(eType, *this);
-}
-
-
-void Model::Clear()
-{
-    mPersonalia.clear();
-    mWeeks.clear();
-    mVMDefinities.clear();
-    mGerechtDefinities.clear();
-    mReceptDefinities.clear();
-    m_units->Clear();
 }
 
 
@@ -64,7 +54,7 @@ Week* Model::FindWeek(const Utils::Date& aDate)
         if (mWeeks[i]->Includes(aDate))
             return mWeeks[i].get();
 
-    return NULL;
+    return nullptr;
 }
 
 
@@ -76,43 +66,38 @@ bool Model::SetEndDate(Week& aWeek, const Utils::Date& aDate)
 
 VMDefinitie* Model::FindVoedingsmiddelDefinitie(const std::tstring& aName)
 {
-    for (size_t i = 0; i < mVMDefinities.size(); ++i)
-        if (mVMDefinities[i]->GetName() == aName)
-            return mVMDefinities[i].get();
-
-    return NULL;
+    return m_foodDefinitions->Find(aName);
 }
 
 
 ReceptDefinitie* Model::FindReceptDefinitie(const std::tstring& aName)
 {
-    for (size_t i = 0; i < mReceptDefinities.size(); ++i)
-        if (mReceptDefinities[i]->GetName() == aName)
-            return mReceptDefinities[i].get();
+    for (const auto& recipe : mReceptDefinities)
+        if (recipe->GetName() == aName)
+            return recipe.get();
 
-    return NULL;
+    return nullptr;
 }
 
-std::vector<std::wstring> Model::GetUnits() const
+std::shared_ptr<IRepository> Model::GetUnitRepository() const noexcept
 {
-    return m_units->Get();
+    return m_units;
 }
 
-std::vector<std::wstring> Model::GetCategories() const
+std::shared_ptr<IRepository> Model::GetCategoryRepository() const noexcept
 {
-    return m_categories->Get();
+    return m_categories;
 }
 
-std::vector<std::wstring> Model::GetBrands() const
+std::shared_ptr<IRepository> Model::GetBrandRepository() const noexcept
 {
-    return m_brands->Get();
+    return m_brands;
 }
 
-std::vector<std::wstring> Model::GetPortions() const
+std::shared_ptr<IFoodDefinitionRepository> Model::GetFoodDefinitionRepository() const noexcept
 {
-    return m_portions->Get();
+    return m_foodDefinitions;
 }
-
 
 void Model::AddUnit(const std::wstring& aUnit)
 {
@@ -139,20 +124,11 @@ bool Model::Add(std::unique_ptr<Week> aWeek)
 
 bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
 {
-    for (size_t i = 0; i < mVMDefinities.size(); ++i)
-    {
-        if (mVMDefinities[i]->GetName() == aDefinitie->GetName())
-        {
-            TCHAR smsg[1024];
-            _stprintf_s(smsg, _T("Could not add Voedingsmiddeldefinitie %s\n"), aDefinitie->GetName().c_str());
-            ::MessageBox(0, smsg, _T("ERROR"), MB_OK);
-            return false;
-        }
-    }
+    if (!m_foodDefinitions->Add(std::move(aDefinitie)))
+        return false;
 
     AddUnit(aDefinitie->GetUnit());
     AddCategory(aDefinitie->GetCategory());
-    mVMDefinities.push_back(std::move(aDefinitie));
     return true;
 }
 
@@ -173,35 +149,6 @@ bool Model::Add(std::unique_ptr<ReceptDefinitie> aReceptDef)
     mReceptDefinities.push_back(std::move(aReceptDef));
     return true;
 }
-
-
-bool Model::Add(std::unique_ptr<GerechtDefinitie> aGerechtDef)
-{
-    for (size_t i = 0; i < mGerechtDefinities.size(); ++i)
-    {
-        if (mGerechtDefinities[i]->GetName() == aGerechtDef->GetName())
-        {
-            TCHAR smsg[1024];
-            _stprintf_s(smsg, _T("Could not add duplicate Restaurantgerecht %s\n"), aGerechtDef->GetName().c_str());
-            ::MessageBox(0, smsg, _T("ERROR"), MB_OK);
-            return false;
-        }
-    }
-
-    mGerechtDefinities.push_back(std::move(aGerechtDef));
-    return true;
-}
-
-
-//bool Model::Add(const PortieNaam& aOmschrijving)
-//{
-//    for (size_t i = 0; i < mPortieNamen.size(); ++i)
-//        if (mPortieNamen[i].Get() == aOmschrijving.Get())
-//            return false;
-//
-//    mPortieNamen.push_back(aOmschrijving);
-//    return true;
-//}
 
 
 bool Model::Add(std::unique_ptr<Personalia> aPersonalia)
@@ -229,22 +176,13 @@ void Model::AddBrand(const std::wstring& brand)
 }
 
 
-bool Model::Remove(VMDefinitie* aDefinitie)
+bool Model::Remove(const VMDefinitie* aDefinitie)
 {
-    for (auto iter = mVMDefinities.begin(); iter != mVMDefinities.end(); ++iter)
-    {
-        if (iter->get() == aDefinitie)
-        {
-            mVMDefinities.erase(iter);
-            return true;
-        }
-    }
-
-    return false;
+    return aDefinitie != nullptr && m_foodDefinitions->Remove(aDefinitie->GetName());
 }
 
 
-bool Model::Remove(ReceptDefinitie* aReceptDef)
+bool Model::Remove(const ReceptDefinitie* aReceptDef)
 {
     for (auto iter = mReceptDefinities.begin();
          iter != mReceptDefinities.end();
@@ -261,24 +199,7 @@ bool Model::Remove(ReceptDefinitie* aReceptDef)
 }
 
 
-bool Model::Remove(GerechtDefinitie* aGerechtDef)
-{
-    for (auto iter = mGerechtDefinities.begin();
-         iter != mGerechtDefinities.end();
-         ++iter)
-    {
-        if (iter->get() == aGerechtDef)
-        {
-            mGerechtDefinities.erase(iter);
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
-bool Model::Remove(Personalia* aPersonalia)
+bool Model::Remove(const Personalia* aPersonalia)
 {
     for (auto iter = mPersonalia.begin(); iter != mPersonalia.end(); ++iter)
     {
@@ -297,9 +218,9 @@ double Model::GetVrijePunten() const
 {
     switch (mStrategyType) {
         case STRATEGY_TYPE::KCal:
-            return GetPersonalia()[0]->GetKCWeekPuntenTotaal();
+            return GetPersonalia().front()->GetKCWeekPuntenTotaal();
         case STRATEGY_TYPE::CarboHydrates:
-            return GetPersonalia()[0]->GetCHWeekPuntenTotaal() / 7 - GetPersonalia()[0]->GetCHPuntenTotaal();
+            return GetPersonalia().front()->GetCHWeekPuntenTotaal() / 7 - GetPersonalia().front()->GetCHPuntenTotaal();
         default:
             assert(false);
             return 0;
@@ -317,18 +238,18 @@ bool Model::HasPersonalia(const std::tstring& name) const
 Personalia* Model::GetActivePersonalia()
 {
     if (mPersonalia.empty())
-        return NULL;
+        return nullptr;
 
-    return mPersonalia[0].get();
+    return mPersonalia.front().get();
 }
 
 
 const Personalia* Model::GetActivePersonalia() const
 {
     if (mPersonalia.empty())
-        return NULL;
+        return nullptr;
 
-    return mPersonalia[0].get();
+    return mPersonalia.front().get();
 }
 
 Personalia* Model::AddPersonalia(const std::tstring& aName)

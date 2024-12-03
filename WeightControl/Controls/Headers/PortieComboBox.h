@@ -9,7 +9,6 @@ namespace weight
 {
 class Model;
 class Portie;
-class PortieNaam;
 }
 
 class PortieComboBox: public CComboBox

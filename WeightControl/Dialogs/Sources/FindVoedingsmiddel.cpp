@@ -7,6 +7,8 @@
 #include <assert.h>
 #include "WeightControl.h"
 #include "model/Day.h"
+#include "model/IFoodDefinitionRepository.h"
+#include "model/IRepository.h"
 #include "model/Portie.h"
 #include "model/Voedingsmiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"
@@ -14,15 +16,15 @@
 
 // CFindVoedingsmiddel dialog
 
-namespace {
-std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
-{
-    std::vector<weight::VMDefinitie*> definitions;
-    for (auto& definition : model.GetVoedingsmiddelDefinities())
-        definitions.push_back(definition.get());
-    return definitions;
-}
-}
+//namespace {
+//std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
+//{
+//    std::vector<weight::VMDefinitie*> definitions;
+//    for (auto& definition : model.GetVoedingsmiddelDefinities())
+//        definitions.push_back(definition.get());
+//    return definitions;
+//}
+//}
 
 IMPLEMENT_DYNAMIC(CFindVoedingsmiddel, CDialog)
 CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
@@ -30,9 +32,9 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
                                          std::unique_ptr<weight::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindVoedingsmiddel::IDD, pParent)
-    , mItemList(Definitions(aModel))
-    , mCategorieBox(aModel.GetCategories())
-    , mMerkBox(aModel.GetBrands(), true)
+    , mItemList(aModel.GetFoodDefinitionRepository()->GetAll())
+    , mCategorieBox(aModel.GetCategoryRepository()->Get())
+    , mMerkBox(aModel.GetBrandRepository()->Get(), true)
     , mFood(nullptr)
     , mState(nullptr)
     , m_lotFactory(std::move(lotFactory))
@@ -161,7 +163,7 @@ void CFindVoedingsmiddel::OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResu
 
     mDefinitie = lvitem->GetItem();
     assert(mDefinitie != nullptr);
-    mUnitNaam.SetValue(mDefinitie->GetUnit().GetName());
+    mUnitNaam.SetValue(mDefinitie->GetUnit());
 
     SetState(CreateState(*mDefinitie));
 

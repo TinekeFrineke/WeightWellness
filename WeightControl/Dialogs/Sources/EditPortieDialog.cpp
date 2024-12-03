@@ -5,7 +5,6 @@
 #include "WeightControl.h"
 #include "EditPortieDialog.h"
 
-#include "model/Unit.h"
 #include "model/VoedingsmiddelDefinitie.h"
 #include ".\editportiedialog.h"
 
@@ -66,7 +65,7 @@ BOOL CEditPortieDialog::OnInitDialog()
     mNaam.Initialize();
     mNaam.Fill(mPortienames, mPortie->GetName());
 
-    mUnitStatic.SetWindowText(mDefinitie.GetUnit().GetName().c_str());
+    mUnitStatic.SetWindowText(mDefinitie.GetUnit().c_str());
     mVoedingsMiddel.SetValue(mDefinitie.GetName());
 
     mUnitAmount.SetValue(mPortie->GetUnits());

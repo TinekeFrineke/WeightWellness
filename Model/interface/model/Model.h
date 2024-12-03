@@ -11,13 +11,12 @@
 namespace weight
 {
 
+class Day;
 class IBrandRepository;
 class ICategoryRepository;
-class CategorieNaam;
-class Day;
+class IFoodDefinitionRepository;
 class IRepository;
 class Personalia;
-class PortieNaam;
 class Recept;
 class ReceptDefinitie;
 class GerechtDefinitie;
@@ -30,26 +29,21 @@ public:
     Model();
     ~Model();
 
-    void                                    Clear();
-
     STRATEGY_TYPE                           GetStrategy() const noexcept { return mStrategyType; }
     void                                    SetStrategy(STRATEGY_TYPE eType);
 
     bool                                    Add(std::unique_ptr<Week> aWeek);
     bool                                    Add(std::unique_ptr<VMDefinitie> aDefinitie);
     bool                                    Add(std::unique_ptr<ReceptDefinitie> aReceptDef);
-    bool                                    Add(std::unique_ptr<GerechtDefinitie> aGerechtDef);
     bool                                    Add(std::unique_ptr<Personalia> aPersonalia);
 
     void                                    AddUnit(const std::wstring& aUnit);
-    bool                                    Add(const PortieNaam& aOmschrijving);
     void                                    AddCategory(const std::wstring& aCategory);
     void                                    AddBrand(const std::wstring& brand);
 
-    bool                                    Remove(VMDefinitie* aDefinitie);
-    bool                                    Remove(ReceptDefinitie* aRecept);
-    bool                                    Remove(GerechtDefinitie* aGerecht);
-    bool                                    Remove(Personalia* aPersonalia);
+    bool                                    Remove(const VMDefinitie* aDefinitie);
+    bool                                    Remove(const ReceptDefinitie* aRecept);
+    bool                                    Remove(const Personalia* aPersonalia);
 
     Week* FindWeek(const Utils::Date& aDate);
     bool                                    SetEndDate(Week& aWeek, const Utils::Date& aDate);
@@ -57,57 +51,41 @@ public:
     VMDefinitie* FindVoedingsmiddelDefinitie(const std::tstring& aName);
     ReceptDefinitie* FindReceptDefinitie(const std::tstring& aName);
 
-    std::vector<std::wstring> GetUnits() const;
-    std::vector<std::wstring> GetCategories() const;
-    std::vector<std::wstring> GetBrands() const;
-    std::vector<std::wstring> GetPortions() const;
-    std::vector<std::unique_ptr<VMDefinitie>>& GetVoedingsmiddelDefinities() { return mVMDefinities; }
-    const std::vector<std::unique_ptr<VMDefinitie>>& GetVoedingsmiddelDefinities() const { return mVMDefinities; }
-    std::vector< std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() { return mReceptDefinities; }
-    const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const { return mReceptDefinities; }
-    std::vector<std::unique_ptr<GerechtDefinitie>>& GetGerechtDefs() { return mGerechtDefinities; }
-    const std::vector<std::unique_ptr<GerechtDefinitie>>& GetGerechtDefs() const { return mGerechtDefinities; }
-    std::vector<std::unique_ptr<Week>>& GetWeeks() { return mWeeks; }
-    const std::vector<std::unique_ptr<Week>>& GetWeeks() const { return mWeeks; }
-    //std::vector<CategorieNaam>& GetCategorieNamen() { return mCategorieNamen; }
-    //const std::vector<CategorieNaam>& GetCategorieNamen() const { return mCategorieNamen; }
-    //std::vector<MerkNaam>& GetMerkNamen() { return mMerkNamen; }
-    //const std::vector<MerkNaam>& GetMerkNamen() const { return mMerkNamen; }
-    std::vector<std::unique_ptr<Personalia>>& GetPersonalia() { return mPersonalia; }
-    const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const { return mPersonalia; }
-    BonusPointsMap& GetBonusPointsMap() { return mBonusPointsMap; }
-    const BonusPointsMap& GetBonusPointsMap() const { return mBonusPointsMap; }
+    std::shared_ptr<IRepository> GetUnitRepository() const noexcept;
+    std::shared_ptr<IRepository> GetCategoryRepository() const noexcept;
+    std::shared_ptr<IRepository> GetBrandRepository() const noexcept;
+    std::shared_ptr<IFoodDefinitionRepository> GetFoodDefinitionRepository() const noexcept;
 
-    double                                  GetPuntenTotaal(STRATEGY_TYPE eType) const;
-    double                                  GetWeekPuntenTotaal() const;
-    double                                  GetVrijePunten() const;
+    const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const noexcept { return mReceptDefinities; }
+    const std::vector<std::unique_ptr<Week>>& GetWeeks() const noexcept { return mWeeks; }
+    const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept { return mPersonalia; }
+    const BonusPointsMap& GetBonusPointsMap() const noexcept { return mBonusPointsMap; }
 
-    bool                                    HasPersonalia(const std::tstring& name) const;
+    double GetPuntenTotaal(STRATEGY_TYPE eType) const;
+    double GetWeekPuntenTotaal() const;
+    double GetVrijePunten() const;
+
+    bool HasPersonalia(const std::tstring& name) const;
     Personalia* GetActivePersonalia();
     const Personalia* GetActivePersonalia() const;
     Personalia* AddPersonalia(const std::tstring& aName);
 
-    std::shared_ptr<PointsCalculator>       GetCalculator() const { return m_calculator; }
+    std::shared_ptr<PointsCalculator> GetCalculator() const noexcept { return m_calculator; }
 
 private:
-    //std::vector<Unit> mUnits;
-    std::shared_ptr<IRepository> m_units;
     std::vector<std::unique_ptr<Week>> mWeeks;
-    std::vector<std::unique_ptr<VMDefinitie>> mVMDefinities;
+    std::shared_ptr<IFoodDefinitionRepository> m_foodDefinitions;
     std::vector<std::unique_ptr<ReceptDefinitie>> mReceptDefinities;
-    std::vector<std::unique_ptr<GerechtDefinitie>> mGerechtDefinities;
-    std::shared_ptr<IRepository> m_portions;
-    //std::vector<PortieNaam> mPortieNamen;
+    //std::vector<std::unique_ptr<GerechtDefinitie>> mGerechtDefinities;
+    std::vector<std::unique_ptr<Personalia>> mPersonalia;
+    std::shared_ptr<IRepository> m_units;
     std::shared_ptr<IRepository> m_categories;
     std::shared_ptr<IRepository> m_brands;
-    //std::vector<CategorieNaam> mCategorieNamen;
-    //std::vector<MerkNaam> mMerkNamen;
-    std::vector<std::unique_ptr<Personalia>> mPersonalia;
 
-    BonusPointsMap                          mBonusPointsMap;
+    BonusPointsMap mBonusPointsMap;
 
-    std::shared_ptr<PointsCalculator>       m_calculator;
-    STRATEGY_TYPE                           mStrategyType;
+    std::shared_ptr<PointsCalculator> m_calculator;
+    STRATEGY_TYPE mStrategyType;
 };
 
 
