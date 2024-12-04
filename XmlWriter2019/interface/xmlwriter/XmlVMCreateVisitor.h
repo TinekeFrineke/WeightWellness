@@ -40,8 +40,8 @@ public:
     {
     }
 
-    weight::PortionedLot* Create(weight::VMDefinitie& aDefinitie,
-                             weight::Portie& aPortie);
+    std::unique_ptr<weight::PortionedLot> Create(weight::VMDefinitie& aDefinitie,
+                                                 weight::Portie& aPortie);
 
 private:
     CreateLotFromVMDef(const CreateLotFromVMDef&) = delete;

@@ -10,27 +10,30 @@ namespace weight
 class EntityBase
 {
 protected:
-    virtual                       ~EntityBase() {}
-    void                          Register(const std::tstring& aClassName,
-                                           const std::tstring& anInstanceName,
-                                           int                  aNumberOfInstances);
-    void                          Unregister(const std::tstring& aClassName,
-                                             const std::tstring& anInstanceName,
-                                             int                  aNumberOfInstances);
+    virtual ~EntityBase() = default;
+
+    void Register(const std::wstring& aClassName,
+                  const std::wstring& anInstanceName,
+                  int                  aNumberOfInstances);
+    void Unregister(const std::wstring& aClassName,
+                    const std::wstring& anInstanceName,
+                    int                  aNumberOfInstances);
 };
 
 template <class CLASS>
 class Entity : public EntityBase
 {
 public:
-    void                          Register();
-    void                          Unregister();
+    virtual ~Entity() = default;
+
+    void Register();
+    void Unregister();
 
 protected:
-    virtual std::tstring          GetInstanceName() const = 0;
+    virtual std::wstring GetInstanceName() const = 0;
 
 private:
-    static int                    mNumberOfInstances;
+    static int mNumberOfInstances;
 };
 
 

@@ -209,19 +209,19 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
 
             if (vmlist[i]->GetVoedingswaarde() != nullptr)
             {
-                weight::CalculatedVMDef* cdefinitie = new weight::CalculatedVMDef(mModel.GetCalculator());
+                auto cdefinitie = std::make_unique<weight::CalculatedVMDef>(mModel.GetCalculator());
                 cdefinitie->SetKCalPer100Units(Str::ToDouble(vmlist[i]->GetVoedingswaarde()->Getkcalper100().c_str()));
                 cdefinitie->SetVetPer100Units(Str::ToDouble(vmlist[i]->GetVoedingswaarde()->Getvetper100().c_str()));
                 cdefinitie->SetKoolhydratenPer100Units(Str::ToDouble(vmlist[i]->GetVoedingswaarde()->Getkoolhydratenper100().c_str()));
                 cdefinitie->SetEiwitPer100Units(Str::ToDouble(vmlist[i]->GetVoedingswaarde()->Geteiwitper100().c_str()));
                 cdefinitie->SetVezelsPer100Units(Str::ToDouble(vmlist[i]->GetVoedingswaarde()->Getvezelsper100().c_str()));
-                base.reset(cdefinitie);
+                base = std::move(cdefinitie);
             }
             else if (vmlist[i]->GetPuntenper100() != nullptr)
             {
-                weight::FixedVMDef* fdefinitie = new weight::FixedVMDef;
+                auto fdefinitie = std::make_unique<weight::FixedVMDef>();
                 fdefinitie->SetPointsPer100Units(Str::ToDouble(vmlist[i]->GetPuntenper100()->Getpunten()));
-                base.reset(fdefinitie);
+                base = std::move(fdefinitie);
             }
             else
             {
@@ -229,11 +229,10 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
                 return weight::Result::InterpretError;
             }
 
-            weight::VMDefinitie* definitie = new weight::VMDefinitie(mModel.GetCalculator(),
-                                                             vmlist[i]->GetVoedingsmiddelheader().Getnaam(),
-                                                             vmlist[i]->GetVoedingsmiddelheader().Getunit(),
-                                                             std::move(base));
-
+            auto definitie = std::make_unique<weight::VMDefinitie>(mModel.GetCalculator(),
+                                                                   vmlist[i]->GetVoedingsmiddelheader().Getnaam(),
+                                                                   vmlist[i]->GetVoedingsmiddelheader().Getunit(),
+                                                                   std::move(base));
 
             if (!vmlist[i]->GetVoedingsmiddelheader().Getcategorie().empty())
                 definitie->SetCategory(vmlist[i]->GetVoedingsmiddelheader().Getcategorie());
@@ -248,8 +247,7 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
                 definitie->AddPortie(std::move(portie));
             }
 
-            auto uni = std::unique_ptr<weight::VMDefinitie>(definitie);
-            mModel.Add(std::move(uni));
+            mModel.Add(std::move(definitie));
         }
     }
     catch (XmlClass::Result result) {

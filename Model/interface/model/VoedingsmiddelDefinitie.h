@@ -26,43 +26,41 @@ public:
     VMDefinitie(const VMDefinitie&);
     VMDefinitie& operator=(const VMDefinitie&);
 
-    virtual                   ~VMDefinitie();
+    virtual ~VMDefinitie();
 
-    virtual std::wstring      GetName() const { return mName; }
+    std::wstring GetName() const { return mName; }
     std::wstring GetCategory() const { return mCategory; }
     std::wstring GetMerk() const { return mMerk; }
 
-    virtual double            GetPointsPer100Units() const;
+    virtual double GetPointsPer100Units() const;
 
     // Transfers ownership
-    bool                      AddPortie(std::unique_ptr<Portie> aPortie);
-    bool                      RemovePortie(Portie* aPortie);
+    bool AddPortie(std::unique_ptr<Portie> aPortie);
+    bool RemovePortie(Portie* aPortie);
 
-    void                      SetCategory(const std::wstring& aCategory) { mCategory = aCategory; }
-    void                      SetMerk(const std::wstring& aMerk) { mMerk = aMerk; }
-    void                      SetUnit(const std::wstring& aUnit) { mUnit = aUnit; }
-
-    void                      SetFavourite(bool aFavourite) noexcept { mFavourite = aFavourite; }
-
+    void SetCategory(const std::wstring& aCategory) { mCategory = aCategory; }
+    void SetMerk(const std::wstring& aMerk) { mMerk = aMerk; }
+    void SetUnit(const std::wstring& aUnit) { mUnit = aUnit; }
+    void SetFavourite(bool aFavourite) noexcept { mFavourite = aFavourite; }
 
     std::wstring GetUnit() const { return mUnit; }
 
-    const std::vector< std::unique_ptr<Portie>>& GetPortieList() const noexcept { return mPortieList; }
+    const std::vector<std::unique_ptr<Portie>>& GetPortieList() const noexcept { return mPortieList; }
 
-    bool                      IsCalculated() const;
-    bool                      IsFixed() const;
-    bool                      IsFavourite() const noexcept { return mFavourite; }
+    bool IsCalculated() const;
+    bool IsFixed() const;
+    bool IsFavourite() const noexcept { return mFavourite; }
 
     VMDefBase* GetVMDef() { return mPoints.get(); }
     CalculatedVMDef* GetCalculatedVMDef();
     FixedVMDef* GetFixedVMDef();
 
-    void                      SetCalculated(const FoodParameters& oParameters);
-    void                      SetFixed();
+    void SetCalculated(const FoodParameters& oParameters);
+    void SetFixed();
 
     // Entity overrides
-    virtual std::tstring      GetInstanceName() const noexcept { return mName; }
-    static std::tstring       GetClassName() { return _T("VMDefinitie"); }
+    virtual std::tstring GetInstanceName() const noexcept { return mName; }
+    static std::tstring GetClassName() { return _T("VMDefinitie"); }
 
 private:
     std::wstring mUnit;
@@ -70,7 +68,7 @@ private:
     std::wstring mCategory;
     std::wstring mMerk;
     std::vector<std::unique_ptr<Portie>> mPortieList;
-    bool                      mFavourite;
+    bool mFavourite;
 
     // Can calculate the amount of points based upon the strategy used
     std::shared_ptr<PointsCalculator> m_calculator;
@@ -87,14 +85,14 @@ class FixedVMDef;
 class VMDefBase
 {
 public:
-    virtual                   ~VMDefBase() noexcept = default;
+    virtual ~VMDefBase() noexcept = default;
 
     virtual void Accept(VoedingsMiddelDefinitionVisitor& visitor) = 0;
     virtual std::unique_ptr<VMDefBase> Copy() const = 0;
-    virtual double            GetPointsPer100Units() const = 0;
+    virtual double GetPointsPer100Units() const = 0;
 
-    virtual bool              IsCalculated() const noexcept { return false; }
-    virtual bool              IsFixed() const noexcept { return false; }
+    virtual bool IsCalculated() const noexcept { return false; }
+    virtual bool IsFixed() const noexcept { return false; }
 
     virtual CalculatedVMDef* GetCalculatedVMDef() noexcept { return nullptr; }
     virtual FixedVMDef* GetFixedVMDef() noexcept { return nullptr; }

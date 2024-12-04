@@ -83,7 +83,7 @@ weight::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
     if (personalia->GetUserName().empty())
         return weight::Result::Ok;
 
-    XmlPersonalia* xmlpersonalia = new XmlPersonalia;
+    auto xmlpersonalia = std::make_unique<XmlPersonalia>();
     xmlpersonalia->Setgebruikersnaam(personalia->GetUserName());
     xmlpersonalia->Setnaam(personalia->GetName());
     xmlpersonalia->Setgeboren(Utils::ToString(personalia->GetDateOfBirth()));
@@ -111,8 +111,6 @@ weight::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
 
     XmlPersonaliaWriter writer;
     writer.Write(aFilename, *xmlpersonalia);
-
-    delete xmlpersonalia;
 
     return weight::Result::Ok;
 }
@@ -200,7 +198,7 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
 
 weight::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
 {
-    XmlReceptdefs* xmlrecepten = new XmlReceptdefs;
+    auto xmlrecepten = std::make_unique<XmlReceptdefs>();
 
     const auto& recepten = mModel.GetReceptDefs();
     for (size_t i = 0; i < recepten.size(); ++i)
@@ -219,29 +217,9 @@ weight::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
 
     XmlReceptdefsWriter writer;
     writer.Write(aFilename, *xmlrecepten);
-    delete xmlrecepten;
 
     return weight::Result::Ok;
 }
-
-
-//weight::Result XmlWriter::WriteGerechten(const std::tstring& aFilename)
-//{
-//    XmlGerechtdefs* xmlgerechten = new XmlGerechtdefs;
-//
-//    const auto& restaurantgerechten = mModel.GetGerechtDefs();
-//    for (size_t i = 0; i < restaurantgerechten.size(); ++i)
-//    {
-//        auto restaurantgerecht = std::make_unique<XmlGerechtdef>();
-//        restaurantgerecht->Setnaam(restaurantgerechten[i]->GetName());
-//        xmlgerechten->Add(std::move(restaurantgerecht));
-//    }
-//
-//    XmlGerechtdefsWriter xmlwriter;
-//    xmlwriter.Write(aFilename, *xmlgerechten);
-//    delete xmlgerechten;
-//    return weight::Result::Ok;
-//}
 
 
 weight::Result XmlWriter::WriteWeeks(const std::tstring& aDirectory)
@@ -395,7 +373,7 @@ weight::Result XmlWriter::Create(const weight::Day& aDay,
 
 weight::Result XmlWriter::Write(weight::Week& aWeek, const std::tstring& aFilename)
 {
-    XmlWeek* xmlweek = new XmlWeek;
+    auto xmlweek = std::make_unique<XmlWeek>();
 
     xmlweek->Setbegindatum(Utils::ToString(aWeek.GetStartDate()));
     xmlweek->Seteinddatum(Utils::ToString(aWeek.GetEndDate()));
@@ -427,7 +405,6 @@ weight::Result XmlWriter::Write(weight::Week& aWeek, const std::tstring& aFilena
 
     XmlWeekWriter xmlwriter;
     xmlwriter.Write(aFilename, *xmlweek);
-    delete xmlweek;
 
     return weight::Result::Ok;
 }
