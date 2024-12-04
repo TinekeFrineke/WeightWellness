@@ -3,18 +3,18 @@
 
 #include "stdafx.h"
 #include "afxmsg_.h"
-#include "WeightControl.h"
-#include "ItemsPage.h"
-
-#include "EditFoodDefDialog.h"
 
 #include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
 #include "model/VoedingsmiddelDefinitie.h"
+
+#include "ItemsPage.h"
+
+#include "EditFoodDefDialog.h"
+#include "FoodDefinitionEditor.h"
+
 #include ".\itemspage.h"
 
-namespace {
-}
 
 // CItemsPage dialog
 
@@ -78,10 +78,10 @@ BOOL CItemsPage::OnInitDialog()
 
 void CItemsPage::OnBnClickedAdd()
 {
-    CEditFoodDefDialog dialog(mModel, mModel.GetUnitRepository(), mModel.GetCategoryRepository(), mModel.GetBrandRepository(), nullptr, mModel.GetCalculator(), this);
-    INT_PTR nResponse = dialog.DoModal();
-    if (nResponse == IDOK)
-    {
+    FoodDefinitionEditor editor(mModel, this);
+    auto food = editor.Create();
+    if (food != nullptr) {
+        mModel.Add(std::move(food));
         mItemsList.Fill();
     }
 }
@@ -110,7 +110,7 @@ void CItemsPage::EditItem()
 {
     VMDefinitiesListItem* item = mItemsList.GetSelectedItem();
     if (item != nullptr) {
-        CEditFoodDefDialog dlg(mModel, mModel.GetUnitRepository(), mModel.GetCategoryRepository(), mModel.GetBrandRepository(), item->GetItem(), mModel.GetCalculator(), this);
+        CEditFoodDefDialog dlg(mModel, mModel.GetUnitRepository(), mModel.GetCategoryRepository(), mModel.GetBrandRepository(), *item->GetItem(), false, mModel.GetCalculator(), this);
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
         {

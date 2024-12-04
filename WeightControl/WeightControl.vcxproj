@@ -54,6 +54,7 @@
     <ClInclude Include="Dialogs\Headers\PointsPerDay.h" />
     <ClInclude Include="Dialogs\Headers\ReceptenPage.h" />
     <ClInclude Include="Dialogs\Headers\WWDialog.h" />
+    <ClInclude Include="Editor\Headers\FoodDefinitionEditor.h" />
     <ClInclude Include="Editor\Headers\PortieEditor.h" />
     <ClInclude Include="General\Headers\ItemEditVisitor.h" />
     <ClInclude Include="General\Headers\stdafx.h" />
@@ -88,6 +89,7 @@
     <ClCompile Include="Dialogs\Sources\PointsPerDay.cpp" />
     <ClCompile Include="Dialogs\Sources\ReceptenPage.cpp" />
     <ClCompile Include="Dialogs\Sources\WWDialog.cpp" />
+    <ClCompile Include="Editor\Sources\FoodDefinitionEditor.cpp" />
     <ClCompile Include="Editor\Sources\PortieEditor.cpp" />
     <ClCompile Include="General\Sources\ItemEditVisitor.cpp" />
     <ClCompile Include="General\Sources\WeightControl.cpp" />

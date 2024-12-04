@@ -9,6 +9,7 @@
 #include "VMDefinitiesList.h"
 #include "ComboBox.h"
 #include "BrandComboBox.h"
+#include "resource.h"
 
 // CItemsPage dialog
 
