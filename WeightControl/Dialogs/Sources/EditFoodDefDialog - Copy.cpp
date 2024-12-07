@@ -80,19 +80,21 @@ CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
                                        std::shared_ptr<weight::IRepository> units,
                                        std::shared_ptr<weight::IRepository> categories,
                                        std::shared_ptr<weight::IRepository> brands,
-                                       weight::VMDefinitie& aDefinitie,
-                                       bool newDefinition,
+                                       weight::VMDefinitie* aDefinitie,
                                        std::shared_ptr<weight::PointsCalculator> calculator,
                                        CWnd* pParent /*=nullptr*/)
     : CDialog(CEditFoodDefDialog::IDD, pParent)
     , mModel(aModel)
-    , m_definition(aDefinitie)
-    , m_newDefinition(newDefinition)
-    , mUnitBox(units->Get(), aDefinitie.GetUnit())
-    , mCategorie(categories->Get(), aDefinitie.GetCategory())
-    , mMerk(brands->Get(), false, aDefinitie.GetMerk())
+    , mDefinitieAbc(aDefinitie)
+    , mChangedDefinitieAbc(nullptr)
+    , mUnitBox(units->Get(), (aDefinitie ? aDefinitie->GetUnit() : _T("g")))
+    , mCategorie(categories->Get(), (aDefinitie ? aDefinitie->GetCategory() : _T("")))
+    , mMerk(brands->Get(), false, (aDefinitie ? aDefinitie->GetMerk() : _T("")))
     , m_calculator(std::move(calculator))
 {
+    if (mDefinitieAbc != nullptr) {
+        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(*mDefinitieAbc);
+    }
 }
 
 
@@ -106,37 +108,37 @@ BOOL CEditFoodDefDialog::OnInitDialog()
     if (CDialog::OnInitDialog() == FALSE)
         return FALSE;
 
-    mPortieListView.SetPointsPer100Units(m_definition.GetPointsPer100Units());
-    mPortieListView.SetPorties(CreateListViewPorties(m_definition.GetPortieList()));
+    mPortieListView.SetPorties(CreateListViewPorties(mChangedDefinitieAbc->GetPortieList()));
+    mPortieListView.SetPointsPer100Units(mDefinitieAbc->GetPointsPer100Units());
 
-    UpdateUiCalculated(m_definition.IsCalculated());
+    UpdateUiCalculated(mChangedDefinitieAbc == nullptr || mChangedDefinitieAbc->IsCalculated());
 
-    mName.SetReadOnly(m_newDefinition);
+    mName.SetReadOnly(mChangedDefinitieAbc != nullptr);
     mEenheden.SetValue(100);
 
-    std::tstring eenheden = m_definition.GetUnit().c_str();
+    std::tstring eenheden = mChangedDefinitieAbc == nullptr ? _T("eenheden") : mChangedDefinitieAbc->GetUnit().c_str();
 
-    //if (mChangedDefinitieAbc == nullptr)
-    //{
-    //    // No definition available yet
-    //    mKCalPer100.SetValue(0);
-    //    mVetPer100.SetValue(0);
-    //    mEiwitPer100.SetValue(0);
-    //    mKoolhydratenPer100.SetValue(0);
-    //    mVezelsPer100.SetValue(0);
-    //    mPuntenPer100.SetValue(0);
-    //}
-    //else
-    //{
+    if (mChangedDefinitieAbc == nullptr)
+    {
+        // No definition available yet
+        mKCalPer100.SetValue(0);
+        mVetPer100.SetValue(0);
+        mEiwitPer100.SetValue(0);
+        mKoolhydratenPer100.SetValue(0);
+        mVezelsPer100.SetValue(0);
+        mPuntenPer100.SetValue(0);
+    }
+    else
+    {
         // Definition available
-        mName.SetValue(m_definition.GetName());
+        mName.SetValue(mChangedDefinitieAbc->GetName());
 
-        mPuntenPer100.SetValue(m_definition.GetPointsPer100Units());
+        mPuntenPer100.SetValue(mChangedDefinitieAbc->GetPointsPer100Units());
 
-        if (m_definition.IsCalculated())
+        if (mChangedDefinitieAbc->IsCalculated())
         {
             // Definition is calculated
-            weight::CalculatedVMDef* cdef = m_definition.GetCalculatedVMDef();
+            weight::CalculatedVMDef* cdef = mChangedDefinitieAbc->GetCalculatedVMDef();
             assert(cdef != nullptr);
             mKCalPer100.SetValue(cdef->GetKCalPer100Units());
             mVetPer100.SetValue(cdef->GetVetPer100Units());
@@ -145,10 +147,10 @@ BOOL CEditFoodDefDialog::OnInitDialog()
             mVezelsPer100.SetValue(cdef->GetVezelsPer100Units());
             mPuntenPer100.SetValue(cdef->GetPointsPer100Units());
         }
-        else if (m_definition.IsFixed())
+        else if (mChangedDefinitieAbc->IsFixed())
         {
             // Definition is fixed
-            weight::FixedVMDef* fdef = m_definition.GetFixedVMDef();
+            weight::FixedVMDef* fdef = mChangedDefinitieAbc->GetFixedVMDef();
             mKCalPer100.SetValue(0);
             mVetPer100.SetValue(0);
             mEiwitPer100.SetValue(0);
@@ -160,9 +162,9 @@ BOOL CEditFoodDefDialog::OnInitDialog()
         {
             assert(false);
         }
-    //}
+    }
 
-    if (m_definition.IsFavourite())
+    if (mChangedDefinitieAbc != nullptr && mChangedDefinitieAbc->IsFavourite())
         CheckDlgButton(IDC_CHECK_FAVOURITE, 1);
 
     mPortieListView.Initialize();
@@ -205,11 +207,12 @@ void CEditFoodDefDialog::OnBnClickedAdd()
         return;
 
     // calculated state
-    PortieEditor editor(m_definition, this);
+    PortieEditor editor(*mChangedDefinitieAbc, this);
     auto portie = editor.Create();
     if (portie != nullptr) {
-        m_definition.AddPortie(std::move(portie));
-        mPortieListView.SetPorties(CreateListViewPorties(m_definition.GetPortieList()));
+        mChangedDefinitieAbc->AddPortie(std::move(portie));
+        //mPortieListView.AddPortie(std::make_unique<weight::Portie>(*dialog.GetPortie()));
+        mPortieListView.SetPorties(CreateListViewPorties(mChangedDefinitieAbc->GetPortieList()));
     }
 }
 
@@ -221,7 +224,7 @@ void CEditFoodDefDialog::OnBnClickedEdit()
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {
-        PortieEditor editor(m_definition, this);
+        PortieEditor editor(*mChangedDefinitieAbc, this);
         if (editor.Edit(*item->GetPortie()))
             mPortieListView.Update(item);
     }
@@ -235,17 +238,19 @@ void CEditFoodDefDialog::OnBnClickedDelete()
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {
-        m_definition.RemovePortie(item->GetPortie());
-        mPortieListView.SetPorties(CreateListViewPorties(m_definition.GetPortieList()));
+        mChangedDefinitieAbc->RemovePortie(item->GetPortie());
+        mPortieListView.SetPorties(CreateListViewPorties(mChangedDefinitieAbc->GetPortieList()));
     }
 }
 
 
 bool CEditFoodDefDialog::CreateCommonFoodParts()
 {
-    m_definition.SetUnit(mUnitBox.GetString());
-    m_definition.SetCategory(mCategorie.GetString());
-    m_definition.SetMerk(mMerk.GetString());
+    assert(mChangedDefinitieAbc != nullptr);
+
+    mChangedDefinitieAbc->SetUnit(mUnitBox.GetString());
+    mChangedDefinitieAbc->SetCategory(mCategorie.GetString());
+    mChangedDefinitieAbc->SetMerk(mMerk.GetString());
     return true;
 }
 
@@ -283,14 +288,20 @@ bool CEditFoodDefDialog::CreateCalculatedFood()
                                       mVetPer100.GetValue() * amountFactor,
                                       mVezelsPer100.GetValue() * amountFactor,
                                       mKoolhydratenPer100.GetValue() * amountFactor);
-    if (!m_definition.IsCalculated())
+    if (mChangedDefinitieAbc == nullptr)
     {
-        m_definition.SetCalculated(parameters);
+        auto vdef = std::make_unique<weight::CalculatedVMDef>(m_calculator);
+        vdef->SetParameters(parameters);
+        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(m_calculator, name, mUnitBox.GetString(), std::move(vdef));
+    }
+    else if (!mChangedDefinitieAbc->IsCalculated())
+    {
+        mChangedDefinitieAbc->SetCalculated(parameters);
     }
     else
     {
-        assert(m_definition.GetCalculatedVMDef() != nullptr);
-        m_definition.GetCalculatedVMDef()->SetParameters(parameters);
+        assert(mChangedDefinitieAbc->GetCalculatedVMDef() != nullptr);
+        mChangedDefinitieAbc->GetCalculatedVMDef()->SetParameters(parameters);
     }
 
     CreateCommonFoodParts();
@@ -316,13 +327,19 @@ bool CEditFoodDefDialog::CreateFixedFood()
 
     double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
 
-    if (m_definition.IsFixed())
+    if (mChangedDefinitieAbc == nullptr)
     {
-        m_definition.GetFixedVMDef()->SetPointsPer100Units(mPuntenPer100.GetValue() * amountFactor);
+        auto vdef = std::make_unique<weight::FixedVMDef>();
+        vdef->SetPointsPer100Units(mPuntenPer100.GetValue() * amountFactor);
+        mChangedDefinitieAbc = std::make_unique<weight::VMDefinitie>(m_calculator, name, mUnitBox.GetString(), std::move(vdef));
+    }
+    else if (mChangedDefinitieAbc->IsFixed())
+    {
+        mChangedDefinitieAbc->GetFixedVMDef()->SetPointsPer100Units(mPuntenPer100.GetValue() * amountFactor);
     }
     else
     {
-        m_definition.SetFixed();
+        mChangedDefinitieAbc->SetFixed();
     }
 
     CreateCommonFoodParts();
@@ -352,7 +369,7 @@ bool CEditFoodDefDialog::FinalizeCalculatedData()
     if (!CreateCalculatedFood())
         return false;
 
-    mPortieListView.SetPointsPer100Units(m_definition.GetPointsPer100Units());
+    mPortieListView.SetPointsPer100Units(mChangedDefinitieAbc->GetPointsPer100Units());
 
     return true;
 }
@@ -363,7 +380,7 @@ bool CEditFoodDefDialog::FinalizeFixedData()
     if (!CreateFixedFood())
         return false;
 
-    mPortieListView.SetPointsPer100Units(m_definition.GetPointsPer100Units());
+    mPortieListView.SetPointsPer100Units(mChangedDefinitieAbc->GetPointsPer100Units());
 
     return true;
 }
@@ -381,13 +398,7 @@ bool CEditFoodDefDialog::FinalizeData()
 void CEditFoodDefDialog::OnBnClickedOk()
 {
     std::tstring name = mName.GetValue();
-    if (name.empty())
-    {
-        ::MessageBox(0, _T("Enter a unique name"), _T("Error"), MB_OK);
-        return;
-    }
-
-    if (m_newDefinition && mModel.FindVoedingsmiddelDefinitie(name))
+    if (mDefinitieAbc == nullptr && mModel.FindVoedingsmiddelDefinitie(name))
     {
         ::MessageBox(0, _T("Een voedingsmiddel met deze naam bestaat al!"), _T("Error"), MB_OK);
         return;
@@ -401,53 +412,72 @@ void CEditFoodDefDialog::OnBnClickedOk()
         // fixed state
         result = OnFixedOk();
 
-    if (result)
-        OnOK();
+    if (!result)
+        return;
+
+    //std::vector<std::unique_ptr<weight::Portie>> porties;
+    //mPortieListView.ReleasePorties(porties);
+
+    if (mChangedDefinitieAbc != nullptr)
+    {
+        if (mDefinitieAbc == nullptr)
+        {
+            mDefinitieAbc = std::make_unique<weight::VMDefinitie>(*mChangedDefinitieAbc);
+            *mDefinitieAbc = *mChangedDefinitieAbc;
+            mModel.Add(std::move(mDefinitieAbc));
+        }
+        else
+        {
+            *mDefinitieAbc = *mChangedDefinitieAbc;
+        }
+    }
+
+    OnOK();
 }
 
 void CEditFoodDefDialog::OnEnChangeKcalper100()
 {
-    if (m_definition.IsCalculated())
+    if (mChangedDefinitieAbc != nullptr && mChangedDefinitieAbc->IsCalculated())
     {
         double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
-        m_definition.GetCalculatedVMDef()->SetKCalPer100Units(mKCalPer100.GetValue() * amountFactor);
+        mChangedDefinitieAbc->GetCalculatedVMDef()->SetKCalPer100Units(mKCalPer100.GetValue() * amountFactor);
         mPortieListView.SetPointsPer100Units(mKCalPer100.GetValue() * amountFactor);
     }
 }
 
 void CEditFoodDefDialog::OnEnChangeVetper100()
 {
-    if (m_definition.IsCalculated())
+    if (mChangedDefinitieAbc != nullptr && mChangedDefinitieAbc->IsCalculated())
     {
         double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
-        m_definition.GetCalculatedVMDef()->SetVetPer100Units(mVetPer100.GetValue() * amountFactor);
+        mChangedDefinitieAbc->GetCalculatedVMDef()->SetVetPer100Units(mVetPer100.GetValue() * amountFactor);
     }
 }
 
 void CEditFoodDefDialog::OnEnChangeEiwittenPer100()
 {
-    if (m_definition.IsCalculated())
+    if (mChangedDefinitieAbc != nullptr && mChangedDefinitieAbc->IsCalculated())
     {
         double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
-        m_definition.GetCalculatedVMDef()->SetEiwitPer100Units(mEiwitPer100.GetValue() * amountFactor);
+        mChangedDefinitieAbc->GetCalculatedVMDef()->SetEiwitPer100Units(mEiwitPer100.GetValue() * amountFactor);
     }
 }
 
 void CEditFoodDefDialog::OnEnChangeKoolhydratenPer100()
 {
-    if (m_definition.IsCalculated())
+    if (mChangedDefinitieAbc != nullptr && mChangedDefinitieAbc->IsCalculated())
     {
         double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
-        m_definition.GetCalculatedVMDef()->SetKoolhydratenPer100Units(mKoolhydratenPer100.GetValue() * amountFactor);
+        mChangedDefinitieAbc->GetCalculatedVMDef()->SetKoolhydratenPer100Units(mKoolhydratenPer100.GetValue() * amountFactor);
     }
 }
 
 void CEditFoodDefDialog::OnEnChangeVezelsPer100()
 {
-    if (m_definition.IsCalculated())
+    if (mChangedDefinitieAbc != nullptr && mChangedDefinitieAbc->IsCalculated())
     {
         double amountFactor = 100.0f / static_cast<double>(mEenheden.GetValue());
-        m_definition.GetCalculatedVMDef()->SetVezelsPer100Units(mVezelsPer100.GetValue() * amountFactor);
+        mChangedDefinitieAbc->GetCalculatedVMDef()->SetVezelsPer100Units(mVezelsPer100.GetValue() * amountFactor);
     }
 }
 
@@ -486,6 +516,15 @@ void CEditFoodDefDialog::OnBnClickedRadioVast()
 
 void CEditFoodDefDialog::OnBnClickedCancel()
 {
+    if (mDefinitieAbc == nullptr)
+        mChangedDefinitieAbc.reset();
+
+    // Re-attach the original portions to the food
+    for (size_t i = 0; i < mOriginalPorties.size(); ++i)
+        mDefinitieAbc->AddPortie(std::move(mOriginalPorties[i]));
+
+    mOriginalPorties.clear();
+
     OnCancel();
 }
 
@@ -507,7 +546,7 @@ void CEditFoodDefDialog::OnCbnEditchangeUnit()
 
 void CEditFoodDefDialog::OnBnClickedCheckFavourite()
 {
-    m_definition.SetFavourite(IsDlgButtonChecked(IDC_CHECK_FAVOURITE) != FALSE);
+    mChangedDefinitieAbc->SetFavourite(IsDlgButtonChecked(IDC_CHECK_FAVOURITE) != FALSE);
 }
 
 
@@ -523,7 +562,7 @@ void CEditFoodDefDialog::OnNMDblclkPortie(NMHDR* pNMHDR, LRESULT* pResult)
     PortieListItem* item = mPortieListView.GetSelectedItem();
     if (item != nullptr)
     {
-        PortieEditor editor(m_definition, this);
+        PortieEditor editor(*mChangedDefinitieAbc, this);
         if (editor.Edit(*item->GetPortie()))
             mPortieListView.Update(item);
     }

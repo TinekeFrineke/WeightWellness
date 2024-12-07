@@ -97,6 +97,7 @@
     <ClInclude Include="header\FoodDefinitionRepository.h" />
     <ClInclude Include="header\RecipeRepository.h" />
     <ClInclude Include="header\UniqueRepository.h" />
+    <ClInclude Include="header\WeekRepository.h" />
     <ClInclude Include="interface\model\BonusPointsMap.h" />
     <ClInclude Include="interface\model\Day.h" />
     <ClInclude Include="interface\model\Entity.h" />
@@ -108,6 +109,7 @@
     <ClInclude Include="interface\model\IRepository.h" />
     <ClInclude Include="interface\model\ISubject.h" />
     <ClInclude Include="interface\model\Item.h" />
+    <ClInclude Include="interface\model\IWeekRepository.h" />
     <ClInclude Include="interface\model\Lot.h" />
     <ClInclude Include="interface\model\ILotFactory.h" />
     <ClInclude Include="interface\model\LotFactory.h" />
@@ -151,6 +153,7 @@
     <ClCompile Include="source\VoedingsmiddelDefinitie.cpp" />
     <ClCompile Include="source\Week.cpp" />
     <ClCompile Include="source\Model.cpp" />
+    <ClCompile Include="source\WeekRepository.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

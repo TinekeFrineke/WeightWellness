@@ -55,6 +55,8 @@
     <ClInclude Include="Dialogs\Headers\ReceptenPage.h" />
     <ClInclude Include="Dialogs\Headers\WWDialog.h" />
     <ClInclude Include="Editor\Headers\FoodDefinitionEditor.h" />
+    <ClInclude Include="Editor\Headers\IEditorFactory.h" />
+    <ClInclude Include="Editor\Headers\IPortieEditor.h" />
     <ClInclude Include="Editor\Headers\PortieEditor.h" />
     <ClInclude Include="General\Headers\ItemEditVisitor.h" />
     <ClInclude Include="General\Headers\stdafx.h" />

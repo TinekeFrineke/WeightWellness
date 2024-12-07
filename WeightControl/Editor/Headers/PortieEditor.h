@@ -1,21 +1,21 @@
 #pragma once
 
-#include <memory>
+#include "IPortieEditor.h"
 
 class CWnd;
 
 namespace weight {
-class Portie;
 class VMDefinitie;
 }
 
 class PortieEditor
+    : public IPortieEditor
 {
 public:
     PortieEditor(weight::VMDefinitie& aDefinitie, CWnd* parent) : m_definitie(aDefinitie), m_parent(parent) {}
 
-    bool Edit(weight::Portie& portie) const;
-    std::unique_ptr<weight::Portie> Create() const;
+    bool Edit(weight::Portie& portie) const override;
+    std::unique_ptr<weight::Portie> Create() const override;
 
 private:
     weight::VMDefinitie& m_definitie;
