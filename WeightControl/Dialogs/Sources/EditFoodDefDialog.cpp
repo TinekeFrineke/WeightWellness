@@ -106,9 +106,6 @@ BOOL CEditFoodDefDialog::OnInitDialog()
     if (CDialog::OnInitDialog() == FALSE)
         return FALSE;
 
-    mPortieListView.SetPointsPer100Units(m_definition.GetPointsPer100Units());
-    mPortieListView.SetPorties(CreateListViewPorties(m_definition.GetPortieList()));
-
     UpdateUiCalculated(m_definition.IsCalculated());
 
     mName.SetReadOnly(m_newDefinition);
@@ -116,60 +113,50 @@ BOOL CEditFoodDefDialog::OnInitDialog()
 
     std::tstring eenheden = m_definition.GetUnit().c_str();
 
-    //if (mChangedDefinitieAbc == nullptr)
-    //{
-    //    // No definition available yet
-    //    mKCalPer100.SetValue(0);
-    //    mVetPer100.SetValue(0);
-    //    mEiwitPer100.SetValue(0);
-    //    mKoolhydratenPer100.SetValue(0);
-    //    mVezelsPer100.SetValue(0);
-    //    mPuntenPer100.SetValue(0);
-    //}
-    //else
-    //{
-        // Definition available
-        mName.SetValue(m_definition.GetName());
+    mName.SetValue(m_definition.GetName());
 
-        mPuntenPer100.SetValue(m_definition.GetPointsPer100Units());
+    mPuntenPer100.SetValue(m_definition.GetPointsPer100Units());
 
-        if (m_definition.IsCalculated())
-        {
-            // Definition is calculated
-            weight::CalculatedVMDef* cdef = m_definition.GetCalculatedVMDef();
-            assert(cdef != nullptr);
-            mKCalPer100.SetValue(cdef->GetKCalPer100Units());
-            mVetPer100.SetValue(cdef->GetVetPer100Units());
-            mEiwitPer100.SetValue(cdef->GetEiwitPer100Units());
-            mKoolhydratenPer100.SetValue(cdef->GetKoolhydratenPer100Units());
-            mVezelsPer100.SetValue(cdef->GetVezelsPer100Units());
-            mPuntenPer100.SetValue(cdef->GetPointsPer100Units());
-        }
-        else if (m_definition.IsFixed())
-        {
-            // Definition is fixed
-            weight::FixedVMDef* fdef = m_definition.GetFixedVMDef();
-            mKCalPer100.SetValue(0);
-            mVetPer100.SetValue(0);
-            mEiwitPer100.SetValue(0);
-            mKoolhydratenPer100.SetValue(0);
-            mVezelsPer100.SetValue(0);
-            mPuntenPer100.SetValue(fdef->GetPointsPer100Units());
-        }
-        else
-        {
-            assert(false);
-        }
-    //}
+    if (m_definition.IsCalculated())
+    {
+        // Definition is calculated
+        weight::CalculatedVMDef* cdef = m_definition.GetCalculatedVMDef();
+        assert(cdef != nullptr);
+        mKCalPer100.SetValue(cdef->GetKCalPer100Units());
+        mVetPer100.SetValue(cdef->GetVetPer100Units());
+        mEiwitPer100.SetValue(cdef->GetEiwitPer100Units());
+        mKoolhydratenPer100.SetValue(cdef->GetKoolhydratenPer100Units());
+        mVezelsPer100.SetValue(cdef->GetVezelsPer100Units());
+        mPuntenPer100.SetValue(cdef->GetPointsPer100Units());
+    }
+    else if (m_definition.IsFixed())
+    {
+        // Definition is fixed
+        weight::FixedVMDef* fdef = m_definition.GetFixedVMDef();
+        mKCalPer100.SetValue(0);
+        mVetPer100.SetValue(0);
+        mEiwitPer100.SetValue(0);
+        mKoolhydratenPer100.SetValue(0);
+        mVezelsPer100.SetValue(0);
+        mPuntenPer100.SetValue(fdef->GetPointsPer100Units());
+    }
+    else
+    {
+        assert(false);
+    }
 
     if (m_definition.IsFavourite())
         CheckDlgButton(IDC_CHECK_FAVOURITE, 1);
 
+    // Initialize controls
     mPortieListView.Initialize();
     mUnitBox.Initialize();
     mCategorie.Initialize();
     mMerk.Initialize();
 
+    // Fill controls
+    mPortieListView.SetPointsPer100Units(m_definition.GetPointsPer100Units());
+    mPortieListView.SetPorties(CreateListViewPorties(m_definition.GetPortieList()));
     mUnitBox.Fill();
     mCategorie.Fill();
     mMerk.Fill();
