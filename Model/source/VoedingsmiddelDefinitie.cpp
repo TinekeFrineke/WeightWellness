@@ -12,20 +12,20 @@ namespace weight
 {
 
 
-int   Entity<VMDefinitie>::mNumberOfInstances = 0;
-int   Entity<CalculatedVMDef>::mNumberOfInstances = 0;
-int   Entity<FixedVMDef>::mNumberOfInstances = 0;
+int Entity<VMDefinitie>::mNumberOfInstances = 0;
+int Entity<CalculatedVMDef>::mNumberOfInstances = 0;
+int Entity<FixedVMDef>::mNumberOfInstances = 0;
 
 
 VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
                          const std::tstring& aName,
                          const std::wstring& aUnit,
                          std::unique_ptr<VMDefBase> aDefinition)
-    : m_calculator(std::move(calculator)),
-    mName(aName),
-    mUnit(aUnit),
-    mFavourite(false),
-    mPoints(std::move(aDefinition))
+    : m_calculator(std::move(calculator))
+    , mName(aName)
+    , mUnit(aUnit)
+    , mFavourite(false)
+    , mPoints(std::move(aDefinition))
 {
     assert(mPoints != NULL);
 #ifdef FIND_LEAKS
@@ -83,28 +83,28 @@ VMDefinitie::~VMDefinitie()
 }
 
 
-bool VMDefinitie::IsCalculated() const
+bool VMDefinitie::IsCalculated() const noexcept
 {
     assert(mPoints != NULL);
     return mPoints->IsCalculated();
 }
 
 
-bool VMDefinitie::IsFixed() const
+bool VMDefinitie::IsFixed() const noexcept
 {
     assert(mPoints != NULL);
     return mPoints->IsFixed();
 }
 
 
-CalculatedVMDef* VMDefinitie::GetCalculatedVMDef()
+CalculatedVMDef* VMDefinitie::GetCalculatedVMDef() noexcept
 {
     assert(mPoints != NULL);
     return mPoints->GetCalculatedVMDef();
 }
 
 
-FixedVMDef* VMDefinitie::GetFixedVMDef()
+FixedVMDef* VMDefinitie::GetFixedVMDef() noexcept
 {
     assert(mPoints != NULL);
     return mPoints->GetFixedVMDef();
@@ -113,8 +113,8 @@ FixedVMDef* VMDefinitie::GetFixedVMDef()
 
 bool VMDefinitie::AddPortie(std::unique_ptr<Portie> aPortie)
 {
-    for (size_t i = 0; i < mPortieList.size(); ++i)
-        if (aPortie->GetName() == mPortieList[i]->GetName())
+    for (const auto& portie : mPortieList)
+        if (aPortie->GetName() == portie->GetName())
             return false;
 
     // Portie was not yet found:
@@ -175,7 +175,7 @@ CalculatedVMDef::CalculatedVMDef(std::shared_ptr<PointsCalculator> calculator)
 }
 
 
-CalculatedVMDef::CalculatedVMDef(const CalculatedVMDef& aVMDef)
+CalculatedVMDef::CalculatedVMDef(const CalculatedVMDef& aVMDef) noexcept
     : VMDefBase(aVMDef)
     , m_calculator(aVMDef.m_calculator),
     mParameters(aVMDef.mParameters)

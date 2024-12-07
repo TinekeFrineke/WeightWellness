@@ -14,10 +14,10 @@ protected:
 
     void Register(const std::wstring& aClassName,
                   const std::wstring& anInstanceName,
-                  int                  aNumberOfInstances);
+                  int                  aNumberOfInstances) noexcept;
     void Unregister(const std::wstring& aClassName,
                     const std::wstring& anInstanceName,
-                    int                  aNumberOfInstances);
+                    int                  aNumberOfInstances) noexcept;
 };
 
 template <class CLASS>
@@ -26,11 +26,11 @@ class Entity : public EntityBase
 public:
     virtual ~Entity() = default;
 
-    void Register();
-    void Unregister();
+    void Register() noexcept;
+    void Unregister() noexcept;
 
 protected:
-    virtual std::wstring GetInstanceName() const = 0;
+    virtual std::wstring GetInstanceName() const noexcept = 0;
 
 private:
     static int mNumberOfInstances;
@@ -38,14 +38,14 @@ private:
 
 
 template<class CLASS>
-void Entity<CLASS>::Register()
+void Entity<CLASS>::Register() noexcept
 {
     EntityBase::Register(CLASS::GetClassName(), GetInstanceName(), ++mNumberOfInstances);
 }
 
 
 template<class CLASS>
-void Entity<CLASS>::Unregister()
+void Entity<CLASS>::Unregister() noexcept
 {
     EntityBase::Unregister(CLASS::GetClassName(), GetInstanceName(), --mNumberOfInstances);
 }

@@ -15,6 +15,7 @@ class Portie: public Entity<Portie>
 {
 public:
     Portie(const std::wstring& aName);
+    Portie(const Portie& portie);
     ~Portie();
 
     double GetUnits() const noexcept { return mUnits; }

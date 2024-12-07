@@ -31,17 +31,13 @@ CMyTabControl::CMyTabControl()
 {
 }
 
-CMyTabControl::~CMyTabControl()
-{
-    for (int nCount = 0; nCount < m_nNumberOfPages; nCount++)
-        delete m_tabPages[nCount].mDialog;
-}
+CMyTabControl::~CMyTabControl() = default;
 
 
-void CMyTabControl::AddPage(TabPage* aPage, UINT aResourceID, TCHAR* aName)
+void CMyTabControl::AddPage(std::unique_ptr<TabPage> aPage, UINT aResourceID, TCHAR* aName)
 {
     assert(aPage->GetDialog() != NULL);
-    m_tabPages.push_back(DialogData(aPage, aResourceID, aName));
+    m_tabPages.push_back(std::make_unique<DialogData>(std::move(aPage), aResourceID, aName));
 }
 
 
@@ -50,16 +46,16 @@ void CMyTabControl::Initialize()
     m_tabCurrent = 0;
 
     for (size_t i = 0; i < m_tabPages.size(); ++i) {
-        m_tabPages[i].mDialog->GetDialog()->Create(m_tabPages[i].mResourceID, this);
-        InsertItem(static_cast<int>(i), m_tabPages[i].mName);
+        m_tabPages[i]->mDialog->GetDialog()->Create(m_tabPages[i]->mResourceID, this);
+        InsertItem(static_cast<int>(i), m_tabPages[i]->mName);
         m_nNumberOfPages++;
     }
 
     if (!m_tabPages.empty())
     {
-        m_tabPages[0].mDialog->GetDialog()->ShowWindow(SW_SHOW);
+        m_tabPages[0]->mDialog->GetDialog()->ShowWindow(SW_SHOW);
         for (int i = 1; i < m_nNumberOfPages; ++i)
-            m_tabPages[i].mDialog->GetDialog()->ShowWindow(SW_HIDE);
+            m_tabPages[i]->mDialog->GetDialog()->ShowWindow(SW_HIDE);
     }
 
     SetRectangle();
@@ -80,9 +76,9 @@ void CMyTabControl::SetRectangle()
 
     if (!m_tabPages.empty())
     {
-        m_tabPages[0].mDialog->GetDialog()->SetWindowPos(&wndTop, nX, nY, nXc, nYc, SWP_SHOWWINDOW);
+        m_tabPages[0]->mDialog->GetDialog()->SetWindowPos(&wndTop, nX, nY, nXc, nYc, SWP_SHOWWINDOW);
         for (int nCount = 1; nCount < m_nNumberOfPages; nCount++) {
-            m_tabPages[nCount].mDialog->GetDialog()->SetWindowPos(&wndTop, nX, nY, nXc, nYc, SWP_HIDEWINDOW);
+            m_tabPages[nCount]->mDialog->GetDialog()->SetWindowPos(&wndTop, nX, nY, nXc, nYc, SWP_HIDEWINDOW);
         }
     }
 }
@@ -113,12 +109,12 @@ void CMyTabControl::SelectPage(int iPage)
 void CMyTabControl::UpdateSelection()
 {
     if (m_tabCurrent != GetCurFocus()) {
-        if (m_tabPages[m_tabCurrent].mDialog->CanExit(false))
+        if (m_tabPages[m_tabCurrent]->mDialog->CanExit(false))
         {
-            m_tabPages[m_tabCurrent].mDialog->GetDialog()->ShowWindow(SW_HIDE);
+            m_tabPages[m_tabCurrent]->mDialog->GetDialog()->ShowWindow(SW_HIDE);
             m_tabCurrent = GetCurFocus();
-            m_tabPages[m_tabCurrent].mDialog->GetDialog()->ShowWindow(SW_SHOW);
-            m_tabPages[m_tabCurrent].mDialog->GetDialog()->SetFocus();
+            m_tabPages[m_tabCurrent]->mDialog->GetDialog()->ShowWindow(SW_SHOW);
+            m_tabPages[m_tabCurrent]->mDialog->GetDialog()->SetFocus();
         }
         else
         {
@@ -126,3 +122,12 @@ void CMyTabControl::UpdateSelection()
         }
     }
 }
+
+CMyTabControl::DialogData::DialogData(std::unique_ptr<TabPage> aDialog, UINT anID, TCHAR* aName)
+    : mDialog(std::move(aDialog))
+    , mResourceID(anID)
+    , mName(aName)
+{
+}
+
+CMyTabControl::DialogData::~DialogData() = default;

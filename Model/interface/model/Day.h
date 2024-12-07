@@ -73,7 +73,7 @@ public:
     void                      Recalculate(Model& aModel, const PointsCalculator& aCalculator);
 
     // Entity overrides
-    virtual std::tstring      GetInstanceName() const { return Utils::ToString(mDate); }
+    virtual std::tstring      GetInstanceName() const noexcept { return Utils::ToString(mDate); }
     static std::tstring       GetClassName() { return _T("Dag"); }
 
 private:

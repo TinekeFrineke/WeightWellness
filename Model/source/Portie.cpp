@@ -24,14 +24,14 @@ Portie::Portie(const std::wstring& aName)
 }
 
 
-//Portie::Portie(const Portie& aPortie)
-//    : mName(aPortie.mName)
-//    , mUnits(aPortie.mUnits)
-//{
-//#ifdef FIND_LEAKS
-//    Register();
-//#endif
-//}
+Portie::Portie(const Portie& aPortie)
+    : mName(aPortie.mName)
+    , mUnits(aPortie.mUnits)
+{
+#ifdef FIND_LEAKS
+    Register();
+#endif
+}
 
 
 Portie::~Portie()

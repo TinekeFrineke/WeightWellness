@@ -47,19 +47,19 @@ public:
 
     const std::vector<std::unique_ptr<Portie>>& GetPortieList() const noexcept { return mPortieList; }
 
-    bool IsCalculated() const;
-    bool IsFixed() const;
+    bool IsCalculated() const noexcept;
+    bool IsFixed() const noexcept;
     bool IsFavourite() const noexcept { return mFavourite; }
 
-    VMDefBase* GetVMDef() { return mPoints.get(); }
-    CalculatedVMDef* GetCalculatedVMDef();
-    FixedVMDef* GetFixedVMDef();
+    VMDefBase* GetVMDef() noexcept { return mPoints.get(); }
+    CalculatedVMDef* GetCalculatedVMDef() noexcept;
+    FixedVMDef* GetFixedVMDef() noexcept;
 
     void SetCalculated(const FoodParameters& oParameters);
     void SetFixed();
 
     // Entity overrides
-    virtual std::tstring GetInstanceName() const noexcept { return mName; }
+    std::tstring GetInstanceName() const noexcept override { return mName; }
     static std::tstring GetClassName() { return _T("VMDefinitie"); }
 
 private:
@@ -102,7 +102,7 @@ class CalculatedVMDef: public VMDefBase, public Entity<CalculatedVMDef>
 {
 public:
     explicit CalculatedVMDef(std::shared_ptr<weight::PointsCalculator> calculator);
-    CalculatedVMDef(const CalculatedVMDef&);
+    CalculatedVMDef(const CalculatedVMDef&)  noexcept;
     CalculatedVMDef& operator=(const CalculatedVMDef&);
 
     ~CalculatedVMDef() override;
@@ -117,7 +117,7 @@ public:
     std::unique_ptr<VMDefBase> Copy() const override;
 
     // Entity overrides
-    std::tstring GetInstanceName() const override { return _T("None"); }
+    std::tstring GetInstanceName() const noexcept override { return _T("None"); }
 
     void SetParameters(const FoodParameters& aParameters);
     void SetKCalPer100Units(double aKCalPer100) { mParameters.SetKCalPer100Units(aKCalPer100); }
@@ -157,7 +157,7 @@ public:
     std::unique_ptr<VMDefBase> Copy() const override;
 
     // Entity overrides
-    std::tstring      GetInstanceName() const override { return _T("None"); }
+    std::tstring      GetInstanceName() const noexcept override { return _T("None"); }
 
     void SetPointsPer100Units(double aPoints) noexcept { mPointsPer100Units = aPoints; }
 

@@ -2,6 +2,7 @@
 
 #include "afxcmn.h"
 
+#include <memory>
 #include <vector>
 
 
@@ -17,7 +18,7 @@ public:
     CMyTabControl();
     virtual ~CMyTabControl();
 
-    void AddPage(TabPage* aPage, UINT aResourceID, TCHAR* aName);
+    void AddPage(std::unique_ptr<TabPage> aPage, UINT aResourceID, TCHAR* aName);
 
     void Initialize();
     void SelectPage(int iPage);
@@ -40,9 +41,9 @@ protected:
 private:
     struct DialogData
     {
-        DialogData(TabPage* aDialog, UINT anID, TCHAR* aName)
-            : mDialog(aDialog), mResourceID(anID), mName(aName) {}
-        TabPage* mDialog;
+        DialogData(std::unique_ptr<TabPage> aDialog, UINT anID, TCHAR* aName);
+        ~DialogData();
+        std::unique_ptr<TabPage> mDialog;
         UINT                  mResourceID;
         TCHAR* mName;
     };
@@ -50,7 +51,7 @@ private:
     void                    SetRectangle();
     void                    UpdateSelection();
 
-    std::vector<DialogData> m_tabPages;
+    std::vector<std::unique_ptr<DialogData>> m_tabPages;
     int                     m_tabCurrent;
     int                     m_nNumberOfPages;
 
