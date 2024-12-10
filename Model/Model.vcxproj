@@ -91,19 +91,16 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="header\FoodDefinitionRepository.h" />
+    <ClInclude Include="header\NutritionalValue.h" />
     <ClInclude Include="header\RecipeRepository.h" />
     <ClInclude Include="header\UniqueRepository.h" />
     <ClInclude Include="header\WeekRepository.h" />
     <ClInclude Include="interface\model\BonusPointsMap.h" />
     <ClInclude Include="interface\model\Day.h" />
     <ClInclude Include="interface\model\Entity.h" />
-    <ClInclude Include="interface\model\Gerecht.h" />
-    <ClInclude Include="interface\model\GerechtDefinitie.h" />
     <ClInclude Include="interface\model\IFoodDefinitionRepository.h" />
+    <ClInclude Include="interface\model\ILotFactory.h" />
     <ClInclude Include="interface\model\IObserver.h" />
     <ClInclude Include="interface\model\IRecipeRepository.h" />
     <ClInclude Include="interface\model\IRepository.h" />
@@ -111,11 +108,12 @@
     <ClInclude Include="interface\model\Item.h" />
     <ClInclude Include="interface\model\IWeekRepository.h" />
     <ClInclude Include="interface\model\Lot.h" />
-    <ClInclude Include="interface\model\ILotFactory.h" />
     <ClInclude Include="interface\model\LotFactory.h" />
     <ClInclude Include="interface\model\ManualItem.h" />
+    <ClInclude Include="interface\model\Model.h" />
     <ClInclude Include="interface\model\ModelException.h" />
     <ClInclude Include="interface\model\Naam.h" />
+    <ClInclude Include="interface\model\NutritionalValue.h" />
     <ClInclude Include="interface\model\Observer.h" />
     <ClInclude Include="interface\model\Personalia.h" />
     <ClInclude Include="interface\model\PointsCalculator.h" />
@@ -126,20 +124,19 @@
     <ClInclude Include="interface\model\Subject.h" />
     <ClInclude Include="interface\model\Voedingsmiddel.h" />
     <ClInclude Include="interface\model\VoedingsmiddelDefinitie.h" />
-    <ClInclude Include="interface\model\VoedingsMiddelDefinitionVisitor.h" />
     <ClInclude Include="interface\model\Week.h" />
     <ClInclude Include="interface\model\WWDefinitions.h" />
-    <ClInclude Include="interface\model\Model.h" />
+    <ClInclude Include="interface\model\XmlDefinitions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\BonusPointsMap.cpp" />
     <ClCompile Include="source\Day.cpp" />
     <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\FoodDefinitionRepository.cpp" />
-    <ClCompile Include="source\Gerecht.cpp" />
     <ClCompile Include="source\Lot.cpp" />
     <ClCompile Include="source\LotFactory.cpp" />
     <ClCompile Include="source\ModelException.cpp" />
+    <ClCompile Include="source\NutritionalValue.cpp" />
     <ClCompile Include="source\Observer.cpp" />
     <ClCompile Include="source\Personalia.cpp" />
     <ClCompile Include="source\PointsCalculator.cpp" />

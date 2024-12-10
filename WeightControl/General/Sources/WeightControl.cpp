@@ -77,7 +77,7 @@ BOOL CWWApplication::InitInstance()
 
     mDataDirectory = inifile[_T("General")][_T("DataPath")];
 
-    WW_NAMESPACE::XmlReader reader(mModel);
+    ww2024::XmlReader reader(mModel);
     reader.Read(mDataDirectory);
     if (mModel.GetActivePersonalia() == NULL) {
         NewNameDialog dialog(NULL);
@@ -98,7 +98,7 @@ BOOL CWWApplication::InitInstance()
                 MessageBox(0, _T("Invalid personalia"), terror.c_str(), MB_OK);
                 return FALSE;
             }
-            // TODO ww2019: Place code here to handle when the dialog is
+            // TODO ww2024: Place code here to handle when the dialog is
             //  dismissed with OK
         }
         else if (nResponse == IDCANCEL)
@@ -115,12 +115,12 @@ BOOL CWWApplication::InitInstance()
     INT_PTR nResponse = dlg.DoModal();
     if (nResponse == IDOK)
     {
-        // TODO ww2019: Place code here to handle when the dialog is
+        // TODO ww2024: Place code here to handle when the dialog is
         //  dismissed with OK
     }
     else if (nResponse == IDCANCEL)
     {
-        // TODO ww2019: Place code here to handle when the dialog is
+        // TODO ww2024: Place code here to handle when the dialog is
         //  dismissed with Cancel
     }
 
@@ -140,7 +140,7 @@ std::tstring CWWApplication::GetUserDirectory() const
 CWWApplication::~CWWApplication()
 {
     try {
-        WW_NAMESPACE::XmlWriter writer(mModel);
+        ww2024::XmlWriter writer(mModel);
         writer.Write(mDataDirectory);
     }
     catch (const XERCES_CPP_NAMESPACE::IOException& error) {

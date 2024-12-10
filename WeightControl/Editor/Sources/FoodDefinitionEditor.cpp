@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 
+#include "model/NutritionalValue.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "EditFoodDefDialog.h"
@@ -28,8 +29,8 @@ bool FoodDefinitionEditor::Edit(weight::VMDefinitie& definition) const
 std::unique_ptr<weight::VMDefinitie> FoodDefinitionEditor::Create() const
 {
     m_newDefinition = true;
-    auto vmdefBase = std::make_unique<weight::CalculatedVMDef>(m_model.GetCalculator());
-    auto definition = std::make_unique<weight::VMDefinitie>(m_model.GetCalculator(), L"", L"g", std::move(vmdefBase));
+    auto nutritionalValue = std::make_unique<weight::NutritionalValue>(m_model.GetCalculator());
+    auto definition = std::make_unique<weight::VMDefinitie>(m_model.GetCalculator(), L"", L"g", std::move(nutritionalValue));
     if (Edit(*definition)) {
         m_newDefinition = false;
         return std::move(definition);

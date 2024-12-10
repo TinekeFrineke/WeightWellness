@@ -7,7 +7,6 @@
 #include "FoodDefinitionRepository.h"
 #include "Lot.h"
 #include "Personalia.h"
-#include "GerechtDefinitie.h"
 #include "ReceptDefinitie.h"
 #include "Repository.h"
 #include "VoedingsmiddelDefinitie.h"

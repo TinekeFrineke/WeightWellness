@@ -16,11 +16,11 @@ public:
                    double aVetPer100Units,
                    double aVezelsPer100Units,
                    double aKoolhydratenPer100Units)
-        : mKCalPer100Units(aKCalPer100Units),
-        mEiwitPer100Units(anEiwitPer100Units),
-        mVetPer100Units(aVetPer100Units),
-        mVezelsPer100Units(aVezelsPer100Units),
-        mKoolhydratenPer100Units(aKoolhydratenPer100Units)
+        : mKCalPer100Units(aKCalPer100Units)
+        , mEiwitPer100Units(anEiwitPer100Units)
+        , mVetPer100Units(aVetPer100Units)
+        , mVezelsPer100Units(aVezelsPer100Units)
+        , mKoolhydratenPer100Units(aKoolhydratenPer100Units)
     {
     }
 

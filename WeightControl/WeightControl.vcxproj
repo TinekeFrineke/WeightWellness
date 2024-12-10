@@ -13,6 +13,7 @@
   <ItemGroup>
     <Image Include="dikkie.bmp" />
     <Image Include="naamloos.bmp" />
+    <Image Include="res\WeightWatchers.ico" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Analyse.txt" />
@@ -61,6 +62,7 @@
     <ClInclude Include="General\Headers\ItemEditVisitor.h" />
     <ClInclude Include="General\Headers\stdafx.h" />
     <ClInclude Include="General\Headers\WeightControl.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controls\Sources\BonusList.cpp" />
@@ -144,8 +146,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;WW_NAMESPACE=ww2019;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Editor\Headers;$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)General\Headers;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2019\interface;$(SolutionDir)XmlWriter2019\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Editor\Headers;$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)General\Headers;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -153,7 +155,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;C:\Projects\VC2019\Utilities\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2019.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2019.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2019.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Debug\xerces-c_2_8D.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;C:\Projects\VC2019\Utilities\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2024.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Debug\xerces-c_2_8D.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -173,7 +175,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;WW_NAMESPACE=ww2019;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Editor\Headers;$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)General\Headers;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2019\interface;$(SolutionDir)XmlWriter2019\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>

@@ -8,24 +8,24 @@
 #include <windows.h>
 #endif
 
+#include "NutritionalValue.h"
+
 namespace weight
 {
 
 
 int Entity<VMDefinitie>::mNumberOfInstances = 0;
-int Entity<CalculatedVMDef>::mNumberOfInstances = 0;
-int Entity<FixedVMDef>::mNumberOfInstances = 0;
 
 
 VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
                          const std::tstring& aName,
                          const std::wstring& aUnit,
-                         std::unique_ptr<VMDefBase> aDefinition)
+                         std::unique_ptr<NutritionalValue> nutritionalValue)
     : m_calculator(std::move(calculator))
     , mName(aName)
     , mUnit(aUnit)
     , mFavourite(false)
-    , mPoints(std::move(aDefinition))
+    , mPoints(std::move(nutritionalValue))
 {
     assert(mPoints != NULL);
 #ifdef FIND_LEAKS
@@ -35,13 +35,13 @@ VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
 
 
 VMDefinitie::VMDefinitie(const VMDefinitie& aDefinitie)
-    : m_calculator(aDefinitie.m_calculator),
-    mCategory(aDefinitie.mCategory),
-    mMerk(aDefinitie.mMerk),
-    mName(aDefinitie.mName),
-    mUnit(aDefinitie.mUnit),
-    mFavourite(aDefinitie.mFavourite),
-    mPoints(aDefinitie.mPoints->Copy())
+    : m_calculator(aDefinitie.m_calculator)
+    , mCategory(aDefinitie.mCategory)
+    , mMerk(aDefinitie.mMerk)
+    , mName(aDefinitie.mName)
+    , mUnit(aDefinitie.mUnit)
+    , mFavourite(aDefinitie.mFavourite)
+    , mPoints(std::make_unique<NutritionalValue>(*aDefinitie.mPoints))
 {
 #ifdef FIND_LEAKS
     Register();
@@ -58,7 +58,7 @@ VMDefinitie& VMDefinitie::operator=(const VMDefinitie& aDefinitie)
     if (&aDefinitie == this)
         return *this;
 
-    mPoints = aDefinitie.mPoints->Copy();
+    mPoints = std::make_unique<NutritionalValue>(*aDefinitie.mPoints);
 
     mCategory = aDefinitie.mCategory;
     mMerk = aDefinitie.mMerk;
@@ -80,34 +80,6 @@ VMDefinitie::~VMDefinitie()
 #ifdef FIND_LEAKS
     Unregister();
 #endif
-}
-
-
-bool VMDefinitie::IsCalculated() const noexcept
-{
-    assert(mPoints != NULL);
-    return mPoints->IsCalculated();
-}
-
-
-bool VMDefinitie::IsFixed() const noexcept
-{
-    assert(mPoints != NULL);
-    return mPoints->IsFixed();
-}
-
-
-CalculatedVMDef* VMDefinitie::GetCalculatedVMDef() noexcept
-{
-    assert(mPoints != NULL);
-    return mPoints->GetCalculatedVMDef();
-}
-
-
-FixedVMDef* VMDefinitie::GetFixedVMDef() noexcept
-{
-    assert(mPoints != NULL);
-    return mPoints->GetFixedVMDef();
 }
 
 
@@ -138,124 +110,48 @@ bool VMDefinitie::RemovePortie(Portie* aPortie)
 }
 
 
+void VMDefinitie::SetNutritionalValues(const FoodParameters& parameters)
+{
+    mPoints->SetParameters(parameters);
+}
+
+
 double VMDefinitie::GetPointsPer100Units() const
 {
     return mPoints->GetPointsPer100Units();
 }
 
 
-void VMDefinitie::SetCalculated(const FoodParameters& oParameters)
+void VMDefinitie::SetKCalPer100Units(double value)
 {
-    if (mPoints->IsCalculated())
-        return;
-
-    auto def = std::make_unique<CalculatedVMDef>(m_calculator);
-    def->SetParameters(oParameters);
-    mPoints = std::move(def);
+    mPoints->SetKCalPer100Units(value);
 }
 
 
-void VMDefinitie::SetFixed()
+void VMDefinitie::SetVetPer100Units(double value)
 {
-    if (mPoints->IsFixed())
-        return;
-
-    auto fdef = std::make_unique<FixedVMDef>();
-    fdef->SetPointsPer100Units(mPoints->GetPointsPer100Units());
-    mPoints = std::move(fdef);
+    mPoints->SetFatPer100Units(value);
 }
 
 
-CalculatedVMDef::CalculatedVMDef(std::shared_ptr<PointsCalculator> calculator)
-    : m_calculator(calculator)
+void VMDefinitie::SetEiwitPer100Units(double value)
 {
-#ifdef FIND_LEAKS
-    Register();
-#endif
+    mPoints->SetFatPer100Units(value);
 }
 
 
-CalculatedVMDef::CalculatedVMDef(const CalculatedVMDef& aVMDef) noexcept
-    : VMDefBase(aVMDef)
-    , m_calculator(aVMDef.m_calculator),
-    mParameters(aVMDef.mParameters)
+void VMDefinitie::SetKoolhydratenPer100Units(double value)
 {
-#ifdef FIND_LEAKS
-    Register();
-#endif
+    mPoints->SetCarbohydratesPer100Units(value);
 }
 
 
-CalculatedVMDef& CalculatedVMDef::operator=(const CalculatedVMDef& aVMDef)
+void VMDefinitie::SetVezelsPer100Units(double value)
 {
-    if (&aVMDef == this)
-        return *this;
-
-    mParameters = aVMDef.mParameters;
-    return *this;
+    mPoints->SetFibersPer100Units(value);
 }
 
 
-CalculatedVMDef::~CalculatedVMDef()
-{
-#ifdef FIND_LEAKS
-    Unregister();
-#endif
-}
-
-void CalculatedVMDef::Accept(VoedingsMiddelDefinitionVisitor& visitor)
-{
-    visitor.Visit(* this);
-}
-
-void CalculatedVMDef::SetParameters(const FoodParameters& aParameters)
-{
-    mParameters = aParameters;
-}
-
-
-std::unique_ptr<VMDefBase> CalculatedVMDef::Copy() const
-{
-    return std::make_unique<CalculatedVMDef>(*this);
-}
-
-
-FixedVMDef::FixedVMDef()
-    : mPointsPer100Units(0)
-{
-#ifdef FIND_LEAKS
-    Register();
-#endif
-}
-
-
-FixedVMDef::FixedVMDef(const FixedVMDef& aDef)
-    : VMDefBase(aDef),
-    mPointsPer100Units(aDef.mPointsPer100Units)
-{
-#ifdef FIND_LEAKS
-    Register();
-#endif
-}
-
-
-FixedVMDef::~FixedVMDef()
-{
-#ifdef FIND_LEAKS
-    Unregister();
-#endif
-}
-
-void FixedVMDef::Accept(VoedingsMiddelDefinitionVisitor& visitor)
-{
-    visitor.Visit(*this);
-}
-
-
-std::unique_ptr<VMDefBase> FixedVMDef::Copy() const
-{
-    return std::make_unique<FixedVMDef>(*this);
-}
 
 
 } // namespace weight

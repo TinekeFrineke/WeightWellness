@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by WeightWatchers.rc
+// Used by WeightControl.rc
 //
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
@@ -110,8 +110,6 @@
 #define IDS_VEZELS_PER_100              1105
 #define IDS_PUNTEN_PER_100              1106
 #define IDC_PUNTEN_PER_100              1107
-#define IDC_RADIO_BEREKEND              1108
-#define IDC_RADIO_VAST                  1109
 #define IDC_PER_STATIC                  1110
 #define IDC_EENHEDEN_STATIC             1111
 #define IDC_EENHEDEN                    1112

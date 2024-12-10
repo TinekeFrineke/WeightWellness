@@ -59,11 +59,8 @@ BOOL EditVoedingsmiddelDialog::OnInitDialog()
 
     mNaam.SetValue(mVoedingsmiddel.GetName());
     mPortie.Initialize();
-    weight::PortionedLot* dlot = mVoedingsmiddel.GetLot().GetPortionedLot();
-    if (dlot != nullptr)
-        mPortie.Fill(mVoedingsmiddelDef.GetPortieList(), dlot->GetPortie().GetName());
-    else
-        mPortie.Fill(mVoedingsmiddelDef.GetPortieList());
+    auto& lot = mVoedingsmiddel.GetLot();
+    mPortie.Fill(mVoedingsmiddelDef.GetPortieList(), lot.GetPortie().GetName());
 
     weight::Portie* portie = mPortie.GetSelectedPortie();
     (void)portie;
@@ -154,10 +151,9 @@ void EditVoedingsmiddelDialog::OnBnClickedOk()
         return;
     }
 
-    if (mVoedingsmiddel.GetLot().GetPortionedLot() != nullptr &&
-        mVoedingsmiddel.GetLot().GetPortionedLot()->GetPortie().GetName() == mPortie.GetSelectedPortie()->GetName())
+    if (mVoedingsmiddel.GetLot().GetPortie().GetName() == mPortie.GetSelectedPortie()->GetName())
     {
-        mVoedingsmiddel.GetLot().GetPortionedLot()->SetNumberOfPortions(mAantalPorties.GetValue());
+        mVoedingsmiddel.GetLot().SetNumberOfPortions(mAantalPorties.GetValue());
     }
     else
     {
@@ -174,7 +170,7 @@ void EditVoedingsmiddelDialog::OnBnClickedOk()
 }
 
 
-void EditVoedingsmiddelDialog::EditState::UpdatePortionValues(const weight::PortionedLot& aLot)
+void EditVoedingsmiddelDialog::EditState::UpdatePortionValues(const weight::Lot& aLot)
 {
     GetAantalEenheden().SetValue(aLot.GetPortie().GetUnits() * aLot.GetNumberOfPortions());
     GetAantalPorties().SetValue(aLot.GetNumberOfPortions());
@@ -200,6 +196,5 @@ void EditStandardPortionsState::Initialize()
     GetPortieBox().EnableWindow(true);
     GetPortieBox().Fill(GetDefinitie().GetPortieList());
 
-    if (GetVoedingsMiddel().GetLot().GetPortionedLot() != nullptr)
-        UpdatePortionValues(*GetVoedingsMiddel().GetLot().GetPortionedLot());
+    UpdatePortionValues(GetVoedingsMiddel().GetLot());
 }

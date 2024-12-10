@@ -67,7 +67,7 @@ void PortieList::ClearItems()
 
 void PortieList::Update(PortieListItem* anItem)
 {
-    // TODO ww2019: Place code here to handle when the dialog is
+    // TODO ww2024: Place code here to handle when the dialog is
     // dismissed with OK
     for (size_t i = 0; i < mItems.size(); ++i)
     {

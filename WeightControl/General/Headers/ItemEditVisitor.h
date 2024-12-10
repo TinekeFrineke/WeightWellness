@@ -15,7 +15,6 @@ public:
                         ItemEditVisitor(weight::Model & aModel, CWnd * aParent) : mModel(aModel), mParent(aParent) {}
 
   virtual void          Visit(weight::Recept & aRecept);
-  virtual void          Visit(weight::Gerecht & aGerecht);
   virtual void          Visit(weight::Voedingsmiddel & aVoedingsmiddel);
   virtual void          Visit(weight::ManualItem & anItem);
 

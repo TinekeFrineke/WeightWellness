@@ -2,7 +2,6 @@
 
 #include "controls/doubleedit.h"
 #include "controls/stringedit.h"
-#include "model/lot.h"
 
 #include "portiecombobox.h"
 #include "resource.h"
@@ -12,6 +11,7 @@
 
 namespace weight
 {
+class Lot;
 class Model;
 class Voedingsmiddel;
 class VMDefinitie;
@@ -36,8 +36,8 @@ public:
             mModel(aModel)
         {}
 
-        void                          UpdatePortionValues(const weight::PortionedLot& aLot);
-        virtual void                  Initialize() = 0;
+        void UpdatePortionValues(const weight::Lot & aLot);
+        virtual void Initialize() = 0;
 
     protected:
         CDoubleEdit& GetAantalPorties() { return mDialog.mAantalPorties; }
@@ -60,7 +60,7 @@ public:
                              weight::VMDefinitie& aDefinitie,
                              CWnd* pParent = NULL);
 
-    virtual                       ~EditVoedingsmiddelDialog();
+    virtual ~EditVoedingsmiddelDialog() override;
 
     // Dialog Data
     enum { IDD = IDD_EDIT_VOEDINGSMIDDEL };

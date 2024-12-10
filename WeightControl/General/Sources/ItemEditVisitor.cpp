@@ -7,6 +7,7 @@
 
 #include "model/ManualItem.h"
 #include "model/Model.h"
+#include "model/NutritionalValue.h"
 #include "model/Recept.h"
 #include "model/ReceptDefinitie.h"
 #include "model/Voedingsmiddel.h"
@@ -36,22 +37,17 @@ void ItemEditVisitor::Visit(weight::Recept& aRecept)
 }
 
 
-void ItemEditVisitor::Visit(weight::Gerecht& aGerecht)
-{
-    (void)&aGerecht;
-}
-
-
 void ItemEditVisitor::Visit(weight::Voedingsmiddel& aVoedingsmiddel)
 {
     weight::VMDefinitie* definitie = mModel.FindVoedingsmiddelDefinitie(aVoedingsmiddel.GetName());
     if (definitie == NULL)
     {
-        auto fixedDefinition = std::make_unique<weight::FixedVMDef>();
+        auto nutritionalValue = std::make_unique<weight::NutritionalValue>(mModel.GetCalculator());
+        nutritionalValue->SetParameters(aVoedingsmiddel.GetConstLot().GetParameters());
         auto newDefinition = std::make_unique<weight::VMDefinitie>(mModel.GetCalculator(),
-                                                      aVoedingsmiddel.GetName(),
-                                                      aVoedingsmiddel.GetUnit(),
-                                                      std::move(fixedDefinition));
+                                                                   aVoedingsmiddel.GetName(),
+                                                                   aVoedingsmiddel.GetUnit(),
+                                                                   std::move(nutritionalValue));
         newDefinition->SetCategory(aVoedingsmiddel.GetCategory());
         definitie = newDefinition.get();
         mModel.Add(std::move(newDefinition));

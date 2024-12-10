@@ -114,7 +114,7 @@ void CItemsPage::EditItem()
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
         {
-            // TODO ww2019: Place code here to handle when the dialog is
+            // TODO ww2024: Place code here to handle when the dialog is
             // dismissed with OK
         }
     }

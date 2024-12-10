@@ -60,6 +60,7 @@ public:
     const std::vector<std::unique_ptr<Week>>& GetWeeks() const noexcept { return mWeeks; }
     const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept { return mPersonalia; }
     const BonusPointsMap& GetBonusPointsMap() const noexcept { return mBonusPointsMap; }
+    BonusPointsMap& GetBonusPointsMap() noexcept { return mBonusPointsMap; }
 
     double GetPuntenTotaal(STRATEGY_TYPE eType) const;
     double GetWeekPuntenTotaal() const;

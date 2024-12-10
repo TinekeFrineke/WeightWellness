@@ -2,7 +2,6 @@
 
 
 #include "ILotFactory.h"
-#include "VoedingsMiddelDefinitionVisitor.h"
 
 namespace weight {
 
@@ -14,7 +13,7 @@ class LotFactory
 public:
     explicit LotFactory(std::shared_ptr<PointsCalculator> calculator) noexcept;
 
-    std::unique_ptr<PortionedLot> Create(VMDefinitie& aDefinitie, Portie& aPortie) override;
+    std::unique_ptr<PortionedLot> Create(const VMDefinitie& aDefinitie, Portie& aPortie) override;
 
 private:
     std::shared_ptr<PointsCalculator> m_calculator;

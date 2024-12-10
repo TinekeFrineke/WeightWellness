@@ -12,7 +12,7 @@
 
 // ReceptenPage dialog
 
-// TODO ww2019: Now the page directly removes recepies from the model. 
+// TODO ww2024: Now the page directly removes recepies from the model. 
 // It would be better if this happens only when the user presses "OK".
 
 IMPLEMENT_DYNAMIC(ReceptenPage, CDialog)

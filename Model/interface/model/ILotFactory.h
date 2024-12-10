@@ -13,7 +13,7 @@ class ILotFactory
 public:
     virtual ~ILotFactory() = default;
 
-    virtual std::unique_ptr<PortionedLot> Create(VMDefinitie& aDefinitie, Portie& aPortie) = 0;
+    virtual std::unique_ptr<PortionedLot> Create(const VMDefinitie& aDefinitie, Portie& aPortie) = 0;
 };
 
 } // namespace weight

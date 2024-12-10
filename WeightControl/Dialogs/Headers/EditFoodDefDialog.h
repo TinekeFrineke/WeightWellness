@@ -18,7 +18,6 @@
 
 namespace weight
 {
-class CalculatedVMDef;
 class FixedVMDef;
 class IRepository;
 class VMDefinitie;
@@ -58,8 +57,6 @@ protected:
     afx_msg void OnEnChangeEiwittenPer100();
     afx_msg void OnEnChangeKoolhydratenPer100();
     afx_msg void OnEnChangeVezelsPer100();
-    afx_msg void OnBnClickedRadioBerekend();
-    afx_msg void OnBnClickedRadioVast();
     afx_msg void OnBnClickedCancel();
     afx_msg void OnEnChangeEenheden();
     afx_msg void OnCbnSelchangeUnit();
@@ -73,15 +70,12 @@ private:
     /// Processes the entered definition data into the definition(s)
     bool                      FinalizeData();
     bool                      FinalizeCalculatedData();
-    bool                      FinalizeFixedData();
     bool                      CreateFood();
     bool                      CreateCommonFoodParts();
     bool                      CreateCalculatedFood();
-    bool                      CreateFixedFood();
     void                      UpdateUiCalculated(bool bCalculated);
 
     bool                      OnCalculatedOk();
-    bool                      OnFixedOk();
 
     CStatic                   mKCalPer100Static;
     CStatic                   mEiwitPer100Static;
