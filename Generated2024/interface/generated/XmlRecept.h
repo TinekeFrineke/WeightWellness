@@ -22,10 +22,10 @@ public:
 
     std::wstring Getnaam() const;
     double Getpunten() const;
-    double Getaantalporties() const;
+    int Getaantalporties() const;
     void Setnaam(const std::wstring & anaam);
     void Setpunten(double apunten);
-    void Setaantalporties(double aaantalporties);
+    void Setaantalporties(int aaantalporties);
 
 private:
     XmlRecept(const XmlRecept& anOriginal) = delete;
@@ -33,7 +33,7 @@ private:
 
     std::wstring mnaam;
     double mpunten;
-    double maantalporties;
+    int maantalporties;
 };
 
 

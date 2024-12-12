@@ -31,10 +31,6 @@ void XmlHandmatigitemWriter::Fill(XERCES_CPP_NAMESPACE::DOMDocument & aDocument,
         auto buffer{ std::to_wstring(aHandmatigitem.Getpunten()) };
         anElement.setAttribute(_T("punten"), buffer.c_str());
     }
-    {
-        auto buffer{ std::to_wstring(aHandmatigitem.Gethoeveelheid()) };
-        anElement.setAttribute(_T("hoeveelheid"), buffer.c_str());
-    }
 }
 
 

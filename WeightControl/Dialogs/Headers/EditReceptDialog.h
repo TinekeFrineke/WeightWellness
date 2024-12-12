@@ -3,6 +3,7 @@
 #include "resource.h"
 #include "controls/stringedit.h"
 #include "controls/doubleedit.h"
+#include "controls/IntEdit.h"
 
 
 // EditReceptDialog dialog
@@ -30,7 +31,7 @@ protected:
 
 private:
   CStringEdit                   mName;
-  CDoubleEdit                   mPorties;
+  CIntEdit                      mPorties;
   CDoubleEdit                   mPunten;
 
   weight::Model &                   mModel;

@@ -3,6 +3,7 @@
 #include "afxwin.h"
 
 #include "controls/doubleedit.h"
+#include "controls/IntEdit.h"
 #include "controls/stringedit.h"
 
 #include "receptdefinitieslist.h"
@@ -58,7 +59,7 @@ private:
     // Food items to pick from
     ReceptDefinitiesList  mItemList;
     // The number of porties
-    CDoubleEdit           mPorties;
+    CIntEdit              mPorties;
     CDoubleEdit           mPoints;
 
     weight::Model& mModel;

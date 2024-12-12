@@ -33,7 +33,7 @@ public:
     const XmlVoedingswaarde & GetVoedingswaarde() const;
     XmlVoedingswaarde & GetVoedingswaarde();
     const std::vector<std::unique_ptr<XmlPortie>> & GetPortieList() const;
-    void SetXmlVoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde);
+    void Setvoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde);
     void Add(std::unique_ptr<XmlPortie> aPortie);
     std::wstring Getnaam() const;
     std::wstring Getcategorie() const;

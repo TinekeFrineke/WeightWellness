@@ -70,8 +70,6 @@ weight::Result XmlWriter::Write(const std::tstring& aDirectory)
         result = WriteVoedingsmiddelDefinities(aDirectory + _T("\\voedingsmiddeldefinities.xml"));
     if (result == weight::Result::Ok)
         result = WriteRecepten(aDirectory + _T("\\recepten.xml"));
-    //if (result == weight::Result::Ok)
-    //    result = WriteGerechten(aDirectory + _T("\\restaurantgerechten.xml"));
     if (result == weight::Result::Ok)
         result = WriteWeeks(aDirectory);
 
@@ -164,7 +162,7 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
         xmlwaarde->Setvezelsper100(nutritionalValue.GetFibersPer100Units());
         xmlwaarde->Setkoolhydratenper100(nutritionalValue.GetCarbohydratesPer100Units());
 
-        xmlvmdefinitie->SetXmlVoedingswaarde(std::move(xmlwaarde));
+        xmlvmdefinitie->Setvoedingswaarde(std::move(xmlwaarde));
         xmlvmdefinitie->Setunit(vmdefinities[i]->GetUnit());
         xmlvmdefinitie->Setfavoriet(vmdefinities[i]->IsFavourite()
                                     ? XmlVoedingsmiddeldef::favoriet::yes
@@ -271,10 +269,10 @@ weight::Result XmlWriter::Create(const weight::Voedingsmiddel& aMiddel,
 
     auto portie = std::make_unique<XmlPortie>();
     Create(aMiddel.GetConstLot().GetPortie(), *portie);
-    anXmlMiddel.SetXmlPortie(std::move(portie));
+    anXmlMiddel.Setportie(std::move(portie));
 
     auto voedingswaarde = CreateVoedingswaarde(aMiddel.GetConstLot().GetParameters());
-    anXmlMiddel.SetXmlVoedingswaarde(std::move(voedingswaarde));
+    anXmlMiddel.Setvoedingswaarde(std::move(voedingswaarde));
 
     return weight::Result::Ok;
 }
@@ -294,7 +292,6 @@ weight::Result XmlWriter::Create(const weight::ManualItem& anItem,
                                  XmlHandmatigitem& anXmlItem)
 {
     anXmlItem.Setnaam(anItem.GetName());
-    anXmlItem.Sethoeveelheid(anItem.GetAmount());
     anXmlItem.Setpunten(anItem.GetPoints());
     return weight::Result::Ok;
 }

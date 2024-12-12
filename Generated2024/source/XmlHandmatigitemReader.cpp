@@ -46,10 +46,6 @@ XmlClass::Result XmlHandmatigitemReader::Fill(const XERCES_CPP_NAMESPACE::DOMNod
     if (puntennode != nullptr) {
         aHandmatigitem.Setpunten(_wtof(puntennode->getNodeValue()));
     }
-    const XERCES_CPP_NAMESPACE::DOMNode* hoeveelheidnode = attributes->getNamedItem(_T("hoeveelheid"));
-    if (hoeveelheidnode != nullptr) {
-        aHandmatigitem.Sethoeveelheid(_wtof(hoeveelheidnode->getNodeValue()));
-    }
     }
 
     return XmlClass::Result::Ok;

@@ -39,7 +39,7 @@ const std::vector<std::unique_ptr<XmlPortie>> & XmlVoedingsmiddeldef::GetPortieL
 }
 
 
-void XmlVoedingsmiddeldef::SetXmlVoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde)
+void XmlVoedingsmiddeldef::Setvoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde)
 {
     assert(mVoedingswaarde == nullptr);
     mVoedingswaarde = std::move(aVoedingswaarde);

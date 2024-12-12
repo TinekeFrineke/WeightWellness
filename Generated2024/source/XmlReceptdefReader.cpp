@@ -76,7 +76,7 @@ XmlClass::Result XmlReceptdefReader::Fill(const XERCES_CPP_NAMESPACE::DOMNode & 
       aReceptdef.Setnaam(naamnode->getNodeValue());
     const XERCES_CPP_NAMESPACE::DOMNode* portiesnode = attributes->getNamedItem(_T("porties"));
     if (portiesnode != nullptr) {
-        aReceptdef.Setporties(_wtof(portiesnode->getNodeValue()));
+        aReceptdef.Setporties(_ttoi(portiesnode->getNodeValue()));
     }
     }
 

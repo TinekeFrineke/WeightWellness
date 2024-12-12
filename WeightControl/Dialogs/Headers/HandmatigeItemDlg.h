@@ -31,7 +31,6 @@ protected:
 
 private:
     CStringEdit       mName;
-    CDoubleEdit       mAmount;
     CDoubleEdit       mPoints;
 
     std::unique_ptr<weight::ManualItem>  mItem;

@@ -43,14 +43,14 @@ const XmlVoedingswaarde & XmlVoedingsmiddel::GetVoedingswaarde() const
 }
 
 
-void XmlVoedingsmiddel::SetXmlPortie(std::unique_ptr<XmlPortie> aPortie)
+void XmlVoedingsmiddel::Setportie(std::unique_ptr<XmlPortie> aPortie)
 {
     assert(mPortie == nullptr);
     mPortie = std::move(aPortie);
 }
 
 
-void XmlVoedingsmiddel::SetXmlVoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde)
+void XmlVoedingsmiddel::Setvoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde)
 {
     assert(mVoedingswaarde == nullptr);
     mVoedingswaarde = std::move(aVoedingswaarde);

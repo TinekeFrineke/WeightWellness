@@ -45,9 +45,10 @@ XmlClass::Result XmlVoedingsmiddeldefReader::Fill(const XERCES_CPP_NAMESPACE::DO
         if (type == XERCES_CPP_NAMESPACE::DOMNode::ELEMENT_NODE) {
      if (_tcscmp(node->getNodeName(), _T("voedingswaarde")) == 0)
      {
-         XmlVoedingswaardeReader VoedingswaardeReader;
-         XmlVoedingswaarde & Voedingswaarde = aVoedingsmiddeldef.GetVoedingswaarde();
-         VoedingswaardeReader.Fill(*node, Voedingswaarde);
+         XmlVoedingswaardeReader voedingswaardeReader;
+         auto voedingswaarde = voedingswaardeReader.Generate(*node);
+         if (voedingswaarde != nullptr)
+             aVoedingsmiddeldef.Setvoedingswaarde(std::move(voedingswaarde)); 
      }
      else if (_tcscmp(node->getNodeName(), _T("portie")) == 0)
      {

@@ -23,9 +23,9 @@ public:
     WERKTYPE              GetTypeOfWork() const { return mWerkType; }
     STRATEGY_TYPE         GetStrategy() const { return mStrategy; }
     double                GetPuntenTotaal(STRATEGY_TYPE eType) const;
-    double                GetKCPuntenTotaal() const { return mKCPuntenTotaal; }
+    int                   GetKCPuntenTotaal() const { return mKCPuntenTotaal; }
     double                GetCHPuntenTotaal() const { return mCHPuntenTotaal; }
-    double                GetKCWeekPuntenTotaal() const { return mKCWeekPuntenTotaal; }
+    int                   GetKCWeekPuntenTotaal() const { return mKCWeekPuntenTotaal; }
     double                GetCHWeekPuntenTotaal() const { return mCHWeekPuntenTotaal; }
     double                GetStartGewicht() const { return mStartGewicht; }
     double                GetHuidigGewicht() const { return mHuidigGewicht; }
@@ -38,9 +38,9 @@ public:
     void                  SetTypeOfWork(WERKTYPE aType) { mWerkType = aType; }
     void                  SetStrategy(STRATEGY_TYPE aType) { mStrategy = aType; }
     void                  SetPuntenTotaal(STRATEGY_TYPE eType, double aValue);
-    void                  SetKCPuntenTotaal(double aValue) { mKCPuntenTotaal = aValue; }
+    void                  SetKCPuntenTotaal(int aValue) { mKCPuntenTotaal = aValue; }
     void                  SetCHPuntenTotaal(double value) { mCHPuntenTotaal = value; }
-    void                  SetKCWeekPuntenTotaal(double aValue) { mKCWeekPuntenTotaal = aValue; }
+    void                  SetKCWeekPuntenTotaal(int aValue) { mKCWeekPuntenTotaal = aValue; }
     void                  SetCHWeekPuntenTotaal(double aValue) { mCHWeekPuntenTotaal = aValue; }
     void                  SetStartGewicht(double dValue) { mStartGewicht = dValue; }
     void                  SetHuidigGewicht(double dValue) { mHuidigGewicht = dValue; }
@@ -54,9 +54,9 @@ private:
     Utils::Date           mDateOfBirth;
     WERKTYPE              mWerkType{ WERKTYPE::Zittend };
     STRATEGY_TYPE         mStrategy{ STRATEGY_TYPE::KCal };
-    double                mKCPuntenTotaal{ 0 };
+    int                   mKCPuntenTotaal{ 0 };
     double                mCHPuntenTotaal{ 0 };
-    double                mKCWeekPuntenTotaal{ 0 };
+    int                   mKCWeekPuntenTotaal{ 0 };
     double                mCHWeekPuntenTotaal{ 0 };
     double                mStartGewicht{ 0 };
     double                mHuidigGewicht{ 0 };

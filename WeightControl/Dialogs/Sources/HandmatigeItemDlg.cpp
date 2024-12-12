@@ -25,7 +25,6 @@ void HandmatigeItemDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
     DDX_Control(pDX, IDC_EDIT1, mName);
-    DDX_Control(pDX, IDC_EDIT2, mAmount);
     DDX_Control(pDX, IDC_EDIT3, mPoints);
 }
 
@@ -42,13 +41,11 @@ BOOL HandmatigeItemDlg::OnInitDialog()
 
     if (mItem == NULL)
     {
-        mAmount.SetValue(1);
         mPoints.SetValue(0);
     }
     else
     {
         mName.SetValue(mItem->GetName());
-        mAmount.SetValue(mItem->GetAmount());
         mPoints.SetValue(mItem->GetPoints());
     }
 
@@ -63,6 +60,6 @@ void HandmatigeItemDlg::OnBnClickedOk()
     if (mItem == NULL)
         mItem = std::make_unique<weight::ManualItem>(mName.GetValue(), mPoints.GetValue());
 
-    mItem->Set(mPoints.GetValue(), mAmount.GetValue());
+    mItem->Set(mPoints.GetValue());
     OnOK();
 }

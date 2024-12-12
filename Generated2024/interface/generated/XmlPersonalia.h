@@ -42,10 +42,10 @@ public:
 
     std::wstring Getnaam() const;
     std::wstring Getgebruikersnaam() const;
-    double Getkcpunten() const;
-    double Getkcweekpunten() const;
-    double Getchpunten() const;
-    double Getchweekpunten() const;
+    int Getkcpunten() const;
+    int Getkcweekpunten() const;
+    int Getchpunten() const;
+    int Getchweekpunten() const;
     std::wstring Getgeboren() const;
     geslacht Getgeslacht() const;
     werk Getwerk() const;
@@ -57,10 +57,10 @@ public:
     strategie Getstrategie() const;
     void Setnaam(const std::wstring & anaam);
     void Setgebruikersnaam(const std::wstring & agebruikersnaam);
-    void Setkcpunten(double akcpunten);
-    void Setkcweekpunten(double akcweekpunten);
-    void Setchpunten(double achpunten);
-    void Setchweekpunten(double achweekpunten);
+    void Setkcpunten(int akcpunten);
+    void Setkcweekpunten(int akcweekpunten);
+    void Setchpunten(int achpunten);
+    void Setchweekpunten(int achweekpunten);
     void Setgeboren(const std::wstring & ageboren);
     void Setgeslacht(geslacht ageslacht);
     void Setwerk(werk awerk);
@@ -77,10 +77,10 @@ private:
 
     std::wstring mnaam;
     std::wstring mgebruikersnaam;
-    double mkcpunten;
-    double mkcweekpunten;
-    double mchpunten;
-    double mchweekpunten;
+    int mkcpunten;
+    int mkcweekpunten;
+    int mchpunten;
+    int mchweekpunten;
     std::wstring mgeboren;
     geslacht mgeslacht;
     werk mwerk;

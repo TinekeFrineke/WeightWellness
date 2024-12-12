@@ -474,7 +474,7 @@ std::unique_ptr<weight::Recept> XmlReader::Create(const XmlRecept& aRecept)
 std::unique_ptr<weight::ManualItem> XmlReader::Create(const XmlHandmatigitem& anItem)
 {
     auto item = std::make_unique<weight::ManualItem>(anItem.Getnaam(), anItem.Getpunten());
-    item->Set(anItem.Getpunten(), anItem.Gethoeveelheid());
+    item->Set(anItem.Getpunten());
     return item;
 }
 

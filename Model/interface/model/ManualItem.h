@@ -11,20 +11,18 @@ class ManualItem: public Item
 {
 public:
     ManualItem(const std::tstring& aName, double aPoints)
-        : mName(aName),
-        mPoints(aPoints) {}
+        : mName(aName)
+        , mPoints(aPoints) {}
 
     virtual               ~ManualItem() {}
     virtual std::tstring  GetName() const { return mName; }
     virtual double        GetPoints() const { return mPoints; }
     virtual void          Accept(ItemVisitor& aVisitor);
 
-    void                  Set(double aPoints, double anAmount) { mPoints = aPoints; mAmount = anAmount; }
-    double                GetAmount() const { return mAmount; }
+    void                  Set(double aPoints) { mPoints = aPoints; }
 
 private:
     std::tstring          mName;
-    double                mAmount{ 1 };
     double                mPoints;
 };
 

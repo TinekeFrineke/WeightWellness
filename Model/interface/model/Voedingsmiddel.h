@@ -23,8 +23,8 @@ public:
     virtual void Accept(ItemVisitor& aVisitor) override;
 
     std::wstring GetCategory() const { return mCategory; }
-    Lot& GetLot() noexcept { return *mLot; }
-    const Lot& GetConstLot() const noexcept { return *mLot; }
+    Lot& GetLot() { return *mLot; }
+    const Lot& GetConstLot() const { return *mLot; }
 
     void SetLot(std::unique_ptr<Lot> aLot);
     void SetUnit(const std::wstring& aUnit) { mUnit = aUnit; }

@@ -48,7 +48,7 @@ XmlClass::Result XmlReceptReader::Fill(const XERCES_CPP_NAMESPACE::DOMNode & anE
     }
     const XERCES_CPP_NAMESPACE::DOMNode* aantalportiesnode = attributes->getNamedItem(_T("aantalporties"));
     if (aantalportiesnode != nullptr) {
-        aRecept.Setaantalporties(_wtof(aantalportiesnode->getNodeValue()));
+        aRecept.Setaantalporties(_ttoi(aantalportiesnode->getNodeValue()));
     }
     }
 

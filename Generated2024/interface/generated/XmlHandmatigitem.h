@@ -22,10 +22,8 @@ public:
 
     std::wstring Getnaam() const;
     double Getpunten() const;
-    double Gethoeveelheid() const;
     void Setnaam(const std::wstring & anaam);
     void Setpunten(double apunten);
-    void Sethoeveelheid(double ahoeveelheid);
 
 private:
     XmlHandmatigitem(const XmlHandmatigitem& anOriginal) = delete;
@@ -33,7 +31,6 @@ private:
 
     std::wstring mnaam;
     double mpunten;
-    double mhoeveelheid;
 };
 
 

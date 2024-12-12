@@ -32,9 +32,9 @@ public:
     void Add(std::unique_ptr<XmlRecept> aRecept);
     void Add(std::unique_ptr<XmlHandmatigitem> aHandmatigitem);
     std::wstring Getnaam() const;
-    double Getporties() const;
+    int Getporties() const;
     void Setnaam(const std::wstring & anaam);
-    void Setporties(double aporties);
+    void Setporties(int aporties);
 
 private:
     XmlReceptdef(const XmlReceptdef& anOriginal) = delete;
@@ -44,7 +44,7 @@ private:
     std::vector<std::unique_ptr<XmlRecept>> mReceptList;
     std::vector<std::unique_ptr<XmlHandmatigitem>> mHandmatigitemList;
     std::wstring mnaam;
-    double mporties;
+    int mporties;
 };
 
 

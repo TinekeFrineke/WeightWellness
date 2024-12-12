@@ -31,7 +31,7 @@ double XmlRecept::Getpunten() const
     return mpunten;
 }
 
-double XmlRecept::Getaantalporties() const
+int XmlRecept::Getaantalporties() const
 {
     return maantalporties;
 }
@@ -46,7 +46,7 @@ void XmlRecept::Setpunten(double apunten)
     mpunten = apunten;
 }
 
-void XmlRecept::Setaantalporties(double aaantalporties)
+void XmlRecept::Setaantalporties(int aaantalporties)
 {
     maantalporties = aaantalporties;
 }

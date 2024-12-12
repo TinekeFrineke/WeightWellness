@@ -41,22 +41,22 @@ std::wstring XmlPersonalia::Getgebruikersnaam() const
     return mgebruikersnaam;
 }
 
-double XmlPersonalia::Getkcpunten() const
+int XmlPersonalia::Getkcpunten() const
 {
     return mkcpunten;
 }
 
-double XmlPersonalia::Getkcweekpunten() const
+int XmlPersonalia::Getkcweekpunten() const
 {
     return mkcweekpunten;
 }
 
-double XmlPersonalia::Getchpunten() const
+int XmlPersonalia::Getchpunten() const
 {
     return mchpunten;
 }
 
-double XmlPersonalia::Getchweekpunten() const
+int XmlPersonalia::Getchweekpunten() const
 {
     return mchweekpunten;
 }
@@ -116,22 +116,22 @@ void XmlPersonalia::Setgebruikersnaam(const std::wstring & agebruikersnaam)
     mgebruikersnaam = agebruikersnaam;
 }
 
-void XmlPersonalia::Setkcpunten(double akcpunten)
+void XmlPersonalia::Setkcpunten(int akcpunten)
 {
     mkcpunten = akcpunten;
 }
 
-void XmlPersonalia::Setkcweekpunten(double akcweekpunten)
+void XmlPersonalia::Setkcweekpunten(int akcweekpunten)
 {
     mkcweekpunten = akcweekpunten;
 }
 
-void XmlPersonalia::Setchpunten(double achpunten)
+void XmlPersonalia::Setchpunten(int achpunten)
 {
     mchpunten = achpunten;
 }
 
-void XmlPersonalia::Setchweekpunten(double achweekpunten)
+void XmlPersonalia::Setchweekpunten(int achweekpunten)
 {
     mchweekpunten = achweekpunten;
 }

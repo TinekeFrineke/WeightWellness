@@ -126,19 +126,19 @@ XmlClass::Result XmlPersonaliaReader::Fill(const XERCES_CPP_NAMESPACE::DOMNode &
       aPersonalia.Setgebruikersnaam(gebruikersnaamnode->getNodeValue());
     const XERCES_CPP_NAMESPACE::DOMNode* kcpuntennode = attributes->getNamedItem(_T("kcpunten"));
     if (kcpuntennode != nullptr) {
-        aPersonalia.Setkcpunten(_wtof(kcpuntennode->getNodeValue()));
+        aPersonalia.Setkcpunten(_ttoi(kcpuntennode->getNodeValue()));
     }
     const XERCES_CPP_NAMESPACE::DOMNode* kcweekpuntennode = attributes->getNamedItem(_T("kcweekpunten"));
     if (kcweekpuntennode != nullptr) {
-        aPersonalia.Setkcweekpunten(_wtof(kcweekpuntennode->getNodeValue()));
+        aPersonalia.Setkcweekpunten(_ttoi(kcweekpuntennode->getNodeValue()));
     }
     const XERCES_CPP_NAMESPACE::DOMNode* chpuntennode = attributes->getNamedItem(_T("chpunten"));
     if (chpuntennode != nullptr) {
-        aPersonalia.Setchpunten(_wtof(chpuntennode->getNodeValue()));
+        aPersonalia.Setchpunten(_ttoi(chpuntennode->getNodeValue()));
     }
     const XERCES_CPP_NAMESPACE::DOMNode* chweekpuntennode = attributes->getNamedItem(_T("chweekpunten"));
     if (chweekpuntennode != nullptr) {
-        aPersonalia.Setchweekpunten(_wtof(chweekpuntennode->getNodeValue()));
+        aPersonalia.Setchweekpunten(_ttoi(chweekpuntennode->getNodeValue()));
     }
     const XERCES_CPP_NAMESPACE::DOMNode* geborennode = attributes->getNamedItem(_T("geboren"));
     if (geborennode != nullptr)

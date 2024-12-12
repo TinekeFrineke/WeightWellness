@@ -64,7 +64,7 @@ std::wstring XmlReceptdef::Getnaam() const
     return mnaam;
 }
 
-double XmlReceptdef::Getporties() const
+int XmlReceptdef::Getporties() const
 {
     return mporties;
 }
@@ -74,7 +74,7 @@ void XmlReceptdef::Setnaam(const std::wstring & anaam)
     mnaam = anaam;
 }
 
-void XmlReceptdef::Setporties(double aporties)
+void XmlReceptdef::Setporties(int aporties)
 {
     mporties = aporties;
 }

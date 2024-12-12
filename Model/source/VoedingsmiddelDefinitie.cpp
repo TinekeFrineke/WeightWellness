@@ -27,7 +27,8 @@ VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
     , mFavourite(false)
     , mPoints(std::move(nutritionalValue))
 {
-    assert(mPoints != NULL);
+    assert(m_calculator != nullptr);
+    assert(mPoints != nullptr);
 #ifdef FIND_LEAKS
     Register();
 #endif

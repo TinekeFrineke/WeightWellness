@@ -28,8 +28,8 @@ public:
     XmlPortie & GetPortie();
     const XmlVoedingswaarde & GetVoedingswaarde() const;
     XmlVoedingswaarde & GetVoedingswaarde();
-    void SetXmlPortie(std::unique_ptr<XmlPortie> aPortie);
-    void SetXmlVoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde);
+    void Setportie(std::unique_ptr<XmlPortie> aPortie);
+    void Setvoedingswaarde(std::unique_ptr<XmlVoedingswaarde> aVoedingswaarde);
     std::wstring Getnaam() const;
     std::wstring Getcategorie() const;
     std::wstring Getunit() const;
