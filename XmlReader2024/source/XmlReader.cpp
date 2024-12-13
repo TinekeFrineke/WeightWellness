@@ -454,6 +454,7 @@ std::unique_ptr<weight::Voedingsmiddel> XmlReader::Create(const XmlVoedingsmidde
     lot->SetEiwitPer100Units(aVoedingsmiddel.GetVoedingswaarde().Geteiwitper100());
     lot->SetKoolhydratenPer100Units(aVoedingsmiddel.GetVoedingswaarde().Getkoolhydratenper100());
     lot->SetVezelsPer100Units(aVoedingsmiddel.GetVoedingswaarde().Getvezelsper100());
+    lot->SetNumberOfPortions(aVoedingsmiddel.Getaantalporties());
 
     auto voedingsmiddel = std::make_unique<weight::Voedingsmiddel>(aVoedingsmiddel.Getnaam(), std::move(lot),
                                                                    aVoedingsmiddel.Getunit());
