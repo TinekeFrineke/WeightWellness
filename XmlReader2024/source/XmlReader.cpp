@@ -339,9 +339,9 @@ weight::Result XmlReader::ReadWeek(const std::tstring& aDirectory)
         }
 
         const auto& dagen(xmlweek->GetDagList());
-        for (size_t i = 0; i < dagen.size(); ++i)
+        for (const auto& xmldag : dagen)
         {
-            auto dag = Create(*dagen[i]);
+            auto dag = Create(*xmldag);
             if (!week->Add(std::move(dag)))
                 return weight::Result::InterpretError;
         }
@@ -445,8 +445,9 @@ weight::Portie XmlReader::Create(const XmlPortie& aPortie)
 
 std::unique_ptr<weight::Voedingsmiddel> XmlReader::Create(const XmlVoedingsmiddel& aVoedingsmiddel)
 {
-    weight::Portie portie(aVoedingsmiddel.Getnaam());
-    portie.SetUnits(aVoedingsmiddel.Getaantalporties());
+    const auto& xmlportie = aVoedingsmiddel.GetPortie();
+    weight::Portie portie(xmlportie.Getnaam());
+    portie.SetUnits(xmlportie.Geteenheden());
     auto lot = std::make_unique<weight::PortionedLot>(mModel.GetCalculator(), portie);
     lot->SetKCalPer100Units(aVoedingsmiddel.GetVoedingswaarde().Getkcalper100());
     lot->SetVetPer100Units(aVoedingsmiddel.GetVoedingswaarde().Getvetper100());
@@ -489,8 +490,8 @@ std::unique_ptr<weight::Day> XmlReader::Create(const XmlDag& aDag)
         day->SetFreeBonusPoints(Str::ToDouble(aDag.Getbonuspunten().c_str()));
 
     const auto& vmiddelen(aDag.GetVoedingsmiddelList());
-    for (size_t i = 0; i < vmiddelen.size(); ++i)
-        day->Add(Create(*vmiddelen[i]));
+    for (const auto& xmlvm : vmiddelen)
+        day->Add(Create(*xmlvm));
 
     const auto& recepten(aDag.GetReceptList());
     for (size_t i = 0; i < recepten.size(); ++i)
