@@ -15,7 +15,7 @@
 
 IMPLEMENT_DYNAMIC(EditFoodDialog, CDialog)
 EditFoodDialog::EditFoodDialog(weight::Voedingsmiddel& aVoedingsmiddel,
-                               weight::FoodParameters& parameters,
+                               const weight::FoodParameters& parameters,
                                std::shared_ptr<weight::PointsCalculator> calculator,
                                double pointsPerUnit,
                                const std::vector<std::unique_ptr<weight::Portie>>& porties,

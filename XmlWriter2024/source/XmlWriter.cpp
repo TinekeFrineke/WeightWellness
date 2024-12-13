@@ -168,12 +168,12 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
                                     ? XmlVoedingsmiddeldef::favoriet::yes
                                     : XmlVoedingsmiddeldef::favoriet::no);
 
-        const std::vector<std::unique_ptr<weight::Portie>>& portielist = vmdefinities[i]->GetPortieList();
-        for (size_t p = 0; p < vmdefinities[i]->GetPortieList().size(); ++p) {
-            auto portie = std::make_unique<XmlPortie>();
-            portie->Setnaam(portielist[p]->GetName());
-            portie->Seteenheden(portielist[p]->GetUnits());
-            xmlvmdefinitie->Add(std::move(portie));
+        const auto& portielist = vmdefinities[i]->GetPortieList();
+        for (const auto& portie : portielist) {
+            auto xmlportie = std::make_unique<XmlPortie>();
+            xmlportie->Setnaam(portie->GetName());
+            xmlportie->Seteenheden(portie->GetUnits());
+            xmlvmdefinitie->Add(std::move(xmlportie));
         }
 
         xmlvmdefinities->Add(std::move(xmlvmdefinitie));

@@ -1,4 +1,4 @@
-// EditFoodDialog.cpp : implementation file
+// EditFoodDefDialog.cpp : implementation file
 //
 
 #include "stdafx.h"

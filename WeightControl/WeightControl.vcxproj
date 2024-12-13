@@ -56,7 +56,9 @@
     <ClInclude Include="Dialogs\Headers\ReceptenPage.h" />
     <ClInclude Include="Dialogs\Headers\WWDialog.h" />
     <ClInclude Include="Editor\Headers\FoodDefinitionEditor.h" />
+    <ClInclude Include="Editor\Headers\FoodEditor.h" />
     <ClInclude Include="Editor\Headers\IEditorFactory.h" />
+    <ClInclude Include="Editor\Headers\IFoodEditor.h" />
     <ClInclude Include="Editor\Headers\IPortieEditor.h" />
     <ClInclude Include="Editor\Headers\PortieEditor.h" />
     <ClInclude Include="General\Headers\ItemEditVisitor.h" />
@@ -94,6 +96,7 @@
     <ClCompile Include="Dialogs\Sources\ReceptenPage.cpp" />
     <ClCompile Include="Dialogs\Sources\WWDialog.cpp" />
     <ClCompile Include="Editor\Sources\FoodDefinitionEditor.cpp" />
+    <ClCompile Include="Editor\Sources\FoodEditor.cpp" />
     <ClCompile Include="Editor\Sources\PortieEditor.cpp" />
     <ClCompile Include="General\Sources\ItemEditVisitor.cpp" />
     <ClCompile Include="General\Sources\WeightControl.cpp" />

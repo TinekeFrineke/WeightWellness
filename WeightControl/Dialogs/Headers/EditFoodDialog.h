@@ -27,7 +27,7 @@ class EditFoodDialog: public CDialog
 
 public:
     EditFoodDialog(weight::Voedingsmiddel& aVoedingsmiddel,
-                   weight::FoodParameters& parameters,
+                   const weight::FoodParameters& parameters,
                    std::shared_ptr<weight::PointsCalculator> calculator,
                    double pointsPer100Units,
                    const std::vector<std::unique_ptr<weight::Portie>>& porties,

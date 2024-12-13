@@ -16,6 +16,7 @@
 #include "EditFoodDialog.h"
 #include "EditReceptDialog.h"
 #include "Handmatigeitemdlg.h"
+#include "FoodEditor.h"
 
 
 
@@ -39,23 +40,8 @@ void ItemEditVisitor::Visit(weight::Recept& aRecept)
 
 void ItemEditVisitor::Visit(weight::Voedingsmiddel& aVoedingsmiddel)
 {
-    weight::VMDefinitie* definitie = mModel.FindVoedingsmiddelDefinitie(aVoedingsmiddel.GetName());
-    if (definitie == NULL)
-    {
-        auto nutritionalValue = std::make_unique<weight::NutritionalValue>(mModel.GetCalculator());
-        nutritionalValue->SetParameters(aVoedingsmiddel.GetConstLot().GetParameters());
-        auto newDefinition = std::make_unique<weight::VMDefinitie>(mModel.GetCalculator(),
-                                                                   aVoedingsmiddel.GetName(),
-                                                                   aVoedingsmiddel.GetUnit(),
-                                                                   std::move(nutritionalValue));
-        newDefinition->SetCategory(aVoedingsmiddel.GetCategory());
-        definitie = newDefinition.get();
-        mModel.Add(std::move(newDefinition));
-    }
-
-    EditFoodDialog dialog(aVoedingsmiddel, definitie->GetNutritionalValue().GetParameters(), mModel.GetCalculator(),
-                          definitie->GetNutritionalValue().GetPointsPer100Units(), definitie->GetPortieList(), mParent);
-    dialog.DoModal();
+    FoodEditor editor(mModel.GetFoodDefinitionRepository(), mModel.GetCalculator(), mParent);
+    editor.Edit(aVoedingsmiddel);
 }
 
 
