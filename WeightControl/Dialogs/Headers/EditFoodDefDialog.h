@@ -28,7 +28,7 @@ class CEditFoodDefDialog: public CDialog
     DECLARE_DYNAMIC(CEditFoodDefDialog)
 
 public:
-    CEditFoodDefDialog(weight::Model& aModel,
+    CEditFoodDefDialog(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                        std::shared_ptr<weight::IRepository> units,
                        std::shared_ptr<weight::IRepository> categories,
                        std::shared_ptr<weight::IRepository> brands,
@@ -104,10 +104,10 @@ private:
     weight::VMDefinitie& m_definition;
     // Bit of a hack... whether name should be read only
     bool m_newDefinition;
-    weight::Model& mModel;
     std::shared_ptr<weight::IRepository> m_units;
     std::shared_ptr<weight::IRepository> m_categories;
     std::shared_ptr<weight::IRepository> m_brands;
+    std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
 
     std::shared_ptr<weight::PointsCalculator> m_calculator;
 };

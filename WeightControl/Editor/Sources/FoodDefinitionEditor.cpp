@@ -7,11 +7,6 @@
 
 #include "EditFoodDefDialog.h"
 
-namespace weight {
-
-
-
-}
 
 FoodDefinitionEditor::FoodDefinitionEditor(weight::Model& model, CWnd* parent)
     : m_model(model)
@@ -21,21 +16,23 @@ FoodDefinitionEditor::FoodDefinitionEditor(weight::Model& model, CWnd* parent)
 
 bool FoodDefinitionEditor::Edit(weight::VMDefinitie& definition) const
 {
-    CEditFoodDefDialog dialog(m_model, m_model.GetUnitRepository(), m_model.GetCategoryRepository(), m_model.GetBrandRepository(), definition, m_newDefinition, m_model.GetCalculator(), m_parent);
+    CEditFoodDefDialog dialog(m_model.GetFoodDefinitionRepository(), m_model.GetUnitRepository(),
+                              m_model.GetCategoryRepository(), m_model.GetBrandRepository(), definition,
+                              m_isNewDefinition, m_model.GetCalculator(), m_parent);
     INT_PTR nResponse = dialog.DoModal();
     return nResponse == IDOK;
 }
 
 std::unique_ptr<weight::VMDefinitie> FoodDefinitionEditor::Create() const
 {
-    m_newDefinition = true;
+    m_isNewDefinition = true;
     auto nutritionalValue = std::make_unique<weight::NutritionalValue>(m_model.GetCalculator());
     auto definition = std::make_unique<weight::VMDefinitie>(m_model.GetCalculator(), L"", L"g", std::move(nutritionalValue));
     if (Edit(*definition)) {
-        m_newDefinition = false;
+        m_isNewDefinition = false;
         return std::move(definition);
     }
 
-    m_newDefinition = false;
+    m_isNewDefinition = false;
     return {};
 }

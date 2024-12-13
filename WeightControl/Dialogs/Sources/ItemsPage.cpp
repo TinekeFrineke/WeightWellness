@@ -110,7 +110,9 @@ void CItemsPage::EditItem()
 {
     VMDefinitiesListItem* item = mItemsList.GetSelectedItem();
     if (item != nullptr) {
-        CEditFoodDefDialog dlg(mModel, mModel.GetUnitRepository(), mModel.GetCategoryRepository(), mModel.GetBrandRepository(), *item->GetItem(), false, mModel.GetCalculator(), this);
+        CEditFoodDefDialog dlg(mModel.GetFoodDefinitionRepository(), mModel.GetUnitRepository(),
+                               mModel.GetCategoryRepository(), mModel.GetBrandRepository(),
+                               *item->GetItem(), false, mModel.GetCalculator(), this);
         INT_PTR nResponse = dlg.DoModal();
         if (nResponse == IDOK)
         {

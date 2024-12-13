@@ -18,7 +18,7 @@ public:
     std::unique_ptr<weight::VMDefinitie> Create() const;
 
 private:
-    mutable bool m_newDefinition{ false };
+    mutable bool m_isNewDefinition{ false };
     weight::Model& m_model;
     CWnd* m_parent;
 };

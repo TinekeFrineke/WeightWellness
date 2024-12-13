@@ -7,6 +7,7 @@
 #include "WeightControl.h"
 #include ".\editfooddefdialog.h"
 #include "EditPortieDialog.h"
+#include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
 #include "model/NutritionalValue.h"
 #include "model/VoedingsmiddelDefinitie.h"
@@ -75,7 +76,7 @@ CreateListViewPorties(const std::vector<std::unique_ptr<weight::Portie>>& portie
 }
 }
 
-CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
+CEditFoodDefDialog::CEditFoodDefDialog(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                                        std::shared_ptr<weight::IRepository> units,
                                        std::shared_ptr<weight::IRepository> categories,
                                        std::shared_ptr<weight::IRepository> brands,
@@ -84,9 +85,9 @@ CEditFoodDefDialog::CEditFoodDefDialog(weight::Model& aModel,
                                        std::shared_ptr<weight::PointsCalculator> calculator,
                                        CWnd* pParent /*=nullptr*/)
     : CDialog(CEditFoodDefDialog::IDD, pParent)
-    , mModel(aModel)
     , m_definition(aDefinitie)
     , m_newDefinition(newDefinition)
+    , m_foodDefinitions(std::move(foodDefinitions))
     , mUnitBox(units->Get(), aDefinitie.GetUnit())
     , mCategorie(categories->Get(), aDefinitie.GetCategory())
     , mMerk(brands->Get(), false, aDefinitie.GetMerk())
@@ -301,7 +302,7 @@ void CEditFoodDefDialog::OnBnClickedOk()
         return;
     }
 
-    if (m_newDefinition && mModel.FindVoedingsmiddelDefinitie(name))
+    if (m_newDefinition && m_foodDefinitions->Has(name))
     {
         ::MessageBox(0, _T("Een voedingsmiddel met deze naam bestaat al!"), _T("Error"), MB_OK);
         return;
