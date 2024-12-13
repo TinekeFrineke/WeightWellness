@@ -13,8 +13,8 @@
 #include "model/Voedingsmiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
+#include "EditFoodDialog.h"
 #include "EditReceptDialog.h"
-#include "EditVoedingsmiddelDialog.h"
 #include "Handmatigeitemdlg.h"
 
 
@@ -53,7 +53,8 @@ void ItemEditVisitor::Visit(weight::Voedingsmiddel& aVoedingsmiddel)
         mModel.Add(std::move(newDefinition));
     }
 
-    EditVoedingsmiddelDialog dialog(mModel, aVoedingsmiddel, *definitie, mParent);
+    EditFoodDialog dialog(aVoedingsmiddel, definitie->GetNutritionalValue().GetParameters(), mModel.GetCalculator(),
+                          definitie->GetNutritionalValue().GetPointsPer100Units(), definitie->GetPortieList(), mParent);
     dialog.DoModal();
 }
 

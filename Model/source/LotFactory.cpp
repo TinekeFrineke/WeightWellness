@@ -15,10 +15,10 @@ LotFactory::LotFactory(std::shared_ptr<PointsCalculator> calculator) noexcept
 }
 
 
-std::unique_ptr<PortionedLot> LotFactory::Create(const VMDefinitie& aDefinitie, Portie& aPortie)
+std::unique_ptr<PortionedLot> LotFactory::Create(const FoodParameters& parameters, Portie& aPortie)
 {
     auto lot = std::make_unique<PortionedLot>(m_calculator, aPortie);
-    lot->SetParameters(aDefinitie.GetNutritionalValue().GetParameters());
+    lot->SetParameters(parameters);
     lot->SetNumberOfPortions(1);
     return lot;
 }

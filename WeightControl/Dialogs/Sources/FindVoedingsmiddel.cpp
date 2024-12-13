@@ -9,6 +9,7 @@
 #include "model/Day.h"
 #include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
+#include "model/NutritionalValue.h"
 #include "model/Portie.h"
 #include "model/Voedingsmiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"
@@ -125,7 +126,7 @@ void CFindVoedingsmiddel::OnBnClickedOk()
         return;
     }
 
-    auto lot = m_lotFactory->Create(*mDefinitie, *portie);
+    auto lot = m_lotFactory->Create(mDefinitie->GetNutritionalValue().GetParameters(), *portie);
     assert(lot != nullptr);
     lot->SetNumberOfPortions(mPorties.GetValue());
     mFood = std::make_unique<weight::Voedingsmiddel>(std::move(lot), *mDefinitie);
@@ -232,7 +233,7 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
         return;
     }
 
-    auto lot = m_lotFactory->Create(*mDefinitie, *portie);
+    auto lot = m_lotFactory->Create(mDefinitie->GetNutritionalValue().GetParameters(), *portie);
     lot->SetNumberOfPortions(mPorties.GetValue());
     mFood = std::make_unique<weight::Voedingsmiddel>(std::move(lot), *mDefinitie);
 

@@ -45,7 +45,7 @@
     <ClInclude Include="Dialogs\Headers\EditPortieDialog.h" />
     <ClInclude Include="Dialogs\Headers\EditReceptDefDialog.h" />
     <ClInclude Include="Dialogs\Headers\EditReceptDialog.h" />
-    <ClInclude Include="Dialogs\Headers\EditVoedingsmiddelDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditFoodDialog.h" />
     <ClInclude Include="Dialogs\Headers\FindRecept.h" />
     <ClInclude Include="Dialogs\Headers\FindVoedingsmiddel.h" />
     <ClInclude Include="Dialogs\Headers\HandmatigeItemDlg.h" />
@@ -83,7 +83,7 @@
     <ClCompile Include="Dialogs\Sources\EditPortieDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\EditReceptDefDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\EditReceptDialog.cpp" />
-    <ClCompile Include="Dialogs\Sources\EditVoedingsmiddelDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditFoodDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\FindRecept.cpp" />
     <ClCompile Include="Dialogs\Sources\FindVoedingsmiddel.cpp" />
     <ClCompile Include="Dialogs\Sources\HandmatigeItemDlg.cpp" />
