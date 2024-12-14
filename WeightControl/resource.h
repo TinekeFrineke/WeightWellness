@@ -108,8 +108,6 @@
 #define IDS_KOOLHYDRATEN_PER_100        1103
 #define IDS_VET_PER_100                 1104
 #define IDS_VEZELS_PER_100              1105
-#define IDS_PUNTEN_PER_100              1106
-#define IDC_PUNTEN_PER_100              1107
 #define IDC_PER_STATIC                  1110
 #define IDC_EENHEDEN_STATIC             1111
 #define IDC_EENHEDEN                    1112

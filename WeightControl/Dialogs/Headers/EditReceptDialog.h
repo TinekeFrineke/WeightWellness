@@ -10,30 +10,30 @@
 
 class EditReceptDialog : public CDialog
 {
-	DECLARE_DYNAMIC(EditReceptDialog)
+    DECLARE_DYNAMIC(EditReceptDialog)
 
 public:
-  EditReceptDialog(weight::Model & aModel, weight::Recept & aRecept, CWnd * pParent = NULL);   // standard constructor
-	virtual ~EditReceptDialog();
+    EditReceptDialog(weight::Model& aModel, weight::Recept& aRecept, CWnd* pParent = NULL);   // standard constructor
+    virtual ~EditReceptDialog();
 
-// Dialog Data
-	enum { IDD = IDD_EDIT_RECEPT };
+    // Dialog Data
+    enum { IDD = IDD_EDIT_RECEPT };
 
 protected:
-	virtual void                  DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    virtual void                  DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
-  BOOL                          OnInitDialog();
+    BOOL                          OnInitDialog();
 
-  afx_msg void                  OnEnChangePorties();
-  afx_msg void                  OnBnClickedOk();
+    afx_msg void                  OnEnChangePorties();
+    afx_msg void                  OnBnClickedOk();
 
 private:
-  CStringEdit                   mName;
-  CIntEdit                      mPorties;
-  CDoubleEdit                   mPunten;
+    CStringEdit                   mName;
+    CIntEdit                      mPorties;
+    CDoubleEdit                   mPunten;
 
-  weight::Model &                   mModel;
-  weight::Recept &                  mRecept;
+    weight::Model& mModel;
+    weight::Recept& mRecept;
 };

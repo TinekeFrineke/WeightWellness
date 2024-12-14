@@ -73,14 +73,11 @@ private:
     bool                      CreateFood();
     bool                      CreateCommonFoodParts();
 
-    bool                      OnOk();
-
     CStatic                   mKCalPer100Static;
     CStatic                   mEiwitPer100Static;
     CStatic                   mKoolhydratenPer100Static;
     CStatic                   mVetPer100Static;
     CStatic                   mVezelsPer100Static;
-    CStatic                   mPuntenPer100Static;
     CStatic                   mEenhedenStatic;
 
     CStringEdit               mName;
@@ -92,7 +89,6 @@ private:
     CDoubleEdit               mEiwitPer100;
     CDoubleEdit               mKoolhydratenPer100;
     CDoubleEdit               mVezelsPer100;
-    CDoubleEdit               mPuntenPer100;
     // Contains and owns portions, initially a copy of the original portions.
     // It serves as the owner of the changed definitions portions.
     PortieList                mPortieListView;

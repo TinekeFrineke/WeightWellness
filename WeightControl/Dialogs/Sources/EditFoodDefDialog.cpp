@@ -36,8 +36,6 @@ void CEditFoodDefDialog::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDS_KOOLHYDRATEN_PER_100, mKoolhydratenPer100Static);
     DDX_Control(pDX, IDS_VET_PER_100, mVetPer100Static);
     DDX_Control(pDX, IDS_VEZELS_PER_100, mVezelsPer100Static);
-    DDX_Control(pDX, IDS_PUNTEN_PER_100, mPuntenPer100Static);
-    DDX_Control(pDX, IDC_PUNTEN_PER_100, mPuntenPer100);
     DDX_Control(pDX, IDS_KCAL_PER_100, mKCalPer100Static);
     DDX_Control(pDX, IDC_EENHEDEN, mEenheden);
     DDX_Control(pDX, IDC_EENHEDEN_STATIC, mEenhedenStatic);
@@ -116,15 +114,12 @@ BOOL CEditFoodDefDialog::OnInitDialog()
 
     mName.SetValue(m_definition.GetName());
 
-    mPuntenPer100.SetValue(m_definition.GetPointsPer100Units());
-
     // Definition is calculated
     mKCalPer100.SetValue(m_definition.GetNutritionalValue().GetKCalPer100Units());
     mVetPer100.SetValue(m_definition.GetNutritionalValue().GetFatPer100Units());
     mEiwitPer100.SetValue(m_definition.GetNutritionalValue().GetProteinPer100Units());
     mKoolhydratenPer100.SetValue(m_definition.GetNutritionalValue().GetCarbohydratesPer100Units());
     mVezelsPer100.SetValue(m_definition.GetNutritionalValue().GetFibersPer100Units());
-    mPuntenPer100.SetValue(m_definition.GetNutritionalValue().GetPointsPer100Units());
 
     if (m_definition.IsFavourite())
         CheckDlgButton(IDC_CHECK_FAVOURITE, 1);
@@ -162,7 +157,6 @@ void CEditFoodDefDialog::FillStatics()
     _stprintf_s(labelstring, _T("Vezels per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
     mVezelsPer100Static.SetWindowText(labelstring);
     _stprintf_s(labelstring, _T("Punten per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
-    mPuntenPer100Static.SetWindowText(labelstring);
     mEenhedenStatic.SetWindowText(eehedenname.c_str());
 }
 
@@ -249,22 +243,6 @@ bool CEditFoodDefDialog::CreateFood()
 }
 
 
-bool CEditFoodDefDialog::OnOk()
-{
-    std::tstring name = mName.GetValue();
-
-    return FinalizeCalculatedData();
-}
-
-
-//bool CEditFoodDefDialog::OnFixedOk()
-//{
-//    std::tstring name = mName.GetValue();
-//
-//    return FinalizeFixedData();
-//}
-
-
 bool CEditFoodDefDialog::FinalizeCalculatedData()
 {
     if (!CreateFood())
@@ -297,9 +275,7 @@ void CEditFoodDefDialog::OnBnClickedOk()
         return;
     }
 
-    bool result = OnOk();
-
-    if (result)
+    if (FinalizeCalculatedData())
         OnOK();
 }
 
