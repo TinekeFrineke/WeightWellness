@@ -220,6 +220,7 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
             }
 
             mModel.Add(std::move(definitie));
+            mModel.AddBrand(vm->Getmerk());
         }
     }
     catch (XmlClass::Result result) {
