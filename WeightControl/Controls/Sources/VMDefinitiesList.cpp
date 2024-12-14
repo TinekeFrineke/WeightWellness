@@ -86,6 +86,12 @@ void VMDefinitiesList::Initialize()
     Fill();
 }
 
+void VMDefinitiesList::SetDefinitions(const std::vector<weight::VMDefinitie*>& definitions)
+{
+    m_definitions = definitions;
+    Fill();
+}
+
 
 void VMDefinitiesList::ClearItems()
 {

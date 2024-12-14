@@ -311,9 +311,10 @@ void CDiaryPage::OnBnClickedAddHandmatig()
     if (nResponse == IDOK)
     {
         //  dismissed with OK
-        if (dialog.GetItem() != nullptr)
+        auto item = dialog.GetItem();
+        if (item != nullptr)
         {
-            mDay->Add(std::move(dialog.GetItem()));
+            mDay->Add(std::move(item));
             mItemList.View(mDay);
             UpdatePointsLeft();
         }

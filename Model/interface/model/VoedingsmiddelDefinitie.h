@@ -37,6 +37,7 @@ public:
     bool AddPortie(std::unique_ptr<Portie> aPortie);
     bool RemovePortie(Portie* aPortie);
 
+    void SetName(const std::wstring& name) { mName = name; }
     void SetCategory(const std::wstring& aCategory) { mCategory = aCategory; }
     void SetMerk(const std::wstring& aMerk) { mMerk = aMerk; }
     void SetUnit(const std::wstring& aUnit) { mUnit = aUnit; }

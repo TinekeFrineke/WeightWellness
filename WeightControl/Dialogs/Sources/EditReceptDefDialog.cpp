@@ -15,10 +15,10 @@
 
 IMPLEMENT_DYNAMIC(EditReceptDefDialog, CDialog)
 EditReceptDefDialog::EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie* aRecept, CWnd* pParent /*=nullptr*/)
-    : CDialog(EditReceptDefDialog::IDD, pParent),
-    mModel(aModel),
-    mItemList(aModel),
-    mRecept(aRecept)
+    : CDialog(EditReceptDefDialog::IDD, pParent)
+    , mModel(aModel)
+    , mItemList(aModel)
+    , mRecept(aRecept)
 {
 }
 

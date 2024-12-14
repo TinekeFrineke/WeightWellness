@@ -77,7 +77,6 @@ private:
     std::vector<std::unique_ptr<Week>> mWeeks;
     std::shared_ptr<IFoodDefinitionRepository> m_foodDefinitions;
     std::vector<std::unique_ptr<ReceptDefinitie>> mReceptDefinities;
-    //std::vector<std::unique_ptr<GerechtDefinitie>> mGerechtDefinities;
     std::vector<std::unique_ptr<Personalia>> mPersonalia;
     std::shared_ptr<IRepository> m_units;
     std::shared_ptr<IRepository> m_categories;

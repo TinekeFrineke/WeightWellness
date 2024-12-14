@@ -82,6 +82,7 @@ void CItemsPage::OnBnClickedAdd()
     auto food = editor.Create();
     if (food != nullptr) {
         mModel.Add(std::move(food));
+        mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
         mItemsList.Fill();
     }
 }
@@ -101,8 +102,9 @@ void CItemsPage::OnBnClickedDelete()
     if (item == nullptr)
         return;
 
-    if (mModel.Remove(item->GetItem()))
-        mItemsList.Fill();
+    if (mModel.Remove(item->GetItem())) {
+        mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
+    }
 }
 
 

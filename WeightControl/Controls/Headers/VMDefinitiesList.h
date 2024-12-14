@@ -60,6 +60,7 @@ public:
     ~VMDefinitiesList();
 
     void                        Initialize();
+    void SetDefinitions(const std::vector<weight::VMDefinitie*>& definitions);
     void                        SetFilter(const VMDefinitiesFilter& aFilter);
     void                        Fill();
 

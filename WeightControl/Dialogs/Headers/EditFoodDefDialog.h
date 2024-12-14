@@ -72,10 +72,8 @@ private:
     bool                      FinalizeCalculatedData();
     bool                      CreateFood();
     bool                      CreateCommonFoodParts();
-    bool                      CreateCalculatedFood();
-    void                      UpdateUiCalculated(bool bCalculated);
 
-    bool                      OnCalculatedOk();
+    bool                      OnOk();
 
     CStatic                   mKCalPer100Static;
     CStatic                   mEiwitPer100Static;
