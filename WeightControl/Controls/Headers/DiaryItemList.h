@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Utilities/Date.h"
-#include "Utilities/Observer.h"
 #include "itemlist.h"
 
 namespace weight
@@ -19,7 +18,7 @@ class Model;
 /////////////////////////////////////////////////////////////////////////////
 // CDiaryItemList window
 
-class CDiaryItemList: public ItemList, public Observer
+class CDiaryItemList: public ItemList
 {
     // Construction
 public:
@@ -28,12 +27,6 @@ public:
 
     void                            View(weight::Day* aDay);
 
-    virtual void                    Update(Subject* aSubject);
-    virtual void                    Destroyed(Subject* aSubject);
-
-    // Implementation
-
-      // Generated message map functions
 protected:
 
     DECLARE_MESSAGE_MAP()

@@ -156,14 +156,12 @@ void CFindVoedingsmiddel::OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResu
     (void)pNMHDR;
     *pResult = 0;
 
-    VMDefinitiesListItem* lvitem = mItemList.GetSelectedItem();
-    if (lvitem == nullptr)
+    auto mDefinitie = mItemList.GetSelectedDefinition();
+    if (mDefinitie == nullptr)
         return;
 
     mUpdatingFilter = true;
 
-    mDefinitie = lvitem->GetItem();
-    assert(mDefinitie != nullptr);
     mUnitNaam.SetValue(mDefinitie->GetUnit());
 
     SetState(CreateState(*mDefinitie));

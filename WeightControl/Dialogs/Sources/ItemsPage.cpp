@@ -24,7 +24,7 @@ CItemsPage::CItemsPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
     , mModel(aModel)
     , mCategory(aModel.GetCategoryRepository()->Get())
     , mMerk(aModel.GetBrandRepository()->Get(), true)
-    , mItemsList(aModel.GetFoodDefinitionRepository()->GetAll())
+    , mItemsList({}/*aModel.GetFoodDefinitionRepository()->GetAll()*/)
     , mUpdatingFilter(false)
 {
 }
@@ -44,6 +44,7 @@ void CItemsPage::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CItemsPage, CDialog)
+    ON_WM_SHOWWINDOW()
     ON_BN_CLICKED(IDC_ADD, OnBnClickedAdd)
     ON_BN_CLICKED(IDC_EDIT, OnBnClickedEdit)
     ON_BN_CLICKED(IDC_DELETE, OnBnClickedDelete)
@@ -65,7 +66,6 @@ BOOL CItemsPage::OnInitDialog()
         return FALSE;
 
     mItemsList.Initialize();
-    mItemsList.Fill();
 
     mCategory.Initialize();
     mCategory.Fill();
@@ -96,13 +96,20 @@ void CItemsPage::OnCancel()
 {
 }
 
+void CItemsPage::OnShowWindow(BOOL bShow, UINT nStatus)
+{
+    if (bShow == TRUE)
+        mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
+    CDialog::OnShowWindow(bShow, nStatus);
+}
+
 void CItemsPage::OnBnClickedDelete()
 {
-    VMDefinitiesListItem* item = mItemsList.GetSelectedItem();
-    if (item == nullptr)
+    auto definition = mItemsList.GetSelectedDefinition();
+    if (definition == nullptr)
         return;
 
-    if (mModel.Remove(item->GetItem())) {
+    if (mModel.Remove(definition)) {
         mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
     }
 }
@@ -110,14 +117,12 @@ void CItemsPage::OnBnClickedDelete()
 
 void CItemsPage::EditItem()
 {
-    VMDefinitiesListItem* item = mItemsList.GetSelectedItem();
-    if (item != nullptr) {
-        CEditFoodDefDialog dlg(mModel.GetFoodDefinitionRepository(), mModel.GetUnitRepository(),
-                               mModel.GetCategoryRepository(), mModel.GetBrandRepository(),
-                               *item->GetItem(), false, mModel.GetCalculator(), this);
-        INT_PTR nResponse = dlg.DoModal();
-        if (nResponse == IDOK)
+    auto definition = mItemsList.GetSelectedDefinition();
+    if (definition != nullptr) {
+        FoodDefinitionEditor editor(mModel, this);
+        if (editor.Edit(*definition))
         {
+            mItemsList.SelectItem(*definition);
             // TODO ww2024: Place code here to handle when the dialog is
             // dismissed with OK
         }

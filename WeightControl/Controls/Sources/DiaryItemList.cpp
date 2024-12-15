@@ -28,9 +28,9 @@
 // CDiaryItemList
 
 CDiaryItemList::CDiaryItemList(weight::Model& aModel)
-    : ItemList(aModel),
-    mDate(Utils::Date::Today()),
-    mDay(NULL)
+    : ItemList(aModel)
+    , mDate(Utils::Date::Today())
+    , mDay(nullptr)
 {
 }
 
@@ -42,7 +42,7 @@ CDiaryItemList::~CDiaryItemList()
 
 void CDiaryItemList::View(weight::Day* aDay)
 {
-    if (aDay == NULL)
+    if (aDay == nullptr)
     {
         DeleteAllItems();
         ClearItems();
@@ -54,29 +54,8 @@ void CDiaryItemList::View(weight::Day* aDay)
 }
 
 
-void CDiaryItemList::Update(Subject* aSubject)
-{
-    (void)aSubject;
-}
-
-
-void CDiaryItemList::Destroyed(Subject* aSubject)
-{
-    (void)aSubject;
-}
-
-
 BEGIN_MESSAGE_MAP(CDiaryItemList, CListCtrl)
     //{{AFX_MSG_MAP(CDiaryItemList)
     //ON_WM_LBUTTONDOWN()
     //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/////////////////////////////////////////////////////////////////////////////
-//// CDiaryItemList message handlers
-//
-//void CDiaryItemList::OnLButtonDown(UINT nFlags, CPoint point) 
-//{
-//  (void)nFlags;
-//  (void)point;
-//}

@@ -18,11 +18,11 @@ class VMDefinitiesFilter
 {
 public:
     VMDefinitiesFilter() : mFavouritesOnly(false) {}
-    VMDefinitiesFilter(const std::tstring& aDescription,
+    VMDefinitiesFilter(const std::tstring& aName,
                        const std::tstring& aCategory,
                        const std::tstring& aMerk);
 
-    std::tstring                GetDescription() const { return mDescription; }
+    std::tstring                GetDescription() const { return mName; }
     std::tstring                GetCategory() const { return mCategory; }
     std::tstring                GetBrand() const { return mMerk; }
 
@@ -30,27 +30,25 @@ public:
     void                        SetFavouritesOnly(bool bFilter);
 
 private:
-    std::tstring                mDescription;
+    std::tstring                mName;
     std::tstring                mCategory;
     std::tstring                mMerk;
     bool                        mFavouritesOnly;
 };
 
 class VMDefinitiesListItem
-{
+/*{
 public:
     VMDefinitiesListItem(weight::VMDefinitie* anItem)
         : mItem(anItem) {}
 
-    void Write(CListCtrl& aControl, int iItemIndex);
-
     weight::VMDefinitie* GetItem() { return mItem; }
 
-    bool Complies(const VMDefinitiesFilter& aFilter) const;
-
 private:
+    void Write(CListCtrl& aControl, int iItemIndex);
+
     weight::VMDefinitie* mItem;
-};
+}*/;
 
 
 class VMDefinitiesList: public CListCtrl
@@ -63,8 +61,9 @@ public:
     void SetDefinitions(const std::vector<weight::VMDefinitie*>& definitions);
     void                        SetFilter(const VMDefinitiesFilter& aFilter);
     void                        Fill();
-
-    VMDefinitiesListItem* GetSelectedItem();
+    weight::VMDefinitie* GetSelectedDefinition();
+    //int GetSelectedItemIndex() const;
+    //VMDefinitiesListItem* GetSelectedItem();
     void                        SelectItem(weight::VMDefinitie& aDefinition);
     void                        SelectItem(int iIndex, bool bSelect);
 
@@ -80,8 +79,6 @@ public:
 
 private:
     void                        ClearItems();
-    static bool                 Complies(const weight::VMDefinitie& anItem,
-                                         const VMDefinitiesFilter& aFilter);
 
     std::vector<std::unique_ptr<VMDefinitiesListItem>> mItems;
     std::vector<weight::VMDefinitie*> m_definitions;

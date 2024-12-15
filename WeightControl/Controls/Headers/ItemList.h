@@ -52,15 +52,15 @@ private:
 };
 
 
-class ItemList: public ListControl/* , public Observer*/
+class ItemList: public ListControl
 {
     // Construction
 public:
     ItemList(weight::Model& aModel);
-    virtual                         ~ItemList();
+    virtual ~ItemList() override;
 
-    // // Operations
-    void                            View(const std::vector<std::unique_ptr<weight::Item>>& aItems);
+    // Operations
+    void View(const std::vector<std::unique_ptr<weight::Item>>& aItems);
 
     ItemListItem* GetItemAt(int iIndex);
     ItemListItem* GetSelectedItem();

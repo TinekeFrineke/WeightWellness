@@ -105,6 +105,7 @@ ItemList::~ItemList()
 
 void ItemList::View(const std::vector<std::unique_ptr<weight::Item>>& aItems)
 {
+    SetRedraw(FALSE);
     DeleteAllItems();
     ClearItems();
 
@@ -125,13 +126,14 @@ void ItemList::View(const std::vector<std::unique_ptr<weight::Item>>& aItems)
 
     for (int i = 0; i < 2; ++i)
         SetColumnWidth(i, LVSCW_AUTOSIZE_USEHEADER);
+    SetRedraw(TRUE);
 }
 
 
 ItemListItem* ItemList::GetItemAt(int iIndex)
 {
     if (iIndex >= static_cast<int>(mItems.size()))
-        return NULL;
+        return nullptr;
 
     return mItems[iIndex].get();
 }
@@ -166,15 +168,15 @@ void ItemList::ClearItems()
 ItemListItem* ItemList::GetSelectedItem()
 {
     POSITION pos = GetFirstSelectedItemPosition();
-    if (pos == NULL)
-        return NULL;
+    if (pos == nullptr)
+        return nullptr;
 
     int nItem = GetNextSelectedItem(pos);
 
     if (nItem >= 0 && nItem < int(mItems.size()))
-        return (ItemListItem*)GetItemData(nItem);
+        return reinterpret_cast<ItemListItem*>(GetItemData(nItem));
 
-    return NULL;
+    return nullptr;
 }
 
 

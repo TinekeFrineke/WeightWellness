@@ -16,7 +16,7 @@ void Repository::Add(const std::wstring& element)
     m_elements.push_back(element);
 }
 
-void Repository::Clear()
+void Repository::Clear() noexcept
 {
     m_elements.clear();
 }

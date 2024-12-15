@@ -20,7 +20,12 @@ bool FoodDefinitionEditor::Edit(weight::VMDefinitie& definition) const
                               m_model.GetCategoryRepository(), m_model.GetBrandRepository(), definition,
                               m_isNewDefinition, m_model.GetCalculator(), m_parent);
     INT_PTR nResponse = dialog.DoModal();
-    return nResponse == IDOK;
+    if (nResponse != IDOK)
+        return false;
+
+    m_model.AddCategory(definition.GetCategory());
+    m_model.AddBrand(definition.GetMerk());
+    return true;
 }
 
 std::unique_ptr<weight::VMDefinitie> FoodDefinitionEditor::Create() const

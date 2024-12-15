@@ -12,7 +12,7 @@ class Repository
 public:
     std::vector<std::wstring> Get() const override;
     void Add(const std::wstring& element) override;
-    void Clear() override;
+    void Clear() noexcept override;
 
 private:
     std::vector<std::wstring> m_elements;

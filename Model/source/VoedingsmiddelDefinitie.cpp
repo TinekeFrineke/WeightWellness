@@ -110,6 +110,20 @@ bool VMDefinitie::RemovePortie(Portie* aPortie)
     return false;
 }
 
+bool VMDefinitie::RemovePortie(const std::wstring& name)
+{
+    for (std::vector<std::unique_ptr<Portie>>::iterator iter = mPortieList.begin(); iter != mPortieList.end(); ++iter)
+    {
+        if (name == ((*iter)->GetName()))
+        {
+            mPortieList.erase(iter);
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 void VMDefinitie::SetNutritionalValues(const FoodParameters& parameters)
 {

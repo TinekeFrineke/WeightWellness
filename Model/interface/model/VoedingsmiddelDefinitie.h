@@ -36,6 +36,7 @@ public:
     // Transfers ownership
     bool AddPortie(std::unique_ptr<Portie> aPortie);
     bool RemovePortie(Portie* aPortie);
+    bool RemovePortie(const std::wstring& name);
 
     void SetName(const std::wstring& name) { mName = name; }
     void SetCategory(const std::wstring& aCategory) { mCategory = aCategory; }
