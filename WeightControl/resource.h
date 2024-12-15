@@ -90,7 +90,6 @@
 #define IDC_AANTAL_UNITS                1076
 #define IDC_VOEDINGSMIDDELNAAM          1077
 #define IDC_ADD_RECEPT                  1078
-#define IDC_ADD_GERECHT                 1079
 #define IDC_WEIGHT                      1083
 #define IDC_PUNTEN_STATIC               1085
 #define IDC_ADD_HANDMATIG               1091

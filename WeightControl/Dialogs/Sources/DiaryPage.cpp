@@ -62,7 +62,6 @@ BEGIN_MESSAGE_MAP(CDiaryPage, CDialog)
     ON_BN_CLICKED(IDC_DAY_MINUS, OnBnClickedDayMinus)
     ON_BN_CLICKED(IDC_DAY_PLUS, OnBnClickedDayPlus)
     ON_BN_CLICKED(IDC_ADD_RECEPT, OnBnClickedAddRecept)
-    ON_BN_CLICKED(IDC_ADD_GERECHT, OnBnClickedAddGerecht)
     ON_BN_CLICKED(IDC_EDIT, OnBnClickedEdit)
     ON_BN_CLICKED(IDC_DELETE, OnBnClickedDelete)
     ON_EN_CHANGE(IDC_WEIGHT, OnEnChangeWeight)
@@ -260,11 +259,6 @@ void CDiaryPage::OnBnClickedAddRecept()
     }
 }
 
-void CDiaryPage::OnBnClickedAddGerecht()
-{
-}
-
-
 void CDiaryPage::EditItem(weight::Item& item)
 {
     ItemEditVisitor visitor(mModel, this);
@@ -365,18 +359,6 @@ void CDiaryPage::OnEnChangeWeekEinde()
 
     UpdatePointsLeft();
 }
-
-void CDiaryPage::OnBnClickedAddbinus()
-{
-    CEditBonuses dialog(mModel, mDay->GetBonuses(), mDay->GetWeight(), this);
-    INT_PTR nResponse = dialog.DoModal();
-    if (nResponse == IDOK) {
-        mDay->SetBonuses(dialog.GetBonuses());
-        mCalculatedBonusPoints.SetValue(mDay->GetCalculatedBonusPoints());
-    }
-}
-
-
 
 void CDiaryPage::OnBnClickedAddbonus()
 {
