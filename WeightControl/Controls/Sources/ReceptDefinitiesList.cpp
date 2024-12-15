@@ -15,6 +15,20 @@ BEGIN_MESSAGE_MAP(ReceptDefinitiesList, CListCtrl)
     //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
+class ReceptDefinitiesListItem
+{
+public:
+    ReceptDefinitiesListItem(weight::ReceptDefinitie* anItem)
+        : mItem(anItem) {}
+
+    void Write(CListCtrl& aControl, int iItemIndex);
+
+    weight::ReceptDefinitie* GetItem() { return mItem; }
+
+private:
+    weight::ReceptDefinitie* mItem;
+};
+
 
 ReceptDefinitiesFilter::ReceptDefinitiesFilter(const std::tstring& aDescription)
     : mDescription(aDescription)
@@ -137,30 +151,14 @@ void ReceptDefinitiesList::SetFilter(const ReceptDefinitiesFilter& aFilter)
     mFilter = aFilter;
 }
 
-void ReceptDefinitiesList::DeleteItem(const ReceptDefinitiesListItem* item)
-{
-    auto iter = std::find_if(mItems.begin(), mItems.end(), [item] (const std::unique_ptr< ReceptDefinitiesListItem>& anItem) {
-        return item == anItem.get();
-    });
-    if (iter == mItems.end())
-        return;
-
-    mModel.Remove((*iter)->GetItem());
-    int index = iter - mItems.begin();
-    mItems.erase(iter);
-    CListCtrl::DeleteItem(index);
-    return;
-}
-
-
-int ReceptDefinitiesList::IndexOf(const ReceptDefinitiesListItem* anItem) const
+int ReceptDefinitiesList::IndexOf(const weight::ReceptDefinitie& anItem) const
 {
     int nItem = GetNextItem(-1, LVNI_ALL);
 
     while (nItem >= 0 && nItem < int(mItems.size()))
     {
         ReceptDefinitiesListItem* item = (ReceptDefinitiesListItem*)GetItemData(nItem);
-        if (item == anItem)
+        if (item->GetItem() == &anItem)
             return nItem;
 
         nItem = GetNextItem(nItem, LVNI_ALL);
@@ -169,19 +167,19 @@ int ReceptDefinitiesList::IndexOf(const ReceptDefinitiesListItem* anItem) const
     return -1;
 }
 
-ReceptDefinitiesListItem* ReceptDefinitiesList::GetSelectedItem()
+weight::ReceptDefinitie* ReceptDefinitiesList::GetSelectedDefinition()
 {
     POSITION pos = GetFirstSelectedItemPosition();
-    if (pos == NULL)
-        return NULL;
+    if (pos == nullptr)
+        return nullptr;
 
     int nItem = GetNextSelectedItem(pos);
 
     if (nItem >= 0 && nItem < int(mItems.size()))
     {
         ReceptDefinitiesListItem* item = (ReceptDefinitiesListItem*)GetItemData(nItem);
-        return item;
+        return item->GetItem();
     }
 
-    return NULL;
+    return nullptr;
 }

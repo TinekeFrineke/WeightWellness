@@ -3,6 +3,7 @@
 #include "controls/tabpage.h"
 #include "model/Model.h"
 #include "ReceptDefinitiesList.h"
+#include "resource.h"
 
 // ReceptenPage dialog
 

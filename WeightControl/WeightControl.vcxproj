@@ -60,7 +60,9 @@
     <ClInclude Include="Editor\Headers\IEditorFactory.h" />
     <ClInclude Include="Editor\Headers\IFoodEditor.h" />
     <ClInclude Include="Editor\Headers\IPortieEditor.h" />
+    <ClInclude Include="Editor\Headers\IRecipeDefinitionEditor.h" />
     <ClInclude Include="Editor\Headers\PortieEditor.h" />
+    <ClInclude Include="Editor\Headers\RecipeDefinitionEditor.h" />
     <ClInclude Include="General\Headers\ItemEditVisitor.h" />
     <ClInclude Include="General\Headers\stdafx.h" />
     <ClInclude Include="General\Headers\WeightControl.h" />
@@ -98,6 +100,7 @@
     <ClCompile Include="Editor\Sources\FoodDefinitionEditor.cpp" />
     <ClCompile Include="Editor\Sources\FoodEditor.cpp" />
     <ClCompile Include="Editor\Sources\PortieEditor.cpp" />
+    <ClCompile Include="Editor\Sources\RecipeDefinitionEditor.cpp" />
     <ClCompile Include="General\Sources\ItemEditVisitor.cpp" />
     <ClCompile Include="General\Sources\WeightControl.cpp" />
   </ItemGroup>

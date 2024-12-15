@@ -26,19 +26,7 @@ private:
     std::tstring                mDescription;
 };
 
-class ReceptDefinitiesListItem
-{
-public:
-    ReceptDefinitiesListItem(weight::ReceptDefinitie* anItem)
-        : mItem(anItem) {}
-
-    void Write(CListCtrl& aControl, int iItemIndex);
-
-    weight::ReceptDefinitie* GetItem() { return mItem; }
-
-private:
-    weight::ReceptDefinitie* mItem;
-};
+class ReceptDefinitiesListItem;
 
 
 class ReceptDefinitiesList: public CListCtrl
@@ -51,11 +39,10 @@ public:
     void SetFilter(const ReceptDefinitiesFilter& aFilter);
     void View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aItems);
 
-    ReceptDefinitiesListItem* GetSelectedItem();
-    void  SelectItem(weight::ReceptDefinitie& aDefinition);
-    void  SelectItem(int iIndex);
-    int  IndexOf(const ReceptDefinitiesListItem* item) const;
-    void  DeleteItem(const ReceptDefinitiesListItem* item);
+    weight::ReceptDefinitie* GetSelectedDefinition();
+    void SelectItem(weight::ReceptDefinitie& aDefinition);
+    void SelectItem(int iIndex);
+    int IndexOf(const weight::ReceptDefinitie& recipe) const;
 
     DECLARE_MESSAGE_MAP()
 

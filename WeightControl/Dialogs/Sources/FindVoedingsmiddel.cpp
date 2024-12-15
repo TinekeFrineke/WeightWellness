@@ -29,7 +29,6 @@
 
 IMPLEMENT_DYNAMIC(CFindVoedingsmiddel, CDialog)
 CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
-                                         weight::VMDefinitie* aDefinitie,
                                          std::unique_ptr<weight::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindVoedingsmiddel::IDD, pParent)
@@ -39,7 +38,7 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
     , mFood(nullptr)
     , mState(nullptr)
     , m_lotFactory(std::move(lotFactory))
-    , mDefinitie(aDefinitie)
+    , mDefinitie(nullptr)
     , mPortieNaam(_T(""))
     , mUpdating(false)
     , mUpdatingFilter(false)
@@ -224,6 +223,11 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
 {
     (void)pNMHDR;
 
+    auto item = mItemList.GetSelectedDefinition();
+    if (item == nullptr)
+        return;
+
+    mDefinitie = item;
     weight::Portie* portie = mPortieNaam.GetSelectedPortie();
     if (portie == nullptr)
     {

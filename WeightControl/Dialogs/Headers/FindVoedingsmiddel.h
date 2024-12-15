@@ -30,7 +30,6 @@ class CFindVoedingsmiddel: public CDialog
 
 public:
     CFindVoedingsmiddel(weight::Model& aModel,
-                        weight::VMDefinitie* aDefinitie,
                         std::unique_ptr<weight::ILotFactory> lotFactory,
                         CWnd* pParent = nullptr);   // standard constructor
     virtual ~CFindVoedingsmiddel();

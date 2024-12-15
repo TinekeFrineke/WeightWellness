@@ -160,7 +160,7 @@ void CDiaryPage::OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CDiaryPage::OnBnClickedAddFood()
 {
-    CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
+    CFindVoedingsmiddel dialog(mModel, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {

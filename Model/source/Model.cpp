@@ -136,13 +136,11 @@ bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
 
 bool Model::Add(std::unique_ptr<ReceptDefinitie> aReceptDef)
 {
-    for (size_t i = 0; i < mReceptDefinities.size(); ++i)
+    for (const auto& definition : mReceptDefinities)
     {
-        if (mReceptDefinities[i]->GetName() == aReceptDef->GetName())
+        if (definition->GetName() == aReceptDef->GetName())
         {
-            TCHAR smsg[1024];
-            _stprintf_s(smsg, _T("Could not add duplicate Recept %s\n"), aReceptDef->GetName().c_str());
-            ::MessageBox(0, smsg, _T("ERROR"), MB_OK);
+            ::MessageBox(0, (_T("Could not add duplicate Recept ") + aReceptDef->GetName()).c_str(), _T("ERROR"), MB_OK);
             return false;
         }
     }

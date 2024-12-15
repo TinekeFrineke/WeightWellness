@@ -20,13 +20,11 @@ class EditReceptDefDialog: public CDialog
     DECLARE_DYNAMIC(EditReceptDefDialog)
 
 public:
-    EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie* aRecept, CWnd* pParent = NULL);   // standard constructor
+    EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent = NULL);   // standard constructor
     virtual ~EditReceptDefDialog();
 
     // Dialog Data
     enum { IDD = IDD_EDITRECEPT_DIALOG };
-
-    std::unique_ptr<weight::ReceptDefinitie> ExtractRecept();
 
 protected:
     virtual void          DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -43,7 +41,7 @@ private:
     void                  EditSelectedItem();
 
     weight::Model& mModel;
-    std::unique_ptr<weight::ReceptDefinitie> mRecept;
+    weight::ReceptDefinitie& mRecept;
 
     ItemList              mItemList;
     CStringEdit           mName;

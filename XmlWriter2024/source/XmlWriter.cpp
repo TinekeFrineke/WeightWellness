@@ -191,18 +191,18 @@ weight::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
     auto xmlrecepten = std::make_unique<XmlReceptdefs>();
 
     const auto& recepten = mModel.GetReceptDefs();
-    for (size_t i = 0; i < recepten.size(); ++i)
+    for (const auto& recipe : recepten)
     {
-        auto recept = std::make_unique<XmlReceptdef>();
-        recept->Setnaam(recepten[i]->GetName());
-        recept->Setporties(recepten[i]->GetPortions());
+        auto xmlRecipe = std::make_unique<XmlReceptdef>();
+        xmlRecipe->Setnaam(recipe->GetName());
+        xmlRecipe->Setporties(recipe->GetPortions());
 
-        XmlReceptItemCreateVisitor visitor(*this, *recept);
+        XmlReceptItemCreateVisitor visitor(*this, *xmlRecipe);
 
-        for (size_t j = 0; j < recepten[i]->GetItems().size(); ++j)
-            recepten[i]->GetItems()[j]->Accept(visitor);
+        for (const auto& item : recipe->GetItems())
+            item->Accept(visitor);
 
-        xmlrecepten->Add(std::move(recept));
+        xmlrecepten->Add(std::move(xmlRecipe));
     }
 
     XmlReceptdefsWriter writer;

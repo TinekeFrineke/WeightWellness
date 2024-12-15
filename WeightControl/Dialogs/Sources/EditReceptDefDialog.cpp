@@ -14,32 +14,6 @@
 // EditReceptDefDialog dialog
 
 IMPLEMENT_DYNAMIC(EditReceptDefDialog, CDialog)
-EditReceptDefDialog::EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie* aRecept, CWnd* pParent /*=nullptr*/)
-    : CDialog(EditReceptDefDialog::IDD, pParent)
-    , mModel(aModel)
-    , mItemList(aModel)
-    , mRecept(aRecept)
-{
-}
-
-EditReceptDefDialog::~EditReceptDefDialog()
-{
-}
-
-std::unique_ptr<weight::ReceptDefinitie> EditReceptDefDialog::ExtractRecept()
-{
-    return std::move(mRecept);
-}
-
-void EditReceptDefDialog::DoDataExchange(CDataExchange* pDX)
-{
-    CDialog::DoDataExchange(pDX);
-    DDX_Control(pDX, IDC_ITEMS_LIST, mItemList);
-    DDX_Control(pDX, IDC_EDIT1, mName);
-    DDX_Control(pDX, IDC_PUNTEN, mPointsPerPortion);
-    DDX_Control(pDX, IDC_PORTIES, mPorties);
-}
-
 
 BEGIN_MESSAGE_MAP(EditReceptDefDialog, CDialog)
     ON_BN_CLICKED(IDC_ADD, OnBnClickedAdd)
@@ -52,24 +26,38 @@ BEGIN_MESSAGE_MAP(EditReceptDefDialog, CDialog)
 END_MESSAGE_MAP()
 
 
+EditReceptDefDialog::EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent)
+    : CDialog(EditReceptDefDialog::IDD, pParent)
+    , mModel(aModel)
+    , mItemList(aModel)
+    , mRecept(aRecept)
+{
+}
+
+EditReceptDefDialog::~EditReceptDefDialog()
+{
+}
+
+void EditReceptDefDialog::DoDataExchange(CDataExchange* pDX)
+{
+    CDialog::DoDataExchange(pDX);
+    DDX_Control(pDX, IDC_ITEMS_LIST, mItemList);
+    DDX_Control(pDX, IDC_EDIT1, mName);
+    DDX_Control(pDX, IDC_PUNTEN, mPointsPerPortion);
+    DDX_Control(pDX, IDC_PORTIES, mPorties);
+}
+
+
 BOOL EditReceptDefDialog::OnInitDialog()
 {
     if (CDialog::OnInitDialog() == FALSE)
         return FALSE;
 
     mItemList.Initialize();
-    if (mRecept == 0)
-    {
-        mPointsPerPortion.SetValue(0);
-        mPorties.SetValue(4);
-    }
-    else
-    {
-        mName.SetValue(mRecept->GetName());
-        mItemList.View(mRecept->GetItems());
-        mPointsPerPortion.SetValue(mRecept->GetPointsPerPortion());
-        mPorties.SetValue(mRecept->GetPortions());
-    }
+    mName.SetValue(mRecept.GetName());
+    mItemList.View(mRecept.GetItems());
+    mPointsPerPortion.SetValue(mRecept.GetPointsPerPortion());
+    mPorties.SetValue(mRecept.GetPortions());
 
     return TRUE;
 
@@ -79,15 +67,15 @@ BOOL EditReceptDefDialog::OnInitDialog()
 void EditReceptDefDialog::EditSelectedItem()
 {
     ItemListItem* item = mItemList.GetSelectedItem();
-    if (item == nullptr || mRecept == nullptr)
+    if (item == nullptr)
         return;
 
     ItemEditVisitor visitor(mModel, this);
     item->GetItem()->Accept(visitor);
 
-    mItemList.View(mRecept->GetItems());
-    mPointsPerPortion.SetValue(mRecept->GetPointsPerPortion());
-    mPorties.SetValue(mRecept->GetPortions());
+    mItemList.View(mRecept.GetItems());
+    mPointsPerPortion.SetValue(mRecept.GetPointsPerPortion());
+    mPorties.SetValue(mRecept.GetPortions());
 }
 
 
@@ -95,41 +83,29 @@ void EditReceptDefDialog::EditSelectedItem()
 
 void EditReceptDefDialog::OnBnClickedAdd()
 {
-    if (mRecept == nullptr) {
-        if (mName.GetValue().empty()) {
-            ::MessageBox(0, _T("Type name"), _T("ERROR"), MB_OK);
-            return;
-        }
-
-        if (mModel.FindReceptDefinitie(mName.GetValue()) != nullptr)
-        {
-            ::MessageBox(0, _T("Duplicate recept name"), _T("ERROR"), MB_OK);
-            return;
-        }
-
-        mRecept = std::make_unique<weight::ReceptDefinitie>(mName.GetValue());
-    }
-
-    CFindVoedingsmiddel dialog(mModel, nullptr, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
+    CFindVoedingsmiddel dialog(mModel, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
         auto voedingsMiddel = dialog.ExtractVoedingsMiddel();
         if (voedingsMiddel != nullptr) {
-            mRecept->Add(std::move(voedingsMiddel));
+            mRecept.Add(std::move(voedingsMiddel));
         }
     }
 
-    mPointsPerPortion.SetValue(mRecept->GetPointsPerPortion());
-    mItemList.View(mRecept->GetItems());
+    mPointsPerPortion.SetValue(mRecept.GetPointsPerPortion());
+    mItemList.View(mRecept.GetItems());
 }
 
 void EditReceptDefDialog::OnBnClickedOk()
 {
-    if (mRecept == nullptr)
+    if (mName.GetValue().empty()) {
+        MessageBox(L"Empty name not allowed!", L"ERROR");
         return;
+    }
 
-    mRecept->SetPortions(mPorties.GetValue());
+    mRecept.SetName(mName.GetValue());
+    mRecept.SetPortions(mPorties.GetValue());
 
     OnOK();
 }
@@ -159,22 +135,19 @@ void EditReceptDefDialog::OnNMDblclkItemsList(NMHDR* pNMHDR, LRESULT* pResult)
 
 void EditReceptDefDialog::OnEnChangePorties()
 {
-    if (mRecept == nullptr)
-        return;
-
-    mRecept->SetPortions(mPorties.GetValue());
-    mPointsPerPortion.SetValue(mRecept->GetPointsPerPortion());
+    mRecept.SetPortions(mPorties.GetValue());
+    mPointsPerPortion.SetValue(mRecept.GetPointsPerPortion());
 }
 
 void EditReceptDefDialog::OnBnClickedDelete()
 {
     ItemListItem* item = mItemList.GetSelectedItem();
-    if (item == nullptr || mRecept == nullptr)
+    if (item == nullptr)
         return;
 
-    mRecept->Remove(item->GetItem());
+    mRecept.Remove(item->GetItem());
 
-    mItemList.View(mRecept->GetItems());
-    mPointsPerPortion.SetValue(mRecept->GetPointsPerPortion());
-    mPorties.SetValue(mRecept->GetPortions());
+    mItemList.View(mRecept.GetItems());
+    mPointsPerPortion.SetValue(mRecept.GetPointsPerPortion());
+    mPorties.SetValue(mRecept.GetPortions());
 }

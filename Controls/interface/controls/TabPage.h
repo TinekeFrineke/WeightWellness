@@ -1,5 +1,7 @@
 #pragma once
 
+class CDialog;
+
 class TabPage
 {
 public:

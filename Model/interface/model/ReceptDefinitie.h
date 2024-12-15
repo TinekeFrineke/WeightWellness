@@ -19,6 +19,7 @@ public:
     virtual double                GetPointsPerPortion() const;
     int                           GetPortions() const { return mPorties.Get(); }
 
+    void                          SetName(const std::wstring& name) { mName = name; }
     void                          SetPortions(int aPorties) { mPorties.Set(aPorties); }
     void                          Add(std::unique_ptr<Item> anItem);
     void                          Remove(Item* anItem);

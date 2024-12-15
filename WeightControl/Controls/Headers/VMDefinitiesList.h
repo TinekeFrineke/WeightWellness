@@ -62,8 +62,6 @@ public:
     void                        SetFilter(const VMDefinitiesFilter& aFilter);
     void                        Fill();
     weight::VMDefinitie* GetSelectedDefinition();
-    //int GetSelectedItemIndex() const;
-    //VMDefinitiesListItem* GetSelectedItem();
     void                        SelectItem(weight::VMDefinitie& aDefinition);
     void                        SelectItem(int iIndex, bool bSelect);
 

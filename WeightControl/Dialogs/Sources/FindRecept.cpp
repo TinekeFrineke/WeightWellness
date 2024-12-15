@@ -76,8 +76,8 @@ BOOL CFindRecept::OnInitDialog()
 
 void CFindRecept::OnBnClickedOk()
 {
-    ReceptDefinitiesListItem* item = mItemList.GetSelectedItem();
-    if (item == nullptr || item->GetItem() == nullptr)
+    weight::ReceptDefinitie* definition = mItemList.GetSelectedDefinition();
+    if (definition == nullptr)
     {
         ::MessageBox(m_hWnd, _T("Pick a valid item"), _T("ERROR"), MB_OK);
         return;
@@ -89,10 +89,9 @@ void CFindRecept::OnBnClickedOk()
         return;
     }
 
-    weight::ReceptDefinitie* definitie = item->GetItem();
-    mRecept = std::make_unique<weight::Recept>(definitie->GetName());
+    mRecept = std::make_unique<weight::Recept>(definition->GetName());
     mRecept->SetNumberOfPortions(mPorties.GetValue());
-    mRecept->SetPointsPerPortion(definitie->GetPointsPerPortion());
+    mRecept->SetPointsPerPortion(definition->GetPointsPerPortion());
 
     OnOK();
 }
@@ -115,14 +114,13 @@ void CFindRecept::OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResult)
     (void)pNMHDR;
     *pResult = 0;
 
-    ReceptDefinitiesListItem* lvitem = mItemList.GetSelectedItem();
-    if (lvitem == nullptr)
+    auto definition = mItemList.GetSelectedDefinition();
+    if (definition == nullptr)
         return;
 
     mUpdatingFilter = true;
 
-    mDefinitie = lvitem->GetItem();
-    assert(mDefinitie != nullptr);
+    mDefinitie = definition;
     mPoints.SetValue(mDefinitie->GetPointsPerPortion() * mPorties.GetValue());
 
     mUpdatingFilter = false;
@@ -147,17 +145,16 @@ void CFindRecept::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
 {
     (void)pNMHDR;
 
-    ReceptDefinitiesListItem* item = mItemList.GetSelectedItem();
-    if (item == nullptr || item->GetItem() == nullptr)
+    weight::ReceptDefinitie* definition = mItemList.GetSelectedDefinition();
+    if (definition == nullptr)
     {
         ::MessageBox(m_hWnd, _T("Pick a valid item"), _T("ERROR"), MB_OK);
         return;
     }
 
-    weight::ReceptDefinitie* definitie = item->GetItem();
-    mRecept = std::make_unique<weight::Recept>(definitie->GetName());
+    mRecept = std::make_unique<weight::Recept>(definition->GetName());
     mRecept->SetNumberOfPortions(mPorties.GetValue());
-    mRecept->SetPointsPerPortion(definitie->GetPointsPerPortion());
+    mRecept->SetPointsPerPortion(definition->GetPointsPerPortion());
 
     OnOK();
 

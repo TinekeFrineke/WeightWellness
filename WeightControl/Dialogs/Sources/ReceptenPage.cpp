@@ -2,12 +2,16 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
+
 #include "ReceptenPage.h"
+
+#include "model/ReceptDefinitie.h"
+
+//#include "WeightControl.h"
 #include ".\receptenpage.h"
 
 #include "EditReceptDefDialog.h"
-#include "model/ReceptDefinitie.h"
+#include "RecipeDefinitionEditor.h"
 
 
 // ReceptenPage dialog
@@ -57,13 +61,10 @@ BOOL ReceptenPage::OnInitDialog()
 
 void ReceptenPage::OnBnClickedAdd()
 {
-    EditReceptDefDialog dialog(mModel, NULL, this);
-    INT_PTR nResponse = dialog.DoModal();
-    if (nResponse == IDOK)
-    {
-        if (dialog.ExtractRecept() != NULL)
-            mModel.Add(dialog.ExtractRecept());
-    }
+    RecipeDefinitionEditor editor(mModel, this);
+    auto definition = editor.Create();
+    if (definition != nullptr)
+        mModel.Add(std::move(definition));
 
     mReceptenList.View(mModel.GetReceptDefs());
 }
@@ -76,29 +77,26 @@ void ReceptenPage::View(const std::vector<std::unique_ptr<weight::ReceptDefiniti
 
 void ReceptenPage::OnBnClickedEdit()
 {
-    ReceptDefinitiesListItem* item = mReceptenList.GetSelectedItem();
-    if (item == NULL || item->GetItem() == NULL)
+    auto* definition = mReceptenList.GetSelectedDefinition();
+    if (definition == nullptr)
         return;
 
-    EditReceptDefDialog dialog(mModel, item->GetItem(), this);
-    /*INT_PTR nResponse = */dialog.DoModal();
-
-    mReceptenList.View(mModel.GetReceptDefs());
+    RecipeDefinitionEditor editor(mModel, this);
+    if (editor.Edit(*definition))
+        mReceptenList.View(mModel.GetReceptDefs());
 }
 
 void ReceptenPage::OnNMDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 {
     (void)pNMHDR;
 
-    ReceptDefinitiesListItem* item = mReceptenList.GetSelectedItem();
-    if (item == NULL || item->GetItem() == NULL)
+    auto definition = mReceptenList.GetSelectedDefinition();
+    if (definition == nullptr)
         return;
 
-    EditReceptDefDialog dialog(mModel, item->GetItem(), this);
-    /*INT_PTR nResponse = */dialog.DoModal();
-
-
-    mReceptenList.View(mModel.GetReceptDefs());
+    RecipeDefinitionEditor editor(mModel, this);
+    if (editor.Edit(*definition))
+        mReceptenList.View(mModel.GetReceptDefs());
 
     *pResult = 0;
 }
@@ -106,12 +104,12 @@ void ReceptenPage::OnNMDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
 
 void ReceptenPage::OnBnClickedDelete()
 {
-    ReceptDefinitiesListItem* item = mReceptenList.GetSelectedItem();
-    if (item == NULL)
+    auto definition = mReceptenList.GetSelectedDefinition();
+    if (definition == nullptr)
         return;
 
     if (::MessageBox(m_hWnd, _T("Zeker weten?"), _T("Waarschuwing"), MB_ICONQUESTION | MB_YESNO) == IDYES) {
-        mModel.Remove(item->GetItem());
+        mModel.Remove(definition);
     }
 
     View(mModel.GetReceptDefs());
