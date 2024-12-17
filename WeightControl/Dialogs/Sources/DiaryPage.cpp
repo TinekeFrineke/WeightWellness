@@ -25,17 +25,6 @@
 // CDiaryPage dialog
 
 IMPLEMENT_DYNAMIC(CDiaryPage, CDialog)
-CDiaryPage::CDiaryPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
-    : CDialog(CDiaryPage::IDD, pParent),
-    mModel(aModel),
-    mItemList(aModel)
-{
-}
-
-CDiaryPage::~CDiaryPage()
-{
-}
-
 void CDiaryPage::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
@@ -73,6 +62,17 @@ BEGIN_MESSAGE_MAP(CDiaryPage, CDialog)
 END_MESSAGE_MAP()
 
 
+CDiaryPage::CDiaryPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
+    : CDialog(CDiaryPage::IDD, pParent),
+    mModel(aModel),
+    mItemList(aModel)
+{
+}
+
+CDiaryPage::~CDiaryPage()
+{
+}
+
 // CDiaryPage message handlers
 
 BOOL CDiaryPage::OnInitDialog()
@@ -101,6 +101,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     mWeek = mModel.FindWeek(aDate);
     if (mWeek == nullptr)
     {
+        // Week not found, create a new week
         Utils::Date enddate(aDate);
         enddate.AddDays(6);
         auto week = std::make_unique<weight::Week>(aDate, enddate);

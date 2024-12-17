@@ -19,10 +19,10 @@ namespace weight
 
 
 Week::Week(const Utils::Date& aStartDate,
-           const Utils::Date& aEndDate)
-    : mStartDate(aStartDate),
-    mEndDate(aEndDate),
-    mStrategy(STRATEGY_TYPE::KCal)
+           const Utils::Date& aEndDate) noexcept
+    : mStartDate(aStartDate)
+    , mEndDate(aEndDate)
+    , mStrategy(STRATEGY_TYPE::KCal)
 {
 }
 
@@ -32,22 +32,45 @@ Week::~Week() = default;
 
 Day* Week::GetDay(const Utils::Date& aDay)
 {
-    for (size_t i = 0; i < mDays.size(); ++i)
-        if (mDays[i]->GetDate() == aDay)
-            return mDays[i].get();
+    auto x = std::find_if(mDays.begin(), mDays.end(), [aDay] (const std::unique_ptr<Day>& day) noexcept {
+        return day->GetDate() == aDay;
+    });
+    if (x != mDays.end())
+        return x->get();
 
     return nullptr;
 }
 
+
+Day* Week::AddDay(const Utils::Date& date)
+{
+    if (date < mStartDate || date > mEndDate)
+        return nullptr;
+
+    auto dayIter = std::find_if(mDays.begin(), mDays.end(), [date] (const std::unique_ptr<Day>& day) noexcept {
+        return day->GetDate() == date;
+    });
+    if (dayIter != mDays.end())
+        return dayIter->get();
+
+    auto newDay = std::make_unique<Day>(date);
+    auto dayPtr = newDay.get();
+    if (Add(std::move(newDay)))
+        return dayPtr;
+
+    return nullptr;
+}
 
 bool Week::Add(std::unique_ptr<Day> aDay)
 {
     if (aDay->GetDate() < mStartDate || aDay->GetDate() > mEndDate)
         return false;
 
-    for (size_t i = 0; i < mDays.size(); ++i)
-        if (mDays[i]->GetDate() == aDay->GetDate())
-            return false;
+    auto dayIter = std::find_if(mDays.begin(), mDays.end(), [&aDay] (const std::unique_ptr<Day>& day) noexcept {
+        return day->GetDate() == aDay->GetDate();
+    });
+    if (dayIter != mDays.end())
+        return false;
 
     mDays.push_back(std::move(aDay));
     return true;

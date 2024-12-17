@@ -29,10 +29,18 @@ public:
     Model();
     ~Model();
 
+    bool HasPersonalia(const std::tstring& name) const;
+    Personalia* GetActivePersonalia();
+    const Personalia* GetActivePersonalia() const;
+    Personalia* AddPersonalia(const std::tstring& aName);
+
     STRATEGY_TYPE                           GetStrategy() const noexcept { return mStrategyType; }
     void                                    SetStrategy(STRATEGY_TYPE eType);
 
+    Week* FindWeek(const Utils::Date& aDate);
+    Week* CreateWeek(const Utils::Date& aDate);
     bool                                    Add(std::unique_ptr<Week> aWeek);
+
     bool                                    Add(std::unique_ptr<VMDefinitie> aDefinitie);
     bool                                    Add(std::unique_ptr<ReceptDefinitie> aReceptDef);
     bool                                    Add(std::unique_ptr<Personalia> aPersonalia);
@@ -45,11 +53,10 @@ public:
     bool                                    Remove(const ReceptDefinitie* aRecept);
     bool                                    Remove(const Personalia* aPersonalia);
 
-    Week* FindWeek(const Utils::Date& aDate);
     bool                                    SetEndDate(Week& aWeek, const Utils::Date& aDate);
 
-    VMDefinitie* FindVoedingsmiddelDefinitie(const std::tstring& aName);
-    ReceptDefinitie* FindReceptDefinitie(const std::tstring& aName);
+    VMDefinitie* FindVoedingsmiddelDefinitie(const std::wstring& aName);
+    ReceptDefinitie* FindReceptDefinitie(const std::wstring& aName);
 
     std::shared_ptr<IRepository> GetUnitRepository() const noexcept;
     std::shared_ptr<IRepository> GetCategoryRepository() const noexcept;
@@ -65,11 +72,6 @@ public:
     double GetPuntenTotaal(STRATEGY_TYPE eType) const;
     double GetWeekPuntenTotaal() const;
     double GetVrijePunten() const;
-
-    bool HasPersonalia(const std::tstring& name) const;
-    Personalia* GetActivePersonalia();
-    const Personalia* GetActivePersonalia() const;
-    Personalia* AddPersonalia(const std::tstring& aName);
 
     std::shared_ptr<PointsCalculator> GetCalculator() const noexcept { return m_calculator; }
 
