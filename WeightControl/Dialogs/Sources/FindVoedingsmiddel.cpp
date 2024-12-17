@@ -17,17 +17,23 @@
 
 // CFindVoedingsmiddel dialog
 
-//namespace {
-//std::vector<weight::VMDefinitie*> Definitions(const weight::Model& model)
-//{
-//    std::vector<weight::VMDefinitie*> definitions;
-//    for (auto& definition : model.GetVoedingsmiddelDefinities())
-//        definitions.push_back(definition.get());
-//    return definitions;
-//}
-//}
-
 IMPLEMENT_DYNAMIC(CFindVoedingsmiddel, CDialog)
+
+BEGIN_MESSAGE_MAP(CFindVoedingsmiddel, CDialog)
+    ON_BN_CLICKED(IDOK, OnBnClickedOk)
+    ON_BN_CLICKED(IDCANCEL, OnBnClickedCancel)
+    ON_EN_CHANGE(IDC_NAAM, OnEnChangeNaam)
+    ON_CBN_SELCHANGE(IDC_COMBO1, OnCbnSelchangeCombo1)
+    ON_NOTIFY(LVN_ITEMCHANGED, IDC_ITEMLIST, OnLvnItemchangedItemlist)
+    ON_CBN_SELCHANGE(IDC_PORTIENAAM, OnCbnSelchangePortienaam)
+    ON_EN_CHANGE(IDC_PORTIES, OnEnChangePorties)
+    ON_EN_CHANGE(IDC_UNITS, OnEnChangeUnits)
+    ON_NOTIFY(NM_DBLCLK, IDC_ITEMLIST, OnNMDblclkItemlist)
+    ON_CBN_SELCHANGE(IDC_BRAND, OnCbnSelchangeBrand)
+    ON_BN_CLICKED(IDC_CHECK_FAVOURITES, OnBnClickedCheckFavourites)
+END_MESSAGE_MAP()
+
+
 CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
                                          std::unique_ptr<weight::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
@@ -36,7 +42,6 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
     , mCategorieBox(aModel.GetCategoryRepository()->Get())
     , mMerkBox(aModel.GetBrandRepository()->Get(), true)
     , mFood(nullptr)
-    , mState(nullptr)
     , m_lotFactory(std::move(lotFactory))
     , mDefinitie(nullptr)
     , mPortieNaam(_T(""))
@@ -68,21 +73,6 @@ void CFindVoedingsmiddel::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CFindVoedingsmiddel, CDialog)
-    ON_BN_CLICKED(IDOK, OnBnClickedOk)
-    ON_BN_CLICKED(IDCANCEL, OnBnClickedCancel)
-    ON_EN_CHANGE(IDC_NAAM, OnEnChangeNaam)
-    ON_CBN_SELCHANGE(IDC_COMBO1, OnCbnSelchangeCombo1)
-    ON_NOTIFY(LVN_ITEMCHANGED, IDC_ITEMLIST, OnLvnItemchangedItemlist)
-    ON_CBN_SELCHANGE(IDC_PORTIENAAM, OnCbnSelchangePortienaam)
-    ON_EN_CHANGE(IDC_PORTIES, OnEnChangePorties)
-    ON_EN_CHANGE(IDC_UNITS, OnEnChangeUnits)
-    ON_NOTIFY(NM_DBLCLK, IDC_ITEMLIST, OnNMDblclkItemlist)
-    ON_CBN_SELCHANGE(IDC_BRAND, OnCbnSelchangeBrand)
-    ON_BN_CLICKED(IDC_CHECK_FAVOURITES, OnBnClickedCheckFavourites)
-END_MESSAGE_MAP()
-
-
 void CFindVoedingsmiddel::UpdateItemFilter()
 {
     mItemList.SetFilter(VMDefinitiesFilter(mNaam.GetValue(),
@@ -103,6 +93,7 @@ BOOL CFindVoedingsmiddel::OnInitDialog()
     mItemList.Fill();
 
     mPortieNaam.Initialize();
+    mPortieNaam.EnableWindow(true);
 
     mCategorieBox.Initialize();
     mCategorieBox.Fill();
@@ -125,10 +116,14 @@ void CFindVoedingsmiddel::OnBnClickedOk()
         return;
     }
 
-    auto lot = m_lotFactory->Create(mDefinitie->GetNutritionalValue().GetParameters(), *portie);
+    auto definitie = mItemList.GetSelectedDefinition();
+    if (definitie == nullptr)
+        return;
+
+    auto lot = m_lotFactory->Create(definitie->GetNutritionalValue().GetParameters(), *portie);
     assert(lot != nullptr);
     lot->SetNumberOfPortions(mPorties.GetValue());
-    mFood = std::make_unique<weight::Voedingsmiddel>(std::move(lot), *mDefinitie);
+    mFood = std::make_unique<weight::Voedingsmiddel>(std::move(lot), *definitie);
 
     OnOK();
 }
@@ -155,15 +150,24 @@ void CFindVoedingsmiddel::OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResu
     (void)pNMHDR;
     *pResult = 0;
 
-    auto mDefinitie = mItemList.GetSelectedDefinition();
-    if (mDefinitie == nullptr)
+    auto definitie = mItemList.GetSelectedDefinition();
+    if (definitie == nullptr)
         return;
+
+    mDefinitie = definitie;
 
     mUpdatingFilter = true;
 
-    mUnitNaam.SetValue(mDefinitie->GetUnit());
+    mUnitNaam.SetValue(definitie->GetUnit());
 
-    SetState(CreateState(*mDefinitie));
+    mPortieNaam.Fill(mDefinitie->GetPortieList());
+    mPorties.SetValue(1);
+
+    auto portie = mPortieNaam.GetSelectedPortie();
+    if (portie != nullptr) {
+        mUnits.SetValue(portie->GetUnits());
+        mPortieNaam.SetString(portie->GetName());
+    }
 
     mUpdatingFilter = false;
 }
@@ -242,50 +246,6 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
     OnOK();
 
     *pResult = 0;
-}
-
-
-std::unique_ptr<VMState> CFindVoedingsmiddel::CreateState(weight::VMDefinitie& aDefinitie)
-{
-    if (aDefinitie.GetPortieList().empty())
-        return std::make_unique<VMNoPortionsState>(*this, aDefinitie);
-    else
-        return std::make_unique<VMStandardPortionsState>(*this, aDefinitie);
-}
-
-
-void CFindVoedingsmiddel::SetState(std::unique_ptr<VMState> aState)
-{
-    mState = std::move(aState);
-    if (mState != nullptr)
-        mState->Initialize();
-}
-
-
-void VMState::UpdatePortionValues(const weight::Portie& aPortie)
-{
-    GetUnits().SetValue(aPortie.GetUnits());
-    GetPorties().SetValue(1);
-    GetPortieBox().SetString(aPortie.GetName());
-}
-
-
-void VMNoPortionsState::Initialize()
-{
-    GetUnits().SetReadOnly(true);
-    GetPorties().SetReadOnly(true);
-    GetPortieBox().EnableWindow(false);
-}
-
-
-void VMStandardPortionsState::Initialize()
-{
-    GetUnits().SetReadOnly(false);
-    GetPorties().SetReadOnly(false);
-    GetPortieBox().EnableWindow(true);
-    GetPortieBox().Fill(GetDefinitie().GetPortieList());
-
-    UpdatePortionValues(*GetPortieBox().GetSelectedPortie());
 }
 
 
