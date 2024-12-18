@@ -38,6 +38,7 @@ public:
     double GetSaveablePoints() const { return mSaveablePoints; }
     STRATEGY_TYPE GetStrategy() const { return mStrategy; }
 
+    bool SetEndDate(const Utils::Date& aDate);
     void SetPoints(double aPoints) { mPoints = aPoints; }
     void SetSaveablePoints(double aPoints) { mSaveablePoints = aPoints; }
     void SetStartWeight(double aWeight) { mStartWeight = aWeight; }
@@ -51,7 +52,6 @@ public:
 
 private:
     friend class Model;
-    bool SetEndDate(const Utils::Date& aDate);
 
     std::vector<std::unique_ptr<Day>> mDays;
     Utils::Date mStartDate;

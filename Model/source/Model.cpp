@@ -80,12 +80,6 @@ Week* Model::CreateWeek(const Utils::Date& aDate)
 }
 
 
-bool Model::SetEndDate(Week& aWeek, const Utils::Date& aDate)
-{
-    return aWeek.SetEndDate(aDate);
-}
-
-
 VMDefinitie* Model::FindVoedingsmiddelDefinitie(const std::tstring& aName)
 {
     return m_foodDefinitions->Find(aName);

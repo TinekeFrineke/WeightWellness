@@ -11,7 +11,6 @@
 namespace weight
 {
 
-class Day;
 class IBrandRepository;
 class ICategoryRepository;
 class IFoodDefinitionRepository;
@@ -39,21 +38,19 @@ public:
 
     Week* FindWeek(const Utils::Date& aDate);
     Week* CreateWeek(const Utils::Date& aDate);
-    bool                                    Add(std::unique_ptr<Week> aWeek);
+    bool Add(std::unique_ptr<Week> aWeek);
 
-    bool                                    Add(std::unique_ptr<VMDefinitie> aDefinitie);
-    bool                                    Add(std::unique_ptr<ReceptDefinitie> aReceptDef);
-    bool                                    Add(std::unique_ptr<Personalia> aPersonalia);
+    bool Add(std::unique_ptr<VMDefinitie> aDefinitie);
+    bool Add(std::unique_ptr<ReceptDefinitie> aReceptDef);
+    bool Add(std::unique_ptr<Personalia> aPersonalia);
 
-    void                                    AddUnit(const std::wstring& aUnit);
-    void                                    AddCategory(const std::wstring& aCategory);
-    void                                    AddBrand(const std::wstring& brand);
+    void AddUnit(const std::wstring& aUnit);
+    void AddCategory(const std::wstring& aCategory);
+    void AddBrand(const std::wstring& brand);
 
-    bool                                    Remove(const VMDefinitie* aDefinitie);
-    bool                                    Remove(const ReceptDefinitie* aRecept);
-    bool                                    Remove(const Personalia* aPersonalia);
-
-    bool                                    SetEndDate(Week& aWeek, const Utils::Date& aDate);
+    bool Remove(const VMDefinitie* aDefinitie);
+    bool Remove(const ReceptDefinitie* aRecept);
+    bool Remove(const Personalia* aPersonalia);
 
     VMDefinitie* FindVoedingsmiddelDefinitie(const std::wstring& aName);
     ReceptDefinitie* FindReceptDefinitie(const std::wstring& aName);

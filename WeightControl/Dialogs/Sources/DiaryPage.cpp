@@ -345,14 +345,12 @@ void CDiaryPage::OnShowWindow(BOOL bShow, UINT nStatus)
     mCalculatedBonusPoints.SetValue(mDay->GetCalculatedBonusPoints());
     mWeight.SetValue(mDay->GetWeight());
 
-    mWeekpuntenStatic.ShowWindow(SW_SHOW);
-    mWeekPunten.ShowWindow(SW_SHOW);
     mItemList.View(mDay);
 }
 
 void CDiaryPage::OnEnChangeWeekEinde()
 {
-    if (!mModel.SetEndDate(*mWeek, Utils::ToDate(mEndOfWeek.GetValue())))
+    if (!mWeek->SetEndDate(Utils::ToDate(mEndOfWeek.GetValue())))
     {
         ::MessageBox(m_hWnd, (_T("Could not set end date ") + mEndOfWeek.GetValue()).c_str(), _T("Error"), MB_OK);
         return;
