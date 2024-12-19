@@ -4,7 +4,7 @@
 #include <map>
 
 
-namespace ViewModel {
+namespace viewmodel {
 
 
 template <typename T>
@@ -17,7 +17,7 @@ public:
     void Notify(const T& newValue)
     {
         for (auto callback : m_callbacks)
-            callback(newValue);
+            callback.second(newValue);
     }
 
 private:
@@ -37,4 +37,4 @@ void Callback<T>::UnsubscribeValueChanged(int handle)
     m_callbacks.erase(m_callbacks.find(handle));
 }
 
-} // namespace ViewModel
+} // namespace viewmodel

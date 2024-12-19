@@ -19,15 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\DayViewModel.h" />
+    <ClInclude Include="header\IDayInterface.h" />
+    <ClInclude Include="header\IPrivateDay.h" />
+    <ClInclude Include="header\IPrivateWeek.h" />
+    <ClInclude Include="header\IWeekInterface.h" />
+    <ClInclude Include="header\ViewModelCoordinator.h" />
+    <ClInclude Include="header\ViewModelDay.h" />
+    <ClInclude Include="header\ViewModelWeek.h" />
     <ClInclude Include="interface\viewmodel\Callback.h" />
-    <ClInclude Include="interface\viewmodel\IDayViewModel.h" />
+    <ClInclude Include="interface\viewmodel\IViewModelDay.h" />
+    <ClInclude Include="interface\viewmodel\IViewModelWeek.h" />
     <ClInclude Include="interface\viewmodel\Value.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Callback.cpp" />
-    <ClCompile Include="source\DayViewModel.cpp" />
+    <ClCompile Include="source\ViewModelCoordinator.cpp" />
+    <ClCompile Include="source\ViewModelDay.cpp" />
     <ClCompile Include="source\Value.cpp" />
+    <ClCompile Include="source\ViewModelWeek.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -101,7 +110,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)WeightControl\factories\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -121,7 +130,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)WeightControl\factories\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -140,7 +149,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)WeightControl\factories\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -159,7 +168,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\viewmodel;$(SolutionDir)WeightControl\factories\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

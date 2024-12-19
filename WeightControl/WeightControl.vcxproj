@@ -63,7 +63,7 @@
     <ClInclude Include="Editor\Headers\IRecipeDefinitionEditor.h" />
     <ClInclude Include="Editor\Headers\PortieEditor.h" />
     <ClInclude Include="Editor\Headers\RecipeDefinitionEditor.h" />
-    <ClInclude Include="Factories\header\ViewModelFactory.h" />
+    <ClInclude Include="Factories\headers\ViewModelFactory.h" />
     <ClInclude Include="Factories\interface\factories\IViewModelFactory.h" />
     <ClInclude Include="General\Headers\ItemEditVisitor.h" />
     <ClInclude Include="General\Headers\stdafx.h" />
@@ -156,7 +156,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\header;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -185,7 +185,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\header;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>

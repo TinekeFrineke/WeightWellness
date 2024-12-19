@@ -16,9 +16,9 @@ public:
     ViewModelFactory(weight::Model& model);
     ~ViewModelFactory();
 
-    //// Inherited via IViewModelFactory
-    //std::unique_ptr<viewmodel::IWeek> CreateWeekViewModel() override;
-    //std::unique_ptr<viewmodel::IDay> CreateDayViewModel() override;
+    // Inherited via IViewModelFactory
+    //virtual std::unique_ptr<Private::IWeekInterface> CreateWeek() override;
+    //virtual std::unique_ptr<Private::IDayInterface> CreateDay() override;
 
 private:
     weight::Model& m_model;
