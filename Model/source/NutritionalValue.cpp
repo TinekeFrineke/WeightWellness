@@ -33,9 +33,9 @@ std::wstring NutritionalValue::GetInstanceName() const noexcept
     return L"None";
 }
 
-std::tstring NutritionalValue::GetClassName()
+std::wstring NutritionalValue::GetClassName()
 {
-    return _T("NutritionalValue");
+    return L"NutritionalValue";
 }
 
 } // namespace weight

@@ -26,7 +26,7 @@ public:
 
     // Entity overrides
     virtual std::wstring  GetInstanceName() const noexcept override { return mName; }
-    static std::wstring   GetClassName() { return _T("Portie"); }
+    static std::wstring   GetClassName() { return L"Portie"; }
 
 private:
     double mUnits;

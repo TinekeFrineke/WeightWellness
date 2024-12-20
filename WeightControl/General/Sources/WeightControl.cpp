@@ -22,11 +22,6 @@
 
 // CWWApplication
 
-BEGIN_MESSAGE_MAP(CWWApplication, CWinApp)
-    ON_COMMAND(ID_HELP, CWinApp::OnHelp)
-END_MESSAGE_MAP()
-
-
 // CWWApplication construction
 CWWApplication::CWWApplication()
 {

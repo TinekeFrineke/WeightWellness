@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include <commctrl.h>
+
 #include "BonusList.h"
 
 /////////////////////////////////////////////////////
@@ -65,22 +66,23 @@ void BonusListItem::Write(CListCtrl& aControl, int iItemIndex)
     lvi.iItem = iItemIndex;
     lvi.iSubItem = 0;
 
-    //TCHAR intensity[256];
+    TCHAR intensity[256];
     switch (mBonus.GetIntensity())
     {
         case weight::Bonus::INTENSITY::Low:
-            lvi.pszText = _T("low");
+            swprintf_s(intensity, _T("low"));
             break;
 
         case weight::Bonus::INTENSITY::Medium:
-            lvi.pszText = _T("medium");
+            swprintf_s(intensity, _T("medium"));
             break;
 
         case weight::Bonus::INTENSITY::High:
-            lvi.pszText = _T("high");
+            swprintf_s(intensity, _T("high"));
             break;
     }
 
+    lvi.pszText = intensity;
     lvi.lParam = (LPARAM)&mBonus;
 
     int index = aControl.InsertItem(&lvi);

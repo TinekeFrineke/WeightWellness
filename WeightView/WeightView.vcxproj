@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Controls\Headers\BonusList.h" />
+    <ClInclude Include="Controls\Headers\BrandComboBox.h" />
+    <ClInclude Include="Controls\Headers\ComboBox.h" />
+    <ClInclude Include="Controls\Headers\DiaryItemList.h" />
+    <ClInclude Include="Controls\Headers\ItemList.h" />
+    <ClInclude Include="Controls\Headers\MyTabControl.h" />
+    <ClInclude Include="Controls\Headers\PortieComboBox.h" />
+    <ClInclude Include="Controls\Headers\PortieList.h" />
+    <ClInclude Include="Controls\Headers\ReceptDefinitiesList.h" />
+    <ClInclude Include="Controls\Headers\VMDefinitiesList.h" />
+    <ClInclude Include="Dialogs\Headers\BewegingDialog.h" />
+    <ClInclude Include="Dialogs\Headers\DiaryPage.h" />
+    <ClInclude Include="Dialogs\Headers\EditBonusDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditBonuses.h" />
+    <ClInclude Include="Dialogs\Headers\EditFoodDefDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditFoodDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditPortieDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditReceptDefDialog.h" />
+    <ClInclude Include="Dialogs\Headers\EditReceptDialog.h" />
+    <ClInclude Include="Dialogs\Headers\FindRecept.h" />
+    <ClInclude Include="Dialogs\Headers\FindVoedingsmiddel.h" />
+    <ClInclude Include="Dialogs\Headers\HandmatigeItemDlg.h" />
+    <ClInclude Include="Dialogs\Headers\ItemsPage.h" />
+    <ClInclude Include="Dialogs\Headers\NewNameDialog.h" />
+    <ClInclude Include="Dialogs\Headers\PersonaliaDialog.h" />
+    <ClInclude Include="Dialogs\Headers\PointsPerDay.h" />
+    <ClInclude Include="Dialogs\Headers\ReceptenPage.h" />
+    <ClInclude Include="Dialogs\Headers\WWDialog.h" />
+    <ClInclude Include="Editor\Headers\FoodDefinitionEditor.h" />
+    <ClInclude Include="Editor\Headers\FoodEditor.h" />
+    <ClInclude Include="Editor\Headers\IEditorFactory.h" />
+    <ClInclude Include="Editor\Headers\IFoodEditor.h" />
+    <ClInclude Include="Editor\Headers\IPortieEditor.h" />
+    <ClInclude Include="Editor\Headers\IRecipeDefinitionEditor.h" />
+    <ClInclude Include="Editor\Headers\PortieEditor.h" />
+    <ClInclude Include="Editor\Headers\RecipeDefinitionEditor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Controls\Sources\BonusList.cpp" />
+    <ClCompile Include="Controls\Sources\BrandComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\ComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\DiaryItemList.cpp" />
+    <ClCompile Include="Controls\Sources\ItemList.cpp" />
+    <ClCompile Include="Controls\Sources\MyTabControl.cpp" />
+    <ClCompile Include="Controls\Sources\PortieComboBox.cpp" />
+    <ClCompile Include="Controls\Sources\PortieList.cpp" />
+    <ClCompile Include="Controls\Sources\ReceptDefinitiesList.cpp" />
+    <ClCompile Include="Controls\Sources\VMDefinitiesList.cpp" />
+    <ClCompile Include="Dialogs\Sources\BewegingDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\DiaryPage.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditBonusDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditBonuses.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditFoodDefDialog - Copy.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditFoodDefDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditFoodDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditPortieDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditReceptDefDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\EditReceptDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\FindRecept.cpp" />
+    <ClCompile Include="Dialogs\Sources\FindVoedingsmiddel.cpp" />
+    <ClCompile Include="Dialogs\Sources\HandmatigeItemDlg.cpp" />
+    <ClCompile Include="Dialogs\Sources\ItemsPage.cpp" />
+    <ClCompile Include="Dialogs\Sources\NewNameDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\PersonaliaDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\PointsPerDay.cpp" />
+    <ClCompile Include="Dialogs\Sources\ReceptenPage.cpp" />
+    <ClCompile Include="Dialogs\Sources\WWDialog.cpp" />
+    <ClCompile Include="Editor\Sources\FoodDefinitionEditor.cpp" />
+    <ClCompile Include="Editor\Sources\FoodEditor.cpp" />
+    <ClCompile Include="Editor\Sources\PortieEditor.cpp" />
+    <ClCompile Include="Editor\Sources\RecipeDefinitionEditor.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b3574db9-8968-41c1-8c38-75234642a117}</ProjectGuid>
+    <RootNamespace>WeightView</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_AFXDLL;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_AFXDLL;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_AFXDLL;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_AFXDLL;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -3,6 +3,7 @@
 
 #include <assert.h>
 
+#include "Utilities/Date.h"
 #include "Utilities/MathUtils.h"
 
 #include "BonusPointsMap.h"
@@ -26,7 +27,7 @@ void Bonus::Set(INTENSITY anIntensity, int aWeight, int aDuration, const BonusPo
     mIntensity = anIntensity;
     mDuration = aDuration;
 
-    const BonusPointsMap::MOVEMENT_INTENSITY intensity = mIntensity == INTENSITY::High ? BonusPointsMap::MI_High :
+    const auto intensity = mIntensity == INTENSITY::High ? BonusPointsMap::MI_High :
         mIntensity == INTENSITY::Medium ? BonusPointsMap::MI_Medium :
         BonusPointsMap::MI_Low;
     mPoints = aMap[intensity][aWeight][mDuration];
@@ -34,9 +35,9 @@ void Bonus::Set(INTENSITY anIntensity, int aWeight, int aDuration, const BonusPo
 
 
 Day::Day(const Utils::Date& aDate)
-    : mDate(aDate),
-    mWeight(0),
-    mBonusPoints(0)
+    : mDate(std::make_unique<Utils::Date>(aDate))
+    , mWeight(0)
+    , mBonusPoints(0)
 {
 }
 
@@ -99,6 +100,15 @@ void Day::Recalculate(Model& aModel, const PointsCalculator& aCalculator)
         item->Recalculate(aModel, aCalculator);
 }
 
+// Entity overrides
+
+std::wstring Day::GetInstanceName() const noexcept { return Utils::ToString(*mDate); }
+
+
+Utils::Date Day::GetDate() const noexcept
+{
+    return *mDate;
+}
 
 void Day::SetBonuses(const std::list<Bonus>& aBonuses)
 {

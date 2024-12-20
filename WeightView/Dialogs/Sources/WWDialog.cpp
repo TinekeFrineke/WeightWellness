@@ -2,9 +2,9 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 #include "WWDialog.h"
 
+#include "MyTabControl.h"
 #include "ItemsPage.h"
 #include "PersonaliaDialog.h"
 #include "ReceptenPage.h"
@@ -47,11 +47,14 @@ END_MESSAGE_MAP()
 
 
 CWWDialog::CWWDialog(weight::Model& aModel, CWnd* pParent /*=NULL*/)
-    : CDialog(CWWDialog::IDD, pParent),
-    mModel(aModel)
+    : CDialog(CWWDialog::IDD, pParent)
+    , mTabControl(std::make_unique<CTabControl>())
+    , mModel(aModel)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
+
+CWWDialog::~CWWDialog() = default;
 
 void CWWDialog::DoDataExchange(CDataExchange* pDX)
 {

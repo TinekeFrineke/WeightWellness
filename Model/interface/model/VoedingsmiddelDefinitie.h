@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Entity.h"
 #include "PointsCalculator.h"
 #include "Portie.h"
@@ -59,8 +61,8 @@ public:
     const NutritionalValue& GetNutritionalValue() const noexcept { return *mPoints; }
 
     // Entity overrides
-    std::tstring GetInstanceName() const noexcept override { return mName; }
-    static std::tstring GetClassName() { return _T("VMDefinitie"); }
+    std::wstring GetInstanceName() const noexcept override { return mName; }
+    static std::wstring GetClassName() { return L"VMDefinitie"; }
 
 private:
     std::wstring mUnit;

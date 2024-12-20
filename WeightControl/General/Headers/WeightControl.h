@@ -7,7 +7,7 @@
 	#error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"		// main symbols
+//#include "resource.h"		// main symbols
 
 #include "model/Model.h"
 
@@ -30,8 +30,6 @@ public:
 	virtual BOOL      InitInstance();
 
 // Implementation
-
-	DECLARE_MESSAGE_MAP()
 
 private:
   weight::Model         mModel;

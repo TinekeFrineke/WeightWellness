@@ -33,8 +33,8 @@ public:
     const Personalia* GetActivePersonalia() const;
     Personalia* AddPersonalia(const std::tstring& aName);
 
-    STRATEGY_TYPE                           GetStrategy() const noexcept { return mStrategyType; }
-    void                                    SetStrategy(STRATEGY_TYPE eType);
+    STRATEGY_TYPE GetStrategy() const noexcept { return mStrategyType; }
+    void          SetStrategy(STRATEGY_TYPE eType);
 
     Week* FindWeek(const Utils::Date& aDate);
     Week* CreateWeek(const Utils::Date& aDate);

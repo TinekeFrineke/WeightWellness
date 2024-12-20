@@ -18,7 +18,7 @@ int Entity<VMDefinitie>::mNumberOfInstances = 0;
 
 
 VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
-                         const std::tstring& aName,
+                         const std::wstring& aName,
                          const std::wstring& aUnit,
                          std::unique_ptr<NutritionalValue> nutritionalValue)
     : m_calculator(std::move(calculator))

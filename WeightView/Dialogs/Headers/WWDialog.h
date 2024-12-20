@@ -4,9 +4,11 @@
 #pragma once
 #include "afxcmn.h"
 
-#include "MyTabControl.h"
+//#include "MyTabControl.h"
 #include "model/Model.h"
 
+
+class CMyTabControl;
 
 // CWWDialog dialog
 class CWWDialog : public CDialog
@@ -14,6 +16,7 @@ class CWWDialog : public CDialog
 // Construction
 public:
 	CWWDialog(weight::Model & aModel, CWnd* pParent = NULL);	// standard constructor
+	~CWWDialog();
 
 // Dialog Data
 	enum { IDD = IDD_WEIGHTWATCHERS_DIALOG };
@@ -36,7 +39,7 @@ public:
   afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 
 private:
-  CMyTabControl mTabControl;
+  std::unique_ptr<CMyTabControl> mTabControl;
 
   weight::Model &     mModel;
 };

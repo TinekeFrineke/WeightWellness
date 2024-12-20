@@ -1,10 +1,14 @@
 #pragma once
 
 #include <list>
+#include <memory>
 #include <vector>
 #include "Entity.h"
-#include "Utilities/Date.h"
 
+
+namespace Utils {
+class Date;
+}
 
 namespace weight
 {
@@ -60,7 +64,7 @@ public:
 
     const std::vector<std::unique_ptr<Item>>& GetItems() const noexcept  { return mItems; }
 
-    Utils::Date               GetDate() const noexcept  { return mDate; }
+    Utils::Date               GetDate() const noexcept;
     double                    GetWeight() const noexcept { return mWeight; }
     const std::list<Bonus>& GetBonuses() const noexcept { return mBonuses; }
     void                      SetBonuses(const std::list<Bonus>& aBonuses);
@@ -73,19 +77,19 @@ public:
     void                      Recalculate(Model& aModel, const PointsCalculator& aCalculator);
 
     // Entity overrides
-    virtual std::tstring      GetInstanceName() const noexcept { return Utils::ToString(mDate); }
-    static std::tstring       GetClassName() { return _T("Dag"); }
+    virtual std::wstring      GetInstanceName() const noexcept override;
+    static std::wstring       GetClassName() { return L"Dag"; }
 
 private:
     Day& operator=(const Day&) = delete;
     Day(const Day&) = delete;
 
-    Utils::Date               mDate;
+    std::unique_ptr<Utils::Date> mDate;
     // 0 == no weight
     double                    mWeight;
     double                    mBonusPoints;
     std::vector<std::unique_ptr<Item>>   mItems;
-    std::list<Bonus>      mBonuses;
+    std::list<Bonus>        mBonuses;
 };
 
 

@@ -1,15 +1,18 @@
 #include "Entity.h"
 
+
 #ifdef FIND_LEAKS
 #include <windows.h>
+#else
+#include <tuple>
 #endif
 
 
 namespace weight
 {
 
-void EntityBase::Register(const std::tstring& aClassName,
-                          const std::tstring& anInstanceName,
+void EntityBase::Register(const std::wstring& aClassName,
+                          const std::wstring& anInstanceName,
                           int                 aNumberOfInstances) noexcept
 {
 #ifdef FIND_LEAKS
@@ -26,8 +29,8 @@ void EntityBase::Register(const std::tstring& aClassName,
 }
 
 
-void EntityBase::Unregister(const std::tstring& aClassName,
-                            const std::tstring& anInstanceName,
+void EntityBase::Unregister(const std::wstring& aClassName,
+                            const std::wstring& anInstanceName,
                             int                 aNumberOfInstances) noexcept
 {
 #ifdef FIND_LEAKS
