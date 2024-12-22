@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 
 #include "model/Personalia.h"
 #include "model/Model.h"

@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+
 #include "WWDialog.h"
 
 #include "MyTabControl.h"
@@ -9,9 +10,19 @@
 #include "PersonaliaDialog.h"
 #include "ReceptenPage.h"
 #include "DiaryPage.h"
+#include "resource.h"
 
 
 // CAboutDlg dialog used for App About
+
+namespace {
+enum { IDD = IDD_WEIGHTWATCHERS_DIALOG };
+
+TCHAR personaliaName[]{ L"Personalia" };
+TCHAR diaryName[]{ L"Dagboek" };
+TCHAR itemsName[]{ L"Items" };
+TCHAR recipesName[]{ L"Recepten" };
+}
 
 class CAboutDlg: public CDialog
 {
@@ -47,8 +58,8 @@ END_MESSAGE_MAP()
 
 
 CWWDialog::CWWDialog(weight::Model& aModel, CWnd* pParent /*=NULL*/)
-    : CDialog(CWWDialog::IDD, pParent)
-    , mTabControl(std::make_unique<CTabControl>())
+    : CDialog(IDD, pParent)
+    , mTabControl(std::make_unique<CMyTabControl>())
     , mModel(aModel)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -59,8 +70,7 @@ CWWDialog::~CWWDialog() = default;
 void CWWDialog::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
-    //DDX_Control(pDX, IDC_TAB1, mTabControl);
-    DDX_Control(pDX, IDC_TAB1, mTabControl);
+    DDX_Control(pDX, IDC_TAB1, *mTabControl);
 }
 
 BEGIN_MESSAGE_MAP(CWWDialog, CDialog)
@@ -76,10 +86,10 @@ END_MESSAGE_MAP()
 
 BOOL CWWDialog::OnInitDialog()
 {
-    mTabControl.AddPage(std::make_unique<CPersonaliaDialog>(mModel, this), IDD_PERSONALIA_PAGE, _T("Personalia"));
-    mTabControl.AddPage(std::make_unique<CDiaryPage>(mModel, this), IDD_DIARY_PAGE, _T("Dagboek"));
-    mTabControl.AddPage(std::make_unique<CItemsPage>(mModel, this), IDD_ITEMS_PAGE, _T("Items"));
-    mTabControl.AddPage(std::make_unique<ReceptenPage>(mModel, this), IDD_RECEPTEN_PAGE, _T("Recepten"));
+    mTabControl->AddPage(std::make_unique<CPersonaliaDialog>(mModel, this), IDD_PERSONALIA_PAGE, personaliaName);
+    mTabControl->AddPage(std::make_unique<CDiaryPage>(mModel, this), IDD_DIARY_PAGE, diaryName);
+    mTabControl->AddPage(std::make_unique<CItemsPage>(mModel, this), IDD_ITEMS_PAGE, itemsName);
+    mTabControl->AddPage(std::make_unique<ReceptenPage>(mModel, this), IDD_RECEPTEN_PAGE, recipesName);
 
     CDialog::OnInitDialog();
 
@@ -106,8 +116,8 @@ BOOL CWWDialog::OnInitDialog()
     SetIcon(m_hIcon, TRUE);			// Set big icon
     SetIcon(m_hIcon, FALSE);		// Set small icon
 
-    mTabControl.Initialize();
-    mTabControl.SelectPage(1);
+    mTabControl->Initialize();
+    mTabControl->SelectPage(1);
 
     return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -165,4 +175,15 @@ void CWWDialog::OnTcnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult)
 {
     (void)pNMHDR;
     *pResult = 0;
+}
+
+CDialog* CWWDialog::GetWindow()
+{
+    return this;
+}
+
+INT_PTR CWWDialog::DoModal()
+{
+    auto x = CDialog::DoModal();
+    return x;
 }

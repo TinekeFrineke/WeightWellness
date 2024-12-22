@@ -5,8 +5,8 @@
 #include ".\findrecept.h"
 
 #include <assert.h>
-#include "WeightControl.h"
 #include "model/Day.h"
+#include "model/Model.h"
 #include "model/Portie.h"
 #include "model/Recept.h"
 #include "model/ReceptDefinitie.h"

@@ -10,6 +10,8 @@
 
 // NewNameDialog dialog
 
+namespace weightview {
+
 IMPLEMENT_DYNAMIC(NewNameDialog, CDialogEx)
 
 NewNameDialog::NewNameDialog(CWnd* pParent /*=nullptr*/)
@@ -24,13 +26,13 @@ NewNameDialog::~NewNameDialog()
 
 std::tstring NewNameDialog::GetName() const
 {
-  return m_Name;
+	return m_Name;
 }
 
 void NewNameDialog::DoDataExchange(CDataExchange* pDX)
 {
-  CDialogEx::DoDataExchange(pDX);
-  DDX_Control(pDX, IDC_NAME, mName);
+	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_NAME, mName);
 }
 
 
@@ -47,3 +49,10 @@ void NewNameDialog::OnBnClickedOk()
 	m_Name = mName.GetValue();
 	CDialogEx::OnOK();
 }
+
+INT_PTR NewNameDialog::DoModal()
+{
+	return CDialogEx::DoModal();
+}
+
+} // namespace weightview

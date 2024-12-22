@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 #include "EditPortieDialog.h"
 
 #include "model/VoedingsmiddelDefinitie.h"

@@ -2,6 +2,8 @@
 #include "afxwin.h"
 #include "afxdtctl.h"
 
+#include "resource.h"
+
 
 // CPointsPerDay dialog
 

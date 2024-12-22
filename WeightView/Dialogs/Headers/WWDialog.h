@@ -7,11 +7,15 @@
 //#include "MyTabControl.h"
 #include "model/Model.h"
 
+#include "IWWDialog.h"
+
 
 class CMyTabControl;
 
 // CWWDialog dialog
-class CWWDialog : public CDialog
+class CWWDialog
+	: public CDialog
+	, public weightview::IWWDialog
 {
 // Construction
 public:
@@ -19,11 +23,13 @@ public:
 	~CWWDialog();
 
 // Dialog Data
-	enum { IDD = IDD_WEIGHTWATCHERS_DIALOG };
-
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
+
+  // Inherited via IWWDialog
+	virtual CDialog* GetWindow() override;
+	virtual INT_PTR DoModal() override;
 
 // Implementation
 protected:

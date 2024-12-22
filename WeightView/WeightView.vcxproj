@@ -53,8 +53,14 @@
     <ClInclude Include="Editor\Headers\IFoodEditor.h" />
     <ClInclude Include="Editor\Headers\IPortieEditor.h" />
     <ClInclude Include="Editor\Headers\IRecipeDefinitionEditor.h" />
+    <ClInclude Include="Editor\Headers\ItemEditVisitor.h" />
     <ClInclude Include="Editor\Headers\PortieEditor.h" />
     <ClInclude Include="Editor\Headers\RecipeDefinitionEditor.h" />
+    <ClInclude Include="interface\weightview\IEditFoodDialog.h" />
+    <ClInclude Include="interface\weightview\IEditReceptDialog.h" />
+    <ClInclude Include="interface\weightview\IHandmatigeitemdlg.h" />
+    <ClInclude Include="interface\weightview\INewNameDialog.h" />
+    <ClInclude Include="interface\weightview\ViewFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controls\Sources\BonusList.cpp" />
@@ -71,7 +77,6 @@
     <ClCompile Include="Dialogs\Sources\DiaryPage.cpp" />
     <ClCompile Include="Dialogs\Sources\EditBonusDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\EditBonuses.cpp" />
-    <ClCompile Include="Dialogs\Sources\EditFoodDefDialog - Copy.cpp" />
     <ClCompile Include="Dialogs\Sources\EditFoodDefDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\EditFoodDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\EditPortieDialog.cpp" />
@@ -88,8 +93,10 @@
     <ClCompile Include="Dialogs\Sources\WWDialog.cpp" />
     <ClCompile Include="Editor\Sources\FoodDefinitionEditor.cpp" />
     <ClCompile Include="Editor\Sources\FoodEditor.cpp" />
+    <ClCompile Include="Editor\Sources\ItemEditVisitor.cpp" />
     <ClCompile Include="Editor\Sources\PortieEditor.cpp" />
     <ClCompile Include="Editor\Sources\RecipeDefinitionEditor.cpp" />
+    <ClCompile Include="source\ViewFactory..cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -172,7 +179,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)interface\weightview;$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Controls\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -191,7 +198,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)interface\weightview;$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Controls\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -210,7 +217,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)interface\weightview;$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Controls\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -229,7 +236,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Model\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)interface\weightview;$(ProjectDir)Controls\headers;$(ProjectDir)Dialogs\headers;$(ProjectDir)Editor\headers;$(SolutionDir)Controls\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\Utilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

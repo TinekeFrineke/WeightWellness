@@ -19,6 +19,6 @@ public:
   virtual void          Visit(weight::ManualItem & anItem);
 
 private:
-  weight::Model &           mModel;
-  CWnd *                mParent;
+  weight::Model& mModel;
+  CWnd* mParent;
 };

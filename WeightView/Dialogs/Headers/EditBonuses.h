@@ -1,5 +1,7 @@
 #pragma once
+
 #include "bonuslist.h"
+#include "resource.h"
 
 
 // CEditBonuses dialog

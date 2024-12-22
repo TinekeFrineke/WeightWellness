@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 #include ".\handmatigeitemdlg.h"
 
 #include "model/ManualItem.h"

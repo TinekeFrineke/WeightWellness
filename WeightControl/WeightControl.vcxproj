@@ -24,19 +24,14 @@
     <None Include="ww.dtd" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="WeightControl.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Factories\headers\ViewModelFactory.h" />
     <ClInclude Include="Factories\interface\factories\IViewModelFactory.h" />
-    <ClInclude Include="General\Headers\ItemEditVisitor.h" />
     <ClInclude Include="General\Headers\stdafx.h" />
     <ClInclude Include="General\Headers\WeightControl.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Factories\source\ViewModelFactory.cpp" />
-    <ClCompile Include="General\Sources\ItemEditVisitor.cpp" />
     <ClCompile Include="General\Sources\WeightControl.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -88,7 +83,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_AFXDLL;WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)WeightView\Dialogs\headers;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)WeightView\interface;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -96,7 +91,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;C:\Projects\VC2019\Utilities\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2024.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Debug\xerces-c_2_8D.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\weightview.lib;C:\Projects\VC2019\Utilities\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2024.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Debug\xerces-c_2_8D.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -117,7 +112,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_AFXDLL;WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)WeightView\Dialogs\headers;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)WeightView\interface;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\VC2019\Utilities\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
@@ -126,7 +121,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;C:\Projects\VC2019\Utilities\Release\utilities.lib;C:\Projects\VC2019\WW\WWModel\Release\wwmodel.lib;C:\Projects\VC2019\WW\Generated12\Release\wwgenerated.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Release\xerces-c_2_8.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(PlatformTarget)\$(Configuration)\controls.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\weightview.lib;C:\Projects\VC2019\Utilities\Release\utilities.lib;C:\Projects\VC2019\WW\WWModel\Release\wwmodel.lib;C:\Projects\VC2019\WW\Generated12\Release\wwgenerated.lib;C:\Projects\VC2019\xerces280\Build\Win32\VC2019\Release\xerces-c_2_8.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

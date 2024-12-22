@@ -12,7 +12,7 @@ class Model;
 class BrandComboBox: public weight::ComboBox
 {
 public:
-    BrandComboBox(const std::vector<std::wstring>& availableTexts, bool aIsForFiltering,
+    BrandComboBox(const std::vector<std::tstring>& availableTexts, bool aIsForFiltering,
                   const std::tstring& anInitialBrand = _T(""));
 
     void AddLines() override;

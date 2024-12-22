@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 #include "BewegingDialog.h"
-#include "WeightControl.h"
 
 
 // BewegingDialog dialog

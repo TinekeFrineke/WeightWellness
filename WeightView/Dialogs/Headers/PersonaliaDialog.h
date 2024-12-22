@@ -7,6 +7,8 @@
 #include "controls/intedit.h"
 #include "controls/doubleedit.h"
 
+#include "resource.h"
+
 namespace weight { class Model; }
 
 // CPersonaliaDialog dialog

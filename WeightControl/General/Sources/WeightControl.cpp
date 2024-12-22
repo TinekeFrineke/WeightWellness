@@ -12,13 +12,14 @@
 #include "Utilities/Inifile.h"
 #include "Utilities/PathUtils.h"
 
-#include "WWDialog.h"
+#include "weightview/IWWDialog.h"
 
 #include "model/Personalia.h"
 #include "xmlreader/XmlReader.h"
 #include "xmlwriter/XmlWriter.h"
 
-#include "NewNameDialog.h"
+#include "weightview/INewNameDialog.h"
+#include "weightview/ViewFactory.h"
 
 // CWWApplication
 
@@ -72,14 +73,17 @@ BOOL CWWApplication::InitInstance()
 
     mDataDirectory = inifile[_T("General")][_T("DataPath")];
 
+    weightview::ViewFactory factory(mModel);
+
     ww2024::XmlReader reader(mModel);
     reader.Read(mDataDirectory);
     if (mModel.GetActivePersonalia() == NULL) {
-        NewNameDialog dialog(NULL);
-        INT_PTR nResponse = dialog.DoModal();
+        auto newNameDialog = factory.CreateNewNameDialog(nullptr);
+        //NewNameDialog dialog(NULL);
+        INT_PTR nResponse = newNameDialog->DoModal();// dialog.DoModal();
         if (nResponse == IDOK)
         {
-            std::tstring name(dialog.GetName());
+            std::tstring name(newNameDialog->GetName());//dialog.GetName());
             if (name.empty()) {
                 MessageBox(0, _T("Empty personalia not allowed"), _T("ERROR"), MB_OK);
                 return FALSE;
@@ -105,9 +109,9 @@ BOOL CWWApplication::InitInstance()
 
     mModel.SetStrategy(mModel.GetActivePersonalia()->GetStrategy());
 
-    CWWDialog dlg(mModel);
-    m_pMainWnd = &dlg;
-    INT_PTR nResponse = dlg.DoModal();
+    m_dialog = factory.CreateWWDialog(nullptr);
+    m_pMainWnd = m_dialog->GetWindow();
+    INT_PTR nResponse = m_dialog->DoModal();
     if (nResponse == IDOK)
     {
         // TODO ww2024: Place code here to handle when the dialog is

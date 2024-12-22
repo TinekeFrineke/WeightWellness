@@ -6,6 +6,11 @@
 #include "controls/IntEdit.h"
 
 
+namespace weight {
+class Model;
+class Recept;
+}
+
 // EditReceptDialog dialog
 
 class EditReceptDialog : public CDialog
@@ -13,7 +18,7 @@ class EditReceptDialog : public CDialog
     DECLARE_DYNAMIC(EditReceptDialog)
 
 public:
-    EditReceptDialog(weight::Model& aModel, weight::Recept& aRecept, CWnd* pParent = NULL);   // standard constructor
+    EditReceptDialog(weight::Recept& aRecept, CWnd* pParent = NULL);   // standard constructor
     virtual ~EditReceptDialog();
 
     // Dialog Data
@@ -34,6 +39,5 @@ private:
     CIntEdit                      mPorties;
     CDoubleEdit                   mPunten;
 
-    weight::Model& mModel;
     weight::Recept& mRecept;
 };

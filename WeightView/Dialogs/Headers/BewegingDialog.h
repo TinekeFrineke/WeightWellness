@@ -2,6 +2,7 @@
 
 #include "afxdialogex.h"
 #include "controls/doubleedit.h"
+#include "resource.h"
 
 // BewegingDialog dialog
 

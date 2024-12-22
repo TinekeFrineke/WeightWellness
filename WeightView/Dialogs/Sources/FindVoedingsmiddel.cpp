@@ -5,10 +5,11 @@
 #include ".\findvoedingsmiddel.h"
 
 #include <assert.h>
-#include "WeightControl.h"
+
 #include "model/Day.h"
 #include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
+#include "model/Model.h"
 #include "model/NutritionalValue.h"
 #include "model/Portie.h"
 #include "model/Voedingsmiddel.h"

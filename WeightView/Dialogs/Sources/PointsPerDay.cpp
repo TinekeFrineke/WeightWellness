@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 #include "PointsPerDay.h"
 #include ".\pointsperday.h"
 

@@ -5,6 +5,8 @@
 #include "controls/doubleedit.h"
 #include "controls/intedit.h"
 
+#include "resource.h"
+
 // EditBonusDialog dialog
 namespace weight { class BonusPointsMap; }
 

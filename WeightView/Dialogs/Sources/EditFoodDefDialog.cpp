@@ -4,7 +4,6 @@
 #include "stdafx.h"
 
 #include <assert.h>
-#include "WeightControl.h"
 #include ".\editfooddefdialog.h"
 #include "EditPortieDialog.h"
 #include "model/IFoodDefinitionRepository.h"

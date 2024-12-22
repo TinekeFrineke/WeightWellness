@@ -19,7 +19,6 @@
 #include "FindVoedingsmiddel.h"
 #include "HandmatigeItemDlg.h"
 #include "ItemEditVisitor.h"
-#include "WeightControl.h"
 
 
 // CDiaryPage dialog

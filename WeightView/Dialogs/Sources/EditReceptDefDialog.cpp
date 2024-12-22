@@ -2,13 +2,13 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 #include ".\editreceptdefdialog.h"
 
 #include "FindVoedingsmiddel.h"
 #include "ItemEditVisitor.h"
 
 #include "model/LotFactory.h"
+#include "model/Model.h"
 #include "model/ReceptDefinitie.h"
 
 // EditReceptDefDialog dialog

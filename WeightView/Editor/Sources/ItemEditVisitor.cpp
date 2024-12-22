@@ -1,9 +1,9 @@
 
 #include "stdafx.h"
 
-#include <assert.h>
-
 #include "ItemEditVisitor.h"
+
+#include <assert.h>
 
 #include "model/ManualItem.h"
 #include "model/Model.h"
@@ -33,7 +33,7 @@ void ItemEditVisitor::Visit(weight::Recept& aRecept)
         mModel.Add(std::move(newDefinition));
     }
 
-    EditReceptDialog dialog(mModel, aRecept, /**definitie,*/ mParent);
+    EditReceptDialog dialog(aRecept, /**definitie,*/ mParent);
     dialog.DoModal();
 }
 

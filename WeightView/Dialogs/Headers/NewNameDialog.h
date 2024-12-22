@@ -1,5 +1,7 @@
 #pragma once
 
+#include "INewNameDialog.h"
+
 #include "afxdialogex.h"
 #include "afxwin.h"
 #include "afxcmn.h"
@@ -11,7 +13,12 @@
 
 // NewNameDialog dialog
 
-class NewNameDialog : public CDialogEx
+namespace weightview
+{
+
+class NewNameDialog
+	: public CDialogEx
+	, public weightview::INewNameDialog
 {
 	DECLARE_DYNAMIC(NewNameDialog)
 
@@ -19,9 +26,11 @@ public:
 	NewNameDialog(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~NewNameDialog();
 
-  std::tstring GetName() const;
+	// Inherited via INewNameDialog
+	virtual INT_PTR DoModal() override;
+	std::tstring GetName() const;
 
-// Dialog Data
+	// Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_NEWNAME };
 #endif
@@ -31,7 +40,10 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-  CStringEdit mName;
-  std::tstring m_Name;
-  afx_msg void OnBnClickedOk();
+	CStringEdit mName;
+	std::tstring m_Name;
+	afx_msg void OnBnClickedOk();
+
 };
+
+} // namespace weightview

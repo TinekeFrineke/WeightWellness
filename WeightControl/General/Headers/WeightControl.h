@@ -16,6 +16,10 @@
 // See WeightWatchers.cpp for the implementation of this class
 //
 
+namespace weightview {
+class IWWDialog;
+}
+
 class CWWApplication : public CWinApp
 {
 public:
@@ -34,6 +38,7 @@ public:
 private:
   weight::Model         mModel;
   std::tstring      mDataDirectory;
+  std::unique_ptr<weightview::IWWDialog> m_dialog;
 };
 
 extern CWWApplication theApp;

@@ -3,6 +3,7 @@
 #include "controls/stringedit.h"
 #include "controls/doubleedit.h"
 
+#include "resource.h"
 
 // HandmatigeItemDlg dialog
 
