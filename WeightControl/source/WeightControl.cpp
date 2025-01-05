@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
 
     QQmlApplicationEngine engine;
     engine.addImportPath(":/");
-    engine.loadFromModule("QmlResource", "Dialog");
+    engine.loadFromModule("QmlResource", "Main");
 
     if (engine.rootObjects().isEmpty()) {
         qFatal("Failed to load QML Dialog.");
