@@ -36,3 +36,5 @@ Solution.VC.db-wal
 *.ipdb
 *.dll
 *.pch
+/.vs/
+/out/

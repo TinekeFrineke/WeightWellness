@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(WeightWellness VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+message(STATUS "QML Import Path: ${QML_IMPORT_PATH}")
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+
+add_compile_definitions(_UNICODE UNICODE)
+add_compile_options(-finput-charset=UTF-8 -fexec-charset=UTF-8 /permissive- /GS /W3 /Zc:wchar_t /sdl /Zc:inline /fp:precise /errorReport:prompt /WX /Zc:forScope /FC /EHsc /nologo /diagnostics:column)
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_compile_definitions(_DEBUG /Od /ZI /RTC2 /MDd)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_compile_definitions(NDEBUG /O2 /RTC0 /MD)
+endif()
+
+add_subdirectory(Generated2024)
+add_subdirectory(Model)
+add_subdirectory(WeightControl)
+add_subdirectory(XmlBase)
+add_subdirectory(XmlReader2024)
+add_subdirectory(XmlWriter2024)
+
