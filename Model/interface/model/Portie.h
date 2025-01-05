@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "Utilities/strutils.h"
+
 #include "Entity.h"
 
 namespace weight

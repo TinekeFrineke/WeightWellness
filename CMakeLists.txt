@@ -9,7 +9,7 @@ message(STATUS "QML Import Path: ${QML_IMPORT_PATH}")
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
 add_compile_definitions(_UNICODE UNICODE)
-add_compile_options(-finput-charset=UTF-8 -fexec-charset=UTF-8 /permissive- /GS /W3 /Zc:wchar_t /sdl /Zc:inline /fp:precise /errorReport:prompt /WX /Zc:forScope /FC /EHsc /nologo /diagnostics:column)
+add_compile_options(/permissive- /GS /W3 /Zc:wchar_t /sdl /Zc:inline /fp:precise /errorReport:prompt /WX /Zc:forScope /FC /EHsc /nologo /diagnostics:column)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(_DEBUG /Od /ZI /RTC2 /MDd)

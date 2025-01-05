@@ -28,7 +28,6 @@ set(HEADERS
     interface/model/BonusPointsMap.h
     interface/model/Day.h
     interface/model/Entity.h
-    interface/model/FoodDefinitionRepository.cpp
     interface/model/IFoodDefinitionRepository.h
     interface/model/ILotFactory.h
     interface/model/IObserver.h
@@ -57,9 +56,14 @@ set(HEADERS
     interface/model/Week.h
     interface/model/WWDefinitions.h
     interface/model/XmlDefinitions.h
-) 
+    header/FoodDefinitionRepository.h
+)
  
  
 add_library(Model ${SOURCES} ${HEADERS})
 
-target_include_directories(Model PUBLIC interface/model)
+target_include_directories(Model PUBLIC
+    header
+    interface/model
+    C:/Projects/VC2022/Utilities/include
+)

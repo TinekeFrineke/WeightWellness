@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Utilities/Date.h"
+#include "Utilities/date.h"
+
 #include "WWDefinitions.h"
 
 namespace weight

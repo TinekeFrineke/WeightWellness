@@ -32,7 +32,9 @@
 #include "generated/XmlWeekReader.h"
 
 #include "model/BonusPointsMap.h"
+#include "model/Day.h"
 #include "model/ManualItem.h"
+#include "model/Model.h"
 #include "model/NutritionalValue.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
@@ -503,21 +505,11 @@ std::unique_ptr<weight::Day> XmlReader::Create(const XmlDag& aDag)
     for (size_t i = 0; i < handmatig.size(); ++i)
         day->Add(Create(*handmatig[i]));
 
-    const auto& bonuslist(aDag.GetBonuscellList());
-    for (size_t i = 0; i < bonuslist.size(); ++i)
-        day->Add(Create(*bonuslist[i]));
+    //const auto& bonuslist(aDag.GetBonuscellList());
+    //for (size_t i = 0; i < bonuslist.size(); ++i)
+    //    day->Add(Create(*bonuslist[i]));
 
     return std::move(day);
-}
-
-
-weight::Bonus XmlReader::Create(const XmlBonuscell& aCell)
-{
-    weight::Bonus::INTENSITY intensity =
-        aCell.Getintensiteit() == XmlBonuscell::intensiteit::hoog ? weight::Bonus::INTENSITY::High :
-        aCell.Getintensiteit() == XmlBonuscell::intensiteit::middel ? weight::Bonus::INTENSITY::Medium :
-        weight::Bonus::INTENSITY::Low;
-    return weight::Bonus(intensity, aCell.Getminuten(), aCell.Getpunten());
 }
 
 

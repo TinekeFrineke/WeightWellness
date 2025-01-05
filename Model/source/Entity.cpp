@@ -4,6 +4,8 @@
 #include <windows.h>
 #endif
 
+#include "Utilities/StrUtils.h"
+
 
 namespace weight
 {

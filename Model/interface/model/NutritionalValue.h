@@ -32,7 +32,7 @@ public:
 
 protected:
     std::wstring GetInstanceName() const noexcept override;
-    static std::tstring GetClassName();
+    static std::wstring GetClassName();
 
 private:
     std::shared_ptr<weight::PointsCalculator> m_calculator;

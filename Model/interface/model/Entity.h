@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Utilities/StrUtils.h"
+#include <string>
 
-// Clas should be useful for detecting memory leaks
+// Class should be useful for detecting memory leaks
 
 namespace weight
 {

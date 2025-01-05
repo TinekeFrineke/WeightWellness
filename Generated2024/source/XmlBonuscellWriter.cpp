@@ -16,7 +16,7 @@ namespace ww2024
 {
 XERCES_CPP_NAMESPACE::DOMNode * XmlBonuscellWriter::Write(XERCES_CPP_NAMESPACE::DOMDocument & aDocument, const XmlBonuscell & aBonuscell)
 {
-    XERCES_CPP_NAMESPACE::DOMElement * element = aDocument.createElement(u"bonuscell");
+    XERCES_CPP_NAMESPACE::DOMElement * element = aDocument.createElement(_T("bonuscell"));
     Fill(aDocument, aBonuscell, *element);
     return element;
 }
