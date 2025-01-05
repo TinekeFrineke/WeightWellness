@@ -5,8 +5,10 @@
 #include "WeightControl.h"
 
 
-#include <QApplication>
-#include <QPushButton>
+//#include <QApplication>
+//#include <QPushButton>
+#include <QQmlApplicationEngine>
+#include <QGuiApplication>
 #include <QDebug>
 
 #include <assert.h>
@@ -70,15 +72,24 @@ int main(int argc, char* argv[])
         ::MessageBox(0, L"Could not initialize WeightControl", L"ERROR", MB_OK);
     }
 
-    QApplication app(argc, argv);
+//    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
 #ifdef _DEBUG
     attachConsole();
 #endif
 
-    QPushButton button("Hello, World!");
-    button.resize(200, 100);
-    button.show();
+    QQmlApplicationEngine engine;
+    engine.addImportPath(":/");
+    engine.loadFromModule("QmlResource", "Dialog");
+
+    if (engine.rootObjects().isEmpty()) {
+        qFatal("Failed to load QML Dialog.");
+    }
+
+    //QPushButton button("Hello, World!");
+    //button.resize(200, 100);
+    //button.show();
 
     return app.exec(); // Start the Qt event loop
 }

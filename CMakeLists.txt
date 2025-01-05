@@ -19,6 +19,7 @@ endif()
 
 add_subdirectory(Generated2024)
 add_subdirectory(Model)
+add_subdirectory(QmlResource)
 add_subdirectory(WeightControl)
 add_subdirectory(XmlBase)
 add_subdirectory(XmlReader2024)

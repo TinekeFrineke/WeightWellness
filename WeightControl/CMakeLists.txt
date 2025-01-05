@@ -70,6 +70,7 @@ target_link_libraries(WeightControl PRIVATE
     Utilities
     Generated2024
     Model
+    QmlResourceLibplugin
     XmlReader
     XmlWriter
 )
