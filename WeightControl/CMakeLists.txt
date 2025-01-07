@@ -28,33 +28,6 @@ target_include_directories(WeightControl PUBLIC
     ${CMAKE_SOURCE_DIR}/XmlWriter2024/interface
 )
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(XERCESLIB xerces-c_2_8D)
-    if (CMAKE_SIZEOF_VOID_P EQUAL 8)  # 64-bit
-        target_link_directories(WeightControl PRIVATE
-            C:/Projects/VC2022/Utilities/x64/Debug
-            C:/Projects/VC2019/xerces280/Build/Win64/VC2019/Debug
-        )
-    else ()  # 32-bit
-        target_link_directories(WeightControl PRIVATE
-            C:/Projects/VC2022/Utilities/Win32/Debug
-            C:/Projects/VC2019/xerces280/Build/Win32/VC2019/Debug
-        )
-    endif ()
-elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
-    set(XERCESLIB xerces-c_2_8)
-    if (CMAKE_SIZEOF_VOID_P EQUAL 8)  # 64-bit
-        target_link_directories(WeightControl PRIVATE
-            C:/Projects/VC2022/Utilities/x64/Release
-            C:/Projects/VC2019/xerces280/Build/Win64/VC2019/Release
-        )
-    else ()  # 32-bit
-        target_link_directories(WeightControl PRIVATE 
-            C:/Projects/VC2022/Utilities/Win32/Release
-            C:/Projects/VC2019/xerces280/Build/Win32/VC2019/Release
-        )
-    endif ()
-endif ()
 
 # Set the output directories for different configurations
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/${CMAKE_GENERATOR_PLATFORM}/Debug)
@@ -65,12 +38,13 @@ target_link_libraries(WeightControl PRIVATE
     Qt6::Core
     Qt6::Quick
     Qt6::Widgets
-    #QmlResourceLibplugin
-    ${XERCESLIB}
-    Utilities
     Generated2024
     Model
     QmlResourceLibplugin
     XmlReader
     XmlWriter
+    $<$<CONFIG:Debug>:C:/Projects/VC2019/xerces280/Build/Win64/VC2019/Debug/xerces-c_2_8D.lib>
+    $<$<CONFIG:Release>:C:/Projects/VC2019/xerces280/Build/Win64/VC2019/Release/xerces-c_2_8.lib>
+    $<$<CONFIG:Debug>:C:/Projects/VC2022/Utilities/x64/Debug/Utilities.lib>
+    $<$<CONFIG:Release>:C:/Projects/VC2022/Utilities/x64/Release/Utilities.lib>
 )
