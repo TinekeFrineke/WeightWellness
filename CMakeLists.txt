@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.16)
 project(WeightWellness VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
-message(STATUS "QML Import Path: ${QML_IMPORT_PATH}")
+#list(APPEND QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+#message(STATUS "QML Import Path: ${QML_IMPORT_PATH}")
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 

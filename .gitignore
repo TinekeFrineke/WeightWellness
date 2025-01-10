@@ -38,3 +38,4 @@ Solution.VC.db-wal
 *.pch
 /.vs/
 /out/
+/build/
