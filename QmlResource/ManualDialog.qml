@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "controls" as WW
-
 Dialog {
     id: manualDialog
     title: "Title"
@@ -11,7 +9,7 @@ Dialog {
     height: 200
     modal: true
 
-    header : WW.Label {
+    header : WWLabel {
         text: "Manual Item"
     }
 
@@ -25,11 +23,11 @@ Dialog {
         RowLayout {
             Layout.fillWidth: true
 
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Name"
             }
-            WW.TextField {
+            WWTextField {
                 id: nameId
                 Layout.preferredWidth: 300
                 Layout.preferredHeight: 40
@@ -38,11 +36,11 @@ Dialog {
         RowLayout {
             Layout.fillWidth: true
 
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Points"
             }
-            WW.TextField {
+            WWTextField {
                 id: pointsId
                 Layout.preferredWidth: 300
                 Layout.preferredHeight: 40
@@ -63,7 +61,7 @@ Dialog {
                 Layout.minimumHeight: 40
                 Layout.fillWidth: true
                 spacing: 0
-                WW.Button {
+                Button {
                     Layout.fillWidth: true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Ok"
@@ -71,7 +69,7 @@ Dialog {
                        manualDialog.accept()
                     }
                 }
-                WW.Button {
+                Button {
                     Layout.fillWidth : true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Cancel"

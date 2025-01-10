@@ -3,8 +3,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Imagine 2.12
 
-import "controls" as WW
-
 
 Window {
     width: 960
@@ -21,7 +19,7 @@ Window {
             height: 60
             currentIndex:1
             contentHeight : 60
-            WW.TabButton {
+            WWTabButton {
                 text: qsTr("Personal")
                 onClicked: {
                     personaliaPage.visible = true
@@ -30,7 +28,7 @@ Window {
                     recipePage.visible = false
                 }
             }
-            WW.TabButton {
+            WWTabButton {
                 text: qsTr("Diary")
                 onClicked: {
                     personaliaPage.visible = false
@@ -39,7 +37,7 @@ Window {
                     recipePage.visible = false
                 }
             }
-            WW.TabButton {
+            WWTabButton {
                 text: qsTr("Items")
                 onClicked: {
                     personaliaPage.visible = false
@@ -48,7 +46,7 @@ Window {
                     recipePage.visible = false
                 }
             }
-            WW.TabButton {
+            WWTabButton {
                 text: qsTr("Recipes")
                 onClicked: {
                     personaliaPage.visible = false

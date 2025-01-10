@@ -1,8 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 
-import "controls" as WW
-
 
 Rectangle {
     signal dayMin()
@@ -19,7 +17,6 @@ Rectangle {
     property string pointsLeft: leftId.text
     property string weekPoints: weekPointsId.text
     property string totalPoints: totalId.text
-    property var model: foodListView.model
 
     id: diaryPage
     color: "lightblue"
@@ -27,7 +24,7 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         // This rectangle contains the actual page contents. It also pushes the
-        // button bar to the bottom
+        // WWButton bar to the bottom
         Rectangle {
             id: diaryMain
             Layout.fillWidth: true
@@ -43,41 +40,41 @@ Rectangle {
                 RowLayout {
                     spacing: 10
 
-                    WW.Label {
+                    WWLabel {
                         text: "Day"
                     }
                     RowLayout {
                         spacing: 0
-                        WW.Button {
+                        WWButton {
                             Layout.minimumWidth: 30
                             Layout.minimumHeight: 30
                             text: "-"
                             onClicked: diaryPage.dayMin()
                         }
-                        WW.TextField {
+                        WWTextField {
                             id: dayId
                             Layout.preferredWidth: 100
                             Layout.preferredHeight: 40
                         }
-                        WW.Button {
+                        WWButton {
                             Layout.minimumWidth: 30
                             Layout.minimumHeight: 30
                             text: "+"
                             onClicked: diaryPage.dayPlus()
                         }
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "Week start"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: weekStartId
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "Week end"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: weekEndId
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
@@ -87,18 +84,18 @@ Rectangle {
                     spacing: 10
                     Layout.preferredHeight: 40
                     Layout.fillWidth: true
-                    WW.Label {
+                    WWLabel {
                         text: "Strategy"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: strategyId
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "Weight"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: weightId
                         validator: DoubleValidator {
                             bottom: 0
@@ -108,19 +105,19 @@ Rectangle {
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "Points"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: pointsId
                         validator: DoubleValidator {}
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "Free bonus"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: freeBonusId
                         validator: DoubleValidator {}
                         Layout.preferredWidth: 80
@@ -132,28 +129,28 @@ Rectangle {
                     spacing: 10
                     Layout.preferredHeight: 40
                     Layout.fillWidth: true
-                    WW.Label {
+                    WWLabel {
                         text: "Movement bonus"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: movementBonusId
                         validator: DoubleValidator {}
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "Left"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: leftId
                         validator: DoubleValidator {}
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "Week points"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: weekPointsId
                         validator: DoubleValidator {}
                         Layout.preferredWidth: 80
@@ -175,9 +172,9 @@ Rectangle {
                     Layout.preferredWidth: diaryMain.width - Layout.leftMargin - Layout.rightMargin
                     color: "#ffff99"
                     ListView {
-                        id: foodListView
                         anchors.fill: parent
 
+                        id: foodListView
                         model: foodModel
 
                         delegate: delegateId
@@ -185,14 +182,14 @@ Rectangle {
                         header: RowLayout {
                             Layout.fillWidth: true
                             Layout.preferredWidth: 400
-                            WW.Label {
+                            WWLabel {
                                 id: headerNameId
                                 Layout.preferredWidth: 140
                                 text: "Name"
                                 font.pointSize: 16
                             }
 
-                            WW.Label {
+                            WWLabel {
                                 id: headerPointsId
                                 Layout.fillWidth: true
                                 Layout.leftMargin: 140
@@ -207,7 +204,7 @@ Rectangle {
                         Rectangle {
                             id: rectangleId
                             width: parent.width  // Remember to specify these sizes or you'll have problems
-                            height: WW.ListView.itemHeight
+                            height: WWListView.itemHeight
                             color: "beige"
                             border.color: "yellowgreen"
                             radius: 1
@@ -215,14 +212,14 @@ Rectangle {
                             RowLayout {
                                 Layout.fillWidth: true
                                 Layout.preferredWidth: 400
-                                WW.Label {
+                                WWLabel {
                                     id: textId
                                     Layout.preferredWidth: 140
                                     text: model.name
                                     font.pointSize: 16
                                 }
 
-                                WW.Label {
+                                WWLabel {
                                     horizontalAlignment: Text.AlignRight
                                     Layout.leftMargin: 140
                                     Layout.alignment : Qt.AlignRight
@@ -246,10 +243,10 @@ Rectangle {
                     spacing: 10
                     Layout.preferredHeight: 40
                     Layout.fillWidth: true
-                    WW.Label {
+                    WWLabel {
                         text: "Total"
                     }
-                    WW.TextField {
+                    WWTextField {
                         id: totalId
                         validator: DoubleValidator {}
                         Layout.preferredWidth: 100
@@ -263,10 +260,10 @@ Rectangle {
         RowLayout {
             id: buttonBarId
             Layout.fillWidth: true
-            Layout.preferredHeight : 40
+            Layout.preferredHeight : WWRowLayout.buttonBarHeight
             spacing: 0
 
-            WW.Button {
+            WWButton {
                 id: addFoodButton
                 text: "Add &Food"
                 Layout.fillWidth: true
@@ -276,7 +273,7 @@ Rectangle {
                 }
             }
 
-            WW.Button {
+            WWButton {
                 id: addManualButton
                 text: "Add &Manual"
                 Layout.fillWidth: true
@@ -286,7 +283,7 @@ Rectangle {
                 }
             }
 
-            WW.Button {
+            WWButton {
                 id: addRecipeButton
                 text: "Add &Recipe"
                 Layout.fillWidth: true
@@ -296,15 +293,15 @@ Rectangle {
                 }
             }
 
-            WW.Button {
-                id: editButton
+            WWButton {
+                id: editWWButton
                 text: "&Edit"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight
             }
 
-            WW.Button {
-                id: deleteButton
+            WWButton {
+                id: deleteWWButton
                 text: "&Delete"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight

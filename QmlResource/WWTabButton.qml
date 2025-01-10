@@ -31,7 +31,7 @@ T.TabButton {
         icon: control.icon
         text: control.text
         font: control.font
-        color: control.palette.buttonText
+        color: "white"//control.palette.buttonText
     }
 
     background: NinePatchImage {

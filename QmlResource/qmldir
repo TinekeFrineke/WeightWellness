@@ -1,0 +1,23 @@
+module controls
+DiaryPage DiaryPage.qml
+FoodDefinitionList FoodDefinitionList.qml
+FoodDefinitionModel FoodDefinitionModel.qml
+FoodDialog FoodDialog.qml
+Main Main.qml
+ManualDialog ManualDialog.qml
+PersonaliaPage PersonaliaPage.qml
+RecipeDialog RecipeDialog.qml
+RecipePage RecipePage.qml
+
+WWButton WWButton.qml
+WWCheckBox WWCheckBox.qml
+WWComboBox WWComboBox.qml
+WWDialog WWDialog.qml
+WWGroupBox WWGroupBox.qml
+WWLabel WWLabel.qml
+WWRadioButton WWRadioButton.qml
+WWTabButton WWTabButton.qml
+WWTextField WWTextField.qml
+
+singleton WWListView WWListView.qml
+singleton WWRowLayout WWRowLayout.qml

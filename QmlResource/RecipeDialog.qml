@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "controls" as WW
-
 Dialog {
 
     property string name
@@ -14,7 +12,7 @@ Dialog {
     height: 550
     modal: true
 
-    header : WW.Label {
+    header : WWLabel {
         text: "Recipe Item"
     }
 
@@ -28,11 +26,11 @@ Dialog {
         RowLayout {
             Layout.fillWidth: true
 
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Name"
             }
-            WW.TextField {
+            WWTextField {
                 id: nameId
                 Layout.preferredWidth: 300
                 Layout.preferredHeight: 40
@@ -44,7 +42,7 @@ Dialog {
             Rectangle {
                 id: rectangleId
                 width: parent.width  // Remember to specify these sizes or you'll have problems
-                height: WW.ListView.itemHeight
+                height: WWListView.itemHeight
                 color: "beige"
                 border.color: "yellowgreen"
                 radius: 1
@@ -52,14 +50,14 @@ Dialog {
                 RowLayout {
                     Layout.fillWidth: true
                     Layout.preferredWidth: 400
-                    WW.Label {
+                    WWLabel {
                         id: textId
                         Layout.preferredWidth: 140
                         text: model.name
                         font.pointSize: 16
                     }
 
-                    WW.Label {
+                    WWLabel {
                         horizontalAlignment: Text.AlignRight
                         Layout.leftMargin: 140
                         Layout.alignment : Qt.AlignRight
@@ -100,14 +98,14 @@ Dialog {
             header: RowLayout {
                 Layout.fillWidth: true
                 Layout.preferredWidth: 400
-                WW.Label {
+                WWLabel {
                     id: headerNameId
                     Layout.preferredWidth: 140
                     text: "Name"
                     font.pointSize: 16
                 }
 
-                WW.Label {
+                WWLabel {
                     id: headerPointsId
                     Layout.fillWidth: true
                     Layout.leftMargin: 140
@@ -121,20 +119,20 @@ Dialog {
         RowLayout {
             Layout.fillWidth: true
 
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Portions"
             }
-            WW.TextField {
+            WWTextField {
                 id: portionsId
                 Layout.preferredWidth: 50
                 Layout.preferredHeight: 40
             }
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Points"
             }
-            WW.TextField {
+            WWTextField {
                 id: pointsId
                 Layout.preferredWidth: 70
                 Layout.preferredHeight: 40
@@ -155,7 +153,7 @@ Dialog {
                 Layout.minimumHeight: 40
                 Layout.fillWidth: true
                 spacing: 0
-                WW.Button {
+                WWButton {
                     Layout.fillWidth: true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Ok"
@@ -163,7 +161,7 @@ Dialog {
                        recipeDialog.accept()
                     }
                 }
-                WW.Button {
+                WWButton {
                     Layout.fillWidth : true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Cancel"

@@ -87,10 +87,6 @@ int main(int argc, char* argv[])
         qFatal("Failed to load QML Dialog.");
     }
 
-    //QPushButton button("Hello, World!");
-    //button.resize(200, 100);
-    //button.show();
-
     return app.exec(); // Start the Qt event loop
 }
 

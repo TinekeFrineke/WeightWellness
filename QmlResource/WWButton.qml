@@ -20,7 +20,7 @@ T.Button {
         font: control.font
         color: control.enabled && control.flat && control.highlighted ? control.palette.highlight
             : control.enabled && (control.down || control.checked || control.highlighted) && !control.flat
-            ? control.palette.brightText : control.flat ? control.palette.windowText : control.palette.buttonText
+            ? control.palette.brightText : control.flat ? control.palette.windowText : "white"
     }
 
     background: Rectangle {

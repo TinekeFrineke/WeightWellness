@@ -3,9 +3,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Imagine
 
-import "controls" as WW
-
-
 Rectangle {
     id: personaliaPage
     color: "#bbfadd"
@@ -21,17 +18,17 @@ Rectangle {
         RowLayout{
             spacing: 10
             Layout.fillHeight: true
-            WW.Label {
+            WWLabel {
                 text: "Name"
             }
-            WW.TextField {
+            WWTextField {
                 Layout.preferredWidth: 300
                 Layout.preferredHeight: 40
             }
-            WW.Label {
+            WWLabel {
                 text: "Username"
             }
-            WW.TextField {
+            WWTextField {
                 Layout.preferredWidth: 200
                 Layout.preferredHeight: 40
             }
@@ -42,84 +39,84 @@ Rectangle {
             ColumnLayout {
                 Layout.fillWidth: true
                 Layout.preferredWidth: 1
-                WW.Label {
+                WWLabel {
                     Layout.fillHeight: true
                     Layout.minimumHeight: 25
                     text: "Gender"
                 }
 
-                WW.GroupBox {
+                WWGroupBox {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.minimumHeight: 95
                     ColumnLayout {
                         spacing: 10
                         Layout.fillHeight: true
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: true
                             text: "Male"
                         }
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: false
                             text: "Female"
                         }
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: false
                             text: "Other"
                         }
                     }
-                } // GroupBox
-                WW.Label {
+                } // WWGroupBox
+                WWLabel {
                     Layout.fillHeight: true
                     Layout.minimumHeight: 25
                     text: "Strategy"
                 }
 
-                WW.GroupBox {
+                WWGroupBox {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.minimumHeight: 65
                     ColumnLayout {
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: true
                             text: "KCal"
                         }
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: false
                             text: "Carbohydrates"
                         }
                     }
                 }
-                WW.Label {
+                WWLabel {
                     Layout.fillHeight: true
                     Layout.minimumHeight: 25
                     text: "Work"
                 }
 
-                WW.GroupBox {
+                WWGroupBox {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.minimumHeight: 125
                     ColumnLayout {
                         spacing: 10
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: true
                             text: "Sitting"
                         }
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: false
                             text: "Standing"
                         }
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: false
                             text: "Walking"
                         }
-                        WW.RadioButton {
+                        WWRadioButton {
                             checked: false
                             text: "Heavy"
                         }
                     } // ColumnLayout
-                } // GroupBox
+                } // WWGroupBox
             } // ColumnLayout
 
             ColumnLayout {
@@ -127,69 +124,69 @@ Rectangle {
                 spacing: 10
                 RowLayout {
                     Layout.fillWidth: true
-                    WW.Label {
+                    WWLabel {
                         text: "Born"
                     }
-                    WW.TextField {
+                    WWTextField {
                         Layout.preferredWidth: 200
                         Layout.preferredHeight: 40
                     }
                 }
 
                 RowLayout {
-                    WW.Label {
+                    WWLabel {
                         text: "Start weight"
                     }
-                    WW.TextField {
+                    WWTextField {
                         Layout.preferredWidth: 200
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "kg"
                     }
                 }
 
                 RowLayout {
-                    WW.Label {
+                    WWLabel {
                         text: "Target weight"
                     }
-                    WW.TextField {
+                    WWTextField {
                         Layout.preferredWidth: 200
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "kg"
                     }
                 }
 
                 RowLayout {
-                    WW.Label {
+                    WWLabel {
                         text: "Length"
                     }
-                    WW.TextField {
+                    WWTextField {
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }
-                    WW.Label {
+                    WWLabel {
                         text: "cm"
                     }
                 }
 
                 RowLayout {
-                    WW.Label {
+                    WWLabel {
                         text: "Points per day"
                     }
-                    WW.TextField {
+                    WWTextField {
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }
                 }
 
                 RowLayout {
-                    WW.Label {
+                    WWLabel {
                         text: "Extra week points per day"
                     }
-                    WW.TextField {
+                    WWTextField {
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }

@@ -1,9 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 
-import "controls" as WW
-
-
 Rectangle {
     id: itemsPage
     color: "#ffff99"
@@ -46,24 +43,24 @@ Rectangle {
         RowLayout {
             id: buttonBarId
             Layout.fillWidth: true
-            Layout.preferredHeight : 40
+            Layout.preferredHeight : WWRowLayout.buttonBarHeight
             spacing: 0
 
-            WW.Button {
+            WWButton {
                 id: addButton
                 text: "&Add"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight
             }
 
-            WW.Button {
+            WWButton {
                 id: editButton
                 text: "&Edit"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight
             }
 
-            WW.Button {
+            WWButton {
                 id: deleteButton
                 text: "&Delete"
                 Layout.fillWidth: true

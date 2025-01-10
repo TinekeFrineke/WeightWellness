@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 
-import "controls" as WW
 
 ListView {
     id: foodListView
@@ -20,32 +19,32 @@ ListView {
     delegate: Item {
         id: delegateId
         width: ListView.view.width // Match the width of the ListView
-        height: WW.ListView.itemHeight // Fixed row height
+        height: WWListView.itemHeight // Fixed row height
 
         RowLayout {
             anchors.fill: parent
             spacing: 10
-            WW.Label {
+            WWLabel {
                 id: textId
                 Layout.fillWidth: true
                 Layout.preferredWidth: foodListView.nameColumnWidth
                 text: model.name
             }
 
-            WW.Label {
+            WWLabel {
                 Layout.fillWidth: true
                 Layout.preferredWidth: foodListView.categoryColumnWidth
                 // Layout.leftMargin: foodListView.categoryColumnStart
                 id: categoryId
                 text: model.category
             }
-            WW.Label {
+            WWLabel {
                 Layout.fillWidth: true
                 Layout.preferredWidth: foodListView.unitColumnWidth
                 id: unitId
                 text: model.unit
             }
-            WW.Label {
+            WWLabel {
                 Layout.fillWidth: true
                 Layout.preferredWidth: foodListView.pointsColumnWidth
                 horizontalAlignment: Text.AlignRight
@@ -62,29 +61,29 @@ ListView {
         }
     }
     header: RowLayout {
-        height: WW.ListView.itemHeight // Set a fixed height for the header
+        height: ListView.itemHeight // Set a fixed height for the header
         anchors.left: parent.left
         anchors.right: parent.right
 
-        WW.Label {
+        WWLabel {
             text: "Name"
             font.bold: true
             Layout.preferredWidth: foodListView.nameColumnWidth // Match proportions with rows
             Layout.fillWidth: true
         }
-        WW.Label {
+        WWLabel {
             text: "Category"
             font.bold: true
             Layout.preferredWidth: foodListView.categoryColumnWidth // Match proportions with rows
             Layout.fillWidth: true
         }
-        WW.Label {
+        WWLabel {
             text: "Unit"
             font.bold: true
             Layout.preferredWidth: foodListView.unitColumnWidth // Match proportions with rows
             Layout.fillWidth: true
         }
-        WW.Label {
+        WWLabel {
             text: "Points"
             font.bold: true
             Layout.preferredWidth: foodListView.pointsColumnWidth // Match proportions with rows

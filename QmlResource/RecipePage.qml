@@ -1,8 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 
-import "controls" as WW
-
 // pragma ComponentBehavior: Bound
 
 Rectangle {
@@ -19,9 +17,7 @@ Rectangle {
             Layout.fillHeight: true
             Layout.margins: 20
             color: "#ccccff"
-            Component.onCompleted: {
-                console.log("diaryMain width == " + String(width) + " height == " + String(height))
-            }
+
             ColumnLayout {
                 height: parent.height
                 spacing: 10
@@ -34,6 +30,7 @@ Rectangle {
                 }
 
                 ListView {
+                    id: recipeListView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.preferredHeight: 400
@@ -41,18 +38,18 @@ Rectangle {
                     model: foodModel
                     // Define the header
                     header: RowLayout {
-                        height: WW.ListView.itemHeight // Set a fixed height for the header
+                        height: WWListView.itemHeight // Set a fixed height for the header
                         anchors.left: parent.left
                         anchors.right: parent.right
 
-                        WW.Label {
+                        WWLabel {
                             text: "Name"
                             font.bold: true
                             Layout.preferredWidth: 4 // Match proportions with rows
                             Layout.fillWidth: true
                             verticalAlignment: Text.AlignVCenter
                         }
-                        WW.Label {
+                        WWLabel {
                             text: "Points/portion"
                             font.bold: true
                             Layout.preferredWidth: 1 // Match proportions with rows
@@ -63,19 +60,19 @@ Rectangle {
                     }
                     delegate: Item {
                         width: ListView.view.width // Match the width of the ListView
-                        height: WW.ListView.itemHeight // Fixed row height
+                        height: WWListView.itemHeight // Fixed row height
 
                         RowLayout {
                             anchors.fill: parent
                             spacing: 10
 
-                            WW.Label {
+                            WWLabel {
                                 text: model.name
                                 Layout.preferredWidth: 4
                                 Layout.fillWidth: true
                                 elide: Text.ElideRight
                             }
-                            WW.Label {
+                            WWLabel {
                                 text: model.points
                                 horizontalAlignment: Text.AlignRight
                                 Layout.preferredWidth: 1
@@ -90,24 +87,24 @@ Rectangle {
         RowLayout {
             id: buttonBarId
             Layout.fillWidth: true
-            Layout.preferredHeight : 40
+            Layout.preferredHeight : WWRowLayout.buttonBarHeight
             spacing: 0
 
-            WW.Button {
+            WWButton {
                 id: addButton
                 text: "&Add"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight
             }
 
-            WW.Button {
+            WWButton {
                 id: editButton
                 text: "&Edit"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight
             }
 
-            WW.Button {
+            WWButton {
                 id: deleteButton
                 text: "&Delete"
                 Layout.fillWidth: true

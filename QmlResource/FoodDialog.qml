@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "controls" as WW
-
 Dialog {
     id: foodDialog
     title: "Title"
@@ -11,7 +9,7 @@ Dialog {
     height: 550
     modal: true
 
-    header : WW.Label {
+    header : WWLabel {
         text: "Food Item"
     }
 
@@ -26,16 +24,16 @@ Dialog {
         RowLayout {
             Layout.fillWidth: true
 
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Name"
             }
-            WW.TextField {
+            TextField {
                 id: nameId
                 Layout.preferredWidth: 300
                 Layout.preferredHeight: 40
             }
-            WW.CheckBox {
+            CheckBox {
                 checked: false
                 text: "Favourite"
             }
@@ -44,11 +42,11 @@ Dialog {
         RowLayout {
             Layout.fillWidth: true
 
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Category"
             }
-            WW.ComboBox {
+            ComboBox {
                 model: ["Fruit", "Groente", "Brood"]
             }
         } // RowLayout
@@ -58,7 +56,7 @@ Dialog {
             Rectangle {
                 id: rectangleId
                 width: parent.width  // Remember to specify these sizes or you'll have problems
-                height: WW.ListView.itemHeight
+                height: WWListView.itemHeight
                 color: "beige"
                 border.color: "yellowgreen"
                 radius: 1
@@ -66,14 +64,14 @@ Dialog {
                 RowLayout {
                     Layout.fillWidth: true
                     Layout.preferredWidth: 400
-                    WW.Label {
+                    WWLabel {
                         id: textId
                         Layout.preferredWidth: 140
                         text: model.name
                         font.pointSize: 16
                     }
 
-                    WW.Label {
+                    WWLabel {
                         horizontalAlignment: Text.AlignRight
                         Layout.leftMargin: 140
                         Layout.alignment : Qt.AlignRight
@@ -114,14 +112,14 @@ Dialog {
             header: RowLayout {
                 Layout.fillWidth: true
                 Layout.preferredWidth: 400
-                WW.Label {
+                WWLabel {
                     id: headerNameId
                     Layout.preferredWidth: 140
                     text: "Name"
                     font.pointSize: 16
                 }
 
-                WW.Label {
+                WWLabel {
                     id: headerPointsId
                     Layout.fillWidth: true
                     Layout.leftMargin: 140
@@ -133,23 +131,23 @@ Dialog {
         } // RowLayout
 
         RowLayout {
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "Portions"
             }
-            WW.TextField {
+            TextField {
                 id: portionsId
                 Layout.preferredWidth: 50
                 Layout.preferredHeight: 40
             }
-            WW.ComboBox {
+            ComboBox {
                 model: ["eetlepel", "theelepel", "portie"]
             }
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 70
                 text: "Points"
             }
-            WW.TextField {
+            TextField {
                 id: pointsId
                 Layout.preferredWidth: 70
                 Layout.preferredHeight: 40
@@ -157,12 +155,12 @@ Dialog {
         }
 
         RowLayout {
-            WW.TextField {
+            TextField {
                 id: unitsId
                 Layout.preferredWidth: 100
                 Layout.preferredHeight: 40
             }
-            WW.Label {
+            WWLabel {
                 Layout.preferredWidth: 100
                 text: "units"
             }
@@ -182,7 +180,7 @@ Dialog {
                 Layout.minimumHeight: 40
                 Layout.fillWidth: true
                 spacing: 0
-                WW.Button {
+                Button {
                     Layout.fillWidth: true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Ok"
@@ -190,7 +188,7 @@ Dialog {
                        foodDialog.accept()
                     }
                 }
-                WW.Button {
+                Button {
                     Layout.fillWidth : true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Cancel"
