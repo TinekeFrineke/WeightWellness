@@ -6,6 +6,15 @@ qt_add_library(${LIB_NAME} STATIC)
 set_target_properties(${LIB_NAME} PROPERTIES AUTOMOC ON)
 target_link_libraries(${LIB_NAME} PRIVATE Qt6::Quick)
 
+set(qml_singletons
+    WWListView.qml
+    WWRowLayout.qml
+)
+
+set_source_files_properties(${qml_singletons}
+    PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_qml_module(${LIB_NAME}
     URI ${MODULE_NAME}
     # VERSION 1.0
@@ -36,3 +45,5 @@ qt_add_qml_module(${LIB_NAME}
         qmldir
 
 )
+
+set_target_properties(${LIB_NAME} PROPERTIES FOLDER "QmlResource")

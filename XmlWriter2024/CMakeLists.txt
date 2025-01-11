@@ -26,4 +26,6 @@ target_include_directories(XmlWriter PRIVATE
     ${CMAKE_SOURCE_DIR}/Model/interface
 )
 
-target_link_libraries(XmlReader XmlBase)
+target_link_libraries(XmlWriter XmlBase)
+
+set_target_properties(XmlWriter PROPERTIES FOLDER "WeightControl")
