@@ -6,18 +6,6 @@ Rectangle {
     signal dayMin()
     signal dayPlus()
 
-    property string day : dayId.text
-    property string weekStart : weekStartId.text
-    property string weekEnd : weekEndId.text
-    property string strategy : dayId.text
-    property string weight : dayId.text
-    property string points: pointsId.text
-    property string freeBonus: freeBonusId.text
-    property string movementBonus: movementBonusId.text
-    property string pointsLeft: leftId.text
-    property string weekPoints: weekPointsId.text
-    property string totalPoints: totalId.text
-
     id: diaryPage
     color: "lightblue"
 
