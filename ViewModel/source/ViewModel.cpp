@@ -1,20 +1,28 @@
 
 #include "ViewModel.h"
 
+#include "IDay.h"
+#include "IPersonalData.h"
+#include "IWeek.h"
+
 
 namespace viewmodel
 {
 
 ViewModel::ViewModel(std::shared_ptr<weight::Model> model,
-                     std::shared_ptr<IPersonalData> data,
-                     std::shared_ptr<IDay> day,
-                     std::shared_ptr<IWeek> week,
+                     std::unique_ptr<IPersonalData> data,
+                     std::unique_ptr<IDay> day,
+                     std::unique_ptr<IWeek> week,
                      QObject* parent)
     : IViewModel(parent)
     , m_model(std::move(model))
     , m_personalData(std::move(data))
     , m_day(std::move(day))
     , m_week(std::move(week))
+{
+}
+
+ViewModel::~ViewModel()
 {
 }
 

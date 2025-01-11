@@ -24,11 +24,12 @@ class ViewModel
     : public IViewModel {
     Q_OBJECT
 public:
-    explicit ViewModel(std::shared_ptr<weight::Model> model,
-                       std::shared_ptr<IPersonalData> data,
-                       std::shared_ptr<IDay> day,
-                       std::shared_ptr<IWeek> week,
-                       QObject* parent = nullptr);
+    ViewModel(std::shared_ptr<weight::Model> model,
+              std::unique_ptr<IPersonalData> data,
+              std::unique_ptr<IDay> day,
+              std::unique_ptr<IWeek> week,
+              QObject* parent = nullptr);
+    ~ViewModel() override;
 
 public slots:
     void onItemClicked(int index);
@@ -36,9 +37,9 @@ public slots:
 
 private:
     std::shared_ptr<weight::Model> m_model;
-    std::shared_ptr<IDay> m_personalData;
-    std::shared_ptr<IDay> m_day;
-    std::shared_ptr<IDay> m_week;
+    std::unique_ptr<IPersonalData> m_personalData;
+    std::unique_ptr<IDay> m_day;
+    std::unique_ptr<IWeek> m_week;
 };
 
 } // namespace viewmodel
