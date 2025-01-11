@@ -5,9 +5,8 @@
 #include "WeightControl.h"
 
 
-//#include <QApplication>
-//#include <QPushButton>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QGuiApplication>
 #include <QDebug>
 
@@ -20,6 +19,8 @@
 #include "Utilities/PathUtils.h"
 
 #include "model/Personalia.h"
+#include "viewmodel/IViewModel.h"
+#include "viewmodel/ViewModelFactory.h"
 #include "xmlreader/XmlReader.h"
 #include "xmlwriter/XmlWriter.h"
 
@@ -72,14 +73,16 @@ int main(int argc, char* argv[])
         ::MessageBox(0, L"Could not initialize WeightControl", L"ERROR", MB_OK);
     }
 
-//    QApplication app(argc, argv);
     QGuiApplication app(argc, argv);
 
 #ifdef _DEBUG
     attachConsole();
 #endif
 
+    auto viewModel(viewmodel::CreateViewModel(control.GetModel()));
+
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("ViewModel", viewModel.get());
     engine.addImportPath(":/");
     engine.loadFromModule("QmlResource", "Main");
 
@@ -99,8 +102,8 @@ WeightControl::WeightControl()
 WeightControl::~WeightControl()
 {
     try {
-        ww2024::XmlWriter writer(mModel);
-        writer.Write(mDataDirectory);
+        ww2024::XmlWriter writer(*mModel);
+        writer.Write(m_dataDirectory);
     }
     catch (const XERCES_CPP_NAMESPACE::IOException& error) {
         std::tstring terror(Str::ToTString(error.getMessage()));
@@ -126,10 +129,11 @@ bool WeightControl::Initialize()
         return false;
     }
 
-    mDataDirectory = inifile[_T("General")][_T("DataPath")];
+    m_dataDirectory = inifile[_T("General")][_T("DataPath")];
 
-    ww2024::XmlReader reader(mModel);
-    reader.Read(mDataDirectory);
+    mModel = std::make_shared<weight::Model>();
+    ww2024::XmlReader reader(*mModel);
+    reader.Read(m_dataDirectory);
     //if (mModel.GetActivePersonalia() == NULL) {
     //    NewNameDialog dialog(NULL);
     //    INT_PTR nResponse = dialog.DoModal();
@@ -159,7 +163,7 @@ bool WeightControl::Initialize()
     //    }
     //}
 
-    mModel.SetStrategy(mModel.GetActivePersonalia()->GetStrategy());
+    mModel->SetStrategy(mModel->GetActivePersonalia()->GetStrategy());
 
     return true;
 }

@@ -26,6 +26,7 @@ target_include_directories(WeightControl PUBLIC
     ${CMAKE_SOURCE_DIR}/Model/interface
     ${CMAKE_SOURCE_DIR}/XmlReader2024/interface
     ${CMAKE_SOURCE_DIR}/XmlWriter2024/interface
+    ${CMAKE_SOURCE_DIR}/ViewModel/interface
 )
 
 # Set the output directories for different configurations
@@ -53,6 +54,7 @@ add_dependencies(WeightControl
     Generated2024
     Model
     QmlResourceLibplugin
+    ViewModel
     XmlReader
     XmlWriter
 )

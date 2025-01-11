@@ -5,6 +5,7 @@
 //
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include "model/Model.h"
@@ -25,7 +26,10 @@ public:
 
     bool Initialize();
 
+    std::shared_ptr<weight::Model> GetModel() { return mModel; }
+
+
 private:
-    weight::Model mModel;
-    std::wstring mDataDirectory;
+    std::shared_ptr<weight::Model> mModel;
+    std::wstring m_dataDirectory;
 };
