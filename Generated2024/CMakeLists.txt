@@ -118,3 +118,5 @@ target_include_directories(Generated2024 PUBLIC
     interface/generated
     C:/Projects/VC2022/xerces280/src
 )
+
+set_target_properties(Generated2024 PROPERTIES FOLDER WeightControl)

@@ -46,4 +46,32 @@ qt_add_qml_module(${LIB_NAME}
 
 )
 
-set_target_properties(${LIB_NAME} PROPERTIES FOLDER "QmlResource")
+set(MOC_BUILD_PATH ${CMAKE_SOURCE_DIR}/build/QmlResource/QmlResourceLib_autogen/)
+set(QML_JSON_PATH C:/Qt/6.8.0/msvc2022_64/metatypes/)
+
+source_group(Qml FILES
+    ${MOC_BUILD_PATH}mocs_compilation_Debug.cpp
+    ${MOC_BUILD_PATH}mocs_compilation_MinSizeRel.cpp
+    ${MOC_BUILD_PATH}mocs_compilation_Release.cpp
+    ${MOC_BUILD_PATH}mocs_compilation_RelWithDebInfo.cpp
+    ${QML_JSON_PATH}qt6core_metatypes.json
+    ${QML_JSON_PATH}qt6gui_metatypes.json
+    ${QML_JSON_PATH}qt6network_metatypes.json
+    ${QML_JSON_PATH}qt6opengl_metatypes.json
+    ${QML_JSON_PATH}qt6qml_metatypes.json
+    ${QML_JSON_PATH}qt6qmlmeta_metatypes.json
+    ${QML_JSON_PATH}qt6qmlmodels_metatypes.json
+    ${QML_JSON_PATH}qt6qmlworkerscript_metatypes.json
+    ${QML_JSON_PATH}qt6quick_metatypes.json
+)
+
+set_target_properties(${LIB_NAME} PROPERTIES FOLDER QmlResource)
+set_target_properties(${LIB_NAME}_automoc_json_extraction PROPERTIES FOLDER QmlResource)
+set_target_properties(${LIB_NAME}_qmltyperegistration PROPERTIES FOLDER QmlResource)
+set_target_properties(${LIB_NAME}_resources_1 PROPERTIES FOLDER QmlResource)
+set_target_properties(${LIB_NAME}_resources_2 PROPERTIES FOLDER QmlResource)
+set_target_properties(${LIB_NAME}_tooling PROPERTIES FOLDER QmlResource)
+set_target_properties(${LIB_NAME}plugin PROPERTIES FOLDER QmlResource)
+set_target_properties(${LIB_NAME}plugin_init PROPERTIES FOLDER QmlResource)
+set_target_properties(module_${LIB_NAME}_aotstats_targets PROPERTIES FOLDER QmlResource)
+set_target_properties(all_qmltyperegistrations PROPERTIES FOLDER QmlResource)

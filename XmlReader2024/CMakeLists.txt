@@ -23,3 +23,5 @@ target_include_directories(XmlReader PRIVATE
 )
 
 target_link_libraries(XmlReader XmlBase)
+
+set_target_properties(XmlReader PROPERTIES FOLDER WeightControl)

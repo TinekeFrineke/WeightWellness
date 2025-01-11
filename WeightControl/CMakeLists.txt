@@ -28,23 +28,6 @@ target_include_directories(WeightControl PUBLIC
     ${CMAKE_SOURCE_DIR}/XmlWriter2024/interface
 )
 
-message(STATUS "CMAKE_BINARY_DIR  == ${CMAKE_BINARY_DIR}")
-message(STATUS "CMAKE_BUILD_TYPE  == ${CMAKE_BUILD_TYPE}")
-message(STATUS "CMAKE_GENERATOR_PLATFORM  == ${CMAKE_GENERATOR_PLATFORM}")
-
-if(CMAKE_CONFIGURATION_TYPES)
-    foreach(config ${CMAKE_CONFIGURATION_TYPES})
-        if(config STREQUAL "Debug")
-            message(STATUS "Debug configuration is defined")
-        elseif(config STREQUAL "Release")
-            message(STATUS "Release configuration is defined")
-        endif()
-    endforeach()
-else()
-    message(STATUS "CMAKE_CONFIGURATION_TYPES is not set (single-configuration generator?)")
-endif()
-
-
 # Set the output directories for different configurations
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/${CMAKE_GENERATOR_PLATFORM}/Debug)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/${CMAKE_GENERATOR_PLATFORM}/Release)
@@ -57,6 +40,7 @@ target_link_libraries(WeightControl PRIVATE
     Generated2024
     Model
     QmlResourceLibplugin
+    ViewModel
     XmlReader
     XmlWriter
     $<$<CONFIG:Debug>:C:/Projects/VC2019/xerces280/Build/Win64/VC2019/Debug/xerces-c_2_8D.lib>
@@ -65,4 +49,22 @@ target_link_libraries(WeightControl PRIVATE
     $<$<CONFIG:Release>:C:/Projects/VC2022/Utilities/x64/Release/Utilities.lib>
 )
 
-source_group(weightcontrol)
+add_dependencies(WeightControl
+    Generated2024
+    Model
+    QmlResourceLibplugin
+    XmlReader
+    XmlWriter
+)
+
+set(MOC_BUILD_PATH ${CMAKE_SOURCE_DIR}/build/WeightControl/WeightControl_autogen/)
+
+source_group(Qml FILES
+    ${MOC_BUILD_PATH}mocs_compilation_Debug.cpp
+    ${MOC_BUILD_PATH}mocs_compilation_MinSizeRel.cpp
+    ${MOC_BUILD_PATH}mocs_compilation_Release.cpp
+    ${MOC_BUILD_PATH}mocs_compilation_RelWithDebInfo.cpp
+)
+
+set_target_properties(WeightControl PROPERTIES FOLDER WeightControl)
+

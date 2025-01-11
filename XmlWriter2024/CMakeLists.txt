@@ -28,4 +28,4 @@ target_include_directories(XmlWriter PRIVATE
 
 target_link_libraries(XmlWriter XmlBase)
 
-set_target_properties(XmlWriter PROPERTIES FOLDER "WeightControl")
+set_target_properties(XmlWriter PROPERTIES FOLDER WeightControl)

@@ -67,3 +67,5 @@ target_include_directories(Model PUBLIC
     interface/model
     C:/Projects/VC2022/Utilities/include
 )
+
+set_target_properties(Model PROPERTIES FOLDER WeightControl)
