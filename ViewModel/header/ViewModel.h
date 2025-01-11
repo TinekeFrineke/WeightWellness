@@ -16,9 +16,9 @@ class Model;
 namespace viewmodel
 {
 
-class IDay;
 class IPersonalData;
-class IWeek;
+class IViewModelDay;
+class IViewModelWeek;
 
 class ViewModel
     : public IViewModel {
@@ -26,8 +26,8 @@ class ViewModel
 public:
     ViewModel(std::shared_ptr<weight::Model> model,
               std::unique_ptr<IPersonalData> data,
-              std::unique_ptr<IDay> day,
-              std::unique_ptr<IWeek> week,
+              std::unique_ptr<IViewModelDay> day,
+              std::unique_ptr<IViewModelWeek> week,
               QObject* parent = nullptr);
     ~ViewModel() override;
 
@@ -38,8 +38,8 @@ public slots:
 private:
     std::shared_ptr<weight::Model> m_model;
     std::unique_ptr<IPersonalData> m_personalData;
-    std::unique_ptr<IDay> m_day;
-    std::unique_ptr<IWeek> m_week;
+    std::unique_ptr<IViewModelDay> m_day;
+    std::unique_ptr<IViewModelWeek> m_week;
 };
 
 } // namespace viewmodel

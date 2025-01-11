@@ -21,6 +21,10 @@ set(HEADERS
     interface/ViewModel/IViewModel.h
     interface/ViewModel/IWeek.h
     header/Day.h
+    header/ISettableDay.h
+    header/ISettableWeek.h
+    header/IViewModelDay.h
+    header/IViewModelWeek.h
     header/PersonalData.h
     header/ViewModel.h
     header/Week.h
