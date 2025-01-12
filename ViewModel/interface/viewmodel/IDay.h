@@ -16,7 +16,10 @@ public:
     virtual ~IDay() = default;
     IDay(QObject* parent) : QObject(parent) {}
 
-
+public slots:
+    virtual void freeBonusChanged(double newValue) = 0;
+    virtual void itemChanged() = 0;
+    virtual void weightChanged(double newWeight) = 0;
 };
 
 

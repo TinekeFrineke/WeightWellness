@@ -1,6 +1,8 @@
 
 #include "ViewModel.h"
 
+#include "model/Model.h"
+
 #include "IPersonalData.h"
 #include "IViewModelDay.h"
 #include "IViewModelWeek.h"
@@ -34,6 +36,18 @@ void ViewModel::onItemClicked(int index) {
 void ViewModel::onItemDoubleClicked(int index) {
     qDebug() << "Item double-clicked at index:" << index;
     // Add your logic here
+}
+
+void ViewModel::DayMinusOne()
+{
+    //auto newData(m_currentDate);
+    //newData.AddDays(1);
+
+    //if (m_model->GetDay)
+}
+
+void ViewModel::DayPlusOne()
+{
 }
 
 } // namespace viewmodel

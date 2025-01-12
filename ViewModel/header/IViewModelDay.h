@@ -18,8 +18,6 @@ class IViewModelDay
 public:
     IViewModelDay(QObject* parent) : IDay(parent) {}
     ~IViewModelDay() override = default;
-
-    virtual void setDay(weight::Day* day) = 0;
 };
 
 

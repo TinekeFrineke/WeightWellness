@@ -15,5 +15,19 @@ void Day::setDay(weight::Day* day)
     m_day = day;
 }
 
+void Day::itemChanged()
+{
+}
+
+void Day::weightChanged(double newWeight)
+{
+    m_day->SetWeight(newWeight);
+}
+
+void Day::freeBonusChanged(double newValue)
+{
+    m_day->SetFreeBonusPoints(newValue);
+}
+
 
 } // namespace viewmodel

@@ -16,7 +16,9 @@ public:
     virtual ~IViewModel() = default;
     IViewModel(QObject* parent) : QObject(parent) {}
 
-
+public slots:
+    virtual void DayPlusOne() = 0;
+    virtual void DayMinusOne() = 0;
 };
 
 

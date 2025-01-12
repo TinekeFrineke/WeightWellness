@@ -6,6 +6,8 @@
 
 #include <memory>
 
+#include "Utilities/Date.h"
+
 #include "IViewModel.h"
 
 
@@ -36,7 +38,12 @@ public slots:
     void onItemDoubleClicked(int index);
 
 private:
+    // Inherited via IViewModel
+    void DayMinusOne() override;
+    void DayPlusOne() override;
+
     std::shared_ptr<weight::Model> m_model;
+    Utils::Date m_currentDate;
     std::unique_ptr<IPersonalData> m_personalData;
     std::unique_ptr<IViewModelDay> m_day;
     std::unique_ptr<IViewModelWeek> m_week;
