@@ -37,18 +37,24 @@ Rectangle {
                             Layout.minimumWidth: 30
                             Layout.minimumHeight: 30
                             text: "-"
-                            onClicked: diaryPage.dayMin()
+                            onClicked: ViewModel.DayMinusOne()
                         }
                         WWTextField {
                             id: dayId
+                            horizontalAlignment: Qt.AlignHCenter
+                            placeholderText: "Enter date (yyyyMMdd)"
+                            text: ViewModel.currentDate
+                            validator: RegularExpressionValidator {
+                                regularExpression: /^\d{8}$/
+                            }
                             Layout.preferredWidth: 100
-                            Layout.preferredHeight: 40
+                            Layout.preferredHeight: 50
                         }
                         WWButton {
                             Layout.minimumWidth: 30
                             Layout.minimumHeight: 30
                             text: "+"
-                            onClicked: diaryPage.dayPlus()
+                            onClicked: ViewModel.DayPlusOne()
                         }
                     }
                     WWLabel {
@@ -56,17 +62,47 @@ Rectangle {
                     }
                     WWTextField {
                         id: weekStartId
+                        placeholderText: "Enter date (yyyyMMdd)"
+                        text: ViewModel.startDate
+                        horizontalAlignment: Qt.AlignHCenter
+                        validator: RegularExpressionValidator {
+                            regularExpression: /^\d{8}$/
+                        }
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }
                     WWLabel {
                         text: "Week end"
                     }
-                    WWTextField {
-                        id: weekEndId
-                        Layout.preferredWidth: 100
-                        Layout.preferredHeight: 40
-                    }
+                    RowLayout {
+                        spacing: 0
+                        WWButton {
+                            Layout.minimumWidth: 30
+                            Layout.minimumHeight: 30
+                            text: "-"
+                            onClicked: ViewModel.endDateMinusOne()
+                        }
+                        WWTextField {
+                            id: weekEndId
+                            placeholderText: "Enter date (yyyyMMdd)"
+                            text: ViewModel.endDate
+                            onEditingFinished: {
+                                ViewModel.endDate = text;
+                            }
+                            horizontalAlignment: Qt.AlignHCenter
+                            validator: RegularExpressionValidator {
+                                regularExpression: /^\d{8}$/
+                            }
+                            Layout.preferredWidth: 100
+                            Layout.preferredHeight: 40
+                        }
+                        WWButton {
+                            Layout.minimumWidth: 30
+                            Layout.minimumHeight: 30
+                            text: "+"
+                            onClicked: ViewModel.endDatePlusOne()
+                        }
+                    } // RowLayout
                 }
                 RowLayout {
                     spacing: 10
@@ -77,7 +113,10 @@ Rectangle {
                     }
                     WWTextField {
                         id: strategyId
-                        Layout.preferredWidth: 100
+                        text: Week.strategy
+                        readOnly: true
+                        horizontalAlignment: Qt.AlignLeft
+                        Layout.preferredWidth: 180
                         Layout.preferredHeight: 40
                     }
                     WWLabel {
@@ -90,6 +129,11 @@ Rectangle {
                             top: 9999
                             decimals: 2
                         }
+                        text: parseFloat(Day.weight)
+                        onEditingFinished: {
+                            Day.weight = parseFloat(text);
+                        }
+                        horizontalAlignment: Qt.AlignRight
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
@@ -98,7 +142,12 @@ Rectangle {
                     }
                     WWTextField {
                         id: pointsId
+                        horizontalAlignment: Qt.AlignRight
                         validator: DoubleValidator {}
+                        text: parseFloat(Week.points)
+                        onEditingFinished: {
+                            Day.weight = parseFloat(text);
+                        }
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
@@ -107,7 +156,12 @@ Rectangle {
                     }
                     WWTextField {
                         id: freeBonusId
+                        horizontalAlignment: Qt.AlignRight
                         validator: DoubleValidator {}
+                        text: parseFloat(Day.freeBonus)
+                        onEditingFinished: {
+                            Day.freeBonus = parseFloat(text);
+                        }
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
@@ -122,6 +176,9 @@ Rectangle {
                     }
                     WWTextField {
                         id: movementBonusId
+                        readOnly: true
+                        text: "0.0"
+                        horizontalAlignment: Qt.AlignRight
                         validator: DoubleValidator {}
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
@@ -131,7 +188,10 @@ Rectangle {
                     }
                     WWTextField {
                         id: leftId
+                        readOnly: true
                         validator: DoubleValidator {}
+                        text: parseFloat(ViewModel.pointsLeft)
+                        horizontalAlignment: Qt.AlignRight
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
@@ -140,7 +200,10 @@ Rectangle {
                     }
                     WWTextField {
                         id: weekPointsId
+                        readOnly: true
                         validator: DoubleValidator {}
+                        text: parseFloat(ViewModel.weekPointsLeft)
+                        horizontalAlignment: Qt.AlignRight
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
@@ -193,7 +256,7 @@ Rectangle {
                             id: rectangleId
                             width: parent.width  // Remember to specify these sizes or you'll have problems
                             height: WWListView.itemHeight
-                            color: "beige"
+                            color: "yellow"
                             border.color: "yellowgreen"
                             radius: 1
 
@@ -237,6 +300,7 @@ Rectangle {
                     WWTextField {
                         id: totalId
                         validator: DoubleValidator {}
+                        text: parseFloat(Day.totalPointsSpent)
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }

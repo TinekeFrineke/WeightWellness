@@ -19,7 +19,10 @@
 #include "Utilities/PathUtils.h"
 
 #include "model/Personalia.h"
+#include "viewmodel/IDay.h"
+#include "viewmodel/IPersonalData.h"
 #include "viewmodel/IViewModel.h"
+#include "viewmodel/IWeek.h"
 #include "viewmodel/ViewModelFactory.h"
 #include "xmlreader/XmlReader.h"
 #include "xmlwriter/XmlWriter.h"
@@ -61,7 +64,6 @@ XercesInitializer::~XercesInitializer()
 
 int main(int argc, char* argv[])
 {
-
     wchar_t dir[MAX_PATH];
     GetCurrentDirectory(MAX_PATH, dir);
     std::wcout << "Current path: " << dir << std::endl;
@@ -83,6 +85,9 @@ int main(int argc, char* argv[])
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("ViewModel", viewModel.get());
+    engine.rootContext()->setContextProperty("PersonalData", viewModel->GetPersonalData());
+    engine.rootContext()->setContextProperty("Day", viewModel->GetDay());
+    engine.rootContext()->setContextProperty("Week", viewModel->GetWeek());
     engine.addImportPath(":/");
     engine.loadFromModule("QmlResource", "Main");
 

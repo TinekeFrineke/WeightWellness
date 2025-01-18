@@ -15,6 +15,7 @@ public:
     virtual ~ISettableDay() = default;
 
     virtual void setDay(weight::Day* day) = 0;
+    virtual const weight::Day* getDay() const = 0;
 };
 
 

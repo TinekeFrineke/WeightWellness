@@ -50,16 +50,44 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
 
 Week* Model::FindWeek(const Utils::Date& aDate)
 {
-    for (size_t i = 0; i < mWeeks.size(); ++i)
-        if (mWeeks[i]->Includes(aDate))
-            return mWeeks[i].get();
+    for (const auto& week : mWeeks)
+        if (week->Includes(aDate))
+            return week.get();
 
     return nullptr;
+}
+
+Week* Model::CreateWeek(const Utils::Date& aDate)
+{
+    auto weekptr = FindWeek(aDate);
+    if (weekptr != nullptr)
+        return weekptr;
+
+    // Week not found, create a new week
+    Utils::Date enddate(aDate);
+    enddate.AddDays(6);
+    // If there are already weeks with overlapping start date, make sure this week fits
+    while (FindWeek(enddate) != nullptr && enddate != aDate)
+        enddate.SubtractDays(1);
+
+    auto week = std::make_unique<weight::Week>(aDate, enddate);
+    // Fill from personalia
+    week->SetPoints(GetActivePersonalia()->GetPuntenTotaal(GetStrategy()));
+    week->SetSaveablePoints(GetVrijePunten());
+    week->SetStrategy(GetStrategy(), *this);
+    week->SetStartWeight(GetActivePersonalia()->GetHuidigGewicht());
+    weekptr = week.get();
+    Add(std::move(week));
+    return weekptr;
 }
 
 
 bool Model::SetEndDate(Week& aWeek, const Utils::Date& aDate)
 {
+    auto weekAtDate(FindWeek(aDate));
+    if (weekAtDate != nullptr && weekAtDate != &aWeek)
+        return false;
+
     return aWeek.SetEndDate(aDate);
 }
 

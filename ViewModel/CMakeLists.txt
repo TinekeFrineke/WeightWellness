@@ -10,6 +10,7 @@ set(SOURCES
     source/Day.cpp
     source/PersonalData.cpp
     source/ViewModel.cpp
+    source/ViewModelUtilities.cpp
     source/Week.cpp
     source/ViewModelFactory.cpp
 )
@@ -27,6 +28,7 @@ set(HEADERS
     header/IViewModelWeek.h
     header/PersonalData.h
     header/ViewModel.h
+    header/ViewModelUtilities.h
     header/Week.h
 )
 

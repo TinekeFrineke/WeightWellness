@@ -12,21 +12,41 @@ Day::Day(std::shared_ptr<weight::Model> model, QObject* parent)
 
 void Day::setDay(weight::Day* day)
 {
+    if (day == m_day)
+        return;
+
     m_day = day;
+    emit weightChanged(m_day->GetWeight());
 }
 
-void Day::itemChanged()
+const weight::Day* Day::getDay() const
 {
+    return m_day;
 }
 
-void Day::weightChanged(double newWeight)
+double Day::weight() const
 {
-    m_day->SetWeight(newWeight);
+    return m_day->GetWeight();
 }
 
-void Day::freeBonusChanged(double newValue)
+void Day::setWeight(double weight)
 {
-    m_day->SetFreeBonusPoints(newValue);
+    m_day->SetWeight(weight);
+}
+
+double Day::freeBonus() const
+{
+    return m_day->GetFreeBonusPoints();
+}
+
+void Day::setFreeBonus(double bonus)
+{
+    m_day->SetFreeBonusPoints(bonus);
+}
+
+double Day::totalPointsSpent() const
+{
+    return m_day->GetPoints();
 }
 
 

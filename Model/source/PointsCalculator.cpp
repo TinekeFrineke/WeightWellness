@@ -9,7 +9,7 @@ static int PointsCalculatorInstances = 0;
 
 
 PointsCalculator::PointsCalculator()
-    :   mImplementation(std::make_unique<KCalCalculator>())
+    : mImplementation(std::make_unique<KCalCalculator>())
     , mStrategy(STRATEGY_TYPE::KCal)
 {
 }

@@ -18,13 +18,13 @@ class Week
 {
 public:
     Week(const Utils::Date& aStartDate,
-         const Utils::Date& aEndDate);
+         const Utils::Date& aEndDate) noexcept;
 
     ~Week();
 
-    bool                      Add(std::unique_ptr<Day> anItem);
+    Day* AddDay(const Model& model, const Utils::Date& date);
+    bool Add(std::unique_ptr<Day> day);
 
-    std::vector<std::unique_ptr<Day>>& GetDays() { return mDays; }
     const std::vector<std::unique_ptr<Day>>& GetDays() const { return mDays; }
 
     Day* GetDay(const Utils::Date& aDay);
@@ -48,7 +48,6 @@ public:
 
     // Recalculates the points for the days in the week
     void                      Recalculate(Model& aModel);
-
 
 private:
     friend class Model;

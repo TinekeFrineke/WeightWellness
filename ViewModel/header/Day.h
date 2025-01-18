@@ -21,15 +21,22 @@ public:
     Day(std::shared_ptr < weight::Model> model, QObject* parent = nullptr);
 
 private:
+    // Inherited via IViewModelDay
+    void setDay(weight::Day* day) override;
+    const weight::Day* getDay() const override;
+
+    // m_model will disappear, just temporary
     std::shared_ptr<weight::Model> m_model;
     weight::Day* m_day{};
 
     // Inherited via IViewModelDay
-    void setDay(weight::Day* day) override;
+    double weight() const override;
+    void setWeight(double weight) override;
 
-    void itemChanged() override;
-    void weightChanged(double newWeight) override;
-    void freeBonusChanged(double newValue) override;
+    double freeBonus() const override;
+    void setFreeBonus(double bonus) override;
+
+    double totalPointsSpent() const override;
 };
 
 } // namespace viewmodel

@@ -26,27 +26,44 @@ class ViewModel
     : public IViewModel {
     Q_OBJECT
 public:
-    ViewModel(std::shared_ptr<weight::Model> model,
+    ViewModel(const Utils::Date& currentDate,
+              std::shared_ptr<weight::Model> model,
               std::unique_ptr<IPersonalData> data,
               std::unique_ptr<IViewModelDay> day,
               std::unique_ptr<IViewModelWeek> week,
               QObject* parent = nullptr);
     ~ViewModel() override;
 
-public slots:
-    void onItemClicked(int index);
-    void onItemDoubleClicked(int index);
+    // Inherited via IViewModelWeek
+    QString endDate() const override;
+    void setEndDate(const QString& date) override;
+    double pointsLeft() const override;
+    double weekPointsLeft() const override;
+
+    QString startDate() const override;
 
 private:
     // Inherited via IViewModel
+    IPersonalData* GetPersonalData() override;
+    IDay* GetDay() override;
+    IWeek* GetWeek() override;
+
+    QString currentDate() const override;
+    void setCurrentDate(const QString& date) override;
+
     void DayMinusOne() override;
     void DayPlusOne() override;
+    void endDatePlusOne() override;
+    void endDateMinusOne() override;
+
+    void UpdateDate(const Utils::Date& date);
 
     std::shared_ptr<weight::Model> m_model;
     Utils::Date m_currentDate;
     std::unique_ptr<IPersonalData> m_personalData;
     std::unique_ptr<IViewModelDay> m_day;
     std::unique_ptr<IViewModelWeek> m_week;
+
 };
 
 } // namespace viewmodel

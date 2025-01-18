@@ -18,6 +18,7 @@ T.TextField {
         family: "Arial"
         pointSize: 16
     }
+    padding: 3
 
     selectionColor: control.palette.highlight
     selectedTextColor: control.palette.highlightedText
@@ -40,15 +41,20 @@ T.TextField {
         renderType: control.renderType
     }
 
-    background: NinePatchImage {
-        source: Imagine.url + "textfield-background"
-        NinePatchImageSelector on source {
-            states: [
-                {"disabled": !control.enabled},
-                {"focused": control.activeFocus},
-                {"mirrored": control.mirrored},
-                {"hovered": control.hovered}
-            ]
-        }
+    background: Rectangle {
+        anchors.fill: parent
+        color: control.readOnly ? "white" : "#e0eeee"
     }
+
+//    background: NinePatchImage {
+//        source: Imagine.url + "textfield-background"
+//        NinePatchImageSelector on source {
+//            states: [
+//                {"disabled": !control.enabled},
+//                {"focused": control.activeFocus},
+//                {"mirrored": control.mirrored},
+//                {"hovered": control.hovered}
+//            ]
+//        }
+//    }
 }

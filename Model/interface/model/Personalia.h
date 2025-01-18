@@ -24,6 +24,7 @@ public:
     WERKTYPE              GetTypeOfWork() const { return mWerkType; }
     STRATEGY_TYPE         GetStrategy() const { return mStrategy; }
     double                GetPuntenTotaal(STRATEGY_TYPE eType) const;
+    double                GetWeekPuntenTotaal(STRATEGY_TYPE eType) const;
     int                   GetKCPuntenTotaal() const { return mKCPuntenTotaal; }
     double                GetCHPuntenTotaal() const { return mCHPuntenTotaal; }
     int                   GetKCWeekPuntenTotaal() const { return mKCWeekPuntenTotaal; }
@@ -39,6 +40,8 @@ public:
     void                  SetTypeOfWork(WERKTYPE aType) { mWerkType = aType; }
     void                  SetStrategy(STRATEGY_TYPE aType) { mStrategy = aType; }
     void                  SetPuntenTotaal(STRATEGY_TYPE eType, double aValue);
+    void                  SetWeekPuntenTotaal(STRATEGY_TYPE eType, int aValue);
+
     void                  SetKCPuntenTotaal(int aValue) { mKCPuntenTotaal = aValue; }
     void                  SetCHPuntenTotaal(double value) { mCHPuntenTotaal = value; }
     void                  SetKCWeekPuntenTotaal(int aValue) { mKCWeekPuntenTotaal = aValue; }
