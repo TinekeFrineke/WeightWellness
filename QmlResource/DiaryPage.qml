@@ -207,14 +207,6 @@ Rectangle {
                     }
                 } // RowLayout
 
-                ListModel {
-                    id: foodModel
-
-                    ListElement { name: "Apple"; points: 52 }
-                    ListElement { name: "Banana"; points: 89 }
-                    ListElement { name: "Cheese"; points: 402 }
-                }
-
                 Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -224,7 +216,7 @@ Rectangle {
                         anchors.fill: parent
 
                         id: foodListView
-                        model: foodModel
+                        model: FoodListModel //foodModel
 
                         delegate: delegateId
 

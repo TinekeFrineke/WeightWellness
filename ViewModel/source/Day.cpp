@@ -1,12 +1,18 @@
 
 #include "Day.h"
 
+#include "model/Item.h"
+
+#include "FoodListModel.h"
+#include "FoodModel.h"
+
 namespace viewmodel {
 
 
 Day::Day(std::shared_ptr<weight::Model> model, QObject* parent)
     : IViewModelDay(parent)
     , m_model(std::move(model))
+    , m_foodListmodel(std::make_unique<FoodListModel>(nullptr))
 {
 }
 
@@ -17,6 +23,12 @@ void Day::setDay(weight::Day* day)
 
     m_day = day;
     emit weightChanged(m_day->GetWeight());
+
+    if (m_foodListmodel->rowCount() > 0)
+        m_foodListmodel->remove(0, m_foodListmodel->rowCount());
+
+    for (const auto& item : m_day->GetItems())
+        m_foodListmodel->addFood(FoodModel(QString(item->GetName().c_str()), item->GetPoints()));
 }
 
 const weight::Day* Day::getDay() const

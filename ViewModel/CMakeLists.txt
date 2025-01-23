@@ -8,6 +8,8 @@ find_package(Qt6 REQUIRED COMPONENTS Core Quick Widgets)
 
 set(SOURCES
     source/Day.cpp
+    source/FoodModel.cpp
+    source/FoodListModel.cpp
     source/PersonalData.cpp
     source/ViewModel.cpp
     source/ViewModelUtilities.cpp
@@ -18,10 +20,13 @@ set(SOURCES
 set(HEADERS
     interface/viewModel/ViewModelFactory.h
     interface/viewModel/IDay.h
+    interface/viewModel/IFoodListModel.h
     interface/viewModel/IPersonalData.h
     interface/viewModel/IViewModel.h
     interface/viewModel/IWeek.h
     header/Day.h
+    header/FoodModel.h
+    header/FoodListModel.h
     header/ISettableDay.h
     header/ISettableWeek.h
     header/IViewModelDay.h

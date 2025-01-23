@@ -7,6 +7,8 @@
 namespace viewmodel
 {
 
+class IFoodListModel;
+
 class IDay
     : public QObject
 {
@@ -19,6 +21,8 @@ class IDay
 public:
     virtual ~IDay() = default;
     IDay(QObject* parent) : QObject(parent) {}
+
+    virtual IFoodListModel* getFoodListModel() = 0;
 
     virtual double weight() const = 0;
     virtual void setWeight(double weight) = 0;
