@@ -129,7 +129,7 @@ Rectangle {
                             top: 9999
                             decimals: 2
                         }
-                        text: parseFloat(Day.weight)
+                        text: Day.weight.toFixed(0)
                         onEditingFinished: {
                             Day.weight = parseFloat(text);
                         }
@@ -142,12 +142,10 @@ Rectangle {
                     }
                     WWTextField {
                         id: pointsId
+                        readOnly: true
                         horizontalAlignment: Qt.AlignRight
                         validator: DoubleValidator {}
-                        text: parseFloat(Week.points)
-                        onEditingFinished: {
-                            Day.weight = parseFloat(text);
-                        }
+                        text: Week.pointsAvailable.toFixed(2)
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
                     }
@@ -158,7 +156,7 @@ Rectangle {
                         id: freeBonusId
                         horizontalAlignment: Qt.AlignRight
                         validator: DoubleValidator {}
-                        text: parseFloat(Day.freeBonus)
+                        text: Day.freeBonus.toFixed(0)
                         onEditingFinished: {
                             Day.freeBonus = parseFloat(text);
                         }
@@ -190,7 +188,7 @@ Rectangle {
                         id: leftId
                         readOnly: true
                         validator: DoubleValidator {}
-                        text: parseFloat(ViewModel.pointsLeft)
+                        text: ViewModel.pointsLeft.toFixed(2)
                         horizontalAlignment: Qt.AlignRight
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
@@ -202,7 +200,7 @@ Rectangle {
                         id: weekPointsId
                         readOnly: true
                         validator: DoubleValidator {}
-                        text: parseFloat(ViewModel.weekPointsLeft)
+                        text: ViewModel.weekPointsLeft.toFixed(2)
                         horizontalAlignment: Qt.AlignRight
                         Layout.preferredWidth: 80
                         Layout.preferredHeight: 40
@@ -275,7 +273,7 @@ Rectangle {
                                     Layout.leftMargin: 140
                                     Layout.alignment : Qt.AlignRight
                                     id: pointsId
-                                    text: model.points
+                                    text: model.points.toFixed(2)
                                     font.pointSize: 16
                                 }
                             }
@@ -300,7 +298,7 @@ Rectangle {
                     WWTextField {
                         id: totalId
                         validator: DoubleValidator {}
-                        text: parseFloat(Day.totalPointsSpent)
+                        text: Day.totalPointsSpent.toFixed(2)
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 40
                     }

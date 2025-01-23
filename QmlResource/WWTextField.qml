@@ -13,7 +13,7 @@ T.TextField {
                              contentHeight + topPadding + bottomPadding,
                              placeholder.implicitHeight + topPadding + bottomPadding)
 
-    color: "darkblue"
+    color: readOnly ? "black" : "darkblue"
     font {
         family: "Arial"
         pointSize: 16
@@ -43,7 +43,7 @@ T.TextField {
 
     background: Rectangle {
         anchors.fill: parent
-        color: control.readOnly ? "white" : "#e0eeee"
+        color: control.readOnly ? "#e0eeee" : "white"
     }
 
 //    background: NinePatchImage {

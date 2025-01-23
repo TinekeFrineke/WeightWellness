@@ -58,6 +58,7 @@ double PersonalData::pointsPerDay() const
 void PersonalData::setPointsPerDay(double points)
 {
     m_personalia->SetPuntenTotaal(m_personalia->GetStrategy(), points);
+    emit pointsPerDayChanged(points);
 }
 
 double PersonalData::extraWeekPointsPerDay() const
@@ -68,6 +69,7 @@ double PersonalData::extraWeekPointsPerDay() const
 void PersonalData::setExtraWeekPointsPerDay(double points)
 {
     m_personalia->SetWeekPuntenTotaal(m_personalia->GetStrategy(), points);
+    emit extraWeekPointsPerDayChanged(points);
 }
 
 } // namespace viewmodel

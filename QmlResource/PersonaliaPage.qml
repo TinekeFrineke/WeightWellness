@@ -32,6 +32,7 @@ Rectangle {
             WWTextField {
                 Layout.preferredWidth: 200
                 Layout.preferredHeight: 40
+                text: PersonalData.userName
             }
         } // RowLayout
 
@@ -142,7 +143,7 @@ Rectangle {
                         Layout.preferredWidth: 200
                         Layout.preferredHeight: 40
                         readOnly: true
-                        text: parseFloat(PersonalData.startWeight)
+                        text: PersonalData.startWeight
                     }
                     WWLabel {
                         text: "kg"
@@ -186,7 +187,7 @@ Rectangle {
                         Layout.preferredHeight: 40
                         text: parseFloat(PersonalData.pointsPerDay)
                         onEditingFinished: {
-                            ViewModel.endDate = parseFloat(PersonalData.pointsPerDay);
+                            PersonalData.pointsPerDay = parseFloat(text);
                         }
                     }
                 }
@@ -200,7 +201,7 @@ Rectangle {
                         Layout.preferredHeight: 40
                         text: parseFloat(PersonalData.extraWeekPointsPerDay)
                         onEditingFinished: {
-                            ViewModel.endDate = parseFloat(PersonalData.extraWeekPointsPerDay);
+                            PersonalData.extraWeekPointsPerDay = parseFloat(text);
                         }
                     }
                 }

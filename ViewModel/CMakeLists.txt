@@ -16,11 +16,11 @@ set(SOURCES
 )
 
 set(HEADERS
-    interface/ViewModel/ViewModelFactory.h
-    interface/ViewModel/IDay.h
-    interface/ViewModel/IPersonalData.h
-    interface/ViewModel/IViewModel.h
-    interface/ViewModel/IWeek.h
+    interface/viewModel/ViewModelFactory.h
+    interface/viewModel/IDay.h
+    interface/viewModel/IPersonalData.h
+    interface/viewModel/IViewModel.h
+    interface/viewModel/IWeek.h
     header/Day.h
     header/ISettableDay.h
     header/ISettableWeek.h

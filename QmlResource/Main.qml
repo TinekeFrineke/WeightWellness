@@ -10,6 +10,13 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    Loader {
+        id: pageLoader
+        anchors.fill: parent
+        anchors.topMargin: mainBar.height
+        sourceComponent: diaryPage
+    }
+
     Column {
         id: mainPage
         anchors.fill: parent
@@ -22,62 +29,56 @@ Window {
             WWTabButton {
                 text: qsTr("Personal")
                 onClicked: {
-                    personaliaPage.visible = true
-                    diaryPage.visible = false
-                    itemsPage.visible = false
-                    recipePage.visible = false
+                    pageLoader.sourceComponent = personaliaPage
                 }
             }
             WWTabButton {
                 text: qsTr("Diary")
                 onClicked: {
-                    personaliaPage.visible = false
-                    diaryPage.visible = true
-                    itemsPage.visible = false
-                    recipePage.visible = false
+                    pageLoader.sourceComponent = diaryPage
                 }
             }
             WWTabButton {
                 text: qsTr("Items")
                 onClicked: {
-                    personaliaPage.visible = false
-                    diaryPage.visible = false
-                    itemsPage.visible = true
-                    recipePage.visible = false
+                    pageLoader.sourceComponent = itemsPage
                 }
             }
             WWTabButton {
                 text: qsTr("Recipes")
                 onClicked: {
-                    personaliaPage.visible = false
-                    diaryPage.visible = false
-                    itemsPage.visible = false
-                    recipePage.visible = true
+                    pageLoader.sourceComponent = recipePage
                 }
             }
         } // header: TabBar
 
-        PersonaliaPage {
+        Component {
             id: personaliaPage
-            height: parent.height - mainBar.height
-            width: parent.width
-            visible: false
+            PersonaliaPage {
+                height: parent.height - mainBar.height
+                width: parent.width
+            }
         }
-        DiaryPage {
+        Component {
             id: diaryPage
-            height: parent.height - mainBar.height
-            width: parent.width
+            DiaryPage {
+                height: parent.height - mainBar.height
+                width: parent.width
+            }
         }
-        ItemsPage {
+        Component {
             id: itemsPage
-            height: parent.height - mainBar.height
-            width: parent.width
+            ItemsPage {
+                height: parent.height - mainBar.height
+                width: parent.width
+            }
         }
-        RecipePage {
+        Component {
             id: recipePage
-            height: parent.height - mainBar.height
-            width: parent.width
+            RecipePage {
+                height: parent.height - mainBar.height
+                width: parent.width
+            }
         }
-
     } // Column
 } // Window

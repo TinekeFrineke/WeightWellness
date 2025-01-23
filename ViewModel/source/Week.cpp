@@ -39,7 +39,7 @@ QString Week::strategy() const
     return "[Unknown]";
 }
 
-double Week::points() const
+double Week::pointsAvailable() const
 {
     return m_week->GetPoints();
 }

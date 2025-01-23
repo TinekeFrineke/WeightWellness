@@ -22,7 +22,7 @@ private:
 
     // Inherited via IViewModelWeek
     QString strategy() const override;
-    double points() const override;
+    double pointsAvailable() const override;
 
     // m_model will disappear, just temporary
     std::shared_ptr<weight::Model> m_model;
