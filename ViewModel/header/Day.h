@@ -13,12 +13,17 @@ class Model;
 namespace viewmodel
 {
 
+
+class FoodListModel;
+
 class Day
     : public IViewModelDay
 {
     Q_OBJECT
 public:
     Day(std::shared_ptr < weight::Model> model, QObject* parent = nullptr);
+
+    IFoodListModel* getFoodListModel() { return m_foodListmodel.get(); }
 
 private:
     // Inherited via IViewModelDay
@@ -37,6 +42,8 @@ private:
     void setFreeBonus(double bonus) override;
 
     double totalPointsSpent() const override;
+
+    std::unique_ptr<IFoodListModel> m_foodListmodel;
 };
 
 } // namespace viewmodel

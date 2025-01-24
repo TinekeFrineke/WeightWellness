@@ -10,6 +10,7 @@ set(SOURCES
     source/Day.cpp
     source/FoodModel.cpp
     source/FoodListModel.cpp
+    source/FoodDefinitionModel.cpp
     source/PersonalData.cpp
     source/ViewModel.cpp
     source/ViewModelUtilities.cpp
@@ -26,6 +27,7 @@ set(HEADERS
     interface/viewModel/IWeek.h
     header/Day.h
     header/FoodModel.h
+    header/FoodDefinitionModel.h
     header/FoodListModel.h
     header/ISettableDay.h
     header/ISettableWeek.h
