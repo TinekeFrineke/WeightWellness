@@ -6,6 +6,14 @@
 
 namespace viewmodel {
 
+namespace {
+
+enum FoodRoles {
+    NameRole = Qt::UserRole + 1,
+    PointsRole
+};
+
+}
 
 FoodListModel::FoodListModel(QObject* parent)
     : IFoodListModel(parent)
@@ -15,7 +23,7 @@ FoodListModel::FoodListModel(QObject* parent)
 void FoodListModel::addFood(const FoodModel& model)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_foods << std::move(model);  // Move the object into the list
+    m_foods << model;  // Move the object into the list
     endInsertRows();
 }
 
@@ -46,14 +54,6 @@ Q_INVOKABLE void FoodListModel::push(const QString& name, double points)
     m_foods << FoodModel(name, points);
     endInsertRows();
 }
-
-//Q_INVOKABLE void FoodListModel::print()
-//{
-//    qDebug() << "\nPrinting from FoodListModel::print()";
-//    for (const FoodModel& model : m_foods) {
-//        qDebug() << model.getName() << model.getPoints();
-//    }
-//}
 
 int FoodListModel::rowCount(const QModelIndex& parent) const
 {

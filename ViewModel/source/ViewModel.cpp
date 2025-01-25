@@ -2,14 +2,22 @@
 #include "ViewModel.h"
 
 #include "model/Day.h"
+#include "model/IFoodDefinitionRepository.h"
+#include "model/IRecipeRepository.h"
 #include "model/Model.h"
+#include "model/ReceptDefinitie.h"
+#include "model/VoedingsmiddelDefinitie.h"
 #include "model/Week.h"
 #include "Utilities/strutils.h"
 
+#include "FoodDefinitionListModel.h"
+#include "FoodDefinitionModel.h"
 #include "IPersonalData.h"
 #include "IViewModelDay.h"
 #include "IViewModelWeek.h"
 #include "ViewModelUtilities.h"
+#include "RecipeListModel.h"
+#include "RecipeModel.h"
 
 
 namespace viewmodel
@@ -31,11 +39,27 @@ ViewModel::ViewModel(const Utils::Date& currentDate,
     , m_day(std::move(day))
     , m_week(std::move(week))
     , m_currentDate(currentDate)
+    , m_foodDefinitionListmodel(std::make_unique<FoodDefinitionListModel>())
+    , m_recipeListmodel(std::make_unique<RecipeListModel>())
 {
+    auto definitions(m_model->GetFoodDefinitionRepository()->GetAll());
+    for (auto definition : definitions)
+        m_foodDefinitionListmodel->addDefinition(FoodDefinitionModel(QString(definition->GetName().c_str()),
+                                                                     QString(definition->GetCategory().c_str()),
+                                                                     QString(definition->GetUnit().c_str()),
+                                                                     definition->GetPointsPer100Units()));
+
+    const auto& recipes(m_model->GetReceptDefs());
+    for (const auto& recipe : recipes)
+        m_recipeListmodel->addRecipe(RecipeModel(QString(recipe->GetName().c_str()),
+                                                 recipe->GetPointsPerPortion()));
+
+    //m_pointsPerDayChangedConnection = connect(m_personalData.get(), &IPersonalData::pointsPerDayChanged, this, &ViewModel::onPointsPerDayChanged);
 }
 
 ViewModel::~ViewModel()
 {
+    QObject::disconnect(m_pointsPerDayChangedConnection);
 }
 
 void ViewModel::DayMinusOne()
@@ -124,6 +148,16 @@ QString ViewModel::startDate() const
     return Str::ToString(ToString(m_week->getWeek()->GetStartDate())).c_str();
 }
 
+IFoodDefinitionListModel* ViewModel::getFoodDefinitionListModel()
+{
+    return m_foodDefinitionListmodel.get();
+}
+
+IRecipeListModel* ViewModel::getRecipeListModel()
+{
+    return m_recipeListmodel.get();
+}
+
 QString ViewModel::endDate() const
 {
     return Str::ToString(ToString(m_week->getWeek()->GetEndDate())).c_str();
@@ -143,5 +177,23 @@ double ViewModel::weekPointsLeft() const
 {
     return m_week->getWeek()->GetWeekPointsLeft(m_currentDate);
 }
+
+
+void ViewModel::onFreeBonusChanged(double points)
+{
+}
+
+//void ViewModel::onPointsPerDayChanged(double points)
+//{
+//    if (points != m_week->getWeek()->GetPoints())
+//        emit m_week->pointsChanged(points);
+//}
+//
+//void ViewModel::onExtraPointsPerWeekChanged(double points)
+//{
+//    if (points != m_week->getWeek()->GetSaveablePoints())
+//        emit m_week->expointsChanged(points);
+//}
+
 
 } // namespace viewmodel

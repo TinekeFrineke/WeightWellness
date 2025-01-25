@@ -42,6 +42,14 @@ public:
 
     QString startDate() const override;
 
+    IFoodDefinitionListModel* getFoodDefinitionListModel() override;
+    IRecipeListModel* getRecipeListModel() override;
+
+private slots:
+    //void onPointsPerDayChanged(double points);
+    //void onExtraPointsPerWeekChanged(double points);
+    void onFreeBonusChanged(double points);
+
 private:
     // Inherited via IViewModel
     IPersonalData* GetPersonalData() override;
@@ -64,6 +72,10 @@ private:
     std::unique_ptr<IViewModelDay> m_day;
     std::unique_ptr<IViewModelWeek> m_week;
 
+    std::unique_ptr<IFoodDefinitionListModel> m_foodDefinitionListmodel;
+    std::unique_ptr<IRecipeListModel> m_recipeListmodel;
+
+    QMetaObject::Connection m_pointsPerDayChangedConnection;
 };
 
 } // namespace viewmodel

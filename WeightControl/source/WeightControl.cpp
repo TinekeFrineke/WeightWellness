@@ -19,9 +19,11 @@
 #include "Utilities/PathUtils.h"
 
 #include "model/Personalia.h"
+#include "viewmodel/IFoodDefinitionListModel.h"
 #include "viewmodel/IFoodListModel.h"
 #include "viewmodel/IDay.h"
 #include "viewmodel/IPersonalData.h"
+#include "viewmodel/IRecipeListModel.h"
 #include "viewmodel/IViewModel.h"
 #include "viewmodel/IWeek.h"
 #include "viewmodel/ViewModelFactory.h"
@@ -90,6 +92,8 @@ int main(int argc, char* argv[])
     engine.rootContext()->setContextProperty("Day", viewModel->GetDay());
     engine.rootContext()->setContextProperty("Week", viewModel->GetWeek());
     engine.rootContext()->setContextProperty("FoodListModel", viewModel->GetDay()->getFoodListModel());
+    engine.rootContext()->setContextProperty("FoodDefinitionListModel", viewModel->getFoodDefinitionListModel());
+    engine.rootContext()->setContextProperty("RecipeListModel", viewModel->getRecipeListModel());
     engine.addImportPath(":/");
     engine.loadFromModule("QmlResource", "Main");
 

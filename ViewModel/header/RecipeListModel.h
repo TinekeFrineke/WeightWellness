@@ -5,23 +5,24 @@
 #include <QAbstractListModel>
 #include <QList>
 
-#include "IFoodListModel.h"
+#include "IRecipeListModel.h"
 
 namespace viewmodel {
 
-class FoodModel;
+class RecipeModel;
 
-class FoodListModel
-    : public IFoodListModel {
+class RecipeListModel
+    : public IRecipeListModel {
     Q_OBJECT
 
 public:
-    explicit FoodListModel(QObject* parent = nullptr);
+    explicit RecipeListModel(QObject* parent = nullptr);
 
-    void addFood(const FoodModel& model) override;
-    Q_INVOKABLE QVariantList getFoodsForQML() const override;
-    Q_INVOKABLE void remove(int index, int count = 1) override;
-    Q_INVOKABLE void push(const QString& name, double points) override;
+    void addRecipe(const RecipeModel& model);
+
+    Q_INVOKABLE QVariantList getRecipesForQML() const;
+    Q_INVOKABLE void remove(int index, int count = 1);
+    Q_INVOKABLE void push(const QString& name, double points);
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
@@ -31,7 +32,7 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    QList<FoodModel> m_foods;
+    QList<RecipeModel> m_recipies;
 };
 
 } // namespace viewmodel

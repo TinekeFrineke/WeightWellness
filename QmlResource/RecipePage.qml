@@ -35,7 +35,7 @@ Rectangle {
                     Layout.fillHeight: true
                     Layout.preferredHeight: 400
                     Layout.preferredWidth: diaryMain.width - Layout.leftMargin - Layout.rightMargin
-                    model: foodModel
+                    model: RecipeListModel
                     // Define the header
                     header: RowLayout {
                         height: WWListView.itemHeight // Set a fixed height for the header

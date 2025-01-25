@@ -31,7 +31,7 @@ Rectangle {
 
                     FoodDefinitionList {
                         id: foodListView
-                        model: foodModel
+                        model: FoodDefinitionListModel
                         anchors.fill: parent
                     }
                 }

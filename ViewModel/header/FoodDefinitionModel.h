@@ -2,6 +2,8 @@
 
 #include <QString>
 
+namespace viewmodel {
+
 class FoodDefinitionModel {
 public:
     FoodDefinitionModel(QString name, QString category, QString unit, double pointsPer100)
@@ -15,7 +17,7 @@ public:
     const QString& getName() const { return m_name; }
     const QString& getCategory() const { return m_category; }
     const QString& getUnit() const { return m_unit; }
-    double getPointsPer100Units() const { return m_pointsPer100Units; }
+    double getPoints() const { return m_pointsPer100Units; }
 
 private:
     QString m_name;
@@ -23,3 +25,5 @@ private:
     QString m_unit;
     double m_pointsPer100Units;
 };
+
+} // namespace viewmodel

@@ -8,7 +8,9 @@ namespace viewmodel
 {
 
 class IDay;
+class IFoodDefinitionListModel;
 class IPersonalData;
+class IRecipeListModel;
 class IWeek;
 
 class IViewModel
@@ -31,6 +33,7 @@ class IViewModel
     virtual double pointsLeft() const = 0;
     virtual double weekPointsLeft() const = 0;
 
+
 public:
     virtual ~IViewModel() = default;
     IViewModel(QObject* parent) : QObject(parent) {}
@@ -38,6 +41,9 @@ public:
     virtual IPersonalData* GetPersonalData() = 0;
     virtual IDay* GetDay() = 0;
     virtual IWeek* GetWeek() = 0;
+
+    virtual IFoodDefinitionListModel* getFoodDefinitionListModel() = 0;
+    virtual IRecipeListModel* getRecipeListModel() = 0;
 
 
 signals:

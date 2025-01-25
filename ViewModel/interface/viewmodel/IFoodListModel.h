@@ -22,14 +22,9 @@ public:
     explicit IFoodListModel(QObject* parent = nullptr) : QAbstractListModel(parent) {}
 
     virtual void addFood(const FoodModel& model) = 0;
-
     Q_INVOKABLE virtual  QVariantList getFoodsForQML() const = 0;
-
     Q_INVOKABLE virtual void remove(int index, int count = 1) = 0;
-
     Q_INVOKABLE virtual void push(const QString& name, double points) = 0;
-
-    //Q_INVOKABLE virtual void print() = 0;
 };
 
 } // namespace viewmodel
