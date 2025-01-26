@@ -61,5 +61,23 @@ double Day::totalPointsSpent() const
     return m_day->GetPoints();
 }
 
+void Day::handleItemDoubleClicked(int index)
+{
+    auto item = m_foodListmodel->getAtIndex(index);
+    if (item)
+        qDebug() << "Day::handleItemDoubleClicked(" << index << ") item == " << item->getName() << " / " << item->getPoints();
+    else
+        qDebug() << "Day::handleItemDoubleClicked(" << index << ") no item";
+}
+
+void Day::handleEditFood(int index)
+{
+    auto item = m_foodListmodel->getAtIndex(index);
+    if (item)
+        qDebug() << "Day::handleEditFoodItem(" << index << ") item == " << item->getName() << " / " << item->getPoints();
+    else
+        qDebug() << "Day::handleEditFoodItem(" << index << ") no item";
+}
+
 
 } // namespace viewmodel

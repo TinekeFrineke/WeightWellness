@@ -34,6 +34,10 @@ signals:
     void weightChanged(double newWeight);
     void freeBonusChanged(double newBonus);
     void totalPointsSpentChanged(double points);
+
+public slots:
+    virtual void handleItemDoubleClicked(int index) = 0;
+    virtual void handleEditFood(int index) = 0;
 };
 
 

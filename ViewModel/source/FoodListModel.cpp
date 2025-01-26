@@ -27,16 +27,12 @@ void FoodListModel::addFood(const FoodModel& model)
     endInsertRows();
 }
 
-Q_INVOKABLE QVariantList FoodListModel::getFoodsForQML() const
+std::optional<FoodModel> FoodListModel::getAtIndex(int index)
 {
-    QVariantList animalsList;
-    for (const FoodModel& food : m_foods) {
-        QVariantMap animalMap;
-        animalMap["name"] = food.getName();
-        animalMap["points"] = food.getPoints();
-        animalsList.append(animalMap);
-    }
-    return animalsList;
+    if (index >= m_foods.count())
+        return {};
+
+    return m_foods.at(index);
 }
 
 Q_INVOKABLE void FoodListModel::remove(int index, int count)

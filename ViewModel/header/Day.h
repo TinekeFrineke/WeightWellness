@@ -43,6 +43,10 @@ private:
 
     double totalPointsSpent() const override;
 
+    // Handlers from UI signals
+    void handleItemDoubleClicked(int index) override;
+    void handleEditFood(int index) override;
+
     std::unique_ptr<IFoodListModel> m_foodListmodel;
 };
 

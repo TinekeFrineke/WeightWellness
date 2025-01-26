@@ -3,9 +3,6 @@ import QtQuick.Layouts
 
 
 Rectangle {
-    signal dayMin()
-    signal dayPlus()
-
     id: diaryPage
     color: "lightblue"
 
@@ -34,10 +31,16 @@ Rectangle {
                     RowLayout {
                         spacing: 0
                         WWButton {
+                            id: dayMinId
+                            signal dayMin()
                             Layout.minimumWidth: 30
                             Layout.minimumHeight: 30
                             text: "-"
-                            onClicked: ViewModel.DayMinusOne()
+                            onClicked: dayMin() //ViewModel.DayMinusOne()
+
+                            Component.onCompleted: {
+                                dayMinId.dayMin.connect(ViewModel.DayMinusOne);
+                            }
                         }
                         WWTextField {
                             id: dayId
@@ -51,10 +54,16 @@ Rectangle {
                             Layout.preferredHeight: 50
                         }
                         WWButton {
+                            id: dayPlusId
+                            signal dayPlus()
                             Layout.minimumWidth: 30
                             Layout.minimumHeight: 30
                             text: "+"
-                            onClicked: ViewModel.DayPlusOne()
+                            onClicked: dayPlus()
+
+                            Component.onCompleted: {
+                                dayPlusId.dayPlus.connect(ViewModel.DayPlusOne);
+                            }
                         }
                     }
                     WWLabel {
@@ -208,6 +217,7 @@ Rectangle {
                 } // RowLayout
 
                 Rectangle {
+                    id: listViewRectangleId
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.preferredWidth: diaryMain.width - Layout.leftMargin - Layout.rightMargin
@@ -216,7 +226,8 @@ Rectangle {
                         id: foodListView
                         anchors.fill: parent
 
-                        model: FoodListModel //foodModel
+                        model: FoodListModel
+                        signal itemDoubleClicked(int index)
 
                         delegate: delegateId
 
@@ -238,13 +249,17 @@ Rectangle {
                                 font.pointSize: 16
                             }
                         }
+
+                        Component.onCompleted: {
+                            foodListView.itemDoubleClicked.connect(Day.handleItemDoubleClicked);
+                        }
                     }
 
                     Component {
                         id: delegateId
                         Rectangle {
                             id: rectangleId
-                            width: parent.width  // Remember to specify these sizes or you'll have problems
+                            width: listViewRectangleId.width// parent.width  // Remember to specify these sizes or you'll have problems
                             height: WWListView.itemHeight
                             color: index === foodListView.currentIndex ? "lightblue" :"yellow"
                             border.color: "yellowgreen"
@@ -273,7 +288,11 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    console.log("Clicked on: " + model.name);
+                                    foodListView.currentIndex = index
+                                }
+                                onDoubleClicked: {
+                                    foodListView.currentIndex = index
+                                    foodListView.itemDoubleClicked(index)
                                 }
                             }
                         }
@@ -336,14 +355,20 @@ Rectangle {
             }
 
             WWButton {
-                id: editWWButton
+                id: editButton
+                signal editFoodClicked(int index)
                 text: "&Edit"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight
+                onClicked: editFoodClicked(foodListView.currentIndex)
+
+                Component.onCompleted: {
+                    editFoodClicked.connect(Day.handleEditFood);
+                }
             }
 
             WWButton {
-                id: deleteWWButton
+                id: deleteButton
                 text: "&Delete"
                 Layout.fillWidth: true
                 Layout.preferredHeight: buttonBarId.Layout.preferredHeight
