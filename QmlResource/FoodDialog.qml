@@ -51,84 +51,48 @@ Dialog {
             }
         } // RowLayout
 
-        Component {
-            id: delegateId
-            Rectangle {
-                id: rectangleId
-                width: parent.width  // Remember to specify these sizes or you'll have problems
-                height: WWListView.itemHeight
-                color: "beige"
-                border.color: "yellowgreen"
-                radius: 1
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.preferredWidth: 400
-                    WWLabel {
-                        id: textId
-                        Layout.preferredWidth: 140
-                        text: model.name
-                        font.pointSize: 16
-                    }
-
-                    WWLabel {
-                        horizontalAlignment: Text.AlignRight
-                        Layout.leftMargin: 140
-                        Layout.alignment : Qt.AlignRight
-                        id: pointsId
-                        text: model.points
-                        font.pointSize: 16
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        console.log("Clicked on: " + model.name);
-                    }
-                }
-            }
-        }
-
-        ListModel {
-            id: foodModel
-
-            ListElement { name: "Apple"; points: 52 }
-            ListElement { name: "Banana"; points: 89 }
-            ListElement { name: "Cheese"; points: 402 }
-        }
-
-        ListView {
+        Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.margins: 10
-
-            id: foodListView
-            Layout.preferredHeight: 270
-            Layout.preferredWidth: foodDialog.width - Layout.leftMargin - Layout.rightMargin
-            model: FoodDefinitionListModel
-            delegate: delegateId
-
-            header: RowLayout {
-                Layout.fillWidth: true
-                Layout.preferredWidth: 400
-                WWLabel {
-                    id: headerNameId
-                    Layout.preferredWidth: 140
-                    text: "Name"
-                    font.pointSize: 16
-                }
-
-                WWLabel {
-                    id: headerPointsId
-                    Layout.fillWidth: true
-                    Layout.leftMargin: 140
-                    horizontalAlignment: Text.AlignRight
-                    text: "Points"
-                    font.pointSize: 16
-                }
+            Layout.bottomMargin: 20
+            FoodDefinitionList {
+                id: foodDefinitionListId
+                model: FoodDefinitionListModel
+                anchors.fill: parent
             }
-        } // RowLayout
+        }
+
+//        ListView {
+//            Layout.fillWidth: true
+//            Layout.fillHeight: true
+//            Layout.margins: 10
+//
+//            id: foodListView
+//            Layout.preferredHeight: 270
+//            Layout.preferredWidth: foodDialog.width - Layout.leftMargin - Layout.rightMargin
+//            model: FoodDefinitionListModel
+//            delegate: delegateId
+//
+//            header: RowLayout {
+//                Layout.fillWidth: true
+//                Layout.preferredWidth: 400
+//                WWLabel {
+//                    id: headerNameId
+//                    Layout.preferredWidth: 140
+//                    text: "Name"
+//                    font.pointSize: 16
+//                }
+//
+//                WWLabel {
+//                    id: headerPointsId
+//                    Layout.fillWidth: true
+//                    Layout.leftMargin: 140
+//                    horizontalAlignment: Text.AlignRight
+//                    text: "Points"
+//                    font.pointSize: 16
+//                }
+//            }
+//        } // RowLayout
 
         RowLayout {
             WWLabel {

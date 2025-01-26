@@ -14,7 +14,6 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.margins: 20
-            color: "#ffff99"
 
             ColumnLayout {
                 height: parent.height
@@ -25,9 +24,6 @@ Rectangle {
                     Layout.fillHeight: true
                     Layout.preferredWidth: diaryMain.width - Layout.leftMargin - Layout.rightMargin
                     color: "#ffff99"
-                    FoodDefinitionModel {
-                        id: foodModel
-                    }
 
                     FoodDefinitionList {
                         id: foodListView
