@@ -34,6 +34,10 @@ T.ComboBox {
 
         highlighted: control.highlightedIndex === index
         hoverEnabled: control.hoverEnabled
+        background : Rectangle {
+            anchors.fill: parent
+            color: control.currentIndex === index ? "#cc99ff" : "white"
+        }
     }
 
     indicator: Image {
@@ -55,7 +59,7 @@ T.ComboBox {
         }
     }
 
-    contentItem: T.TextField {
+    contentItem: WWTextField {
         text: control.editable ? control.editText : control.displayText
 
         enabled: control.editable
@@ -106,21 +110,6 @@ T.ComboBox {
             highlightMoveDuration: 0
 
             T.ScrollIndicator.vertical: ScrollIndicator { }
-        }
-
-        background: NinePatchImage {
-            source: Imagine.url + "combobox-popup"
-            NinePatchImageSelector on source {
-                states: [
-                    {"disabled": !control.enabled},
-                    {"pressed": control.pressed},
-                    {"editable": control.editable},
-                    {"focused": control.visualFocus || (control.editable && control.activeFocus)},
-                    {"mirrored": control.mirrored},
-                    {"hovered": control.hovered},
-                    {"flat": control.flat}
-                ]
-            }
         }
     }
 }

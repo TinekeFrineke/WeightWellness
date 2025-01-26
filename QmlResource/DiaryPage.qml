@@ -47,7 +47,7 @@ Rectangle {
                             validator: RegularExpressionValidator {
                                 regularExpression: /^\d{8}$/
                             }
-                            Layout.preferredWidth: 100
+                            Layout.preferredWidth: 110
                             Layout.preferredHeight: 50
                         }
                         WWButton {
@@ -68,7 +68,7 @@ Rectangle {
                         validator: RegularExpressionValidator {
                             regularExpression: /^\d{8}$/
                         }
-                        Layout.preferredWidth: 100
+                        Layout.preferredWidth: 110
                         Layout.preferredHeight: 40
                     }
                     WWLabel {
@@ -93,7 +93,7 @@ Rectangle {
                             validator: RegularExpressionValidator {
                                 regularExpression: /^\d{8}$/
                             }
-                            Layout.preferredWidth: 100
+                            Layout.preferredWidth: 110
                             Layout.preferredHeight: 40
                         }
                         WWButton {
@@ -127,14 +127,14 @@ Rectangle {
                         validator: DoubleValidator {
                             bottom: 0
                             top: 9999
-                            decimals: 2
+                            decimals: 1
                         }
-                        text: Day.weight.toFixed(0)
+                        text: Day.weight.toFixed(1)
                         onEditingFinished: {
                             Day.weight = parseFloat(text);
                         }
                         horizontalAlignment: Qt.AlignRight
-                        Layout.preferredWidth: 80
+                        Layout.preferredWidth: 90
                         Layout.preferredHeight: 40
                     }
                     WWLabel {
@@ -146,7 +146,7 @@ Rectangle {
                         horizontalAlignment: Qt.AlignRight
                         validator: DoubleValidator {}
                         text: Week.pointsAvailable.toFixed(2)
-                        Layout.preferredWidth: 80
+                        Layout.preferredWidth: 90
                         Layout.preferredHeight: 40
                     }
                     WWLabel {
@@ -160,7 +160,7 @@ Rectangle {
                         onEditingFinished: {
                             Day.freeBonus = parseFloat(text);
                         }
-                        Layout.preferredWidth: 80
+                        Layout.preferredWidth: 90
                         Layout.preferredHeight: 40
                     }
                 } // RowLayout
@@ -178,7 +178,7 @@ Rectangle {
                         text: "0.0"
                         horizontalAlignment: Qt.AlignRight
                         validator: DoubleValidator {}
-                        Layout.preferredWidth: 80
+                        Layout.preferredWidth: 90
                         Layout.preferredHeight: 40
                     }
                     WWLabel {
@@ -190,7 +190,7 @@ Rectangle {
                         validator: DoubleValidator {}
                         text: ViewModel.pointsLeft.toFixed(2)
                         horizontalAlignment: Qt.AlignRight
-                        Layout.preferredWidth: 80
+                        Layout.preferredWidth: 90
                         Layout.preferredHeight: 40
                     }
                     WWLabel {
@@ -202,7 +202,7 @@ Rectangle {
                         validator: DoubleValidator {}
                         text: ViewModel.weekPointsLeft.toFixed(2)
                         horizontalAlignment: Qt.AlignRight
-                        Layout.preferredWidth: 80
+                        Layout.preferredWidth: 90
                         Layout.preferredHeight: 40
                     }
                 } // RowLayout
@@ -213,9 +213,9 @@ Rectangle {
                     Layout.preferredWidth: diaryMain.width - Layout.leftMargin - Layout.rightMargin
                     color: "#ffff99"
                     ListView {
+                        id: foodListView
                         anchors.fill: parent
 
-                        id: foodListView
                         model: FoodListModel //foodModel
 
                         delegate: delegateId
@@ -246,7 +246,7 @@ Rectangle {
                             id: rectangleId
                             width: parent.width  // Remember to specify these sizes or you'll have problems
                             height: WWListView.itemHeight
-                            color: "yellow"
+                            color: index === foodListView.currentIndex ? "lightblue" :"yellow"
                             border.color: "yellowgreen"
                             radius: 1
 

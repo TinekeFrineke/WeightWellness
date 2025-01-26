@@ -8,7 +8,7 @@ Window {
     width: 960
     height: 680
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Control your weight")
 
     Loader {
         id: pageLoader

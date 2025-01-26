@@ -15,32 +15,36 @@ set_source_files_properties(${qml_singletons}
     PROPERTIES QT_QML_SINGLETON_TYPE TRUE
 )
 
+set(QMLSOURCES
+    WWButton.qml
+    WWCheckBox.qml
+    WWComboBox.qml
+    WWDialog.qml
+    DiaryPage.qml
+    FoodDefinitionList.qml
+    FoodDefinitionModel.qml
+    FoodDialog.qml
+    WWGroupBox.qml
+    ItemsPage.qml
+    WWLabel.qml
+    WWListView.qml
+    Main.qml
+    ManualDialog.qml
+    PersonaliaPage.qml
+    WWRadioButton.qml
+    RecipeDialog.qml
+    RecipePage.qml
+    WWRowLayout.qml
+    WWTabButton.qml
+    WWTextField.qml
+)
+
 qt_add_qml_module(${LIB_NAME}
     URI ${MODULE_NAME}
     # VERSION 1.0
     RESOURCE_PREFIX /
     QML_FILES
-        WWButton.qml
-        WWCheckBox.qml
-        WWComboBox.qml
-        WWDialog.qml
-        DiaryPage.qml
-        FoodDefinitionList.qml
-        FoodDefinitionModel.qml
-        FoodDialog.qml
-        WWGroupBox.qml
-        ItemsPage.qml
-        WWLabel.qml
-        WWListView.qml
-        Main.qml
-        ManualDialog.qml
-        PersonaliaPage.qml
-        WWRadioButton.qml
-        RecipeDialog.qml
-        RecipePage.qml
-        WWRowLayout.qml
-        WWTabButton.qml
-        WWTextField.qml
+        ${QMLSOURCES}
     RESOURCES
         qmldir
 
@@ -49,7 +53,8 @@ qt_add_qml_module(${LIB_NAME}
 set(MOC_BUILD_PATH ${CMAKE_SOURCE_DIR}/build/QmlResource/QmlResourceLib_autogen/)
 set(QML_JSON_PATH C:/Qt/6.8.0/msvc2022_64/metatypes/)
 
-source_group(Qml FILES
+source_group(QmlFiles FILES ${QMLSOURCES}) 
+source_group(Generated FILES
     ${MOC_BUILD_PATH}mocs_compilation_Debug.cpp
     ${MOC_BUILD_PATH}mocs_compilation_MinSizeRel.cpp
     ${MOC_BUILD_PATH}mocs_compilation_Release.cpp

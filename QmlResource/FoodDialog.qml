@@ -28,12 +28,12 @@ Dialog {
                 Layout.preferredWidth: 100
                 text: "Name"
             }
-            TextField {
+            WWTextField {
                 id: nameId
                 Layout.preferredWidth: 300
                 Layout.preferredHeight: 40
             }
-            CheckBox {
+            WWCheckBox {
                 checked: false
                 text: "Favourite"
             }
@@ -46,7 +46,7 @@ Dialog {
                 Layout.preferredWidth: 100
                 text: "Category"
             }
-            ComboBox {
+            WWComboBox {
                 model: ["Fruit", "Groente", "Brood"]
             }
         } // RowLayout
@@ -106,7 +106,7 @@ Dialog {
             id: foodListView
             Layout.preferredHeight: 270
             Layout.preferredWidth: foodDialog.width - Layout.leftMargin - Layout.rightMargin
-            model: foodModel
+            model: FoodDefinitionListModel
             delegate: delegateId
 
             header: RowLayout {
@@ -135,19 +135,19 @@ Dialog {
                 Layout.preferredWidth: 100
                 text: "Portions"
             }
-            TextField {
+            WWTextField {
                 id: portionsId
                 Layout.preferredWidth: 50
                 Layout.preferredHeight: 40
             }
-            ComboBox {
+            WWComboBox {
                 model: ["eetlepel", "theelepel", "portie"]
             }
             WWLabel {
                 Layout.preferredWidth: 70
                 text: "Points"
             }
-            TextField {
+            WWTextField {
                 id: pointsId
                 Layout.preferredWidth: 70
                 Layout.preferredHeight: 40
@@ -155,7 +155,7 @@ Dialog {
         }
 
         RowLayout {
-            TextField {
+            WWTextField {
                 id: unitsId
                 Layout.preferredWidth: 100
                 Layout.preferredHeight: 40
@@ -180,7 +180,7 @@ Dialog {
                 Layout.minimumHeight: 40
                 Layout.fillWidth: true
                 spacing: 0
-                Button {
+                WWButton {
                     Layout.fillWidth: true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Ok"
@@ -188,7 +188,7 @@ Dialog {
                        foodDialog.accept()
                     }
                 }
-                Button {
+                WWButton {
                     Layout.fillWidth : true
                     Layout.minimumHeight: footerId2.Layout.minimumHeight
                     text: "Cancel"
