@@ -216,88 +216,112 @@ Rectangle {
                     }
                 } // RowLayout
 
+
                 Rectangle {
                     id: listViewRectangleId
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.preferredWidth: diaryMain.width - Layout.leftMargin - Layout.rightMargin
                     color: "#ffff99"
-                    ListView {
+                    WWListView {
                         id: foodListView
-                        anchors.fill: parent
-
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: diaryMain.width - Layout.leftMargin - Layout.rightMargin
                         model: FoodListModel
-                        signal itemDoubleClicked(int index)
-
-                        delegate: delegateId
-
-                        header: RowLayout {
-                            Layout.fillWidth: true
-                            Layout.preferredWidth: 400
-                            WWLabel {
-                                id: headerNameId
-                                Layout.preferredWidth: 140
-                                text: "Name"
-                                font.pointSize: 16
-                            }
-
-                            WWLabel {
-                                id: headerPointsId
-                                Layout.fillWidth: true
-                                Layout.leftMargin: 140
-                                text: "Points"
-                                font.pointSize: 16
-                            }
-                        }
-
+                        columns: [
+                            { headerText: "Name", field: "name", width: 140, type: "string" },
+                            { headerText: "Points", field: "points", width: 100, type: "double" }
+                        ]
                         Component.onCompleted: {
-                            foodListView.itemDoubleClicked.connect(Day.handleItemDoubleClicked);
+                            console.log("Listview created")
+//                            Qt.callLater(() => {
+//                                console.log("Model row count: ", foodListView.model ? foodListView.model.count : "No model");
+//                                if (foodListView.model) {
+//                                    for (var i = 0; i < foodListView.model.count; i++) {
+//                                        console.log("Row " + i + " - Name:", foodListView.model.get(i).name, 
+//                                                    "Points:", foodListView.model.get(i).points);
+//                                    }
+//                                }
+//                            })
                         }
-                    }
-
-                    Component {
-                        id: delegateId
-                        Rectangle {
-                            id: rectangleId
-                            width: listViewRectangleId.width// parent.width  // Remember to specify these sizes or you'll have problems
-                            height: WWListView.itemHeight
-                            color: index === foodListView.currentIndex ? "lightblue" :"yellow"
-                            border.color: "yellowgreen"
-                            radius: 1
-
-                            RowLayout {
-                                Layout.fillWidth: true
-                                Layout.preferredWidth: 400
-                                WWLabel {
-                                    id: textId
-                                    Layout.preferredWidth: 140
-                                    text: model.name
-                                    font.pointSize: 16
-                                }
-
-                                WWLabel {
-                                    horizontalAlignment: Text.AlignRight
-                                    Layout.leftMargin: 140
-                                    Layout.alignment : Qt.AlignRight
-                                    id: pointsId
-                                    text: model.points.toFixed(2)
-                                    font.pointSize: 16
-                                }
-                            }
-
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    foodListView.currentIndex = index
-                                }
-                                onDoubleClicked: {
-                                    foodListView.currentIndex = index
-                                    foodListView.itemDoubleClicked(index)
-                                }
-                            }
-                        }
-                    }
+                      }
                 }
+//                    ListView {
+//                        id: foodListView
+//                        anchors.fill: parent
+//
+//                        model: FoodListModel
+//                        signal itemDoubleClicked(int index)
+//
+//                        delegate: delegateId
+//
+//                        header: RowLayout {
+//                            Layout.fillWidth: true
+//                            Layout.preferredWidth: 400
+//                            WWLabel {
+//                                id: headerNameId
+//                                Layout.preferredWidth: 140
+//                                text: "Name"
+//                                font.pointSize: 16
+//                            }
+//
+//                            WWLabel {
+//                                id: headerPointsId
+//                                Layout.fillWidth: true
+//                                Layout.leftMargin: 140
+//                                text: "Points"
+//                                font.pointSize: 16
+//                            }
+//                        }
+//
+//                        Component.onCompleted: {
+//                            foodListView.itemDoubleClicked.connect(Day.handleItemDoubleClicked);
+//                        }
+//                    }
+//
+//                    Component {
+//                        id: delegateId
+//                        Rectangle {
+//                            id: rectangleId
+//                            width: listViewRectangleId.width// parent.width  // Remember to specify these sizes or you'll have problems
+//                            height: WWListView.itemHeight
+//                            color: index === foodListView.currentIndex ? "lightblue" :"yellow"
+//                            border.color: "yellowgreen"
+//                            radius: 1
+//
+//                            RowLayout {
+//                                Layout.fillWidth: true
+//                                Layout.preferredWidth: 400
+//                                WWLabel {
+//                                    id: textId
+//                                    Layout.preferredWidth: 140
+//                                    text: model.name
+//                                    font.pointSize: 16
+//                                }
+//
+//                                WWLabel {
+//                                    horizontalAlignment: Text.AlignRight
+//                                    Layout.leftMargin: 140
+//                                    Layout.alignment : Qt.AlignRight
+//                                    id: pointsId
+//                                    text: model.points.toFixed(2)
+//                                    font.pointSize: 16
+//                                }
+//                            }
+//
+//                            MouseArea {
+//                                anchors.fill: parent
+//                                onClicked: {
+//                                    foodListView.currentIndex = index
+//                                }
+//                                onDoubleClicked: {
+//                                    foodListView.currentIndex = index
+//                                    foodListView.itemDoubleClicked(index)
+//                                }
+//                            }
+//                        }
+//                    }
 
                 RowLayout {
                     spacing: 10

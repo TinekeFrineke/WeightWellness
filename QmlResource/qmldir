@@ -15,9 +15,9 @@ WWComboBox WWComboBox.qml
 WWDialog WWDialog.qml
 WWGroupBox WWGroupBox.qml
 WWLabel WWLabel.qml
+WWListView WWListView.qml
 WWRadioButton WWRadioButton.qml
 WWTabButton WWTabButton.qml
 WWTextField WWTextField.qml
 
-singleton WWListView WWListView.qml
 singleton WWRowLayout WWRowLayout.qml
