@@ -40,7 +40,7 @@ CDiaryItemList::~CDiaryItemList()
 }
 
 
-void CDiaryItemList::View(weight::Day* aDay)
+void CDiaryItemList::View(weight::IDay* aDay)
 {
     if (aDay == nullptr)
     {

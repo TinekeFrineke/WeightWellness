@@ -6,6 +6,7 @@
 #include "Utilities/StrUtils.h"
 
 #include "BonusPointsMap.h"
+#include "IModel.h"
 #include "PointsCalculator.h"
 
 namespace weight
@@ -22,7 +23,7 @@ class GerechtDefinitie;
 class VMDefinitie;
 class Week;
 
-class Model
+class Model : public IModel
 {
 public:
     Model();

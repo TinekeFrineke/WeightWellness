@@ -99,6 +99,7 @@
     <ClInclude Include="interface\model\BonusPointsMap.h" />
     <ClInclude Include="interface\model\Day.h" />
     <ClInclude Include="interface\model\Entity.h" />
+    <ClInclude Include="interface\model\IDay.h" />
     <ClInclude Include="interface\model\IFoodDefinitionRepository.h" />
     <ClInclude Include="interface\model\ILotFactory.h" />
     <ClInclude Include="interface\model\IObserver.h" />

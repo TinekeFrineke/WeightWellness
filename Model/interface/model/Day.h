@@ -5,6 +5,8 @@
 #include "Entity.h"
 #include "Utilities/Date.h"
 
+#include "IDay.h"
+
 
 namespace weight
 {
@@ -40,8 +42,9 @@ private:
     int mPoints;
 };
 
-
-class Day: public Entity<Day>
+class Day
+    : public Entity<Day>
+    , public IDay
 {
 public:
     Day(const Utils::Date& aDate);

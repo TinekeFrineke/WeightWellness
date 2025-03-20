@@ -5,7 +5,7 @@
 
 #include ".\diarypage.h"
 
-#include "model/Day.h"
+#include "model/IDay.h"
 #include "model/LotFactory.h"
 #include "model/ManualItem.h"
 #include "model/Personalia.h"
@@ -104,6 +104,8 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
         // Week not found, create a new week
         Utils::Date enddate(aDate);
         enddate.AddDays(6);
+        while (mModel.FindWeek(enddate))
+            enddate.SubtractDays(1);
         auto week = std::make_unique<weight::Week>(aDate, enddate);
         mWeek = week.get();
         mWeek->SetPoints(mModel.GetActivePersonalia()->GetPuntenTotaal(mModel.GetStrategy()));

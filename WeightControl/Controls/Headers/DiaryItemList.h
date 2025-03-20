@@ -9,7 +9,7 @@
 
 namespace weight
 {
-class Day;
+class IDay;
 class Item;
 class Model;
 }
@@ -23,9 +23,9 @@ class CDiaryItemList: public ItemList
     // Construction
 public:
     CDiaryItemList(weight::Model& aModel);
-    virtual                         ~CDiaryItemList();
+    virtual ~CDiaryItemList();
 
-    void                            View(weight::Day* aDay);
+    void View(weight::IDay* aDay);
 
 protected:
 
@@ -33,7 +33,7 @@ protected:
 
 private:
     Utils::Date mDate;
-    weight::Day* mDay{};
+    weight::IDay* mDay{};
 };
 
 /////////////////////////////////////////////////////////////////////////////

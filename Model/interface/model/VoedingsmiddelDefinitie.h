@@ -30,6 +30,7 @@ public:
     std::wstring GetName() const { return mName; }
     std::wstring GetCategory() const { return mCategory; }
     std::wstring GetMerk() const { return mMerk; }
+    bool IsFavourite() const noexcept { return mFavourite; }
 
     virtual double GetPointsPer100Units() const;
 
@@ -53,8 +54,6 @@ public:
     std::wstring GetUnit() const { return mUnit; }
 
     const std::vector<std::unique_ptr<Portie>>& GetPortieList() const noexcept { return mPortieList; }
-
-    bool IsFavourite() const noexcept { return mFavourite; }
 
     const NutritionalValue& GetNutritionalValue() const noexcept { return *mPoints; }
 
