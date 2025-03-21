@@ -24,7 +24,6 @@ class IWeek
 public:
     virtual ~IWeek() = default;
 
-    //IDay* AddDay(const Utils::Date& date);
     virtual bool Add(std::unique_ptr<IDay> day) = 0;
 
     virtual const std::vector<std::unique_ptr<IDay>>& GetDays() const = 0;

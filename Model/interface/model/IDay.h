@@ -42,9 +42,6 @@ public:
     virtual double GetCalculatedBonusPoints() const = 0;
     virtual double GetFreeBonusPoints() const noexcept = 0;
     virtual double GetTotalBonusPoints() const = 0;
-
-    //// Recalculates the points for the items in the day
-    virtual void Recalculate(IModel& aModel, const PointsCalculator& aCalculator) = 0;
 };
 
 } // namespace weight

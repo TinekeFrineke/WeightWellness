@@ -51,9 +51,6 @@ public:
     double GetWeekPointsLeft(const Utils::Date& aDate);
 
 private:
-    // Recalculates the points for the days in the week
-    void Recalculate(IModel& aModel);
-
     std::vector<std::unique_ptr<IDay>> mDays;
     Utils::Date mStartDate;
     Utils::Date mEndDate;

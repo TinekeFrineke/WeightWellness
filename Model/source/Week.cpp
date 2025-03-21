@@ -150,18 +150,6 @@ void Week::SetStrategy(STRATEGY_TYPE eType, IModel& aModel)
     mStrategy = eType;
     mPoints = aModel.GetPuntenTotaal(mStrategy);
     mSaveablePoints = aModel.GetWeekPuntenTotaal();
-    Recalculate(aModel);
-}
-
-
-// Recalculates the points for the days in the week
-void Week::Recalculate(IModel& aModel)
-{
-    PointsCalculator calculator;
-    calculator.SetStrategy(mStrategy);
-
-    for (size_t i = 0; i < mDays.size(); ++i)
-        mDays[i]->Recalculate(aModel, calculator);
 }
 
 

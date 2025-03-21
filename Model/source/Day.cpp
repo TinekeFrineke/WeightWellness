@@ -79,13 +79,6 @@ void Day::Add(const Bonus& aBonus)
 }
 
 
-void Day::Recalculate(IModel& aModel, const PointsCalculator& aCalculator)
-{
-    for (auto& item : mItems)
-        item->Recalculate(aModel, aCalculator);
-}
-
-
 void Day::SetBonuses(const std::list<Bonus>& aBonuses)
 {
     mBonuses = aBonuses;

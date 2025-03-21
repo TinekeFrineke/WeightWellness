@@ -33,7 +33,7 @@ public:
     void                      Add(const Bonus& aBonus);
     void                      SetFreeBonusPoints(double aPoints) noexcept override { mBonusPoints = aPoints; }
 
-    double                    GetPoints() const;
+    double                    GetPoints() const override;
 
     bool                      IsEmpty() const override;
 
@@ -42,22 +42,19 @@ public:
     Utils::Date               GetDate() const noexcept override { return mDate; }
     double                    GetWeight() const noexcept override { return mWeight; }
     const std::list<Bonus>& GetBonuses() const noexcept override { return mBonuses; }
-    void                      SetBonuses(const std::list<Bonus>& aBonuses);
+    void                      SetBonuses(const std::list<Bonus>& aBonuses) override;
 
     double                    GetCalculatedBonusPoints() const override;
     double                    GetFreeBonusPoints() const noexcept override { return mBonusPoints; }
     double                    GetTotalBonusPoints() const override { return GetCalculatedBonusPoints() + GetFreeBonusPoints(); }
 
     // Entity overrides
-    virtual std::tstring      GetInstanceName() const noexcept override { return Utils::ToString(mDate); }
+    std::wstring      GetInstanceName() const override { return Utils::ToString(mDate); }
     static std::tstring       GetClassName() { return _T("Dag"); }
 
 private:
     Day& operator=(const Day&) = delete;
     Day(const Day&) = delete;
-
-    // Recalculates the points for the items in the day
-    void                      Recalculate(IModel& aModel, const PointsCalculator& aCalculator) override;
 
     Utils::Date               mDate;
     // 0 == no weight

@@ -33,8 +33,6 @@ public:
     virtual std::tstring  GetName() const = 0;
     virtual double        GetPoints() const = 0;
     virtual void          Accept(ItemVisitor& aVisitor) = 0;
-
-    virtual void          Recalculate(IModel& /*aModel*/, const PointsCalculator& /*aCalculator*/) {}
 };
 
 

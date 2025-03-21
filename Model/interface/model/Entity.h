@@ -30,7 +30,7 @@ public:
     void Unregister() noexcept;
 
 protected:
-    virtual std::wstring GetInstanceName() const noexcept = 0;
+    virtual std::wstring GetInstanceName() const = 0;
 
 private:
     static int mNumberOfInstances;
