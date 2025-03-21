@@ -6,13 +6,13 @@
 #include ".\diarypage.h"
 
 #include "model/IDay.h"
+#include "model/IWeek.h"
 #include "model/LotFactory.h"
 #include "model/ManualItem.h"
 #include "model/ModelFactory.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
 #include "model/Voedingsmiddel.h"
-#include "model/Week.h"
 
 #include "BewegingDialog.h"
 #include "EditBonuses.h"
@@ -107,7 +107,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
         enddate.AddDays(6);
         while (mModel.FindWeek(enddate))
             enddate.SubtractDays(1);
-        auto week = std::make_unique<weight::Week>(aDate, enddate);
+        auto week = weight::ModelFactory().CreateWeek(aDate, enddate);
         mWeek = week.get();
         mWeek->SetPoints(mModel.GetActivePersonalia()->GetPuntenTotaal(mModel.GetStrategy()));
         mWeek->SetSaveablePoints(mModel.GetVrijePunten());

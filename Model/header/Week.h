@@ -1,8 +1,10 @@
 #pragma once
 
 #include <vector>
+
 #include "Utilities/Date.h"
 
+#include "IWeek.h"
 #include "PointsCalculator.h"
 #include "WWDefinitions.h"
 
@@ -15,6 +17,7 @@ class IDay;
 class Model;
 
 class Week
+    : public IWeek
 {
 public:
     Week(const Utils::Date& aStartDate,

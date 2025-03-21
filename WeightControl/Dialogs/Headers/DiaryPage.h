@@ -9,15 +9,14 @@
 #include "controls/stringedit.h"
 #include "controls/intedit.h"
 #include "controls/TabPage.h"
-//#include "model/Model.h"
 
 #include "DiaryItemList.h"
 
 
 namespace weight{
 class IDay;
+class IWeek;
 class Model;
-class Week;
 }
 
 // CDiaryPage dialog
@@ -68,7 +67,7 @@ private:
     CDiaryItemList mItemList;
 
     weight::Model& mModel;
-    weight::Week* mWeek{};
+    weight::IWeek* mWeek{};
     weight::IDay* mDay{};
 
     CStringEdit mDate;

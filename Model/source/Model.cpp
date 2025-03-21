@@ -5,12 +5,13 @@
 #include <assert.h>
 
 #include "FoodDefinitionRepository.h"
+#include "IWeek.h"
 #include "Lot.h"
+#include "ModelFactory.h"
 #include "Personalia.h"
 #include "ReceptDefinitie.h"
 #include "Repository.h"
 #include "VoedingsmiddelDefinitie.h"
-#include "Week.h"
 
 namespace weight
 {
@@ -41,14 +42,14 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
     if (GetActivePersonalia() != nullptr)
         GetActivePersonalia()->SetStrategy(eType);
 
-    Week* week = FindWeek(Utils::Date::Today());
+    IWeek* week = FindWeek(Utils::Date::Today());
 
     if (week != nullptr)
         week->SetStrategy(eType, *this);
 }
 
 
-Week* Model::FindWeek(const Utils::Date& aDate)
+IWeek* Model::FindWeek(const Utils::Date& aDate)
 {
     for (const auto& week : mWeeks)
         if (week->Includes(aDate))
@@ -57,7 +58,7 @@ Week* Model::FindWeek(const Utils::Date& aDate)
     return nullptr;
 }
 
-Week* Model::CreateWeek(const Utils::Date& aDate)
+IWeek* Model::CreateWeek(const Utils::Date& aDate)
 {
     auto weekptr = FindWeek(aDate);
     if (weekptr != nullptr)
@@ -69,7 +70,7 @@ Week* Model::CreateWeek(const Utils::Date& aDate)
     while (FindWeek(enddate) != nullptr && enddate != aDate)
         enddate.SubtractDays(1);
 
-    auto week = std::make_unique<weight::Week>(aDate, enddate);
+    auto week = ModelFactory().CreateWeek(aDate, enddate);
     week->SetPoints(GetActivePersonalia()->GetPuntenTotaal(GetStrategy()));
     week->SetSaveablePoints(GetVrijePunten());
     week->SetStrategy(GetStrategy(), *this);
@@ -120,7 +121,7 @@ void Model::AddUnit(const std::wstring& aUnit)
     m_units->Add(aUnit);
 }
 
-bool Model::Add(std::unique_ptr<Week> aWeek)
+bool Model::Add(std::unique_ptr<IWeek> aWeek)
 {
     for (const auto& week: mWeeks)
     {

@@ -16,30 +16,30 @@ class IBrandRepository;
 class ICategoryRepository;
 class IFoodDefinitionRepository;
 class IRepository;
+class IWeek;
 class Personalia;
 class Recept;
 class ReceptDefinitie;
 class GerechtDefinitie;
 class VMDefinitie;
-class Week;
 
-class Model : public IModel
+class Model: public IModel
 {
 public:
     Model();
-    ~Model();
+    ~Model() override;
 
     bool HasPersonalia(const std::tstring& name) const;
     Personalia* GetActivePersonalia();
     const Personalia* GetActivePersonalia() const;
     Personalia* AddPersonalia(const std::tstring& aName);
 
-    STRATEGY_TYPE                           GetStrategy() const noexcept { return mStrategyType; }
-    void                                    SetStrategy(STRATEGY_TYPE eType);
+    STRATEGY_TYPE GetStrategy() const noexcept { return mStrategyType; }
+    void SetStrategy(STRATEGY_TYPE eType);
 
-    Week* FindWeek(const Utils::Date& aDate);
-    Week* CreateWeek(const Utils::Date& aDate);
-    bool Add(std::unique_ptr<Week> aWeek);
+    IWeek* FindWeek(const Utils::Date& aDate);
+    IWeek* CreateWeek(const Utils::Date& aDate);
+    bool Add(std::unique_ptr<IWeek> aWeek);
 
     bool Add(std::unique_ptr<VMDefinitie> aDefinitie);
     bool Add(std::unique_ptr<ReceptDefinitie> aReceptDef);
@@ -62,7 +62,7 @@ public:
     std::shared_ptr<IFoodDefinitionRepository> GetFoodDefinitionRepository() const noexcept;
 
     const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const noexcept { return mReceptDefinities; }
-    const std::vector<std::unique_ptr<Week>>& GetWeeks() const noexcept { return mWeeks; }
+    const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept { return mWeeks; }
     const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept { return mPersonalia; }
     const BonusPointsMap& GetBonusPointsMap() const noexcept { return mBonusPointsMap; }
     BonusPointsMap& GetBonusPointsMap() noexcept { return mBonusPointsMap; }
@@ -74,7 +74,7 @@ public:
     std::shared_ptr<PointsCalculator> GetCalculator() const noexcept { return m_calculator; }
 
 private:
-    std::vector<std::unique_ptr<Week>> mWeeks;
+    std::vector<std::unique_ptr<IWeek>> mWeeks;
     std::shared_ptr<IFoodDefinitionRepository> m_foodDefinitions;
     std::vector<std::unique_ptr<ReceptDefinitie>> mReceptDefinities;
     std::vector<std::unique_ptr<Personalia>> mPersonalia;

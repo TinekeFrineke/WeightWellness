@@ -32,14 +32,14 @@
 #include "model/IDay.h"
 #include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
+#include "model/IWeek.h"
 #include "model/ManualItem.h"
+#include "model/Model.h"
 #include "model/NutritionalValue.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
 #include "model/ReceptDefinitie.h"
 #include "model/VoedingsmiddelDefinitie.h"
-#include "model/Week.h"
-#include "model/Model.h"
 
 #include "XmlItemCreateVisitor.h"
 #include "XmlVMCreateVisitor.h"
@@ -343,7 +343,7 @@ weight::Result XmlWriter::Create(const weight::IDay& aDay,
 }
 
 
-weight::Result XmlWriter::Write(weight::Week& aWeek, const std::tstring& aFilename)
+weight::Result XmlWriter::Write(weight::IWeek& aWeek, const std::tstring& aFilename)
 {
     auto xmlweek = std::make_unique<XmlWeek>();
 

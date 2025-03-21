@@ -33,6 +33,7 @@
 
 #include "model/Bonus.h"
 #include "model/BonusPointsMap.h"
+#include "model/IWeek.h"
 #include "model/ManualItem.h"
 #include "model/ModelFactory.h"
 #include "model/NutritionalValue.h"
@@ -41,7 +42,6 @@
 #include "model/ReceptDefinitie.h"
 #include "model/VoedingsMiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"
-#include "model/Week.h"
 #include "model/WWDefinitions.h"
 
 namespace ww2024
@@ -325,8 +325,8 @@ weight::Result XmlReader::ReadWeek(const std::tstring& aDirectory)
         if (xmlweek == nullptr)
             return weight::Result::Ok;
 
-        auto week = std::make_unique<weight::Week>(Utils::ToDate(xmlweek->Getbegindatum()),
-                                               Utils::ToDate(xmlweek->Geteinddatum()));
+        auto week = weight::ModelFactory().CreateWeek(Utils::ToDate(xmlweek->Getbegindatum()),
+                                                      Utils::ToDate(xmlweek->Geteinddatum()));
         week->SetPoints(xmlweek->Getpunten());
         week->SetSaveablePoints(xmlweek->Getweekpunten());
         week->SetStartWeight(xmlweek->Getstartweight());

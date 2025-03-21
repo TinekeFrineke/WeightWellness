@@ -7,6 +7,7 @@
 namespace weight
 {
 class IDay;
+class IWeek;
 class ManualItem;
 class Model;
 class Portie;
@@ -14,7 +15,6 @@ class PortionedLot;
 class Recept;
 class CalculatedLot;
 class Voedingsmiddel;
-class Week;
 
 struct FoodParameters;
 }
@@ -54,7 +54,7 @@ private:
     weight::Result WriteRecepten(const std::tstring & aFilename);
     weight::Result WriteWeeks(const std::tstring & aDirectory);
 
-    weight::Result Write(weight::Week & aWeek, const std::tstring & aFilename);
+    weight::Result Write(weight::IWeek & aWeek, const std::tstring & aFilename);
 
     weight::Model& mModel;
 };
