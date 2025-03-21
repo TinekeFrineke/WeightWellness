@@ -58,7 +58,7 @@ private:
 class BonusPointsMap
 {
 public:
-  enum MOVEMENT_INTENSITY { MI_Low, MI_Medium, MI_High };
+  enum class MOVEMENT_INTENSITY { MI_Low, MI_Medium, MI_High };
 
   bool                        Has(MOVEMENT_INTENSITY anIntensity) const;
   bool                        IsEmpty(MOVEMENT_INTENSITY anIntensity) const;

@@ -2,7 +2,7 @@
 
 #include "Utilities/StrUtils.h"
 
-#include "model/Day.h"
+#include "model/IDay.h"
 #include "model/Portie.h"
 #include "model/Model.h"
 
@@ -58,7 +58,7 @@ private:
     std::unique_ptr<weight::Voedingsmiddel> Create(const ww2024::XmlVoedingsmiddel& aVoedingsmiddel);
     std::unique_ptr<weight::Recept> Create(const ww2024::XmlRecept& aRecept);
     std::unique_ptr<weight::ManualItem> Create(const ww2024::XmlHandmatigitem& aGerecht);
-    std::unique_ptr<weight::Day> Create(const ww2024::XmlDag& aDag);
+    std::unique_ptr<weight::IDay> Create(const ww2024::XmlDag& aDag);
     weight::Bonus Create(const ww2024::XmlBonuscell& aCell);
     weight::Model& mModel;
 };

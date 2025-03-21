@@ -91,13 +91,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="header\Day.h" />
     <ClInclude Include="header\FoodDefinitionRepository.h" />
     <ClInclude Include="header\NutritionalValue.h" />
     <ClInclude Include="header\RecipeRepository.h" />
     <ClInclude Include="header\UniqueRepository.h" />
     <ClInclude Include="header\WeekRepository.h" />
+    <ClInclude Include="interface\model\Bonus.h" />
     <ClInclude Include="interface\model\BonusPointsMap.h" />
-    <ClInclude Include="interface\model\Day.h" />
     <ClInclude Include="interface\model\Entity.h" />
     <ClInclude Include="interface\model\IDay.h" />
     <ClInclude Include="interface\model\IFoodDefinitionRepository.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="interface\model\ManualItem.h" />
     <ClInclude Include="interface\model\Model.h" />
     <ClInclude Include="interface\model\ModelException.h" />
+    <ClInclude Include="interface\model\ModelFactory.h" />
     <ClInclude Include="interface\model\Naam.h" />
     <ClInclude Include="interface\model\NutritionalValue.h" />
     <ClInclude Include="interface\model\Observer.h" />
@@ -130,6 +132,7 @@
     <ClInclude Include="interface\model\XmlDefinitions.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Bonus.cpp" />
     <ClCompile Include="source\BonusPointsMap.cpp" />
     <ClCompile Include="source\Day.cpp" />
     <ClCompile Include="source\Entity.cpp" />
@@ -137,6 +140,7 @@
     <ClCompile Include="source\Lot.cpp" />
     <ClCompile Include="source\LotFactory.cpp" />
     <ClCompile Include="source\ModelException.cpp" />
+    <ClCompile Include="source\ModelFactory.cpp" />
     <ClCompile Include="source\NutritionalValue.cpp" />
     <ClCompile Include="source\Observer.cpp" />
     <ClCompile Include="source\Personalia.cpp" />

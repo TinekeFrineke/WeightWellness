@@ -1,7 +1,8 @@
 #pragma once
 
 
-#include "model/Day.h"
+#include "model/Bonus.h"
+#include "model/IDay.h"
 #include "controls/doubleedit.h"
 #include "controls/intedit.h"
 
@@ -36,7 +37,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
-  weight::Bonus           mBonus;
+  weight::Bonus       mBonus;
   double              mWeight;
   const weight::BonusPointsMap &
                       mBonusMap;

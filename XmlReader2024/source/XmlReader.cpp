@@ -31,8 +31,10 @@
 #include "generated/XmlWeek.h"
 #include "generated/XmlWeekReader.h"
 
+#include "model/Bonus.h"
 #include "model/BonusPointsMap.h"
 #include "model/ManualItem.h"
+#include "model/ModelFactory.h"
 #include "model/NutritionalValue.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
@@ -482,9 +484,9 @@ std::unique_ptr<weight::ManualItem> XmlReader::Create(const XmlHandmatigitem& an
 }
 
 
-std::unique_ptr<weight::Day> XmlReader::Create(const XmlDag& aDag)
+std::unique_ptr<weight::IDay> XmlReader::Create(const XmlDag& aDag)
 {
-    auto day = std::make_unique<weight::Day>(Utils::ToDate(aDag.Getdatum()));
+    auto day = weight::ModelFactory().CreateDay(Utils::ToDate(aDag.Getdatum()));
     if (!aDag.Getgewicht().empty())
         day->SetWeight(Str::ToDouble(aDag.Getgewicht().c_str()));
 

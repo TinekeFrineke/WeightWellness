@@ -11,7 +11,7 @@ namespace weight
 {
 
 
-class Day;
+class IDay;
 class Model;
 
 class Week
@@ -22,12 +22,12 @@ public:
 
     ~Week();
 
-    Day* AddDay(const Utils::Date& date);
-    bool Add(std::unique_ptr<Day> day);
+    IDay* AddDay(const Utils::Date& date);
+    bool Add(std::unique_ptr<IDay> day);
 
-    const std::vector<std::unique_ptr<Day>>& GetDays() const { return mDays; }
+    const std::vector<std::unique_ptr<IDay>>& GetDays() const { return mDays; }
 
-    Day* GetDay(const Utils::Date& aDay);
+    IDay* GetDay(const Utils::Date& aDay);
 
     bool Includes(const Utils::Date& aDay) const;
 
@@ -53,7 +53,7 @@ public:
 private:
     friend class Model;
 
-    std::vector<std::unique_ptr<Day>> mDays;
+    std::vector<std::unique_ptr<IDay>> mDays;
     Utils::Date mStartDate;
     Utils::Date mEndDate;
     double mStartWeight;

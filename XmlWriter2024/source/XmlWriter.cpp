@@ -28,7 +28,8 @@
 #include "generated/XmlWeek.h"
 #include "generated/XmlWeekWriter.h"
 
-#include "model/Day.h"
+#include "model/Bonus.h"
+#include "model/IDay.h"
 #include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
 #include "model/ManualItem.h"
@@ -297,8 +298,8 @@ weight::Result XmlWriter::Create(const weight::ManualItem& anItem,
 }
 
 
-weight::Result XmlWriter::Create(const weight::Day& aDay,
-                             XmlDag& aDag)
+weight::Result XmlWriter::Create(const weight::IDay& aDay,
+                                 XmlDag& aDag)
 {
     aDag.Setdatum(Utils::ToString(aDay.GetDate()));
     if (!Math::Equals(aDay.GetWeight(), 0))
@@ -364,7 +365,7 @@ weight::Result XmlWriter::Write(weight::Week& aWeek, const std::tstring& aFilena
             assert(false);
     }
 
-    const std::vector<std::unique_ptr<weight::Day>>& days = aWeek.GetDays();
+    const std::vector<std::unique_ptr<weight::IDay>>& days = aWeek.GetDays();
     for (size_t i = 0; i < days.size(); ++i)
     {
         if (days[i]->IsEmpty())

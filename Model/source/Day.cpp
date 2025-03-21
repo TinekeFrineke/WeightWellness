@@ -5,32 +5,13 @@
 
 #include "Utilities/MathUtils.h"
 
+#include "Bonus.h"
 #include "BonusPointsMap.h"
 #include "Item.h"
 
 
 namespace weight
 {
-
-
-void Bonus::Set(INTENSITY anIntensity, int aDuration, int aPoints)
-{
-    mIntensity = anIntensity;
-    mDuration = aDuration;
-    mPoints = aPoints;
-}
-
-
-void Bonus::Set(INTENSITY anIntensity, int aWeight, int aDuration, const BonusPointsMap& aMap)
-{
-    mIntensity = anIntensity;
-    mDuration = aDuration;
-
-    const BonusPointsMap::MOVEMENT_INTENSITY intensity = mIntensity == INTENSITY::High ? BonusPointsMap::MI_High :
-        mIntensity == INTENSITY::Medium ? BonusPointsMap::MI_Medium :
-        BonusPointsMap::MI_Low;
-    mPoints = aMap[intensity][aWeight][mDuration];
-}
 
 
 Day::Day(const Utils::Date& aDate)
@@ -90,6 +71,11 @@ void Day::Remove(Item* anItem)
             return;
         }
     }
+}
+
+void Day::Add(const Bonus& aBonus)
+{
+    mBonuses.push_back(aBonus);
 }
 
 

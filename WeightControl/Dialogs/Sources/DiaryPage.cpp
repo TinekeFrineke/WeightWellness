@@ -8,6 +8,7 @@
 #include "model/IDay.h"
 #include "model/LotFactory.h"
 #include "model/ManualItem.h"
+#include "model/ModelFactory.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
 #include "model/Voedingsmiddel.h"
@@ -135,7 +136,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     mDay = mWeek->GetDay(aDate);
     if (mDay == nullptr)
     {
-        auto day = std::make_unique<weight::Day>(aDate);
+        auto day = weight::ModelFactory().CreateDay(aDate);
         mDay = day.get();
         mDay->SetWeight(mModel.GetActivePersonalia()->GetHuidigGewicht());
         mWeek->Add(std::move(day));

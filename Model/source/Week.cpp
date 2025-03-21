@@ -5,6 +5,7 @@
 
 #include "Day.h"
 #include "Model.h"
+#include "ModelFactory.h"
 
 #ifdef min
 # undef min
@@ -30,9 +31,9 @@ Week::Week(const Utils::Date& aStartDate,
 Week::~Week() = default;
 
 
-Day* Week::GetDay(const Utils::Date& aDay)
+IDay* Week::GetDay(const Utils::Date& aDay)
 {
-    auto x = std::find_if(mDays.begin(), mDays.end(), [aDay] (const std::unique_ptr<Day>& day) noexcept {
+    auto x = std::find_if(mDays.begin(), mDays.end(), [aDay] (const std::unique_ptr<IDay>& day) noexcept {
         return day->GetDate() == aDay;
     });
     if (x != mDays.end())
@@ -42,18 +43,18 @@ Day* Week::GetDay(const Utils::Date& aDay)
 }
 
 
-Day* Week::AddDay(const Utils::Date& date)
+IDay* Week::AddDay(const Utils::Date& date)
 {
     if (date < mStartDate || date > mEndDate)
         return nullptr;
 
-    auto dayIter = std::find_if(mDays.begin(), mDays.end(), [date] (const std::unique_ptr<Day>& day) noexcept {
+    auto dayIter = std::find_if(mDays.begin(), mDays.end(), [date] (const std::unique_ptr<IDay>& day) noexcept {
         return day->GetDate() == date;
     });
     if (dayIter != mDays.end())
         return dayIter->get();
 
-    auto newDay = std::make_unique<Day>(date);
+    auto newDay = ModelFactory().CreateDay(date);
     auto dayPtr = newDay.get();
     if (Add(std::move(newDay)))
         return dayPtr;
@@ -61,12 +62,12 @@ Day* Week::AddDay(const Utils::Date& date)
     return nullptr;
 }
 
-bool Week::Add(std::unique_ptr<Day> aDay)
+bool Week::Add(std::unique_ptr<IDay> aDay)
 {
     if (aDay->GetDate() < mStartDate || aDay->GetDate() > mEndDate)
         return false;
 
-    auto dayIter = std::find_if(mDays.begin(), mDays.end(), [&aDay] (const std::unique_ptr<Day>& day) noexcept {
+    auto dayIter = std::find_if(mDays.begin(), mDays.end(), [&aDay] (const std::unique_ptr<IDay>& day) noexcept {
         return day->GetDate() == aDay->GetDate();
     });
     if (dayIter != mDays.end())

@@ -6,7 +6,7 @@
 
 namespace weight
 {
-class Day;
+class IDay;
 class ManualItem;
 class Model;
 class Portie;
@@ -38,7 +38,7 @@ public:
 
     weight::Result Write(const std::tstring & aDirectory);
 
-    weight::Result Create(const weight::Day & aDag, XmlDag & aDay);
+    weight::Result Create(const weight::IDay & aDag, XmlDag & aDay);
     weight::Result Create(const weight::Voedingsmiddel & aMiddel, XmlVoedingsmiddel & aDay);
     weight::Result Create(const weight::Recept & aMiddel, XmlRecept & aRecept);
     weight::Result Create(const weight::ManualItem & anItem, XmlHandmatigitem & anXmlItem);

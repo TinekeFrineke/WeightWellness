@@ -4,7 +4,8 @@
 
 #include "ItemList.h"
 
-#include "model/Day.h"
+#include "model/Bonus.h"
+#include "model/IDay.h"
 
 namespace weight
 {

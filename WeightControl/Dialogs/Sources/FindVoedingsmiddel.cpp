@@ -6,7 +6,7 @@
 
 #include <assert.h>
 #include "WeightControl.h"
-#include "model/Day.h"
+#include "model/IDay.h"
 #include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
 #include "model/NutritionalValue.h"
