@@ -2,7 +2,7 @@
 
 #include "ReceptDefinitiesList.h"
 
-#include "model/Model.h"
+#include "model/IModel.h"
 #include "model/ReceptDefinitie.h"
 
 #include "EditFoodDefDialog.h"
@@ -72,7 +72,7 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 }
 
 
-ReceptDefinitiesList::ReceptDefinitiesList(weight::Model& aModel)
+ReceptDefinitiesList::ReceptDefinitiesList(weight::IModel& aModel)
     : mModel(aModel)
 {
 }

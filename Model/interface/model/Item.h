@@ -8,10 +8,10 @@ namespace weight
 
 
 class Item;
-class Recept;
+class IModel;
 class ManualItem;
-class Model;
 class PointsCalculator;
+class Recept;
 class Voedingsmiddel;
 
 class ItemVisitor
@@ -34,7 +34,7 @@ public:
     virtual double        GetPoints() const = 0;
     virtual void          Accept(ItemVisitor& aVisitor) = 0;
 
-    virtual void          Recalculate(Model& /*aModel*/, const PointsCalculator& /*aCalculator*/) {}
+    virtual void          Recalculate(IModel& /*aModel*/, const PointsCalculator& /*aCalculator*/) {}
 };
 
 

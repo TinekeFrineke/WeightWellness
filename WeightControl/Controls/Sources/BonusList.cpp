@@ -104,7 +104,7 @@ void BonusListItem::Write(CListCtrl& aControl, int iItemIndex)
 /////////////////////////////////////////////////////////////////////////////
 // BonusList
 
-BonusList::BonusList(weight::Model& aModel)
+BonusList::BonusList(weight::IModel& aModel)
     : mModel(aModel)
 {
     SetNumberOfColumns(3);

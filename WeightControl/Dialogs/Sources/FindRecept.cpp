@@ -2,11 +2,11 @@
 //
 
 #include "stdafx.h"
-#include ".\findrecept.h"
 
-#include <assert.h>
-#include "WeightControl.h"
+#include "FindRecept.h"
+
 #include "model/IDay.h"
+#include "model/IModel.h"
 #include "model/Portie.h"
 #include "model/Recept.h"
 #include "model/ReceptDefinitie.h"
@@ -14,7 +14,7 @@
 // CFindRecept dialog
 
 IMPLEMENT_DYNAMIC(CFindRecept, CDialog)
-CFindRecept::CFindRecept(weight::Model& aModel,
+CFindRecept::CFindRecept(weight::IModel& aModel,
                          weight::ReceptDefinitie* aDefinitie,
                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindRecept::IDD, pParent),

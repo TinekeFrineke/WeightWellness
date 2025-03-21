@@ -1,7 +1,7 @@
 #pragma once
 
 #include "controls/tabpage.h"
-#include "model/Model.h"
+#include "model/IModel.h"
 #include "ReceptDefinitiesList.h"
 #include "resource.h"
 
@@ -17,7 +17,7 @@ class ReceptenPage: public CDialog, public TabPage
     DECLARE_DYNAMIC(ReceptenPage)
 
 public:
-    ReceptenPage(weight::Model& aModel, CWnd* pParent = NULL);   // standard constructor
+    explicit ReceptenPage(weight::IModel& aModel, CWnd* pParent = NULL);   // standard constructor
     virtual                   ~ReceptenPage();
 
     virtual CDialog* GetDialog() { return this; }
@@ -43,6 +43,6 @@ protected:
     void                      View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aRecepten);
 
 private:
-    weight::Model& mModel;
+    weight::IModel& mModel;
     ReceptDefinitiesList mReceptenList;
 };

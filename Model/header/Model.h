@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 #include "Utilities/Date.h"
 #include "Utilities/StrUtils.h"
 

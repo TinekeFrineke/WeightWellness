@@ -48,7 +48,7 @@ namespace ww2024
 {
 
 
-XmlReader::XmlReader(weight::Model& aModel)
+XmlReader::XmlReader(weight::IModel& aModel)
     : mModel(aModel)
 {
 }

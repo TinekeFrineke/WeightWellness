@@ -1,10 +1,17 @@
 #pragma once
 
-#include "resource.h"
 #include "controls/stringedit.h"
 #include "controls/doubleedit.h"
 #include "controls/IntEdit.h"
 
+#include "resource.h"
+
+
+namespace weight {
+
+class Recept;
+
+}
 
 // EditReceptDialog dialog
 
@@ -13,7 +20,7 @@ class EditReceptDialog : public CDialog
     DECLARE_DYNAMIC(EditReceptDialog)
 
 public:
-    EditReceptDialog(weight::Model& aModel, weight::Recept& aRecept, CWnd* pParent = NULL);   // standard constructor
+    explicit EditReceptDialog(weight::Recept& aRecept, CWnd* pParent = NULL);   // standard constructor
     virtual ~EditReceptDialog();
 
     // Dialog Data
@@ -34,6 +41,5 @@ private:
     CIntEdit                      mPorties;
     CDoubleEdit                   mPunten;
 
-    weight::Model& mModel;
     weight::Recept& mRecept;
 };

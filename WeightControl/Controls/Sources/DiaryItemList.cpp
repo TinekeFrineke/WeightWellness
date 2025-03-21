@@ -27,7 +27,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CDiaryItemList
 
-CDiaryItemList::CDiaryItemList(weight::Model& aModel)
+CDiaryItemList::CDiaryItemList(weight::IModel& aModel)
     : ItemList(aModel)
     , mDate(Utils::Date::Today())
     , mDay(nullptr)

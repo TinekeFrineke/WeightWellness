@@ -14,7 +14,7 @@ namespace weight
 class Bonus;
 class BonusPointsMap;
 class Item;
-class Model;
+class IModel;
 class PointsCalculator;
 
 
@@ -48,9 +48,6 @@ public:
     double                    GetFreeBonusPoints() const noexcept override { return mBonusPoints; }
     double                    GetTotalBonusPoints() const override { return GetCalculatedBonusPoints() + GetFreeBonusPoints(); }
 
-    // Recalculates the points for the items in the day
-    void                      Recalculate(Model& aModel, const PointsCalculator& aCalculator);
-
     // Entity overrides
     virtual std::tstring      GetInstanceName() const noexcept override { return Utils::ToString(mDate); }
     static std::tstring       GetClassName() { return _T("Dag"); }
@@ -58,6 +55,9 @@ public:
 private:
     Day& operator=(const Day&) = delete;
     Day(const Day&) = delete;
+
+    // Recalculates the points for the items in the day
+    void                      Recalculate(IModel& aModel, const PointsCalculator& aCalculator) override;
 
     Utils::Date               mDate;
     // 0 == no weight

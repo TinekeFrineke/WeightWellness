@@ -12,8 +12,8 @@ class Date;
 namespace weight {
 
 class Bonus;
+class IModel;
 class Item;
-class Model;
 class PointsCalculator;
 
 class IDay
@@ -44,7 +44,7 @@ public:
     virtual double GetTotalBonusPoints() const = 0;
 
     //// Recalculates the points for the items in the day
-    virtual void Recalculate(Model& aModel, const PointsCalculator& aCalculator) = 0;
+    virtual void Recalculate(IModel& aModel, const PointsCalculator& aCalculator) = 0;
 };
 
 } // namespace weight

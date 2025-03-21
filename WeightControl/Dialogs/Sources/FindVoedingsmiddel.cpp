@@ -2,12 +2,13 @@
 //
 
 #include "stdafx.h"
-#include ".\findvoedingsmiddel.h"
 
-#include <assert.h>
+#include "FindVoedingsmiddel.h"
+
 #include "WeightControl.h"
 #include "model/IDay.h"
 #include "model/IFoodDefinitionRepository.h"
+#include "model/IModel.h"
 #include "model/IRepository.h"
 #include "model/NutritionalValue.h"
 #include "model/Portie.h"
@@ -34,7 +35,7 @@ BEGIN_MESSAGE_MAP(CFindVoedingsmiddel, CDialog)
 END_MESSAGE_MAP()
 
 
-CFindVoedingsmiddel::CFindVoedingsmiddel(weight::Model& aModel,
+CFindVoedingsmiddel::CFindVoedingsmiddel(weight::IModel& aModel,
                                          std::unique_ptr<weight::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindVoedingsmiddel::IDD, pParent)

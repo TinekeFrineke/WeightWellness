@@ -5,21 +5,21 @@
 class CWnd;
 
 namespace weight {
-class Model;
+class IModel;
 class VMDefinitie;
 }
 
 class FoodDefinitionEditor
 {
 public:
-    FoodDefinitionEditor(weight::Model& model, CWnd* parent);
+    FoodDefinitionEditor(weight::IModel& model, CWnd* parent);
 
     bool Edit(weight::VMDefinitie& definition) const;
     std::unique_ptr<weight::VMDefinitie> Create() const;
 
 private:
     mutable bool m_isNewDefinition{ false };
-    weight::Model& m_model;
+    weight::IModel& m_model;
     CWnd* m_parent;
 };
 

@@ -2,18 +2,17 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 
+#include "personaliadialog.h"
+
+#include "model/IModel.h"
 #include "model/Personalia.h"
-#include "model/Model.h"
-
-#include ".\personaliadialog.h"
 
 
 // CPersonaliaDialog dialog
 
 IMPLEMENT_DYNAMIC(CPersonaliaDialog, CDialog)
-CPersonaliaDialog::CPersonaliaDialog(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
+CPersonaliaDialog::CPersonaliaDialog(weight::IModel& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CPersonaliaDialog::IDD, pParent),
     mModel(aModel),
     mGeslacht(GS_Mannelijk),

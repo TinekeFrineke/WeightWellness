@@ -4,8 +4,6 @@
 
 #include <assert.h>
 
-#include "model/Model.h"
-
 BEGIN_MESSAGE_MAP(weight::ComboBox, CComboBox)
     //{{AFX_MSG_MAP(VMDefinitiesList)
   //ON_WM_CREATE()

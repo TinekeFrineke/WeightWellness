@@ -7,7 +7,12 @@
 #include "controls/intedit.h"
 #include "controls/doubleedit.h"
 
-namespace weight { class Model; }
+#include "resource.h"
+
+namespace weight {
+class IModel;
+class Personalia;
+}
 
 // CPersonaliaDialog dialog
 
@@ -16,7 +21,7 @@ class CPersonaliaDialog : public CDialog, public TabPage
 	DECLARE_DYNAMIC(CPersonaliaDialog)
 
 public:
-  CPersonaliaDialog(weight::Model & aModel, CWnd* pParent = NULL);   // standard constructor
+  CPersonaliaDialog(weight::IModel & aModel, CWnd* pParent = NULL);   // standard constructor
 	virtual ~CPersonaliaDialog();
 
 // Dialog Data
@@ -51,7 +56,7 @@ private:
   CIntEdit          mLengte;
   CDoubleEdit       mCurrentWeight;
 
-  weight::Model &       mModel;
+  weight::IModel &       mModel;
   weight::Personalia *  mPersonalia;
 
   GESLACHT          mGeslacht;

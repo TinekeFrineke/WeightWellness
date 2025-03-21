@@ -2,13 +2,14 @@
 
 #include "stdafx.h"
 
+#include "model/IModel.h"
 #include "model/NutritionalValue.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "EditFoodDefDialog.h"
 
 
-FoodDefinitionEditor::FoodDefinitionEditor(weight::Model& model, CWnd* parent)
+FoodDefinitionEditor::FoodDefinitionEditor(weight::IModel& model, CWnd* parent)
     : m_model(model)
     , m_parent(parent)
 {

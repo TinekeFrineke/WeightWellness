@@ -31,10 +31,10 @@
 #include "model/Bonus.h"
 #include "model/IDay.h"
 #include "model/IFoodDefinitionRepository.h"
+#include "model/IModel.h"
 #include "model/IRepository.h"
 #include "model/IWeek.h"
 #include "model/ManualItem.h"
-#include "model/Model.h"
 #include "model/NutritionalValue.h"
 #include "model/Personalia.h"
 #include "model/Recept.h"
@@ -83,7 +83,7 @@ weight::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
     if (mModel.GetPersonalia().empty())
         return weight::Result::Ok;
 
-    weight::Personalia* personalia = mModel.GetActivePersonalia();
+    const weight::Personalia* personalia = mModel.GetActivePersonalia();
 
     if (personalia->GetUserName().empty())
         return weight::Result::Ok;

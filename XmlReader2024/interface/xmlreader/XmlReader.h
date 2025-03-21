@@ -3,8 +3,8 @@
 #include "Utilities/StrUtils.h"
 
 #include "model/IDay.h"
+#include "model/IModel.h"
 #include "model/Portie.h"
-#include "model/Model.h"
 
 #include "xmlbase/XmlBase.h"
 
@@ -36,7 +36,7 @@ namespace ww2024
 class XmlReader
 {
 public:
-    XmlReader(weight::Model& aModel);
+    explicit XmlReader(weight::IModel& aModel);
 
     weight::Result                      Read(const std::tstring& aDirectory);
 
@@ -60,7 +60,7 @@ private:
     std::unique_ptr<weight::ManualItem> Create(const ww2024::XmlHandmatigitem& aGerecht);
     std::unique_ptr<weight::IDay> Create(const ww2024::XmlDag& aDag);
     weight::Bonus Create(const ww2024::XmlBonuscell& aCell);
-    weight::Model& mModel;
+    weight::IModel& mModel;
 };
 
 

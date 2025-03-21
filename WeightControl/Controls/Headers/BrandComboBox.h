@@ -6,7 +6,7 @@
 
 namespace weight
 {
-class Model;
+class IModel;
 }
 
 class BrandComboBox: public weight::ComboBox

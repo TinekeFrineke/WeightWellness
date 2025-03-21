@@ -14,7 +14,7 @@ namespace weight
 
 
 class IDay;
-class Model;
+class IModel;
 
 class Week
     : public IWeek
@@ -45,16 +45,14 @@ public:
     void SetPoints(double aPoints) { mPoints = aPoints; }
     void SetSaveablePoints(double aPoints) { mSaveablePoints = aPoints; }
     void SetStartWeight(double aWeight) { mStartWeight = aWeight; }
-    void SetStrategy(STRATEGY_TYPE eType, Model& aModel);
+    void SetStrategy(STRATEGY_TYPE eType, IModel& aModel);
 
     double GetPointsLeft(const Utils::Date& aDate);
     double GetWeekPointsLeft(const Utils::Date& aDate);
 
-    // Recalculates the points for the days in the week
-    void Recalculate(Model& aModel);
-
 private:
-    friend class Model;
+    // Recalculates the points for the days in the week
+    void Recalculate(IModel& aModel);
 
     std::vector<std::unique_ptr<IDay>> mDays;
     Utils::Date mStartDate;

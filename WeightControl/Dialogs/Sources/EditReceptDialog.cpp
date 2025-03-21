@@ -2,17 +2,16 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
-#include ".\editreceptdialog.h"
+
+#include "EditReceptDialog.h"
 
 #include "model/Recept.h"
 
 // EditReceptDialog dialog
 
 IMPLEMENT_DYNAMIC(EditReceptDialog, CDialog)
-EditReceptDialog::EditReceptDialog(weight::Model & aModel, weight::Recept & aRecept, CWnd* pParent /*=NULL*/)
+EditReceptDialog::EditReceptDialog(weight::Recept & aRecept, CWnd* pParent /*=NULL*/)
 : CDialog (EditReceptDialog::IDD, pParent),
-  mModel  (aModel),
   mRecept (aRecept)
 {
 }

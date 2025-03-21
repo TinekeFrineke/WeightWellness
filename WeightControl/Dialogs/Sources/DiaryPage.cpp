@@ -3,9 +3,10 @@
 
 #include "stdafx.h"
 
-#include ".\diarypage.h"
+#include "DiaryPage.h"
 
 #include "model/IDay.h"
+#include "model/IModel.h"
 #include "model/IWeek.h"
 #include "model/LotFactory.h"
 #include "model/ManualItem.h"
@@ -63,7 +64,7 @@ BEGIN_MESSAGE_MAP(CDiaryPage, CDialog)
 END_MESSAGE_MAP()
 
 
-CDiaryPage::CDiaryPage(weight::Model& aModel, CWnd* pParent /*=nullptr*/)
+CDiaryPage::CDiaryPage(weight::IModel& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CDiaryPage::IDD, pParent),
     mModel(aModel),
     mItemList(aModel)

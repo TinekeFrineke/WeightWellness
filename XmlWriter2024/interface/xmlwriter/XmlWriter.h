@@ -7,9 +7,9 @@
 namespace weight
 {
 class IDay;
+class IModel;
 class IWeek;
 class ManualItem;
-class Model;
 class Portie;
 class PortionedLot;
 class Recept;
@@ -34,7 +34,7 @@ class XmlWriter
 {
 public:
     // TF_TODO Writer for bonus points
-    XmlWriter(weight::Model & aModel) : mModel(aModel) {}
+    XmlWriter(weight::IModel & aModel) : mModel(aModel) {}
 
     weight::Result Write(const std::tstring & aDirectory);
 
@@ -56,7 +56,7 @@ private:
 
     weight::Result Write(weight::IWeek & aWeek, const std::tstring & aFilename);
 
-    weight::Model& mModel;
+    weight::IModel& mModel;
 };
 
 

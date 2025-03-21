@@ -3,7 +3,6 @@
 #include "stdafx.h"
 
 #include "model/IFoodDefinitionRepository.h"
-#include "model/Model.h"
 #include "model/NutritionalValue.h"
 #include "model/Voedingsmiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"

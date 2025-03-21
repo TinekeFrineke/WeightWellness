@@ -6,7 +6,7 @@
 namespace weight
 {
 class Item;
-class Model;
+class IModel;
 }
 
 
@@ -56,7 +56,7 @@ class ItemList: public ListControl
 {
     // Construction
 public:
-    ItemList(weight::Model& aModel);
+    explicit ItemList(weight::IModel& aModel);
     virtual ~ItemList() override;
 
     // Operations
@@ -70,10 +70,10 @@ public:
 protected:
     DECLARE_MESSAGE_MAP()
 
-    weight::Model& GetModel() { return mModel; }
+    weight::IModel& GetModel() { return mModel; }
     void                            ClearItems();
 
 private:
     std::vector<std::unique_ptr<ItemListItem>>     mItems;
-    weight::Model& mModel;
+    weight::IModel& mModel;
 };

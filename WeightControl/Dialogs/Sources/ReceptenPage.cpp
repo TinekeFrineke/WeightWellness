@@ -20,7 +20,7 @@
 // It would be better if this happens only when the user presses "OK".
 
 IMPLEMENT_DYNAMIC(ReceptenPage, CDialog)
-ReceptenPage::ReceptenPage(weight::Model& aModel, CWnd* pParent)
+ReceptenPage::ReceptenPage(weight::IModel& aModel, CWnd* pParent)
     : CDialog(ReceptenPage::IDD, pParent),
     mReceptenList(aModel),
     mModel(aModel)

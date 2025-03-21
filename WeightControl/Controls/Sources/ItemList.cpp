@@ -89,7 +89,7 @@ weight::Item* ItemListItem::GetItem()
 /////////////////////////////////////////////////////////////////////////////
 // ItemList
 
-ItemList::ItemList(weight::Model& aModel)
+ItemList::ItemList(weight::IModel& aModel)
     : mModel(aModel)
 {
     SetNumberOfColumns(2);

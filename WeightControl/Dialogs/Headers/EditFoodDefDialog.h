@@ -1,12 +1,13 @@
 #pragma once
 
-#include "model/Model.h"
 #include "afxwin.h"
 #include "afxcmn.h"
 
 #include "controls/DoubleEdit.h"
 #include "controls/IntEdit.h"
 #include "controls/StringEdit.h"
+
+#include "model/IModel.h"
 
 #include "PortieList.h"
 #include "ComboBox.h"

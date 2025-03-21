@@ -9,7 +9,7 @@
 namespace weight
 {
 class CategorieNaam;
-class Model;
+class IModel;
 class ReceptDefinitie;
 }
 
@@ -32,7 +32,7 @@ class ReceptDefinitiesListItem;
 class ReceptDefinitiesList: public CListCtrl
 {
 public:
-    ReceptDefinitiesList(weight::Model& aModel);
+    explicit ReceptDefinitiesList(weight::IModel& aModel);
     ~ReceptDefinitiesList() override;
 
     void Initialize();
@@ -52,7 +52,7 @@ private:
                                          const ReceptDefinitiesFilter& aFilter);
 
     std::vector<std::unique_ptr<ReceptDefinitiesListItem>> mItems;
-    weight::Model& mModel;
+    weight::IModel& mModel;
     ReceptDefinitiesFilter      mFilter;
 };
 

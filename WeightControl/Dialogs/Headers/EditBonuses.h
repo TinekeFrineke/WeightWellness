@@ -1,17 +1,19 @@
 #pragma once
+
 #include "bonuslist.h"
+#include "resource.h"
 
 
 // CEditBonuses dialog
 
-namespace weight { class Model; }
+namespace weight { class IModel; }
 
 class CEditBonuses : public CDialog
 {
 	DECLARE_DYNAMIC(CEditBonuses)
 
 public:
-	CEditBonuses(weight::Model & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent = NULL);   // standard constructor
+	CEditBonuses(weight::IModel & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent = NULL);   // standard constructor
 	virtual ~CEditBonuses();
 
 // Dialog Data
@@ -30,14 +32,13 @@ public:
   afx_msg void OnBnClickedAdd();
   afx_msg void OnBnClickedEdit();
   afx_msg void OnBnClickedDelete();
+  afx_msg void OnNMDblclkBonuslistjbj(NMHDR* pNMHDR, LRESULT* pResult);
 
 private:
   void                  EditBonus();
 
-  weight::Model &           mModel;
-  double                mWeight;
-  std::list<weight::Bonus>  mBonuses;
-  BonusList             mBonusList;
-public:
-  afx_msg void OnNMDblclkBonuslistjbj(NMHDR *pNMHDR, LRESULT *pResult);
+  weight::IModel& mModel;
+  double mWeight;
+  std::list<weight::Bonus> mBonuses;
+  BonusList mBonusList;
 };

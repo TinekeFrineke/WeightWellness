@@ -4,8 +4,8 @@
 
 #include <algorithm>
 
+#include "model/IModel.h"
 #include "model/Portie.h"
-#include "model/Model.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "EditPortieDialog.h"

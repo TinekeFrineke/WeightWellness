@@ -2,17 +2,19 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
+
 #include "EditBonuses.h"
 
+#include "model/IModel.h"
+
 #include "EditBonusDialog.h"
-#include ".\editbonuses.h"
+
 
 
 // CEditBonuses dialog
 
 IMPLEMENT_DYNAMIC(CEditBonuses, CDialog)
-CEditBonuses::CEditBonuses(weight::Model & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent /*=NULL*/)
+CEditBonuses::CEditBonuses(weight::IModel & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent /*=NULL*/)
 : CDialog(CEditBonuses::IDD, pParent),
   mBonuses  (aBonuses),
   mModel    (aModel),

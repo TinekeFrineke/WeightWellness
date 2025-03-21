@@ -7,7 +7,7 @@ namespace weight
 {
 
 
-class Model;
+class IModel;
 
 
 class ComboBox: public CComboBox

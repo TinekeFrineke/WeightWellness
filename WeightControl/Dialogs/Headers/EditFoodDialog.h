@@ -12,8 +12,8 @@
 
 namespace weight
 {
+class IModel;
 class Lot;
-class Model;
 class PointsCalculator;
 class Portie;
 class Voedingsmiddel;

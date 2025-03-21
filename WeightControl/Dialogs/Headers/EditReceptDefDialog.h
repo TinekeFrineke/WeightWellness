@@ -8,8 +8,8 @@
 
 namespace weight
 {
+class IModel;
 class ReceptDefinitie;
-class Model;
 class Voedingsmiddel;
 }
 
@@ -20,7 +20,7 @@ class EditReceptDefDialog: public CDialog
     DECLARE_DYNAMIC(EditReceptDefDialog)
 
 public:
-    EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent = NULL);   // standard constructor
+    EditReceptDefDialog(weight::IModel& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent = NULL);   // standard constructor
     virtual ~EditReceptDefDialog();
 
     // Dialog Data
@@ -40,7 +40,7 @@ protected:
 private:
     void                  EditSelectedItem();
 
-    weight::Model& mModel;
+    weight::IModel& mModel;
     weight::ReceptDefinitie& mRecept;
 
     ItemList              mItemList;

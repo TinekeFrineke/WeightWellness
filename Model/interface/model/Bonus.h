@@ -2,18 +2,17 @@
 
 #include <list>
 #include <vector>
-#include "Entity.h"
+
 #include "Utilities/Date.h"
+
+#include "Entity.h"
+
 
 namespace weight
 {
 
 class BonusPointsMap;
-//class Item;
-//class Model;
-//class PointsCalculator;
-//
-//
+
 class Bonus
 {
 public:

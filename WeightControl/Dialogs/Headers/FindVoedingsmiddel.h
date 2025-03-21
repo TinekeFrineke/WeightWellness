@@ -27,7 +27,7 @@ class CFindVoedingsmiddel: public CDialog
     DECLARE_DYNAMIC(CFindVoedingsmiddel)
 
 public:
-    CFindVoedingsmiddel(weight::Model& aModel,
+    CFindVoedingsmiddel(weight::IModel& aModel,
                         std::unique_ptr<weight::ILotFactory> lotFactory,
                         CWnd* pParent = nullptr);   // standard constructor
     virtual ~CFindVoedingsmiddel();

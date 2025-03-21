@@ -11,7 +11,7 @@ namespace weight
 {
 class IDay;
 class Item;
-class Model;
+class IModel;
 }
 
 
@@ -22,7 +22,7 @@ class CDiaryItemList: public ItemList
 {
     // Construction
 public:
-    CDiaryItemList(weight::Model& aModel);
+    explicit CDiaryItemList(weight::IModel& aModel);
     virtual ~CDiaryItemList();
 
     void View(weight::IDay* aDay);

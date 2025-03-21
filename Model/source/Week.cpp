@@ -142,7 +142,7 @@ double Week::GetWeekPointsLeft(const Utils::Date& aDate)
 }
 
 
-void Week::SetStrategy(STRATEGY_TYPE eType, Model& aModel)
+void Week::SetStrategy(STRATEGY_TYPE eType, IModel& aModel)
 {
     if (mStrategy == eType)
         return;
@@ -155,7 +155,7 @@ void Week::SetStrategy(STRATEGY_TYPE eType, Model& aModel)
 
 
 // Recalculates the points for the days in the week
-void Week::Recalculate(Model& aModel)
+void Week::Recalculate(IModel& aModel)
 {
     PointsCalculator calculator;
     calculator.SetStrategy(mStrategy);

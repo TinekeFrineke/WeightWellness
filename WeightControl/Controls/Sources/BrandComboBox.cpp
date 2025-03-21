@@ -4,8 +4,6 @@
 
 #include <assert.h>
 
-#include "model/Model.h"
-
 
 BrandComboBox::BrandComboBox(const std::vector<std::wstring>& availableTexts, bool aIsForFiltering,
                              const std::tstring& anInitialBrand)

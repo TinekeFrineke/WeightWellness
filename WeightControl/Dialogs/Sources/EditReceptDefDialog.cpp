@@ -2,12 +2,12 @@
 //
 
 #include "stdafx.h"
-#include "WeightControl.h"
 #include ".\editreceptdefdialog.h"
 
 #include "FindVoedingsmiddel.h"
 #include "ItemEditVisitor.h"
 
+#include "model/IModel.h"
 #include "model/LotFactory.h"
 #include "model/ReceptDefinitie.h"
 
@@ -26,7 +26,7 @@ BEGIN_MESSAGE_MAP(EditReceptDefDialog, CDialog)
 END_MESSAGE_MAP()
 
 
-EditReceptDefDialog::EditReceptDefDialog(weight::Model& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent)
+EditReceptDefDialog::EditReceptDefDialog(weight::IModel& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent)
     : CDialog(EditReceptDefDialog::IDD, pParent)
     , mModel(aModel)
     , mItemList(aModel)

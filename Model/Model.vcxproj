@@ -93,6 +93,7 @@
   <ItemGroup>
     <ClInclude Include="header\Day.h" />
     <ClInclude Include="header\FoodDefinitionRepository.h" />
+    <ClInclude Include="header\Model.h" />
     <ClInclude Include="header\NutritionalValue.h" />
     <ClInclude Include="header\RecipeRepository.h" />
     <ClInclude Include="header\UniqueRepository.h" />
@@ -114,7 +115,6 @@
     <ClInclude Include="interface\model\Lot.h" />
     <ClInclude Include="interface\model\LotFactory.h" />
     <ClInclude Include="interface\model\ManualItem.h" />
-    <ClInclude Include="interface\model\Model.h" />
     <ClInclude Include="interface\model\ModelException.h" />
     <ClInclude Include="interface\model\ModelFactory.h" />
     <ClInclude Include="interface\model\Naam.h" />

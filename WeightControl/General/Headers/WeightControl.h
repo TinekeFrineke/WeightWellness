@@ -4,38 +4,42 @@
 #pragma once
 
 #ifndef __AFXWIN_H__
-	#error include 'stdafx.h' before including this file for PCH
+#error include 'stdafx.h' before including this file for PCH
 #endif
+
+#include <memory>
+#include <string>
 
 #include "resource.h"		// main symbols
 
-#include "model/Model.h"
-
+namespace weight {
+class IModel;
+}
 
 // CWWApplication:
 // See WeightWatchers.cpp for the implementation of this class
 //
 
-class CWWApplication : public CWinApp
+class CWWApplication: public CWinApp
 {
 public:
-	CWWApplication();
-  ~CWWApplication();
+    CWWApplication();
+    ~CWWApplication();
 
-  std::tstring      GetDataDirectory() const { return mDataDirectory; }
-  std::tstring      GetUserDirectory() const;
+    std::wstring      GetDataDirectory() const { return mDataDirectory; }
+    std::wstring      GetUserDirectory() const;
 
-// Overrides
+    // Overrides
 public:
-	virtual BOOL      InitInstance();
+    virtual BOOL      InitInstance();
 
-// Implementation
+    // Implementation
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 
 private:
-  weight::Model         mModel;
-  std::tstring      mDataDirectory;
+    std::unique_ptr<weight::IModel> mModel;
+    std::wstring   mDataDirectory;
 };
 
 extern CWWApplication theApp;

@@ -10,7 +10,7 @@
 namespace weight
 {
 class Bonus;
-class Model;
+class IModel;
 }
 
 
@@ -32,7 +32,7 @@ class BonusList: public ListControl/* , public Observer*/
 {
     // Construction
 public:
-    BonusList(weight::Model& aModel);
+    BonusList(weight::IModel& aModel);
     virtual                         ~BonusList();
 
     // // Operations
@@ -50,10 +50,10 @@ protected:
 
     DECLARE_MESSAGE_MAP()
 
-    weight::Model& GetModel() { return mModel; }
+    weight::IModel& GetModel() { return mModel; }
     void ClearItems();
 
 private:
     std::vector<std::unique_ptr<BonusListItem>> mItems;
-    weight::Model& mModel;
+    weight::IModel& mModel;
 };

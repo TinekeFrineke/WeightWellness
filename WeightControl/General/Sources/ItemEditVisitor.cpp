@@ -5,8 +5,8 @@
 
 #include "ItemEditVisitor.h"
 
+#include "model/IModel.h"
 #include "model/ManualItem.h"
-#include "model/Model.h"
 #include "model/NutritionalValue.h"
 #include "model/Recept.h"
 #include "model/ReceptDefinitie.h"
@@ -33,7 +33,7 @@ void ItemEditVisitor::Visit(weight::Recept& aRecept)
         mModel.Add(std::move(newDefinition));
     }
 
-    EditReceptDialog dialog(mModel, aRecept, /**definitie,*/ mParent);
+    EditReceptDialog dialog(aRecept, mParent);
     dialog.DoModal();
 }
 

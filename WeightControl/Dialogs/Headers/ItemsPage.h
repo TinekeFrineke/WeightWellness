@@ -1,10 +1,11 @@
 #pragma once
 
-#include "model/Model.h"
 #include "afxcmn.h"
 
 #include "controls/StringEdit.h"
 #include "controls/TabPage.h"
+
+#include "model/IModel.h"
 
 #include "VMDefinitiesList.h"
 #include "ComboBox.h"
@@ -18,7 +19,7 @@ class CItemsPage: public CDialog, public TabPage
     DECLARE_DYNAMIC(CItemsPage)
 
 public:
-    CItemsPage(weight::Model& aModel, CWnd* pParent = NULL);   // standard constructor
+    explicit CItemsPage(weight::IModel& aModel, CWnd* pParent = NULL);   // standard constructor
     virtual ~CItemsPage();
 
     // Dialog Data
@@ -52,7 +53,7 @@ private:
     weight::ComboBox    mCategory;
     BrandComboBox       mMerk;
 
-    weight::Model& mModel;
+    weight::IModel& mModel;
     VMDefinitiesList    mItemsList;
 
     bool                mUpdatingFilter;

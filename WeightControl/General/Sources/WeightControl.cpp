@@ -14,6 +14,8 @@
 
 #include "WWDialog.h"
 
+#include "model/IModel.h"
+#include "model/ModelFactory.h"
 #include "model/Personalia.h"
 #include "xmlreader/XmlReader.h"
 #include "xmlwriter/XmlWriter.h"
@@ -29,6 +31,7 @@ END_MESSAGE_MAP()
 
 // CWWApplication construction
 CWWApplication::CWWApplication()
+    : mModel(weight::ModelFactory().CreateModel())
 {
     //_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 
@@ -77,9 +80,9 @@ BOOL CWWApplication::InitInstance()
 
     mDataDirectory = inifile[_T("General")][_T("DataPath")];
 
-    ww2024::XmlReader reader(mModel);
+    ww2024::XmlReader reader(*mModel);
     reader.Read(mDataDirectory);
-    if (mModel.GetActivePersonalia() == NULL) {
+    if (mModel->GetActivePersonalia() == nullptr) {
         NewNameDialog dialog(NULL);
         INT_PTR nResponse = dialog.DoModal();
         if (nResponse == IDOK)
@@ -91,7 +94,7 @@ BOOL CWWApplication::InitInstance()
             }
 
             try {
-                mModel.AddPersonalia(name);
+                mModel->AddPersonalia(name);
             }
             catch (const std::runtime_error& error) {
                 std::tstring terror(Str::ToTString(error.what()));
@@ -108,9 +111,9 @@ BOOL CWWApplication::InitInstance()
         }
     }
 
-    mModel.SetStrategy(mModel.GetActivePersonalia()->GetStrategy());
+    mModel->SetStrategy(mModel->GetActivePersonalia()->GetStrategy());
 
-    CWWDialog dlg(mModel);
+    CWWDialog dlg(*mModel);
     m_pMainWnd = &dlg;
     INT_PTR nResponse = dlg.DoModal();
     if (nResponse == IDOK)
@@ -130,17 +133,17 @@ BOOL CWWApplication::InitInstance()
 }
 
 
-std::tstring CWWApplication::GetUserDirectory() const
+std::wstring CWWApplication::GetUserDirectory() const
 {
-    assert(mModel.GetPersonalia().size() > 0);
-    return *(Path(GetDataDirectory()) + mModel.GetActivePersonalia()->GetUserName());
+    assert(!mModel->GetPersonalia().empty());
+    return *(Path(GetDataDirectory()) + mModel->GetActivePersonalia()->GetUserName());
 }
 
 
 CWWApplication::~CWWApplication()
 {
     try {
-        ww2024::XmlWriter writer(mModel);
+        ww2024::XmlWriter writer(*mModel);
         writer.Write(mDataDirectory);
     }
     catch (const XERCES_CPP_NAMESPACE::IOException& error) {
