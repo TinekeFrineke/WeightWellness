@@ -66,8 +66,7 @@ END_MESSAGE_MAP()
 
 CDiaryPage::CDiaryPage(weight::IModel& aModel, CWnd* pParent /*=nullptr*/)
     : CDialog(CDiaryPage::IDD, pParent),
-    mModel(aModel),
-    mItemList(aModel)
+    mModel(aModel)
 {
 }
 
@@ -164,7 +163,10 @@ void CDiaryPage::OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult)
 
 void CDiaryPage::OnBnClickedAddFood()
 {
-    CFindVoedingsmiddel dialog(mModel, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
+    CFindVoedingsmiddel dialog(*mModel.GetFoodDefinitionRepository(),
+                               *mModel.GetCategoryRepository(),
+                               *mModel.GetBrandRepository(),
+                               std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {

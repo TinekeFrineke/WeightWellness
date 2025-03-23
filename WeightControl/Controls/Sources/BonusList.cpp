@@ -104,8 +104,7 @@ void BonusListItem::Write(CListCtrl& aControl, int iItemIndex)
 /////////////////////////////////////////////////////////////////////////////
 // BonusList
 
-BonusList::BonusList(weight::IModel& aModel)
-    : mModel(aModel)
+BonusList::BonusList()
 {
     SetNumberOfColumns(3);
     SetColumnInfo(0, ColInfo(100, LVCFMT_LEFT, _T("Naam")));

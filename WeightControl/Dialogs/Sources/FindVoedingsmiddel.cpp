@@ -8,7 +8,6 @@
 #include "WeightControl.h"
 #include "model/IDay.h"
 #include "model/IFoodDefinitionRepository.h"
-#include "model/IModel.h"
 #include "model/IRepository.h"
 #include "model/NutritionalValue.h"
 #include "model/Portie.h"
@@ -35,13 +34,15 @@ BEGIN_MESSAGE_MAP(CFindVoedingsmiddel, CDialog)
 END_MESSAGE_MAP()
 
 
-CFindVoedingsmiddel::CFindVoedingsmiddel(weight::IModel& aModel,
+CFindVoedingsmiddel::CFindVoedingsmiddel(const weight::IFoodDefinitionRepository& foodDefinitions,
+                                         const weight::IRepository& categoryRepositiory,
+                                         const weight::IRepository& brandRepository,
                                          std::unique_ptr<weight::ILotFactory> lotFactory,
                                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindVoedingsmiddel::IDD, pParent)
-    , mItemList(aModel.GetFoodDefinitionRepository()->GetAll())
-    , mCategorieBox(aModel.GetCategoryRepository()->Get())
-    , mMerkBox(aModel.GetBrandRepository()->Get(), true)
+    , mItemList(foodDefinitions.GetAll())
+    , mCategorieBox(categoryRepositiory.Get())
+    , mMerkBox(brandRepository.Get(), true)
     , mFood(nullptr)
     , m_lotFactory(std::move(lotFactory))
     , mDefinitie(nullptr)

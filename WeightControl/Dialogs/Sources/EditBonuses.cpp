@@ -18,8 +18,7 @@ CEditBonuses::CEditBonuses(weight::IModel & aModel, const std::list<weight::Bonu
 : CDialog(CEditBonuses::IDD, pParent),
   mBonuses  (aBonuses),
   mModel    (aModel),
-  mWeight   (aWeight),
-  mBonusList(aModel)
+  mWeight   (aWeight)
 {
 }
 

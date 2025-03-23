@@ -22,8 +22,8 @@ class CDiaryItemList: public ItemList
 {
     // Construction
 public:
-    explicit CDiaryItemList(weight::IModel& aModel);
-    virtual ~CDiaryItemList();
+    CDiaryItemList();
+    ~CDiaryItemList() override;
 
     void View(weight::IDay* aDay);
 

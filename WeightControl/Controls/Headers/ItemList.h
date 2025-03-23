@@ -15,7 +15,7 @@ class ListControl: public CListCtrl
 public:
     ListControl();
 
-    void                            SetNumberOfColumns(int aColumns);
+    void SetNumberOfColumns(int aColumns);
 
     struct ColInfo
     {
@@ -56,7 +56,7 @@ class ItemList: public ListControl
 {
     // Construction
 public:
-    explicit ItemList(weight::IModel& aModel);
+    ItemList();
     virtual ~ItemList() override;
 
     // Operations
@@ -70,10 +70,8 @@ public:
 protected:
     DECLARE_MESSAGE_MAP()
 
-    weight::IModel& GetModel() { return mModel; }
-    void                            ClearItems();
+    void ClearItems();
 
 private:
-    std::vector<std::unique_ptr<ItemListItem>>     mItems;
-    weight::IModel& mModel;
+    std::vector<std::unique_ptr<ItemListItem>> mItems;
 };

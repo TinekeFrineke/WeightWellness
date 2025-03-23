@@ -29,7 +29,6 @@ END_MESSAGE_MAP()
 EditReceptDefDialog::EditReceptDefDialog(weight::IModel& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent)
     : CDialog(EditReceptDefDialog::IDD, pParent)
     , mModel(aModel)
-    , mItemList(aModel)
     , mRecept(aRecept)
 {
 }
@@ -83,7 +82,8 @@ void EditReceptDefDialog::EditSelectedItem()
 
 void EditReceptDefDialog::OnBnClickedAdd()
 {
-    CFindVoedingsmiddel dialog(mModel, std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
+    CFindVoedingsmiddel dialog(*mModel.GetFoodDefinitionRepository(), *mModel.GetCategoryRepository(), *mModel.GetBrandRepository(),
+                               std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {

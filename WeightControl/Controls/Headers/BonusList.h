@@ -32,16 +32,15 @@ class BonusList: public ListControl/* , public Observer*/
 {
     // Construction
 public:
-    BonusList(weight::IModel& aModel);
-    virtual                         ~BonusList();
+    BonusList();
+    ~BonusList() override;
 
-    // // Operations
-    void                            View(const std::list<weight::Bonus>& aBonuses);
+    // Operations
+    void View(const std::list<weight::Bonus>& aBonuses);
 
     BonusListItem* GetItemAt(int iIndex);
     BonusListItem* GetSelectedItem();
-    //void                            SelectItem(const weight::Bonus & anItem);
-    void                            SelectItem(int iIndex, bool bSelect);
+    void SelectItem(int iIndex, bool bSelect);
 
 protected:
     //{{AFX_MSG(BonusList)
@@ -50,10 +49,8 @@ protected:
 
     DECLARE_MESSAGE_MAP()
 
-    weight::IModel& GetModel() { return mModel; }
     void ClearItems();
 
 private:
     std::vector<std::unique_ptr<BonusListItem>> mItems;
-    weight::IModel& mModel;
 };

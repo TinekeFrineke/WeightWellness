@@ -23,29 +23,28 @@ public:
     Week(const Utils::Date& aStartDate,
          const Utils::Date& aEndDate) noexcept;
 
-    ~Week();
+    ~Week() override;
 
-    IDay* AddDay(const Utils::Date& date);
-    bool Add(std::unique_ptr<IDay> day);
+    bool Add(std::unique_ptr<IDay> day) override;
 
-    const std::vector<std::unique_ptr<IDay>>& GetDays() const { return mDays; }
+    const std::vector<std::unique_ptr<IDay>>& GetDays() const override { return mDays; }
 
-    IDay* GetDay(const Utils::Date& aDay);
+    IDay* GetDay(const Utils::Date& aDay) override;
 
-    bool Includes(const Utils::Date& aDay) const;
+    bool Includes(const Utils::Date& aDay) const override;
 
-    Utils::Date GetStartDate() const { return mStartDate; }
-    Utils::Date GetEndDate() const { return mEndDate; }
-    double GetStartWeight() const { return mStartWeight; }
-    double GetPoints() const { return mPoints; }
-    double GetSaveablePoints() const { return mSaveablePoints; }
-    STRATEGY_TYPE GetStrategy() const { return mStrategy; }
+    Utils::Date GetStartDate() const override { return mStartDate; }
+    Utils::Date GetEndDate() const override { return mEndDate; }
+    double GetStartWeight() const override { return mStartWeight; }
+    double GetPoints() const override { return mPoints; }
+    double GetSaveablePoints() const override { return mSaveablePoints; }
+    STRATEGY_TYPE GetStrategy() const override { return mStrategy; }
 
     bool SetEndDate(const Utils::Date& aDate);
-    void SetPoints(double aPoints) { mPoints = aPoints; }
-    void SetSaveablePoints(double aPoints) { mSaveablePoints = aPoints; }
-    void SetStartWeight(double aWeight) { mStartWeight = aWeight; }
-    void SetStrategy(STRATEGY_TYPE eType, IModel& aModel);
+    void SetPoints(double aPoints) override { mPoints = aPoints; }
+    void SetSaveablePoints(double aPoints) override { mSaveablePoints = aPoints; }
+    void SetStartWeight(double aWeight) override { mStartWeight = aWeight; }
+    void SetStrategy(STRATEGY_TYPE eType, IModel& aModel) override;
 
     double GetPointsLeft(const Utils::Date& aDate);
     double GetWeekPointsLeft(const Utils::Date& aDate);

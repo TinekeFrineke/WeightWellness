@@ -89,8 +89,7 @@ weight::Item* ItemListItem::GetItem()
 /////////////////////////////////////////////////////////////////////////////
 // ItemList
 
-ItemList::ItemList(weight::IModel& aModel)
-    : mModel(aModel)
+ItemList::ItemList()
 {
     SetNumberOfColumns(2);
     SetColumnInfo(0, ColInfo(80, LVCFMT_LEFT, _T("Naam")));

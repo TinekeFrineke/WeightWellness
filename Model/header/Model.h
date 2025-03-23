@@ -54,10 +54,10 @@ public:
     VMDefinitie* FindVoedingsmiddelDefinitie(const std::wstring& aName);
     ReceptDefinitie* FindReceptDefinitie(const std::wstring& aName);
 
-    std::shared_ptr<IRepository> GetUnitRepository() const noexcept;
-    std::shared_ptr<IRepository> GetCategoryRepository() const noexcept;
-    std::shared_ptr<IRepository> GetBrandRepository() const noexcept;
-    std::shared_ptr<IFoodDefinitionRepository> GetFoodDefinitionRepository() const noexcept;
+    std::shared_ptr<IRepository> GetUnitRepository() const noexcept override;
+    std::shared_ptr<IRepository> GetCategoryRepository() const noexcept override;
+    std::shared_ptr<IRepository> GetBrandRepository() const noexcept override;
+    std::shared_ptr<IFoodDefinitionRepository> GetFoodDefinitionRepository() const noexcept override;
 
     const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const noexcept { return mReceptDefinities; }
     const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept { return mWeeks; }

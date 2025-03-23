@@ -49,9 +49,7 @@ public:
 
     virtual bool Remove(const VMDefinitie* aDefinitie) = 0;
     virtual bool Remove(const ReceptDefinitie* aRecept) = 0;
-    //bool Remove(const Personalia* aPersonalia);
 
-    //VMDefinitie* FindVoedingsmiddelDefinitie(const std::wstring& aName);
     virtual ReceptDefinitie* FindReceptDefinitie(const std::wstring& aName) = 0;
 
     virtual std::shared_ptr<IRepository> GetUnitRepository() const noexcept = 0;
@@ -63,7 +61,6 @@ public:
     virtual const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept = 0;
     virtual const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept = 0;
     virtual const BonusPointsMap& GetBonusPointsMap() const noexcept = 0;
-    //BonusPointsMap& GetBonusPointsMap() noexcept { return mBonusPointsMap; }
 
     virtual double GetPuntenTotaal(STRATEGY_TYPE eType) const = 0;
     virtual double GetWeekPuntenTotaal() const = 0;

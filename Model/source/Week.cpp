@@ -43,25 +43,6 @@ IDay* Week::GetDay(const Utils::Date& aDay)
 }
 
 
-IDay* Week::AddDay(const Utils::Date& date)
-{
-    if (date < mStartDate || date > mEndDate)
-        return nullptr;
-
-    auto dayIter = std::find_if(mDays.begin(), mDays.end(), [date] (const std::unique_ptr<IDay>& day) noexcept {
-        return day->GetDate() == date;
-    });
-    if (dayIter != mDays.end())
-        return dayIter->get();
-
-    auto newDay = ModelFactory().CreateDay(date);
-    auto dayPtr = newDay.get();
-    if (Add(std::move(newDay)))
-        return dayPtr;
-
-    return nullptr;
-}
-
 bool Week::Add(std::unique_ptr<IDay> aDay)
 {
     if (aDay->GetDate() < mStartDate || aDay->GetDate() > mEndDate)
