@@ -9,70 +9,68 @@ namespace weight
 class PointsPerDuration
 {
 public:
-  // Calculates by adding values if necessary
-  int                         operator[](int aDuration) const;
-  // Adds element if necessary
-  int &                       operator[](int aDuration);
+    // Calculates by adding values if necessary
+    int operator[](int aDuration) const;
+    // Adds element if necessary
+    int& operator[](int aDuration);
 
-  //void                        Debug()const;
+    //void                        Debug()const;
 
 private:
-  struct BonusDuration
-  {
-                              BonusDuration(int aDuration, int aPoints)
-                                : mDuration(aDuration),
-                                  mPoints(aPoints) {}
+    struct BonusDuration
+    {
+        BonusDuration(int aDuration, int aPoints)
+            : mDuration(aDuration),
+            mPoints(aPoints) {}
 
-    int                       mDuration;
-    int                       mPoints;
-  };
+        int                       mDuration;
+        int                       mPoints;
+    };
 
-  typedef std::list<BonusDuration> BonusDurationList;
+    typedef std::list<BonusDuration> BonusDurationList;
 
-  BonusDurationList   mBonusDurations;
+    BonusDurationList   mBonusDurations;
 };
 
 
 class PointsPerDurationAndWeight
 {
 public:
-  bool                        IsEmpty() const;
+    bool                        IsEmpty() const;
 
-  PointsPerDuration &         operator[](int aWeight);
-  const PointsPerDuration &   operator[](int aWeight) const;
+    PointsPerDuration& operator[](int aWeight);
+    const PointsPerDuration& operator[](int aWeight) const;
 
 private:
-  struct BonusDurationWeight
-  {
-                              BonusDurationWeight(int aWeight) : mWeight(aWeight) {}
+    struct BonusDurationWeight
+    {
+        BonusDurationWeight(int aWeight) : mWeight(aWeight) {}
 
-    PointsPerDuration         mPointsPerDuration;
-    int                       mWeight;
-  };
+        PointsPerDuration         mPointsPerDuration;
+        int                       mWeight;
+    };
 
-  typedef std::list<BonusDurationWeight> BonusDurationWeightList;
+    typedef std::list<BonusDurationWeight> BonusDurationWeightList;
 
-  BonusDurationWeightList     mBonusDurationWeights;
+    BonusDurationWeightList     mBonusDurationWeights;
 };
 
 class BonusPointsMap
 {
 public:
-  enum class MOVEMENT_INTENSITY { MI_Low, MI_Medium, MI_High };
+    enum class MOVEMENT_INTENSITY { MI_Low, MI_Medium, MI_High };
 
-  bool                        Has(MOVEMENT_INTENSITY anIntensity) const;
-  bool                        IsEmpty(MOVEMENT_INTENSITY anIntensity) const;
+    bool                        Has(MOVEMENT_INTENSITY anIntensity) const;
+    bool                        IsEmpty(MOVEMENT_INTENSITY anIntensity) const;
 
-  PointsPerDurationAndWeight &operator[](MOVEMENT_INTENSITY anIntensity);
-  const PointsPerDurationAndWeight &
-                              operator[](MOVEMENT_INTENSITY anIntensity) const;
-
-  //void                        Debug() const;
+    PointsPerDurationAndWeight& operator[](MOVEMENT_INTENSITY anIntensity);
+    const PointsPerDurationAndWeight&
+        operator[](MOVEMENT_INTENSITY anIntensity) const;
 
 private:
-  typedef std::map<MOVEMENT_INTENSITY, PointsPerDurationAndWeight> IntensityPointsMap;
+    typedef std::map<MOVEMENT_INTENSITY, PointsPerDurationAndWeight> IntensityPointsMap;
 
-  IntensityPointsMap          mPointsMap;
+    IntensityPointsMap mPointsMap;
 };
 
 } // namespace weight

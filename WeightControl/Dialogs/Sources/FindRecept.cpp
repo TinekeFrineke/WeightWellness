@@ -15,15 +15,14 @@
 // CFindRecept dialog
 
 IMPLEMENT_DYNAMIC(CFindRecept, CDialog)
-CFindRecept::CFindRecept(weight::IModel& aModel,
+CFindRecept::CFindRecept(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipies,
                          weight::ReceptDefinitie* aDefinitie,
                          CWnd* pParent /*=nullptr*/)
-    : CDialog(CFindRecept::IDD, pParent),
-    mItemList(aModel.GetRecipeDefinitionRepository()),
-    mModel(aModel),
-    mDefinitie(aDefinitie),
-    mUpdating(false),
-    mUpdatingFilter(false)
+    : CDialog(CFindRecept::IDD, pParent)
+    , m_recipies(recipies)
+    , mDefinitie(aDefinitie)
+    , mUpdating(false)
+    , mUpdatingFilter(false)
 {
 }
 
@@ -54,7 +53,7 @@ END_MESSAGE_MAP()
 void CFindRecept::UpdateItemFilter()
 {
     mItemList.SetFilter(ReceptDefinitiesFilter(mNaam.GetValue()));
-    mItemList.View(mModel.GetRecipeDefinitionRepository()->GetAll());
+    mItemList.View(m_recipies->GetAll());
 }
 
 
@@ -66,7 +65,7 @@ BOOL CFindRecept::OnInitDialog()
         return FALSE;
 
     mItemList.Initialize();
-    mItemList.View(mModel.GetRecipeDefinitionRepository()->GetAll());
+    mItemList.View(m_recipies->GetAll());
 
     mPorties.SetValue(1);
     mPoints.SetValue(0);

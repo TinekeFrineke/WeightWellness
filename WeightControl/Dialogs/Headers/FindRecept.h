@@ -27,7 +27,7 @@ class CFindRecept: public CDialog
     DECLARE_DYNAMIC(CFindRecept)
 
 public:
-    CFindRecept(weight::IModel& aModel,
+    CFindRecept(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipies,
                 weight::ReceptDefinitie* aDefinitie,
                 CWnd* pParent = NULL);   // standard constructor
     virtual               ~CFindRecept();
@@ -61,7 +61,7 @@ private:
     CIntEdit              mPorties;
     CDoubleEdit           mPoints;
 
-    weight::IModel& mModel;
+    std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipies;
     std::unique_ptr<weight::Recept> mRecept;
     weight::ReceptDefinitie* mDefinitie;
 

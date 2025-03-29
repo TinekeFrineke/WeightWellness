@@ -72,8 +72,7 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 }
 
 
-ReceptDefinitiesList::ReceptDefinitiesList(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes)
-    : m_recipes(std::move(recipes))
+ReceptDefinitiesList::ReceptDefinitiesList()
 {
 }
 

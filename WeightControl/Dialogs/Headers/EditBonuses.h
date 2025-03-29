@@ -6,14 +6,16 @@
 
 // CEditBonuses dialog
 
-namespace weight { class IModel; }
+namespace weight {
+class BonusPointsMap;
+}
 
 class CEditBonuses : public CDialog
 {
 	DECLARE_DYNAMIC(CEditBonuses)
 
 public:
-	CEditBonuses(weight::IModel & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent = NULL);   // standard constructor
+	CEditBonuses(std::shared_ptr<weight::BonusPointsMap> bonusPoints, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent = NULL);   // standard constructor
 	virtual ~CEditBonuses();
 
 // Dialog Data
@@ -37,8 +39,8 @@ public:
 private:
   void                  EditBonus();
 
-  weight::IModel& mModel;
   double mWeight;
+  std::shared_ptr<weight::BonusPointsMap> m_bonusPointsMap;
   std::list<weight::Bonus> mBonuses;
   BonusList mBonusList;
 };

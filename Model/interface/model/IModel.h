@@ -56,7 +56,7 @@ public:
     //virtual const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const noexcept = 0;
     virtual const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept = 0;
     virtual const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept = 0;
-    virtual const BonusPointsMap& GetBonusPointsMap() const noexcept = 0;
+    virtual std::shared_ptr<BonusPointsMap> GetBonusPointsMap() const noexcept = 0;
 
     virtual double GetPuntenTotaal(STRATEGY_TYPE eType) const = 0;
     virtual double GetWeekPuntenTotaal() const = 0;

@@ -20,7 +20,6 @@
 IMPLEMENT_DYNAMIC(ReceptenPage, CDialog)
 ReceptenPage::ReceptenPage(weight::IModel& aModel, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, CWnd* pParent)
     : CDialog(ReceptenPage::IDD, pParent)
-    , mReceptenList(recipes)
     , mModel(aModel)
     , m_recipes(recipes)
 {

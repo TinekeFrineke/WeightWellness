@@ -58,8 +58,7 @@ public:
 
     const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept override { return mWeeks; }
     const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept override { return mPersonalia; }
-    const BonusPointsMap& GetBonusPointsMap() const noexcept override { return mBonusPointsMap; }
-    BonusPointsMap& GetBonusPointsMap() noexcept { return mBonusPointsMap; }
+    std::shared_ptr<BonusPointsMap> GetBonusPointsMap() const noexcept override { return mBonusPointsMap; }
 
     double GetPuntenTotaal(STRATEGY_TYPE eType) const;
     double GetWeekPuntenTotaal() const;
@@ -76,7 +75,7 @@ private:
     std::shared_ptr<IStringRepository> m_categories;
     std::shared_ptr<IStringRepository> m_brands;
 
-    BonusPointsMap mBonusPointsMap;
+    std::shared_ptr<BonusPointsMap> mBonusPointsMap;
 
     std::shared_ptr<PointsCalculator> m_calculator;
     STRATEGY_TYPE mStrategyType;

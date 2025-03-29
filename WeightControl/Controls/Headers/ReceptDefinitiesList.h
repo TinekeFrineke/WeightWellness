@@ -33,7 +33,7 @@ class ReceptDefinitiesListItem;
 class ReceptDefinitiesList: public CListCtrl
 {
 public:
-    explicit ReceptDefinitiesList(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes);
+    explicit ReceptDefinitiesList();
     ~ReceptDefinitiesList() override;
 
     void Initialize();
@@ -53,7 +53,6 @@ private:
                                          const ReceptDefinitiesFilter& aFilter);
 
     std::vector<std::unique_ptr<ReceptDefinitiesListItem>> mItems;
-    std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
     ReceptDefinitiesFilter      mFilter;
 };
 

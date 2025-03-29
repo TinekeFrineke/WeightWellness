@@ -14,11 +14,11 @@
 // CEditBonuses dialog
 
 IMPLEMENT_DYNAMIC(CEditBonuses, CDialog)
-CEditBonuses::CEditBonuses(weight::IModel & aModel, const std::list<weight::Bonus> & aBonuses, double aWeight, CWnd* pParent /*=NULL*/)
-: CDialog(CEditBonuses::IDD, pParent),
-  mBonuses  (aBonuses),
-  mModel    (aModel),
-  mWeight   (aWeight)
+CEditBonuses::CEditBonuses(std::shared_ptr<weight::BonusPointsMap> bonusPointsMap, const std::list<weight::Bonus>& aBonuses, double aWeight, CWnd* pParent /*=NULL*/)
+    : CDialog(CEditBonuses::IDD, pParent)
+    , mBonuses(aBonuses)
+    , mWeight(aWeight)
+    , m_bonusPointsMap(bonusPointsMap)
 {
 }
 
@@ -29,17 +29,17 @@ CEditBonuses::~CEditBonuses()
 
 void CEditBonuses::DoDataExchange(CDataExchange* pDX)
 {
-  CDialog::DoDataExchange(pDX);
-  DDX_Control(pDX, IDC_BONUSLISTJBJ, mBonusList);
+    CDialog::DoDataExchange(pDX);
+    DDX_Control(pDX, IDC_BONUSLISTJBJ, mBonusList);
 }
 
 
 BEGIN_MESSAGE_MAP(CEditBonuses, CDialog)
-  ON_BN_CLICKED(IDCANCEL, OnBnClickedCancel)
-  ON_BN_CLICKED(IDC_ADD, OnBnClickedAdd)
-  ON_BN_CLICKED(IDC_EDIT, OnBnClickedEdit)
-  ON_BN_CLICKED(IDC_DELETE, OnBnClickedDelete)
-  ON_NOTIFY(NM_DBLCLK, IDC_BONUSLISTJBJ, OnNMDblclkBonuslistjbj)
+    ON_BN_CLICKED(IDCANCEL, OnBnClickedCancel)
+    ON_BN_CLICKED(IDC_ADD, OnBnClickedAdd)
+    ON_BN_CLICKED(IDC_EDIT, OnBnClickedEdit)
+    ON_BN_CLICKED(IDC_DELETE, OnBnClickedDelete)
+    ON_NOTIFY(NM_DBLCLK, IDC_BONUSLISTJBJ, OnNMDblclkBonuslistjbj)
 END_MESSAGE_MAP()
 
 
@@ -47,36 +47,36 @@ END_MESSAGE_MAP()
 
 void CEditBonuses::OnBnClickedCancel()
 {
-  OnCancel();
+    OnCancel();
 }
 
 void CEditBonuses::OnBnClickedAdd()
 {
-  EditBonusDialog dialog(mModel.GetBonusPointsMap(), mWeight, this);
-  INT_PTR nResponse = dialog.DoModal();
-	if (nResponse == IDOK)
-    mBonuses.push_back(dialog.GetBonus());
+    EditBonusDialog dialog(*m_bonusPointsMap, mWeight, this);
+    INT_PTR nResponse = dialog.DoModal();
+    if (nResponse == IDOK)
+        mBonuses.push_back(dialog.GetBonus());
 
-  mBonusList.View(mBonuses);
+    mBonusList.View(mBonuses);
 }
 
 
 BOOL CEditBonuses::OnInitDialog()
 {
-  if (CDialog::OnInitDialog() == FALSE)
-    return FALSE;
+    if (CDialog::OnInitDialog() == FALSE)
+        return FALSE;
 
-  mBonusList.Initialize();
-  mBonusList.SetSelectionMark(0);
-  mBonusList.ShowWindow(SW_SHOW);
-  mBonusList.View(mBonuses);
+    mBonusList.Initialize();
+    mBonusList.SetSelectionMark(0);
+    mBonusList.ShowWindow(SW_SHOW);
+    mBonusList.View(mBonuses);
 
-  return TRUE;
+    return TRUE;
 }
 
 void CEditBonuses::OnBnClickedEdit()
 {
-  EditBonus();
+    EditBonus();
 }
 
 void CEditBonuses::OnBnClickedDelete()
@@ -86,18 +86,18 @@ void CEditBonuses::OnBnClickedDelete()
 
 void CEditBonuses::EditBonus()
 {
-  BonusListItem * item = mBonusList.GetSelectedItem();
-  if (item != NULL) {
-    EditBonusDialog dlg(mModel.GetBonusPointsMap(), mWeight, item->GetBonus(), this);
-    INT_PTR nResponse = dlg.DoModal();
-    if (nResponse == IDOK)
-      item->GetBonus() = dlg.GetBonus();
-  }
+    BonusListItem* item = mBonusList.GetSelectedItem();
+    if (item != NULL) {
+        EditBonusDialog dlg(*m_bonusPointsMap, mWeight, item->GetBonus(), this);
+        INT_PTR nResponse = dlg.DoModal();
+        if (nResponse == IDOK)
+            item->GetBonus() = dlg.GetBonus();
+    }
 }
 
-void CEditBonuses::OnNMDblclkBonuslistjbj(NMHDR *pNMHDR, LRESULT *pResult)
+void CEditBonuses::OnNMDblclkBonuslistjbj(NMHDR* pNMHDR, LRESULT* pResult)
 {
-  (void)pNMHDR;
-  EditBonus();
-  *pResult = 0;
+    (void)pNMHDR;
+    EditBonus();
+    *pResult = 0;
 }

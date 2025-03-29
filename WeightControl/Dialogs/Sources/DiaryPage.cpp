@@ -252,7 +252,7 @@ void CDiaryPage::OnBnClickedDayPlus()
 
 void CDiaryPage::OnBnClickedAddRecept()
 {
-    CFindRecept dialog(mModel, nullptr, this);
+    CFindRecept dialog(mModel.GetRecipeDefinitionRepository(), nullptr, this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {
