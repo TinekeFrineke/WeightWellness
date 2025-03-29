@@ -5,21 +5,33 @@
 class CWnd;
 
 namespace weight {
-class IModel;
+class IStringRepository;
+class PointsCalculator;
 class VMDefinitie;
+
+template <typename TYPE> class IRepository;
 }
 
 class FoodDefinitionEditor
 {
 public:
-    FoodDefinitionEditor(weight::IModel& model, CWnd* parent);
+    FoodDefinitionEditor(std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                         std::shared_ptr<weight::PointsCalculator> calculator,
+                         std::shared_ptr<weight::IStringRepository> categories,
+                         std::shared_ptr<weight::IStringRepository> brands,
+                         std::shared_ptr<weight::IStringRepository> units, CWnd* parent);
 
     bool Edit(weight::VMDefinitie& definition) const;
     std::unique_ptr<weight::VMDefinitie> Create() const;
 
 private:
     mutable bool m_isNewDefinition{ false };
-    weight::IModel& m_model;
+    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::PointsCalculator> m_calculator;
+    std::shared_ptr<weight::IStringRepository> m_categories;
+    std::shared_ptr<weight::IStringRepository> m_brands;
+    std::shared_ptr<weight::IStringRepository> m_units;
+
     CWnd* m_parent;
 };
 

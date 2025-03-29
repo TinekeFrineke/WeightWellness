@@ -8,6 +8,7 @@
 #include "model/IStringRepository.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
+#include "IPageFactory.h"
 #include "ItemsPage.h"
 
 #include "EditFoodDefDialog.h"
@@ -19,8 +20,9 @@
 // CItemsPage dialog
 
 IMPLEMENT_DYNAMIC(CItemsPage, CDialog)
-CItemsPage::CItemsPage(weight::IModel& aModel, CWnd* pParent /*=nullptr*/)
+CItemsPage::CItemsPage(weight::IModel& aModel, const IPageFactory& factory, CWnd* pParent /*=nullptr*/)
     : CDialog(CItemsPage::IDD, pParent)
+    , m_pageFactory(factory)
     , mModel(aModel)
     , mCategory(aModel.GetCategoryRepository()->Get())
     , mMerk(aModel.GetBrandRepository()->Get(), true)
@@ -78,8 +80,8 @@ BOOL CItemsPage::OnInitDialog()
 
 void CItemsPage::OnBnClickedAdd()
 {
-    FoodDefinitionEditor editor(mModel, this);
-    auto food = editor.Create();
+    auto editor(m_pageFactory.CreateFoodDefinitionEditor(this));
+    auto food = editor->Create();
     if (food != nullptr) {
         mModel.Add(std::move(food));
         mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
@@ -119,8 +121,8 @@ void CItemsPage::EditItem()
 {
     auto definition = mItemsList.GetSelectedDefinition();
     if (definition != nullptr) {
-        FoodDefinitionEditor editor(mModel, this);
-        if (editor.Edit(*definition))
+        auto editor(m_pageFactory.CreateFoodDefinitionEditor(this));
+        if (editor->Edit(*definition))
         {
             mItemsList.SelectItem(*definition);
             // TODO ww2024: Place code here to handle when the dialog is

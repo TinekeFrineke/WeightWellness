@@ -14,12 +14,14 @@
 
 // CItemsPage dialog
 
+class IPageFactory;
+
 class CItemsPage: public CDialog, public TabPage
 {
     DECLARE_DYNAMIC(CItemsPage)
 
 public:
-    explicit CItemsPage(weight::IModel& aModel, CWnd* pParent = NULL);   // standard constructor
+    CItemsPage(weight::IModel& aModel, const IPageFactory& factory, CWnd* pParent = NULL);   // standard constructor
     virtual ~CItemsPage();
 
     // Dialog Data
@@ -53,10 +55,11 @@ private:
     weight::ComboBox    mCategory;
     BrandComboBox       mMerk;
 
+    const IPageFactory& m_pageFactory;
     weight::IModel& mModel;
-    VMDefinitiesList    mItemsList;
+    VMDefinitiesList mItemsList;
 
-    bool                mUpdatingFilter;
+    bool mUpdatingFilter;
 public:
     afx_msg void OnCbnEditchangeCombo1();
     afx_msg void OnBnClickedCheckFavourites();

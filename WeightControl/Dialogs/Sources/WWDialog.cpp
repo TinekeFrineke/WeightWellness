@@ -48,10 +48,20 @@ END_MESSAGE_MAP()
 
 
 CWWDialog::CWWDialog(weight::IModel& aModel, CWnd* pParent /*=NULL*/)
-    : CDialog(CWWDialog::IDD, pParent),
-    mModel(aModel)
+    : CDialog(CWWDialog::IDD, pParent)
+    , m_factory(std::make_unique<PageFactory>(aModel.GetRecipeDefinitionRepository(),
+                                              aModel.GetFoodDefinitionRepository(),
+                                              aModel.GetCalculator(),
+                                              aModel.GetCategoryRepository(),
+                                              aModel.GetBrandRepository(),
+                                              aModel.GetUnitRepository()))
+    , mModel(aModel)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+}
+
+CWWDialog::~CWWDialog()
+{
 }
 
 void CWWDialog::DoDataExchange(CDataExchange* pDX)
@@ -74,15 +84,10 @@ END_MESSAGE_MAP()
 
 BOOL CWWDialog::OnInitDialog()
 {
-    PageFactory factory(mModel.GetRecipeDefinitionRepository(),
-                        mModel.GetFoodDefinitionRepository(),
-                        mModel.GetCalculator(),
-                        mModel.GetCategoryRepository(),
-                        mModel.GetBrandRepository());
     mTabControl.AddPage(std::make_unique<CPersonaliaDialog>(mModel, this), IDD_PERSONALIA_PAGE, _T("Personalia"));
     mTabControl.AddPage(std::make_unique<CDiaryPage>(mModel, this), IDD_DIARY_PAGE, _T("Dagboek"));
-    mTabControl.AddPage(std::make_unique<CItemsPage>(mModel, this), IDD_ITEMS_PAGE, _T("Items"));
-    mTabControl.AddPage(factory.CreateRecipesPage(), IDD_RECEPTEN_PAGE, _T("Recepten"));
+    mTabControl.AddPage(std::make_unique<CItemsPage>(mModel, *m_factory, this), IDD_ITEMS_PAGE, _T("Items"));
+    mTabControl.AddPage(m_factory->CreateRecipesPage(), IDD_RECEPTEN_PAGE, _T("Recepten"));
 
     CDialog::OnInitDialog();
 

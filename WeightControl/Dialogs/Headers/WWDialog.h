@@ -7,6 +7,8 @@
 #include "MyTabControl.h"
 #include "model/IModel.h"
 
+class IPageFactory;
+
 
 // CWWDialog dialog
 class CWWDialog : public CDialog
@@ -14,6 +16,7 @@ class CWWDialog : public CDialog
 // Construction
 public:
 	explicit CWWDialog(weight::IModel & aModel, CWnd* pParent = nullptr);	// standard constructor
+	~CWWDialog() override;
 
 // Dialog Data
 	enum { IDD = IDD_WEIGHTWATCHERS_DIALOG };
@@ -38,5 +41,6 @@ public:
 private:
   CMyTabControl mTabControl;
 
+  std::unique_ptr<IPageFactory> m_factory;
   weight::IModel &     mModel;
 };
