@@ -21,6 +21,15 @@
 
 
 
+ItemEditVisitor::ItemEditVisitor(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
+                                 std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                                 std::shared_ptr<weight::PointsCalculator> calculator,
+                                 CWnd* aParent)
+    : m_recipes(recipes)
+    , m_foodDefinitions(foodDefinitions)
+    , m_calculator(calculator)
+    , mParent(aParent) {}
+
 void ItemEditVisitor::Visit(weight::Recept& aRecept)
 {
     weight::ReceptDefinitie* definitie = m_recipes->Find(aRecept.GetName());
@@ -41,7 +50,7 @@ void ItemEditVisitor::Visit(weight::Recept& aRecept)
 
 void ItemEditVisitor::Visit(weight::Voedingsmiddel& aVoedingsmiddel)
 {
-    FoodEditor editor(mModel.GetFoodDefinitionRepository(), mModel.GetCalculator(), mParent);
+    FoodEditor editor(m_foodDefinitions, m_calculator, mParent);
     editor.Edit(aVoedingsmiddel);
 }
 

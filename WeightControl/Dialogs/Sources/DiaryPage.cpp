@@ -268,7 +268,8 @@ void CDiaryPage::OnBnClickedAddRecept()
 
 void CDiaryPage::EditItem(weight::Item& item)
 {
-    ItemEditVisitor visitor(mModel, mModel.GetRecipeDefinitionRepository(), this);
+    ItemEditVisitor visitor(mModel.GetRecipeDefinitionRepository(), mModel.GetFoodDefinitionRepository(),
+                            mModel.GetCalculator(), this);
     item.Accept(visitor);
 
     mItemList.View(mDay);

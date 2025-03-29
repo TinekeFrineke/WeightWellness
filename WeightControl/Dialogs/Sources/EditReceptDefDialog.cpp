@@ -71,7 +71,8 @@ void EditReceptDefDialog::EditSelectedItem()
     if (item == nullptr)
         return;
 
-    ItemEditVisitor visitor(mModel, m_recipes, this);
+    ItemEditVisitor visitor(mModel.GetRecipeDefinitionRepository(), mModel.GetFoodDefinitionRepository(),
+                            mModel.GetCalculator(), this);
     item->GetItem()->Accept(visitor);
 
     mItemList.View(mRecept.GetItems());

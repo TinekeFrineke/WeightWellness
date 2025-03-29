@@ -59,7 +59,7 @@ BOOL ReceptenPage::OnInitDialog()
 
 void ReceptenPage::OnBnClickedAdd()
 {
-    RecipeDefinitionEditor editor(mModel, mModel.GetRecipeDefinitionRepository(), this);
+    RecipeDefinitionEditor editor(mModel, m_recipes, this);
     auto definition = editor.Create();
     if (definition != nullptr)
         m_recipes->Add(std::move(definition));

@@ -30,7 +30,6 @@ private:
     bool Edit(weight::Voedingsmiddel& food, const weight::FoodParameters& parameters, double pointsPer100Units,
               const std::vector<std::unique_ptr<weight::Portie>>& porties);
 
-    //weight::Model& m_model;
     std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_definitions;
     std::shared_ptr<weight::PointsCalculator> m_calculator;
     CWnd* m_parent;
