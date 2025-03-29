@@ -13,7 +13,7 @@ namespace weight
 class IBrandRepository;
 class ICategoryRepository;
 class IFoodDefinitionRepository;
-class IRepository;
+class IStringRepository;
 class IWeek;
 class Personalia;
 class Recept;
@@ -32,53 +32,50 @@ public:
     const Personalia* GetActivePersonalia() const;
     Personalia* AddPersonalia(const std::tstring& aName);
 
-    STRATEGY_TYPE GetStrategy() const noexcept { return mStrategyType; }
-    void SetStrategy(STRATEGY_TYPE eType);
+    STRATEGY_TYPE GetStrategy() const noexcept override { return mStrategyType; }
+    void SetStrategy(STRATEGY_TYPE eType) override;
 
-    IWeek* FindWeek(const Utils::Date& aDate);
+    IWeek* FindWeek(const Utils::Date& aDate) override;
     IWeek* CreateWeek(const Utils::Date& aDate);
-    bool Add(std::unique_ptr<IWeek> aWeek);
+    bool Add(std::unique_ptr<IWeek> aWeek) override;
 
-    bool Add(std::unique_ptr<VMDefinitie> aDefinitie);
-    bool Add(std::unique_ptr<ReceptDefinitie> aReceptDef);
-    bool Add(std::unique_ptr<Personalia> aPersonalia);
+    bool Add(std::unique_ptr<VMDefinitie> aDefinitie) override;
+    bool Add(std::unique_ptr<Personalia> aPersonalia) override;
 
-    void AddUnit(const std::wstring& aUnit);
-    void AddCategory(const std::wstring& aCategory);
-    void AddBrand(const std::wstring& brand);
+    void AddUnit(const std::wstring& aUnit) override;
+    void AddCategory(const std::wstring& aCategory) override;
+    void AddBrand(const std::wstring& brand) override;
 
-    bool Remove(const VMDefinitie* aDefinitie);
-    bool Remove(const ReceptDefinitie* aRecept);
+    bool Remove(const VMDefinitie* aDefinitie) override;
     bool Remove(const Personalia* aPersonalia);
 
     VMDefinitie* FindVoedingsmiddelDefinitie(const std::wstring& aName);
-    ReceptDefinitie* FindReceptDefinitie(const std::wstring& aName);
 
-    std::shared_ptr<IRepository> GetUnitRepository() const noexcept override;
-    std::shared_ptr<IRepository> GetCategoryRepository() const noexcept override;
-    std::shared_ptr<IRepository> GetBrandRepository() const noexcept override;
+    std::shared_ptr<IStringRepository> GetUnitRepository() const noexcept override;
+    std::shared_ptr<IStringRepository> GetCategoryRepository() const noexcept override;
+    std::shared_ptr<IStringRepository> GetBrandRepository() const noexcept override;
     std::shared_ptr<IFoodDefinitionRepository> GetFoodDefinitionRepository() const noexcept override;
+    std::shared_ptr<IRepository<ReceptDefinitie>> GetRecipeDefinitionRepository() const noexcept override;
 
-    const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const noexcept { return mReceptDefinities; }
-    const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept { return mWeeks; }
-    const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept { return mPersonalia; }
-    const BonusPointsMap& GetBonusPointsMap() const noexcept { return mBonusPointsMap; }
+    const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept override { return mWeeks; }
+    const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept override { return mPersonalia; }
+    const BonusPointsMap& GetBonusPointsMap() const noexcept override { return mBonusPointsMap; }
     BonusPointsMap& GetBonusPointsMap() noexcept { return mBonusPointsMap; }
 
     double GetPuntenTotaal(STRATEGY_TYPE eType) const;
     double GetWeekPuntenTotaal() const;
     double GetVrijePunten() const;
 
-    std::shared_ptr<PointsCalculator> GetCalculator() const noexcept { return m_calculator; }
+    std::shared_ptr<PointsCalculator> GetCalculator() const noexcept override { return m_calculator; }
 
 private:
     std::vector<std::unique_ptr<IWeek>> mWeeks;
     std::shared_ptr<IFoodDefinitionRepository> m_foodDefinitions;
-    std::vector<std::unique_ptr<ReceptDefinitie>> mReceptDefinities;
+    std::shared_ptr<IRepository<ReceptDefinitie>> m_recipeDefinitions;
     std::vector<std::unique_ptr<Personalia>> mPersonalia;
-    std::shared_ptr<IRepository> m_units;
-    std::shared_ptr<IRepository> m_categories;
-    std::shared_ptr<IRepository> m_brands;
+    std::shared_ptr<IStringRepository> m_units;
+    std::shared_ptr<IStringRepository> m_categories;
+    std::shared_ptr<IStringRepository> m_brands;
 
     BonusPointsMap mBonusPointsMap;
 

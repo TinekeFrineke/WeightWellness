@@ -1,13 +1,13 @@
 #pragma once
 
 
-#include "IRepository.h"
+#include "IStringRepository.h"
 
 
 namespace weight {
 
-class Repository
-    : public IRepository
+class StringRepository
+    : public IStringRepository
 {
 public:
     std::vector<std::wstring> Get() const override;

@@ -7,7 +7,6 @@
 
 namespace weight
 {
-class IModel;
 class Portie;
 }
 

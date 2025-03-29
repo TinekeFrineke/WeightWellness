@@ -9,7 +9,6 @@
 namespace weight
 {
 class CategorieNaam;
-class IModel;
 class VMDefinitie;
 }
 

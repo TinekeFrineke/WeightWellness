@@ -4,7 +4,6 @@
 
 #include <assert.h>
 
-#include "model/IModel.h"
 #include "model/Portie.h"
 
 BEGIN_MESSAGE_MAP(PortieComboBox, CComboBox)

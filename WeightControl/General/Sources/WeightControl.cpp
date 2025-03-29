@@ -14,7 +14,6 @@
 
 #include "WWDialog.h"
 
-#include "model/IModel.h"
 #include "model/ModelFactory.h"
 #include "model/Personalia.h"
 #include "xmlreader/XmlReader.h"

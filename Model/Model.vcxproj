@@ -96,7 +96,7 @@
     <ClInclude Include="header\Model.h" />
     <ClInclude Include="header\NutritionalValue.h" />
     <ClInclude Include="header\RecipeRepository.h" />
-    <ClInclude Include="header\UniqueRepository.h" />
+    <ClInclude Include="header\Repository.h" />
     <ClInclude Include="header\Week.h" />
     <ClInclude Include="header\WeekRepository.h" />
     <ClInclude Include="interface\model\Bonus.h" />
@@ -105,9 +105,11 @@
     <ClInclude Include="interface\model\IDay.h" />
     <ClInclude Include="interface\model\IFoodDefinitionRepository.h" />
     <ClInclude Include="interface\model\ILotFactory.h" />
+    <ClInclude Include="interface\model\IModel.h" />
     <ClInclude Include="interface\model\IObserver.h" />
     <ClInclude Include="interface\model\IRecipeRepository.h" />
     <ClInclude Include="interface\model\IRepository.h" />
+    <ClInclude Include="interface\model\IStringRepository.h" />
     <ClInclude Include="interface\model\ISubject.h" />
     <ClInclude Include="interface\model\Item.h" />
     <ClInclude Include="interface\model\IWeek.h" />
@@ -125,7 +127,7 @@
     <ClInclude Include="interface\model\Portie.h" />
     <ClInclude Include="interface\model\Recept.h" />
     <ClInclude Include="interface\model\ReceptDefinitie.h" />
-    <ClInclude Include="interface\model\Repository.h" />
+    <ClInclude Include="interface\model\StringRepository.h" />
     <ClInclude Include="interface\model\Subject.h" />
     <ClInclude Include="interface\model\Voedingsmiddel.h" />
     <ClInclude Include="interface\model\VoedingsmiddelDefinitie.h" />
@@ -150,7 +152,7 @@
     <ClCompile Include="source\Recept.cpp" />
     <ClCompile Include="source\ReceptDefinitie.cpp" />
     <ClCompile Include="source\RecipeRepository.cpp" />
-    <ClCompile Include="source\Repository.cpp" />
+    <ClCompile Include="source\StringRepository.cpp" />
     <ClCompile Include="source\Subject.cpp" />
     <ClCompile Include="source\Voedingsmiddel.cpp" />
     <ClCompile Include="source\VoedingsmiddelDefinitie.cpp" />

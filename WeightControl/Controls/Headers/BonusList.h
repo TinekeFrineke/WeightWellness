@@ -10,7 +10,6 @@
 namespace weight
 {
 class Bonus;
-class IModel;
 }
 
 

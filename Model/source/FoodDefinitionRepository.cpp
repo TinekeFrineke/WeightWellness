@@ -10,32 +10,32 @@ namespace weight {
 
 bool FoodDefinitionRepository::Has(const std::wstring& name) const
 {
-    return UniqueRepository<VMDefinitie>::Has(name);
+    return Repository<VMDefinitie>::Has(name);
 }
 
 VMDefinitie* FoodDefinitionRepository::Find(const std::wstring& name) const
 {
-    return UniqueRepository<VMDefinitie>::Find(name);
+    return Repository<VMDefinitie>::Find(name);
 }
 
 bool FoodDefinitionRepository::Add(std::unique_ptr<VMDefinitie> definition)
 {
-    return UniqueRepository<VMDefinitie>::Add(std::move(definition));
+    return Repository<VMDefinitie>::Add(std::move(definition));
 }
 
 bool FoodDefinitionRepository::Remove(const std::wstring& name)
 {
-    return UniqueRepository<VMDefinitie>::Remove(name);
+    return Repository<VMDefinitie>::Remove(name);
 }
 
 void FoodDefinitionRepository::Clear()
 {
-    UniqueRepository::Clear();
+    Repository::Clear();
 }
 
 std::vector<VMDefinitie*> FoodDefinitionRepository::GetAll() const
 {
-    return UniqueRepository<VMDefinitie>::GetAll();
+    return Repository<VMDefinitie>::GetAll();
 }
 
 } // namespace weight

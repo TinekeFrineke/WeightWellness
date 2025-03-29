@@ -11,6 +11,7 @@
 #include "Personalia.h"
 #include "ReceptDefinitie.h"
 #include "Repository.h"
+#include "StringRepository.h"
 #include "VoedingsmiddelDefinitie.h"
 
 namespace weight
@@ -20,9 +21,10 @@ namespace weight
 Model::Model()
     : mStrategyType(STRATEGY_TYPE::KCal)
     , m_foodDefinitions(std::make_shared<FoodDefinitionRepository>())
-    , m_units(std::make_shared<Repository>())
-    , m_categories(std::make_shared<Repository>())
-    , m_brands(std::make_shared<Repository>())
+    , m_recipeDefinitions(std::make_shared<Repository<ReceptDefinitie>>())
+    , m_units(std::make_shared<StringRepository>())
+    , m_categories(std::make_shared<StringRepository>())
+    , m_brands(std::make_shared<StringRepository>())
     , m_calculator(std::make_shared< PointsCalculator>())
 {
     m_calculator->SetStrategy(STRATEGY_TYPE::KCal);
@@ -87,26 +89,17 @@ VMDefinitie* Model::FindVoedingsmiddelDefinitie(const std::tstring& aName)
 }
 
 
-ReceptDefinitie* Model::FindReceptDefinitie(const std::tstring& aName)
-{
-    for (const auto& recipe : mReceptDefinities)
-        if (recipe->GetName() == aName)
-            return recipe.get();
-
-    return nullptr;
-}
-
-std::shared_ptr<IRepository> Model::GetUnitRepository() const noexcept
+std::shared_ptr<IStringRepository> Model::GetUnitRepository() const noexcept
 {
     return m_units;
 }
 
-std::shared_ptr<IRepository> Model::GetCategoryRepository() const noexcept
+std::shared_ptr<IStringRepository> Model::GetCategoryRepository() const noexcept
 {
     return m_categories;
 }
 
-std::shared_ptr<IRepository> Model::GetBrandRepository() const noexcept
+std::shared_ptr<IStringRepository> Model::GetBrandRepository() const noexcept
 {
     return m_brands;
 }
@@ -114,6 +107,11 @@ std::shared_ptr<IRepository> Model::GetBrandRepository() const noexcept
 std::shared_ptr<IFoodDefinitionRepository> Model::GetFoodDefinitionRepository() const noexcept
 {
     return m_foodDefinitions;
+}
+
+std::shared_ptr<IRepository<ReceptDefinitie>> Model::GetRecipeDefinitionRepository() const noexcept
+{
+    return m_recipeDefinitions;
 }
 
 void Model::AddUnit(const std::wstring& aUnit)
@@ -151,22 +149,6 @@ bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
 }
 
 
-bool Model::Add(std::unique_ptr<ReceptDefinitie> aReceptDef)
-{
-    for (const auto& definition : mReceptDefinities)
-    {
-        if (definition->GetName() == aReceptDef->GetName())
-        {
-            ::MessageBox(0, (_T("Could not add duplicate Recept ") + aReceptDef->GetName()).c_str(), _T("ERROR"), MB_OK);
-            return false;
-        }
-    }
-
-    mReceptDefinities.push_back(std::move(aReceptDef));
-    return true;
-}
-
-
 bool Model::Add(std::unique_ptr<Personalia> aPersonalia)
 {
     if (HasPersonalia(aPersonalia->GetUserName()))
@@ -195,23 +177,6 @@ void Model::AddBrand(const std::wstring& brand)
 bool Model::Remove(const VMDefinitie* aDefinitie)
 {
     return aDefinitie != nullptr && m_foodDefinitions->Remove(aDefinitie->GetName());
-}
-
-
-bool Model::Remove(const ReceptDefinitie* aReceptDef)
-{
-    for (auto iter = mReceptDefinities.begin();
-         iter != mReceptDefinities.end();
-         ++iter)
-    {
-        if (iter->get() == aReceptDef)
-        {
-            mReceptDefinities.erase(iter);
-            return true;
-        }
-    }
-
-    return false;
 }
 
 

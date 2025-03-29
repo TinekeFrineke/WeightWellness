@@ -33,6 +33,7 @@
 
 #include "model/Bonus.h"
 #include "model/BonusPointsMap.h"
+#include "model/IRepository.h"
 #include "model/IWeek.h"
 #include "model/ManualItem.h"
 #include "model/ModelFactory.h"
@@ -270,7 +271,7 @@ weight::Result XmlReader::ReadRecepten(const std::tstring& aDirectory)
                     receptdef->Add(std::move(voedingsmiddel));
             }
 
-            mModel.Add(std::move(receptdef));
+            mModel.GetRecipeDefinitionRepository()->Add(std::move(receptdef));
         }
     }
     catch (XmlClass::Result result) {

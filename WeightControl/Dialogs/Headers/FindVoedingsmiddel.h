@@ -18,7 +18,7 @@ namespace weight
 class Day;
 class IFoodDefinitionRepository;
 class ILotFactory;
-class IRepository;
+class IStringRepository;
 class Voedingsmiddel;
 }
 
@@ -30,8 +30,8 @@ class CFindVoedingsmiddel: public CDialog
 
 public:
     CFindVoedingsmiddel(const weight::IFoodDefinitionRepository& foodDefinitions,
-                        const weight::IRepository& categoryRepositiory,
-                        const weight::IRepository& brandRepository,
+                        const weight::IStringRepository& categoryRepositiory,
+                        const weight::IStringRepository& brandRepository,
                         std::unique_ptr<weight::ILotFactory> lotFactory,
                         CWnd* pParent = nullptr);   // standard constructor
     virtual ~CFindVoedingsmiddel();

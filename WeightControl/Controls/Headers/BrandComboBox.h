@@ -4,11 +4,6 @@
 
 #include "Combobox.h"
 
-namespace weight
-{
-class IModel;
-}
-
 class BrandComboBox: public weight::ComboBox
 {
 public:

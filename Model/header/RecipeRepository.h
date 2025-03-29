@@ -3,7 +3,7 @@
 #include <map>
 
 #include "IRecipeRepository.h"
-#include "UniqueRepository.h"
+#include "Repository.h"
 
 
 namespace weight {
@@ -12,10 +12,10 @@ class ReceptDefinitie;
 
 class RecipeRepository
     : public IRecipeRepository
-    , private UniqueRepository<ReceptDefinitie>
+    , private Repository<ReceptDefinitie>
 {
 public:
-    // Inherited via IFoodDefinitionRepository
+    // Inherited via IRecipeRepository
     bool Has(const std::wstring& name) const override;
     ReceptDefinitie* Find(const std::wstring& name) const override;
     bool Add(std::unique_ptr<ReceptDefinitie> definition) override;

@@ -6,7 +6,6 @@
 namespace weight
 {
 class Item;
-class IModel;
 }
 
 

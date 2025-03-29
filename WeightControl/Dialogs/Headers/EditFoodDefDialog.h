@@ -7,8 +7,6 @@
 #include "controls/IntEdit.h"
 #include "controls/StringEdit.h"
 
-#include "model/IModel.h"
-
 #include "PortieList.h"
 #include "ComboBox.h"
 #include "resource.h" 
@@ -20,7 +18,8 @@
 namespace weight
 {
 class FixedVMDef;
-class IRepository;
+class IFoodDefinitionRepository;
+class IStringRepository;
 class VMDefinitie;
 }
 
@@ -30,9 +29,9 @@ class CEditFoodDefDialog: public CDialog
 
 public:
     CEditFoodDefDialog(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
-                       std::shared_ptr<weight::IRepository> units,
-                       std::shared_ptr<weight::IRepository> categories,
-                       std::shared_ptr<weight::IRepository> brands,
+                       std::shared_ptr<weight::IStringRepository> units,
+                       std::shared_ptr<weight::IStringRepository> categories,
+                       std::shared_ptr<weight::IStringRepository> brands,
                        weight::VMDefinitie& aDefinitie,
                        bool newDefinition,
                        std::shared_ptr<weight::PointsCalculator> calculator,
@@ -99,9 +98,9 @@ private:
     weight::VMDefinitie& m_definition;
     // Bit of a hack... whether name should be read only
     bool m_newDefinition;
-    std::shared_ptr<weight::IRepository> m_units;
-    std::shared_ptr<weight::IRepository> m_categories;
-    std::shared_ptr<weight::IRepository> m_brands;
+    std::shared_ptr<weight::IStringRepository> m_units;
+    std::shared_ptr<weight::IStringRepository> m_categories;
+    std::shared_ptr<weight::IStringRepository> m_brands;
     std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
 
     std::shared_ptr<weight::PointsCalculator> m_calculator;

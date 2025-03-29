@@ -76,7 +76,7 @@ BOOL CWWDialog::OnInitDialog()
     mTabControl.AddPage(std::make_unique<CPersonaliaDialog>(mModel, this), IDD_PERSONALIA_PAGE, _T("Personalia"));
     mTabControl.AddPage(std::make_unique<CDiaryPage>(mModel, this), IDD_DIARY_PAGE, _T("Dagboek"));
     mTabControl.AddPage(std::make_unique<CItemsPage>(mModel, this), IDD_ITEMS_PAGE, _T("Items"));
-    mTabControl.AddPage(std::make_unique<ReceptenPage>(mModel, this), IDD_RECEPTEN_PAGE, _T("Recepten"));
+    mTabControl.AddPage(std::make_unique<ReceptenPage>(mModel, mModel.GetRecipeDefinitionRepository(), this), IDD_RECEPTEN_PAGE, _T("Recepten"));
 
     CDialog::OnInitDialog();
 

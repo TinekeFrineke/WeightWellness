@@ -2,7 +2,8 @@
 //
 
 #include "stdafx.h"
-#include ".\editreceptdefdialog.h"
+
+#include "editreceptdefdialog.h"
 
 #include "FindVoedingsmiddel.h"
 #include "ItemEditVisitor.h"
@@ -26,9 +27,10 @@ BEGIN_MESSAGE_MAP(EditReceptDefDialog, CDialog)
 END_MESSAGE_MAP()
 
 
-EditReceptDefDialog::EditReceptDefDialog(weight::IModel& aModel, weight::ReceptDefinitie& aRecept, CWnd* pParent)
+EditReceptDefDialog::EditReceptDefDialog(weight::IModel& aModel, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, weight::ReceptDefinitie& aRecept, CWnd* pParent)
     : CDialog(EditReceptDefDialog::IDD, pParent)
     , mModel(aModel)
+    , m_recipes(recipes)
     , mRecept(aRecept)
 {
 }
@@ -69,7 +71,7 @@ void EditReceptDefDialog::EditSelectedItem()
     if (item == nullptr)
         return;
 
-    ItemEditVisitor visitor(mModel, this);
+    ItemEditVisitor visitor(mModel, m_recipes, this);
     item->GetItem()->Accept(visitor);
 
     mItemList.View(mRecept.GetItems());

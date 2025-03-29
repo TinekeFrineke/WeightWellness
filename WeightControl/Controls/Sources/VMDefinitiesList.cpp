@@ -2,7 +2,6 @@
 
 #include "VMDefinitiesList.h"
 
-#include "model/IModel.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "EditFoodDefDialog.h"

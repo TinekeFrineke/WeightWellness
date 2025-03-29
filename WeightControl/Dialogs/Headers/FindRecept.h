@@ -8,7 +8,6 @@
 
 #include "receptdefinitieslist.h"
 #include "resource.h"
-#include "portiecombobox.h"
 
 
 class VMState;
@@ -16,6 +15,7 @@ class VMState;
 namespace weight
 {
 class Day;
+class IModel;
 class Recept;
 class ReceptDefinitie;
 }
@@ -47,7 +47,6 @@ protected:
     afx_msg void          OnBnClickedOk();
     afx_msg void          OnBnClickedCancel();
     afx_msg void          OnEnChangeNaam();
-    //  afx_msg void          OnCbnSelchangeCombo1();
     afx_msg void          OnLvnItemchangedItemlist(NMHDR* pNMHDR, LRESULT* pResult);
     afx_msg void          OnEnChangePorties();
     afx_msg void          OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult);

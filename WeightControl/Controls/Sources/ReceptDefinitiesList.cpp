@@ -2,7 +2,6 @@
 
 #include "ReceptDefinitiesList.h"
 
-#include "model/IModel.h"
 #include "model/ReceptDefinitie.h"
 
 #include "EditFoodDefDialog.h"
@@ -15,10 +14,11 @@ BEGIN_MESSAGE_MAP(ReceptDefinitiesList, CListCtrl)
     //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
+// Does not become the owner of the ReceptDefinitie
 class ReceptDefinitiesListItem
 {
 public:
-    ReceptDefinitiesListItem(weight::ReceptDefinitie* anItem)
+    explicit ReceptDefinitiesListItem(weight::ReceptDefinitie* anItem)
         : mItem(anItem) {}
 
     void Write(CListCtrl& aControl, int iItemIndex);
@@ -72,8 +72,8 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 }
 
 
-ReceptDefinitiesList::ReceptDefinitiesList(weight::IModel& aModel)
-    : mModel(aModel)
+ReceptDefinitiesList::ReceptDefinitiesList(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes)
+    : m_recipes(std::move(recipes))
 {
 }
 
@@ -97,16 +97,16 @@ void ReceptDefinitiesList::ClearItems()
 }
 
 
-void ReceptDefinitiesList::View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aItems)
+void ReceptDefinitiesList::View(const std::vector<weight::ReceptDefinitie*>& aItems)
 {
     DeleteAllItems();
     ClearItems();
 
-    SetItemCount((int)aItems.size());
+    SetItemCount(static_cast<int>(aItems.size()));
 
-    for (size_t i = 0; i < aItems.size(); ++i)
-        if (Complies(*aItems[i], mFilter))
-            mItems.push_back(std::make_unique<ReceptDefinitiesListItem>(aItems[i].get()));
+    for (auto& item : aItems)
+        if (Complies(*item, mFilter))
+            mItems.push_back(std::make_unique<ReceptDefinitiesListItem>(item));
 
     int inIndex = 0;
     for (size_t i = 0; i < mItems.size(); ++i)

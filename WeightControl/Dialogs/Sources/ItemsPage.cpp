@@ -5,7 +5,7 @@
 #include "afxmsg_.h"
 
 #include "model/IFoodDefinitionRepository.h"
-#include "model/IRepository.h"
+#include "model/IStringRepository.h"
 #include "model/VoedingsmiddelDefinitie.h"
 
 #include "ItemsPage.h"

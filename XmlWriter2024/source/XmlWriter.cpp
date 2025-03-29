@@ -33,6 +33,7 @@
 #include "model/IFoodDefinitionRepository.h"
 #include "model/IModel.h"
 #include "model/IRepository.h"
+#include "model/IStringRepository.h"
 #include "model/IWeek.h"
 #include "model/ManualItem.h"
 #include "model/NutritionalValue.h"
@@ -191,7 +192,7 @@ weight::Result XmlWriter::WriteRecepten(const std::tstring& aFilename)
 {
     auto xmlrecepten = std::make_unique<XmlReceptdefs>();
 
-    const auto& recepten = mModel.GetReceptDefs();
+    const auto& recepten = mModel.GetRecipeDefinitionRepository()->GetAll();
     for (const auto& recipe : recepten)
     {
         auto xmlRecipe = std::make_unique<XmlReceptdef>();

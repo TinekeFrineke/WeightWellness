@@ -12,7 +12,6 @@ class Date;
 namespace weight {
 
 class Bonus;
-class IModel;
 class Item;
 class PointsCalculator;
 

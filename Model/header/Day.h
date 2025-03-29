@@ -14,7 +14,6 @@ namespace weight
 class Bonus;
 class BonusPointsMap;
 class Item;
-class IModel;
 class PointsCalculator;
 
 

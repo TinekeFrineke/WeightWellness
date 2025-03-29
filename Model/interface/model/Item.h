@@ -8,7 +8,6 @@ namespace weight
 
 
 class Item;
-class IModel;
 class ManualItem;
 class PointsCalculator;
 class Recept;

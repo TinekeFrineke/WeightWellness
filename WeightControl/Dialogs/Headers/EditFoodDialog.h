@@ -12,7 +12,6 @@
 
 namespace weight
 {
-class IModel;
 class Lot;
 class PointsCalculator;
 class Portie;

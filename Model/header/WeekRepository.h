@@ -3,7 +3,6 @@
 #include <map>
 
 #include "IWeekRepository.h"
-//#include "UniqueRepository.h"
 
 
 namespace weight {
@@ -12,7 +11,6 @@ class Week;
 
 class WeekRepository
     : public IWeekRepository
-    //, private UniqueRepository<VMDefinitie>
 {
 public:
     // Inherited via IFoodDefinitionRepository

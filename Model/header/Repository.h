@@ -6,32 +6,33 @@
 #include <string>
 #include <vector>
 
+#include "IRepository.h"
+
 namespace weight {
 
 template <typename TYPE>
-class UniqueRepository
+class Repository : public IRepository<TYPE>
 {
 public:
-    // Inherited via IFoodDefinitionRepository
-    virtual bool Has(const std::wstring& name) const;
-    virtual TYPE* Find(const std::wstring& name) const;
-    virtual bool Add(std::unique_ptr<TYPE> definition);
-    virtual bool Remove(const std::wstring& name);
-    virtual void Clear();
-    virtual std::vector<TYPE*> GetAll() const;
+    virtual bool Has(const std::wstring& name) const override;
+    virtual TYPE* Find(const std::wstring& name) const override;
+    virtual bool Add(std::unique_ptr<TYPE> definition) override;
+    virtual bool Remove(const std::wstring& name) override;
+    virtual void Clear() override;
+    virtual std::vector<TYPE*> GetAll() const override;
 
 private:
     std::map<std::wstring, std::unique_ptr<TYPE>> m_elements;
 };
 
 template <typename TYPE>
-bool UniqueRepository<TYPE>::Has(const std::wstring& name) const
+bool Repository<TYPE>::Has(const std::wstring& name) const
 {
     return m_elements.find(name) != m_elements.end();
 }
 
 template <typename TYPE>
-TYPE* UniqueRepository<TYPE>::Find(const std::wstring& name) const
+TYPE* Repository<TYPE>::Find(const std::wstring& name) const
 {
     auto iterator = m_elements.find(name);
     if (iterator == m_elements.end())
@@ -41,7 +42,7 @@ TYPE* UniqueRepository<TYPE>::Find(const std::wstring& name) const
 }
 
 template <typename TYPE>
-bool UniqueRepository<TYPE>::Add(std::unique_ptr<TYPE> definition)
+bool Repository<TYPE>::Add(std::unique_ptr<TYPE> definition)
 {
     if (definition == nullptr || m_elements.find(definition->GetName()) != m_elements.end())
         return false;
@@ -51,7 +52,7 @@ bool UniqueRepository<TYPE>::Add(std::unique_ptr<TYPE> definition)
 }
 
 template <typename TYPE>
-bool UniqueRepository<TYPE>::Remove(const std::wstring& name)
+bool Repository<TYPE>::Remove(const std::wstring& name)
 {
     auto iterator = m_elements.find(name);
     if (iterator == m_elements.end())
@@ -62,13 +63,13 @@ bool UniqueRepository<TYPE>::Remove(const std::wstring& name)
 }
 
 template <typename TYPE>
-void UniqueRepository<TYPE>::Clear()
+void Repository<TYPE>::Clear()
 {
     m_elements.clear();
 }
 
 template <typename TYPE>
-std::vector<TYPE*> UniqueRepository<TYPE>::GetAll() const
+std::vector<TYPE*> Repository<TYPE>::GetAll() const
 {
     std::vector<TYPE*> definitions;
     for (const auto& definition : m_elements)

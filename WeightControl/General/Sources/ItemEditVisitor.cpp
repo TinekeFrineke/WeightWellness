@@ -6,6 +6,7 @@
 #include "ItemEditVisitor.h"
 
 #include "model/IModel.h"
+#include "model/IRepository.h"
 #include "model/ManualItem.h"
 #include "model/NutritionalValue.h"
 #include "model/Recept.h"
@@ -22,7 +23,7 @@
 
 void ItemEditVisitor::Visit(weight::Recept& aRecept)
 {
-    weight::ReceptDefinitie* definitie = mModel.FindReceptDefinitie(aRecept.GetName());
+    weight::ReceptDefinitie* definitie = m_recipes->Find(aRecept.GetName());
     if (definitie == NULL)
     {
         auto newDefinition = std::make_unique<weight::ReceptDefinitie>(aRecept.GetName());
@@ -30,7 +31,7 @@ void ItemEditVisitor::Visit(weight::Recept& aRecept)
         definitie->SetPortions(1);
         definitie->Add(std::make_unique<weight::ManualItem>(aRecept.GetName(), aRecept.GetPoints()));
 
-        mModel.Add(std::move(newDefinition));
+        m_recipes->Add(std::move(newDefinition));
     }
 
     EditReceptDialog dialog(aRecept, mParent);

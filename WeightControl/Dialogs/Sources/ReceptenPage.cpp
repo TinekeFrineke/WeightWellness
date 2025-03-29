@@ -5,10 +5,8 @@
 
 #include "ReceptenPage.h"
 
+#include "model/IRepository.h"
 #include "model/ReceptDefinitie.h"
-
-//#include "WeightControl.h"
-#include ".\receptenpage.h"
 
 #include "EditReceptDefDialog.h"
 #include "RecipeDefinitionEditor.h"
@@ -20,10 +18,11 @@
 // It would be better if this happens only when the user presses "OK".
 
 IMPLEMENT_DYNAMIC(ReceptenPage, CDialog)
-ReceptenPage::ReceptenPage(weight::IModel& aModel, CWnd* pParent)
-    : CDialog(ReceptenPage::IDD, pParent),
-    mReceptenList(aModel),
-    mModel(aModel)
+ReceptenPage::ReceptenPage(weight::IModel& aModel, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, CWnd* pParent)
+    : CDialog(ReceptenPage::IDD, pParent)
+    , mReceptenList(recipes)
+    , mModel(aModel)
+    , m_recipes(recipes)
 {
 }
 
@@ -52,7 +51,7 @@ BOOL ReceptenPage::OnInitDialog()
         return FALSE;
 
     mReceptenList.Initialize();
-    View(mModel.GetReceptDefs());
+    View(m_recipes->GetAll());
     return TRUE;
 }
 
@@ -61,16 +60,16 @@ BOOL ReceptenPage::OnInitDialog()
 
 void ReceptenPage::OnBnClickedAdd()
 {
-    RecipeDefinitionEditor editor(mModel, this);
+    RecipeDefinitionEditor editor(mModel, mModel.GetRecipeDefinitionRepository(), this);
     auto definition = editor.Create();
     if (definition != nullptr)
-        mModel.Add(std::move(definition));
+        m_recipes->Add(std::move(definition));
 
-    mReceptenList.View(mModel.GetReceptDefs());
+    mReceptenList.View(m_recipes->GetAll());
 }
 
 
-void ReceptenPage::View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aRecepten)
+void ReceptenPage::View(const std::vector<weight::ReceptDefinitie*>& aRecepten)
 {
     mReceptenList.View(aRecepten);
 }
@@ -81,9 +80,9 @@ void ReceptenPage::OnBnClickedEdit()
     if (definition == nullptr)
         return;
 
-    RecipeDefinitionEditor editor(mModel, this);
+    RecipeDefinitionEditor editor(mModel, m_recipes, this);
     if (editor.Edit(*definition))
-        mReceptenList.View(mModel.GetReceptDefs());
+        mReceptenList.View(m_recipes->GetAll());
 }
 
 void ReceptenPage::OnNMDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
@@ -94,9 +93,9 @@ void ReceptenPage::OnNMDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
     if (definition == nullptr)
         return;
 
-    RecipeDefinitionEditor editor(mModel, this);
+    RecipeDefinitionEditor editor(mModel, m_recipes, this);
     if (editor.Edit(*definition))
-        mReceptenList.View(mModel.GetReceptDefs());
+        mReceptenList.View(m_recipes->GetAll());
 
     *pResult = 0;
 }
@@ -109,8 +108,8 @@ void ReceptenPage::OnBnClickedDelete()
         return;
 
     if (::MessageBox(m_hWnd, _T("Zeker weten?"), _T("Waarschuwing"), MB_ICONQUESTION | MB_YESNO) == IDYES) {
-        mModel.Remove(definition);
+        m_recipes->Remove(definition->GetName());
     }
 
-    View(mModel.GetReceptDefs());
+    View(m_recipes->GetAll());
 }

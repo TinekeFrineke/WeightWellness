@@ -10,15 +10,10 @@
 
 bool RecipeDefinitionEditor::Edit(weight::ReceptDefinitie& definition) const
 {
-    EditReceptDefDialog dialog(m_model, definition, m_parent);
+    EditReceptDefDialog dialog(m_model, m_recipes, definition, m_parent);
 
     INT_PTR nResponse = dialog.DoModal();
-    if (nResponse != IDOK)
-        return false;
-
-    //m_model.AddCategory(definition.GetCategory());
-    //m_model.AddBrand(definition.GetMerk());
-    return true;
+    return nResponse == IDOK;
 }
 
 std::unique_ptr<weight::ReceptDefinitie> RecipeDefinitionEditor::Create() const

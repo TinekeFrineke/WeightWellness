@@ -11,7 +11,6 @@ namespace weight
 {
 class IDay;
 class Item;
-class IModel;
 }
 
 

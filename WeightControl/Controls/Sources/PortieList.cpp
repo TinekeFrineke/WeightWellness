@@ -4,7 +4,6 @@
 
 #include <algorithm>
 
-#include "model/IModel.h"
 #include "model/Portie.h"
 #include "model/VoedingsmiddelDefinitie.h"
 

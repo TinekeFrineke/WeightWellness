@@ -7,6 +7,7 @@
 
 #include "model/IDay.h"
 #include "model/IModel.h"
+#include "model/IRepository.h"
 #include "model/Portie.h"
 #include "model/Recept.h"
 #include "model/ReceptDefinitie.h"
@@ -18,7 +19,7 @@ CFindRecept::CFindRecept(weight::IModel& aModel,
                          weight::ReceptDefinitie* aDefinitie,
                          CWnd* pParent /*=nullptr*/)
     : CDialog(CFindRecept::IDD, pParent),
-    mItemList(aModel),
+    mItemList(aModel.GetRecipeDefinitionRepository()),
     mModel(aModel),
     mDefinitie(aDefinitie),
     mUpdating(false),
@@ -53,7 +54,7 @@ END_MESSAGE_MAP()
 void CFindRecept::UpdateItemFilter()
 {
     mItemList.SetFilter(ReceptDefinitiesFilter(mNaam.GetValue()));
-    mItemList.View(mModel.GetReceptDefs());
+    mItemList.View(mModel.GetRecipeDefinitionRepository()->GetAll());
 }
 
 
@@ -65,7 +66,7 @@ BOOL CFindRecept::OnInitDialog()
         return FALSE;
 
     mItemList.Initialize();
-    mItemList.View(mModel.GetReceptDefs());
+    mItemList.View(mModel.GetRecipeDefinitionRepository()->GetAll());
 
     mPorties.SetValue(1);
     mPoints.SetValue(0);

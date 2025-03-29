@@ -1,14 +1,14 @@
 
-#include "Repository.h"
+#include "StringRepository.h"
 
 namespace weight {
 
-std::vector<std::wstring> Repository::Get() const
+std::vector<std::wstring> StringRepository::Get() const
 {
     return m_elements;
 }
 
-void Repository::Add(const std::wstring& element)
+void StringRepository::Add(const std::wstring& element)
 {
     if (element.empty() || std::find(m_elements.begin(), m_elements.end(), element) != m_elements.end())
         return;
@@ -16,7 +16,7 @@ void Repository::Add(const std::wstring& element)
     m_elements.push_back(element);
 }
 
-void Repository::Clear() noexcept
+void StringRepository::Clear() noexcept
 {
     m_elements.clear();
 }

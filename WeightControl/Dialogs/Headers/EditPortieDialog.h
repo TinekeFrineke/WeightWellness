@@ -3,7 +3,6 @@
 
 #include "afxwin.h"
 
-#include "model/IModel.h"
 #include "model/Portie.h"
 
 #include "controls/DoubleEdit.h"

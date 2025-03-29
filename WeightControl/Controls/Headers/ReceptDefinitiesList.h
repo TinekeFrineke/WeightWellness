@@ -9,8 +9,9 @@
 namespace weight
 {
 class CategorieNaam;
-class IModel;
 class ReceptDefinitie;
+
+template <typename TYPE> class IRepository;
 }
 
 
@@ -32,12 +33,12 @@ class ReceptDefinitiesListItem;
 class ReceptDefinitiesList: public CListCtrl
 {
 public:
-    explicit ReceptDefinitiesList(weight::IModel& aModel);
+    explicit ReceptDefinitiesList(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes);
     ~ReceptDefinitiesList() override;
 
     void Initialize();
     void SetFilter(const ReceptDefinitiesFilter& aFilter);
-    void View(const std::vector<std::unique_ptr<weight::ReceptDefinitie>>& aItems);
+    void View(const std::vector<weight::ReceptDefinitie*>& aItems);
 
     weight::ReceptDefinitie* GetSelectedDefinition();
     void SelectItem(weight::ReceptDefinitie& aDefinition);
@@ -52,7 +53,7 @@ private:
                                          const ReceptDefinitiesFilter& aFilter);
 
     std::vector<std::unique_ptr<ReceptDefinitiesListItem>> mItems;
-    weight::IModel& mModel;
+    std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
     ReceptDefinitiesFilter      mFilter;
 };
 

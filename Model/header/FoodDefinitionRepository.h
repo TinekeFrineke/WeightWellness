@@ -3,7 +3,7 @@
 #include <map>
 
 #include "IFoodDefinitionRepository.h"
-#include "UniqueRepository.h"
+#include "Repository.h"
 
 
 namespace weight {
@@ -12,7 +12,7 @@ class VMDefinitie;
 
 class FoodDefinitionRepository
     : public IFoodDefinitionRepository
-    , private UniqueRepository<VMDefinitie>
+    , private Repository<VMDefinitie>
 {
 public:
     // Inherited via IFoodDefinitionRepository
