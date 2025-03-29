@@ -1,6 +1,10 @@
 
 #pragma once
 
+#include <memory>
+#include <string>
+#include <vector>
+
 namespace weight {
 
 template<typename TYPE>

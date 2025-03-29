@@ -8,18 +8,19 @@
 class CWnd;
 
 namespace weight {
-class IFoodDefinitionRepository;
 class PointsCalculator;
 class Portie;
 class VMDefinitie;
 struct FoodParameters;
+
+template <typename TYPE> class IRepository;
 }
 
 class FoodEditor
     : public IFoodEditor
 {
 public:
-    FoodEditor(std::shared_ptr<weight::IFoodDefinitionRepository> definitions,
+    FoodEditor(std::shared_ptr<weight::IRepository<weight::VMDefinitie>> definitions,
                std::shared_ptr<weight::PointsCalculator> calculator,
                CWnd* parent);
 
@@ -30,7 +31,7 @@ private:
               const std::vector<std::unique_ptr<weight::Portie>>& porties);
 
     //weight::Model& m_model;
-    std::shared_ptr<weight::IFoodDefinitionRepository> m_definitions;
+    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_definitions;
     std::shared_ptr<weight::PointsCalculator> m_calculator;
     CWnd* m_parent;
 };

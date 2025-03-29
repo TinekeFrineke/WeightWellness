@@ -12,7 +12,6 @@ namespace weight
 
 class IBrandRepository;
 class ICategoryRepository;
-class IFoodDefinitionRepository;
 class IStringRepository;
 class IWeek;
 class Personalia;
@@ -54,7 +53,7 @@ public:
     std::shared_ptr<IStringRepository> GetUnitRepository() const noexcept override;
     std::shared_ptr<IStringRepository> GetCategoryRepository() const noexcept override;
     std::shared_ptr<IStringRepository> GetBrandRepository() const noexcept override;
-    std::shared_ptr<IFoodDefinitionRepository> GetFoodDefinitionRepository() const noexcept override;
+    std::shared_ptr<IRepository<VMDefinitie>> GetFoodDefinitionRepository() const noexcept override;
     std::shared_ptr<IRepository<ReceptDefinitie>> GetRecipeDefinitionRepository() const noexcept override;
 
     const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept override { return mWeeks; }
@@ -70,7 +69,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<IWeek>> mWeeks;
-    std::shared_ptr<IFoodDefinitionRepository> m_foodDefinitions;
+    std::shared_ptr<IRepository<VMDefinitie>> m_foodDefinitions;
     std::shared_ptr<IRepository<ReceptDefinitie>> m_recipeDefinitions;
     std::vector<std::unique_ptr<Personalia>> mPersonalia;
     std::shared_ptr<IStringRepository> m_units;

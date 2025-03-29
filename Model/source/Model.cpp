@@ -4,7 +4,6 @@
 #include <tchar.h>
 #include <assert.h>
 
-#include "FoodDefinitionRepository.h"
 #include "IWeek.h"
 #include "Lot.h"
 #include "ModelFactory.h"
@@ -20,7 +19,7 @@ namespace weight
 
 Model::Model()
     : mStrategyType(STRATEGY_TYPE::KCal)
-    , m_foodDefinitions(std::make_shared<FoodDefinitionRepository>())
+    , m_foodDefinitions(std::make_shared<Repository<VMDefinitie>>())
     , m_recipeDefinitions(std::make_shared<Repository<ReceptDefinitie>>())
     , m_units(std::make_shared<StringRepository>())
     , m_categories(std::make_shared<StringRepository>())
@@ -104,7 +103,7 @@ std::shared_ptr<IStringRepository> Model::GetBrandRepository() const noexcept
     return m_brands;
 }
 
-std::shared_ptr<IFoodDefinitionRepository> Model::GetFoodDefinitionRepository() const noexcept
+std::shared_ptr<IRepository<VMDefinitie>> Model::GetFoodDefinitionRepository() const noexcept
 {
     return m_foodDefinitions;
 }

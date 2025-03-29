@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 
-#include "model/IFoodDefinitionRepository.h"
+#include "model/IRepository.h"
 #include "model/NutritionalValue.h"
 #include "model/Voedingsmiddel.h"
 #include "model/VoedingsmiddelDefinitie.h"
@@ -10,7 +10,7 @@
 #include "EditFoodDialog.h"
 
 
-FoodEditor::FoodEditor(std::shared_ptr<weight::IFoodDefinitionRepository> definitions,
+FoodEditor::FoodEditor(std::shared_ptr<weight::IRepository<weight::VMDefinitie>> definitions,
                        std::shared_ptr<weight::PointsCalculator> calculator,
                        CWnd* parent)
     : m_definitions(definitions)

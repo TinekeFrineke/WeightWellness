@@ -4,6 +4,7 @@
 #include "afxwin.h"
 
 #include "model/Portie.h"
+#include "model/VoedingsmiddelDefinitie.h"
 
 #include "controls/DoubleEdit.h"
 #include "controls/IntEdit.h"

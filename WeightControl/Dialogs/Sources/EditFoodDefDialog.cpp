@@ -7,7 +7,7 @@
 #include "WeightControl.h"
 #include ".\editfooddefdialog.h"
 #include "EditPortieDialog.h"
-#include "model/IFoodDefinitionRepository.h"
+#include "model/IRepository.h"
 #include "model/IStringRepository.h"
 #include "model/NutritionalValue.h"
 #include "model/VoedingsmiddelDefinitie.h"
@@ -74,7 +74,7 @@ CreateListViewPorties(const std::vector<std::unique_ptr<weight::Portie>>& portie
 }
 }
 
-CEditFoodDefDialog::CEditFoodDefDialog(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
+CEditFoodDefDialog::CEditFoodDefDialog(std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
                                        std::shared_ptr<weight::IStringRepository> units,
                                        std::shared_ptr<weight::IStringRepository> categories,
                                        std::shared_ptr<weight::IStringRepository> brands,

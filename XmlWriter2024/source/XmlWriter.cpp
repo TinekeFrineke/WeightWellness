@@ -30,7 +30,6 @@
 
 #include "model/Bonus.h"
 #include "model/IDay.h"
-#include "model/IFoodDefinitionRepository.h"
 #include "model/IModel.h"
 #include "model/IRepository.h"
 #include "model/IStringRepository.h"
@@ -145,7 +144,6 @@ weight::Result XmlWriter::WriteVoedingsmiddelDefinities(const std::tstring& aFil
 {
     auto xmlvmdefinities = std::make_unique<XmlVoedingsmiddeldefs>();
 
-    //weight::IFoodDefinitionRepository* pos;
     auto vmdefinities = mModel.GetFoodDefinitionRepository()->GetAll();
     for (size_t i = 0; i < vmdefinities.size(); ++i)
     {

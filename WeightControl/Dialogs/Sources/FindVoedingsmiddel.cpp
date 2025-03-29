@@ -7,7 +7,7 @@
 
 #include "WeightControl.h"
 #include "model/IDay.h"
-#include "model/IFoodDefinitionRepository.h"
+#include "model/IRepository.h"
 #include "model/IStringRepository.h"
 #include "model/NutritionalValue.h"
 #include "model/Portie.h"
@@ -34,7 +34,7 @@ BEGIN_MESSAGE_MAP(CFindVoedingsmiddel, CDialog)
 END_MESSAGE_MAP()
 
 
-CFindVoedingsmiddel::CFindVoedingsmiddel(const weight::IFoodDefinitionRepository& foodDefinitions,
+CFindVoedingsmiddel::CFindVoedingsmiddel(const weight::IRepository<weight::VMDefinitie>& foodDefinitions,
                                          const weight::IStringRepository& categoryRepositiory,
                                          const weight::IStringRepository& brandRepository,
                                          std::unique_ptr<weight::ILotFactory> lotFactory,

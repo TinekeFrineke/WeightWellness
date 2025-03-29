@@ -14,7 +14,6 @@ class Date;
 namespace weight {
 
 class BonusPointsMap;
-class IFoodDefinitionRepository;
 class IStringRepository;
 class IWeek;
 class Personalia;
@@ -51,7 +50,7 @@ public:
     virtual std::shared_ptr<IStringRepository> GetUnitRepository() const noexcept = 0;
     virtual std::shared_ptr<IStringRepository> GetCategoryRepository() const noexcept = 0;
     virtual std::shared_ptr<IStringRepository> GetBrandRepository() const noexcept = 0;
-    virtual std::shared_ptr<IFoodDefinitionRepository> GetFoodDefinitionRepository() const noexcept = 0;
+    virtual std::shared_ptr<IRepository<VMDefinitie>> GetFoodDefinitionRepository() const noexcept = 0;
     virtual std::shared_ptr<IRepository<ReceptDefinitie>> GetRecipeDefinitionRepository() const noexcept = 0;
 
     //virtual const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const noexcept = 0;
