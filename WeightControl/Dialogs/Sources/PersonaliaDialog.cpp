@@ -12,13 +12,12 @@
 // CPersonaliaDialog dialog
 
 IMPLEMENT_DYNAMIC(CPersonaliaDialog, CDialog)
-CPersonaliaDialog::CPersonaliaDialog(weight::IModel& aModel, CWnd* pParent /*=nullptr*/)
+CPersonaliaDialog::CPersonaliaDialog(weight::IModel& aModel, weight::Personalia* personalia, CWnd* pParent)
     : CDialog(CPersonaliaDialog::IDD, pParent),
     mModel(aModel),
-    mGeslacht(GS_Mannelijk),
-    mPersonalia(nullptr)
+    mGeslacht(GESLACHT::Mannelijk),
+    mPersonalia(personalia)
 {
-    mPersonalia = mModel.GetActivePersonalia();
 }
 
 CPersonaliaDialog::~CPersonaliaDialog()
@@ -124,13 +123,13 @@ void CPersonaliaDialog::OnCancel()
 
 void CPersonaliaDialog::OnBnClickedMannelijk()
 {
-    mGeslacht = GS_Mannelijk;
+    mGeslacht = GESLACHT::Mannelijk;
     mButtonVrouwelijk.SetCheck(BST_UNCHECKED);
 }
 
 void CPersonaliaDialog::OnBnClickedVrouwelijk()
 {
-    mGeslacht = GS_Vrouwelijk;
+    mGeslacht = GESLACHT::Vrouwelijk;
     mButtonMannelijk.SetCheck(BST_UNCHECKED);
 }
 

@@ -74,8 +74,6 @@ CDiaryPage::~CDiaryPage()
 {
 }
 
-// CDiaryPage message handlers
-
 BOOL CDiaryPage::OnInitDialog()
 {
     if (CDialog::OnInitDialog() == FALSE)

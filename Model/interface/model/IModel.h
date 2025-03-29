@@ -36,16 +36,10 @@ public:
     virtual void SetStrategy(STRATEGY_TYPE eType) = 0;
 
     virtual IWeek* FindWeek(const Utils::Date& aDate) = 0;
-    virtual bool Add(std::unique_ptr<IWeek> aWeek) = 0;
 
+    virtual bool Add(std::unique_ptr<IWeek> aWeek) = 0;
     virtual bool Add(std::unique_ptr<VMDefinitie> aDefinitie) = 0;
     virtual bool Add(std::unique_ptr<Personalia> aPersonalia) = 0;
-
-    virtual void AddUnit(const std::wstring& aUnit) = 0;
-    virtual void AddCategory(const std::wstring& aCategory) = 0;
-    virtual void AddBrand(const std::wstring& brand) = 0;
-
-    virtual bool Remove(const VMDefinitie* aDefinitie) = 0;
 
     virtual std::shared_ptr<IStringRepository> GetUnitRepository() const noexcept = 0;
     virtual std::shared_ptr<IStringRepository> GetCategoryRepository() const noexcept = 0;
@@ -53,7 +47,6 @@ public:
     virtual std::shared_ptr<IRepository<VMDefinitie>> GetFoodDefinitionRepository() const noexcept = 0;
     virtual std::shared_ptr<IRepository<ReceptDefinitie>> GetRecipeDefinitionRepository() const noexcept = 0;
 
-    //virtual const std::vector<std::unique_ptr<ReceptDefinitie>>& GetReceptDefs() const noexcept = 0;
     virtual const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept = 0;
     virtual const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept = 0;
     virtual std::shared_ptr<BonusPointsMap> GetBonusPointsMap() const noexcept = 0;

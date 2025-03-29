@@ -41,14 +41,7 @@ public:
     bool Add(std::unique_ptr<VMDefinitie> aDefinitie) override;
     bool Add(std::unique_ptr<Personalia> aPersonalia) override;
 
-    void AddUnit(const std::wstring& aUnit) override;
-    void AddCategory(const std::wstring& aCategory) override;
-    void AddBrand(const std::wstring& brand) override;
-
-    bool Remove(const VMDefinitie* aDefinitie) override;
     bool Remove(const Personalia* aPersonalia);
-
-    VMDefinitie* FindVoedingsmiddelDefinitie(const std::wstring& aName);
 
     std::shared_ptr<IStringRepository> GetUnitRepository() const noexcept override;
     std::shared_ptr<IStringRepository> GetCategoryRepository() const noexcept override;

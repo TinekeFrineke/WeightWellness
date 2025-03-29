@@ -82,12 +82,6 @@ IWeek* Model::CreateWeek(const Utils::Date& aDate)
 }
 
 
-VMDefinitie* Model::FindVoedingsmiddelDefinitie(const std::tstring& aName)
-{
-    return m_foodDefinitions->Find(aName);
-}
-
-
 std::shared_ptr<IStringRepository> Model::GetUnitRepository() const noexcept
 {
     return m_units;
@@ -111,11 +105,6 @@ std::shared_ptr<IRepository<VMDefinitie>> Model::GetFoodDefinitionRepository() c
 std::shared_ptr<IRepository<ReceptDefinitie>> Model::GetRecipeDefinitionRepository() const noexcept
 {
     return m_recipeDefinitions;
-}
-
-void Model::AddUnit(const std::wstring& aUnit)
-{
-    m_units->Add(aUnit);
 }
 
 bool Model::Add(std::unique_ptr<IWeek> aWeek)
@@ -142,8 +131,8 @@ bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
     if (!m_foodDefinitions->Add(std::move(aDefinitie)))
         return false;
 
-    AddUnit(definition->GetUnit());
-    AddCategory(definition->GetCategory());
+    m_units->Add(definition->GetUnit());
+    m_categories->Add(definition->GetCategory());
     return true;
 }
 
@@ -158,24 +147,6 @@ bool Model::Add(std::unique_ptr<Personalia> aPersonalia)
 
     mPersonalia.push_back(std::move(aPersonalia));
     return true;
-}
-
-
-void Model::AddCategory(const std::wstring& aCategory)
-{
-    m_categories->Add(aCategory);
-}
-
-
-void Model::AddBrand(const std::wstring& brand)
-{
-    m_brands->Add(brand);
-}
-
-
-bool Model::Remove(const VMDefinitie* aDefinitie)
-{
-    return aDefinitie != nullptr && m_foodDefinitions->Remove(aDefinitie->GetName());
 }
 
 

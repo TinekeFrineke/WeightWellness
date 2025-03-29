@@ -111,7 +111,7 @@ void CItemsPage::OnBnClickedDelete()
     if (definition == nullptr)
         return;
 
-    if (mModel.Remove(definition)) {
+    if (mModel.GetFoodDefinitionRepository()->Remove(definition->GetName())) {
         mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
     }
 }

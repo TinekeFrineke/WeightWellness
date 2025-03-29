@@ -79,7 +79,7 @@ END_MESSAGE_MAP()
 
 BOOL CWWDialog::OnInitDialog()
 {
-    mTabControl.AddPage(std::make_unique<CPersonaliaDialog>(mModel, this), IDD_PERSONALIA_PAGE, _T("Personalia"));
+    mTabControl.AddPage(std::make_unique<CPersonaliaDialog>(mModel, mModel.GetActivePersonalia(), this), IDD_PERSONALIA_PAGE, _T("Personalia"));
     mTabControl.AddPage(std::make_unique<CDiaryPage>(mModel, this), IDD_DIARY_PAGE, _T("Dagboek"));
     mTabControl.AddPage(std::make_unique<CItemsPage>(mModel, *m_factory, this), IDD_ITEMS_PAGE, _T("Items"));
     mTabControl.AddPage(m_factory->CreateRecipesPage(), IDD_RECEPTEN_PAGE, _T("Recepten"));
@@ -87,7 +87,6 @@ BOOL CWWDialog::OnInitDialog()
     CDialog::OnInitDialog();
 
     // Add "About..." menu item to system menu.
-
     // IDM_ABOUTBOX must be in the system command range.
     ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
     ASSERT(IDM_ABOUTBOX < 0xF000);
