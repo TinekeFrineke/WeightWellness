@@ -80,10 +80,10 @@ weight::Result XmlWriter::Write(const std::tstring& aDirectory)
 
 weight::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
 {
-    if (mModel.GetPersonalia().empty())
+    if (mModel.GetPersonalia() == nullptr)
         return weight::Result::Ok;
 
-    const weight::Personalia* personalia = mModel.GetActivePersonalia();
+    const weight::Personalia* personalia = mModel.GetPersonalia();
 
     if (personalia->GetUserName().empty())
         return weight::Result::Ok;

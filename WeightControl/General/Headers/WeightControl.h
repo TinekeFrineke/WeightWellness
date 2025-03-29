@@ -27,7 +27,6 @@ public:
     ~CWWApplication();
 
     std::wstring      GetDataDirectory() const { return mDataDirectory; }
-    std::wstring      GetUserDirectory() const;
 
     // Overrides
 public:

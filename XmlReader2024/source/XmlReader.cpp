@@ -84,6 +84,7 @@ weight::Result XmlReader::ReadPersonalia(const std::tstring& aDirectory)
         auto xmlpersonalia = reader.Read(aDirectory);
         if (xmlpersonalia == nullptr)
             return weight::Result::Ok;
+        
         auto personalia = std::make_unique<weight::Personalia>(xmlpersonalia->Getgebruikersnaam());
         personalia->SetName(xmlpersonalia->Getnaam());
         Utils::Date date(Utils::Date::Today());
@@ -128,7 +129,7 @@ weight::Result XmlReader::ReadPersonalia(const std::tstring& aDirectory)
                 return weight::Result::InterpretError;
         }
 
-        mModel.Add(std::move(personalia));
+        mModel.SetPersonalia(std::move(personalia));
 
         return weight::Result::Ok;
     }

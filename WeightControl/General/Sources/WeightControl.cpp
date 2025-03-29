@@ -81,7 +81,7 @@ BOOL CWWApplication::InitInstance()
 
     ww2024::XmlReader reader(*mModel);
     reader.Read(mDataDirectory);
-    if (mModel->GetActivePersonalia() == nullptr) {
+    if (mModel->GetPersonalia() == nullptr) {
         NewNameDialog dialog(NULL);
         INT_PTR nResponse = dialog.DoModal();
         if (nResponse == IDOK)
@@ -93,7 +93,7 @@ BOOL CWWApplication::InitInstance()
             }
 
             try {
-                mModel->AddPersonalia(name);
+                mModel->SetPersonalia(std::make_unique<weight::Personalia>(name));
             }
             catch (const std::runtime_error& error) {
                 std::tstring terror(Str::ToTString(error.what()));
@@ -110,7 +110,7 @@ BOOL CWWApplication::InitInstance()
         }
     }
 
-    mModel->SetStrategy(mModel->GetActivePersonalia()->GetStrategy());
+    mModel->SetStrategy(mModel->GetPersonalia()->GetStrategy());
 
     auto pagefactory(std::make_unique<PageFactory>(mModel->GetRecipeDefinitionRepository(),
                      mModel->GetFoodDefinitionRepository(),
@@ -136,13 +136,6 @@ BOOL CWWApplication::InitInstance()
     // Since the dialog has been closed, return FALSE so that we exit the
     //  application, rather than start the application's message pump.
     return FALSE;
-}
-
-
-std::wstring CWWApplication::GetUserDirectory() const
-{
-    assert(!mModel->GetPersonalia().empty());
-    return *(Path(GetDataDirectory()) + mModel->GetActivePersonalia()->GetUserName());
 }
 
 

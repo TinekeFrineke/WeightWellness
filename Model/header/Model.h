@@ -26,10 +26,8 @@ public:
     Model();
     ~Model() override;
 
-    bool HasPersonalia(const std::tstring& name) const;
-    Personalia* GetActivePersonalia();
-    const Personalia* GetActivePersonalia() const;
-    Personalia* AddPersonalia(const std::tstring& aName);
+    Personalia* GetPersonalia() const override;
+    void SetPersonalia(std::unique_ptr<Personalia> personalia);
 
     STRATEGY_TYPE GetStrategy() const noexcept override { return mStrategyType; }
     void SetStrategy(STRATEGY_TYPE eType) override;
@@ -39,9 +37,6 @@ public:
     bool Add(std::unique_ptr<IWeek> aWeek) override;
 
     bool Add(std::unique_ptr<VMDefinitie> aDefinitie) override;
-    bool Add(std::unique_ptr<Personalia> aPersonalia) override;
-
-    bool Remove(const Personalia* aPersonalia);
 
     std::shared_ptr<IStringRepository> GetUnitRepository() const noexcept override;
     std::shared_ptr<IStringRepository> GetCategoryRepository() const noexcept override;
@@ -50,7 +45,6 @@ public:
     std::shared_ptr<IRepository<ReceptDefinitie>> GetRecipeDefinitionRepository() const noexcept override;
 
     const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept override { return mWeeks; }
-    const std::vector<std::unique_ptr<Personalia>>& GetPersonalia() const noexcept override { return mPersonalia; }
     std::shared_ptr<BonusPointsMap> GetBonusPointsMap() const noexcept override { return mBonusPointsMap; }
 
     double GetPuntenTotaal(STRATEGY_TYPE eType) const;
@@ -63,7 +57,7 @@ private:
     std::vector<std::unique_ptr<IWeek>> mWeeks;
     std::shared_ptr<IRepository<VMDefinitie>> m_foodDefinitions;
     std::shared_ptr<IRepository<ReceptDefinitie>> m_recipeDefinitions;
-    std::vector<std::unique_ptr<Personalia>> mPersonalia;
+    std::unique_ptr<Personalia> mPersonalia;
     std::shared_ptr<IStringRepository> m_units;
     std::shared_ptr<IStringRepository> m_categories;
     std::shared_ptr<IStringRepository> m_brands;

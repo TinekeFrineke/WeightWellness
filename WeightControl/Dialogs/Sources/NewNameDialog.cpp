@@ -12,7 +12,7 @@
 
 IMPLEMENT_DYNAMIC(NewNameDialog, CDialogEx)
 
-NewNameDialog::NewNameDialog(CWnd* pParent /*=nullptr*/)
+NewNameDialog::NewNameDialog(CWnd* pParent)
 	: CDialogEx(IDD_NEWNAME, pParent)
 {
 

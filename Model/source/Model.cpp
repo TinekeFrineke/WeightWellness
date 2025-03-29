@@ -40,8 +40,8 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
 
     mStrategyType = eType;
     m_calculator->SetStrategy(eType);
-    if (GetActivePersonalia() != nullptr)
-        GetActivePersonalia()->SetStrategy(eType);
+    if (GetPersonalia() != nullptr)
+        GetPersonalia()->SetStrategy(eType);
 
     IWeek* week = FindWeek(Utils::Date::Today());
 
@@ -72,10 +72,10 @@ IWeek* Model::CreateWeek(const Utils::Date& aDate)
         enddate.SubtractDays(1);
 
     auto week = ModelFactory().CreateWeek(aDate, enddate);
-    week->SetPoints(GetActivePersonalia()->GetPuntenTotaal(GetStrategy()));
+    week->SetPoints(GetPersonalia()->GetPuntenTotaal(GetStrategy()));
     week->SetSaveablePoints(GetVrijePunten());
     week->SetStrategy(GetStrategy(), *this);
-    week->SetStartWeight(GetActivePersonalia()->GetHuidigGewicht());
+    week->SetStartWeight(GetPersonalia()->GetHuidigGewicht());
     weekptr = week.get();
     Add(std::move(week));
     return weekptr;
@@ -137,88 +137,33 @@ bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
 }
 
 
-bool Model::Add(std::unique_ptr<Personalia> aPersonalia)
-{
-    if (HasPersonalia(aPersonalia->GetUserName()))
-        throw std::runtime_error("Personalia already exists");
-
-    if (mPersonalia.empty())
-        SetStrategy(aPersonalia->GetStrategy());
-
-    mPersonalia.push_back(std::move(aPersonalia));
-    return true;
-}
-
-
-bool Model::Remove(const Personalia* aPersonalia)
-{
-    for (auto iter = mPersonalia.begin(); iter != mPersonalia.end(); ++iter)
-    {
-        if (iter->get() == aPersonalia)
-        {
-            mPersonalia.erase(iter);
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
 double Model::GetVrijePunten() const
 {
     switch (mStrategyType) {
         case STRATEGY_TYPE::KCal:
-            return GetPersonalia().front()->GetKCWeekPuntenTotaal();
+            return GetPersonalia()->GetKCWeekPuntenTotaal();
         case STRATEGY_TYPE::CarboHydrates:
-            return GetPersonalia().front()->GetCHWeekPuntenTotaal() / 7 - GetPersonalia().front()->GetCHPuntenTotaal();
+            return GetPersonalia()->GetCHWeekPuntenTotaal() / 7 - GetPersonalia()->GetCHPuntenTotaal();
         default:
             assert(false);
             return 0;
     }
 }
 
-bool Model::HasPersonalia(const std::tstring& name) const
+Personalia* Model::GetPersonalia() const
 {
-    return std::find_if(mPersonalia.begin(),
-                        mPersonalia.end(),
-                        [name](const std::unique_ptr<Personalia>& personalia) { return personalia->GetUserName() == name; })
-        != mPersonalia.end();
-}
-
-Personalia* Model::GetActivePersonalia()
-{
-    if (mPersonalia.empty())
-        return nullptr;
-
-    return mPersonalia.front().get();
+    return mPersonalia.get();
 }
 
 
-const Personalia* Model::GetActivePersonalia() const
+void Model::SetPersonalia(std::unique_ptr<Personalia> personalia)
 {
-    if (mPersonalia.empty())
-        return nullptr;
-
-    return mPersonalia.front().get();
-}
-
-Personalia* Model::AddPersonalia(const std::tstring& aName)
-{
-    if (HasPersonalia(aName))
-        throw std::runtime_error("Personalia already exists");
-
-    // Temporary until more persons are supported
-    if (!mPersonalia.empty())
-        throw std::runtime_error("Personalia not empty");
-
-    mPersonalia.push_back(std::make_unique<Personalia>(aName));
-    return mPersonalia.back().get();
+    mPersonalia = std::move(personalia);
 }
 
 double Model::GetPuntenTotaal(STRATEGY_TYPE eType) const
 {
-    return GetActivePersonalia()->GetPuntenTotaal(eType);
+    return GetPersonalia()->GetPuntenTotaal(eType);
 }
 
 
@@ -227,9 +172,9 @@ double Model::GetWeekPuntenTotaal() const
     switch (mStrategyType)
     {
         case STRATEGY_TYPE::KCal:
-            return GetActivePersonalia()->GetKCWeekPuntenTotaal();
+            return GetPersonalia()->GetKCWeekPuntenTotaal();
         case STRATEGY_TYPE::CarboHydrates:
-            return GetActivePersonalia()->GetCHWeekPuntenTotaal();
+            return GetPersonalia()->GetCHWeekPuntenTotaal();
         default:
             return 0;
     }

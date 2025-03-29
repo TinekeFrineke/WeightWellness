@@ -107,10 +107,10 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
             enddate.SubtractDays(1);
         auto week = weight::ModelFactory().CreateWeek(aDate, enddate);
         mWeek = week.get();
-        mWeek->SetPoints(mModel.GetActivePersonalia()->GetPuntenTotaal(mModel.GetStrategy()));
+        mWeek->SetPoints(mModel.GetPersonalia()->GetPuntenTotaal(mModel.GetStrategy()));
         mWeek->SetSaveablePoints(mModel.GetVrijePunten());
         mWeek->SetStrategy(mModel.GetStrategy(), mModel);
-        mWeek->SetStartWeight(mModel.GetActivePersonalia()->GetHuidigGewicht());
+        mWeek->SetStartWeight(mModel.GetPersonalia()->GetHuidigGewicht());
         mModel.Add(std::move(week));
     }
 
@@ -136,7 +136,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     {
         auto day = weight::ModelFactory().CreateDay(aDate);
         mDay = day.get();
-        mDay->SetWeight(mModel.GetActivePersonalia()->GetHuidigGewicht());
+        mDay->SetWeight(mModel.GetPersonalia()->GetHuidigGewicht());
         mWeek->Add(std::move(day));
     }
 
@@ -300,7 +300,7 @@ void CDiaryPage::OnBnClickedDelete()
 void CDiaryPage::OnEnChangeWeight()
 {
     mDay->SetWeight(mWeight.GetValue());
-    mModel.GetActivePersonalia()->SetHuidigGewicht(mDay->GetWeight());
+    mModel.GetPersonalia()->SetHuidigGewicht(mDay->GetWeight());
 }
 
 
@@ -345,7 +345,7 @@ void CDiaryPage::OnShowWindow(BOOL bShow, UINT nStatus)
 
     mPunten.SetValue(mWeek->GetPoints());
 
-    mDay->SetWeight(mModel.GetActivePersonalia()->GetHuidigGewicht());
+    mDay->SetWeight(mModel.GetPersonalia()->GetHuidigGewicht());
     mBonusPoints.SetValue(mDay->GetFreeBonusPoints());
     mCalculatedBonusPoints.SetValue(mDay->GetCalculatedBonusPoints());
     mWeight.SetValue(mDay->GetWeight());

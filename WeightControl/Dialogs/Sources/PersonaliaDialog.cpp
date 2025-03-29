@@ -149,11 +149,11 @@ void CPersonaliaDialog::OnEnKillfocusUserNaam()
         if (mUsername.GetValue().empty())
             return;
 
-        auto personalia = std::make_unique< weight::Personalia>(mUsername.GetValue());
+        auto personalia = std::make_unique<weight::Personalia>(mUsername.GetValue());
         mPersonalia = personalia.get();
         mPersonalia->SetName(mNaam.GetValue());
 
-        mModel.Add(std::move(personalia));
+        mModel.SetPersonalia(std::move(personalia));
     }
 
 }
