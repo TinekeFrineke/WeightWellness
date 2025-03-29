@@ -12,14 +12,14 @@
 #include "Utilities/Inifile.h"
 #include "Utilities/PathUtils.h"
 
-#include "WWDialog.h"
-
 #include "model/ModelFactory.h"
 #include "model/Personalia.h"
 #include "xmlreader/XmlReader.h"
 #include "xmlwriter/XmlWriter.h"
 
 #include "NewNameDialog.h"
+#include "PageFactory.h"
+#include "WWDialog.h"
 
 // CWWApplication
 
@@ -112,7 +112,14 @@ BOOL CWWApplication::InitInstance()
 
     mModel->SetStrategy(mModel->GetActivePersonalia()->GetStrategy());
 
-    CWWDialog dlg(*mModel);
+    auto pagefactory(std::make_unique<PageFactory>(mModel->GetRecipeDefinitionRepository(),
+                     mModel->GetFoodDefinitionRepository(),
+                     mModel->GetCalculator(),
+                     mModel->GetCategoryRepository(),
+                     mModel->GetBrandRepository(),
+                     mModel->GetUnitRepository()));
+
+    CWWDialog dlg(*mModel, std::move(pagefactory));
     m_pMainWnd = &dlg;
     INT_PTR nResponse = dlg.DoModal();
     if (nResponse == IDOK)

@@ -15,7 +15,7 @@ class CWWDialog : public CDialog
 {
 // Construction
 public:
-	explicit CWWDialog(weight::IModel & aModel, CWnd* pParent = nullptr);	// standard constructor
+	CWWDialog(weight::IModel & aModel, std::unique_ptr<IPageFactory> pageFactory, CWnd* pParent = nullptr);	// standard constructor
 	~CWWDialog() override;
 
 // Dialog Data

@@ -47,14 +47,9 @@ END_MESSAGE_MAP()
 
 
 
-CWWDialog::CWWDialog(weight::IModel& aModel, CWnd* pParent /*=NULL*/)
+CWWDialog::CWWDialog(weight::IModel& aModel, std::unique_ptr<IPageFactory> pageFactory, CWnd* pParent)
     : CDialog(CWWDialog::IDD, pParent)
-    , m_factory(std::make_unique<PageFactory>(aModel.GetRecipeDefinitionRepository(),
-                                              aModel.GetFoodDefinitionRepository(),
-                                              aModel.GetCalculator(),
-                                              aModel.GetCategoryRepository(),
-                                              aModel.GetBrandRepository(),
-                                              aModel.GetUnitRepository()))
+    , m_factory(std::move(pageFactory))
     , mModel(aModel)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
