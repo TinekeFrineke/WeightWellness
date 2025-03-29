@@ -8,8 +8,10 @@
 
 namespace weight
 {
-class IModel;
+class IStringRepository;
+class PointsCalculator;
 class ReceptDefinitie;
+class VMDefinitie;
 class Voedingsmiddel;
 
 template <typename TYPE> class IRepository;
@@ -22,7 +24,13 @@ class EditReceptDefDialog: public CDialog
     DECLARE_DYNAMIC(EditReceptDefDialog)
 
 public:
-    EditReceptDefDialog(weight::IModel& aModel, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, weight::ReceptDefinitie& aRecept, CWnd* pParent = NULL);   // standard constructor
+    EditReceptDefDialog(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
+                        std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                        std::shared_ptr<weight::PointsCalculator> calculator,
+                        std::shared_ptr<weight::IStringRepository> categories,
+                        std::shared_ptr<weight::IStringRepository> brands,
+                        weight::ReceptDefinitie& aRecept,
+                        CWnd* pParent = NULL);   // standard constructor
     virtual ~EditReceptDefDialog();
 
     // Dialog Data
@@ -46,8 +54,11 @@ protected:
 private:
     void EditSelectedItem();
 
-    weight::IModel& mModel;
     std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
+    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::PointsCalculator> m_calculator;
+    std::shared_ptr<weight::IStringRepository> m_categories;
+    std::shared_ptr<weight::IStringRepository> m_brands;
     weight::ReceptDefinitie& mRecept;
 
     ItemList mItemList;

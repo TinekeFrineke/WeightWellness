@@ -17,7 +17,12 @@ class ReceptenPage: public CDialog, public TabPage
     DECLARE_DYNAMIC(ReceptenPage)
 
 public:
-    explicit ReceptenPage(weight::IModel& aModel, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, CWnd* pParent = NULL);   // standard constructor
+    explicit ReceptenPage(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
+                          std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                          std::shared_ptr<weight::PointsCalculator> calculator,
+                          std::shared_ptr<weight::IStringRepository> categories,
+                          std::shared_ptr<weight::IStringRepository> brands,
+                          CWnd* pParent = NULL);
     ~ReceptenPage() override;
 
     virtual CDialog* GetDialog() { return this; }
@@ -43,7 +48,10 @@ protected:
     void View(const std::vector<weight::ReceptDefinitie*>& aRecepten);
 
 private:
-    weight::IModel& mModel;
     std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
+    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::PointsCalculator> m_calculator;
+    std::shared_ptr<weight::IStringRepository> m_categories;
+    std::shared_ptr<weight::IStringRepository> m_brands;
     ReceptDefinitiesList mReceptenList;
 };

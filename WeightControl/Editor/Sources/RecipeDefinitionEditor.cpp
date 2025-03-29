@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 
+#include "model/IModel.h"
 #include "model/ReceptDefinitie.h"
 
 #include "EditReceptDefDialog.h"
@@ -10,7 +11,8 @@
 
 bool RecipeDefinitionEditor::Edit(weight::ReceptDefinitie& definition) const
 {
-    EditReceptDefDialog dialog(m_model, m_recipes, definition, m_parent);
+    EditReceptDefDialog dialog(m_recipes, m_foodDefinitions, m_calculator,
+                               m_categories, m_brands, definition, m_parent);
 
     INT_PTR nResponse = dialog.DoModal();
     return nResponse == IDOK;

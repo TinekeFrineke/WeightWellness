@@ -49,8 +49,10 @@
     <ClInclude Include="Dialogs\Headers\FindRecept.h" />
     <ClInclude Include="Dialogs\Headers\FindVoedingsmiddel.h" />
     <ClInclude Include="Dialogs\Headers\HandmatigeItemDlg.h" />
+    <ClInclude Include="Dialogs\Headers\IPageFactory.h" />
     <ClInclude Include="Dialogs\Headers\ItemsPage.h" />
     <ClInclude Include="Dialogs\Headers\NewNameDialog.h" />
+    <ClInclude Include="Dialogs\Headers\PageFactory.h" />
     <ClInclude Include="Dialogs\Headers\PersonaliaDialog.h" />
     <ClInclude Include="Dialogs\Headers\PointsPerDay.h" />
     <ClInclude Include="Dialogs\Headers\ReceptenPage.h" />
@@ -94,6 +96,7 @@
     <ClCompile Include="Dialogs\Sources\HandmatigeItemDlg.cpp" />
     <ClCompile Include="Dialogs\Sources\ItemsPage.cpp" />
     <ClCompile Include="Dialogs\Sources\NewNameDialog.cpp" />
+    <ClCompile Include="Dialogs\Sources\PageFactory.cpp" />
     <ClCompile Include="Dialogs\Sources\PersonaliaDialog.cpp" />
     <ClCompile Include="Dialogs\Sources\PointsPerDay.cpp" />
     <ClCompile Include="Dialogs\Sources\ReceptenPage.cpp" />

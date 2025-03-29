@@ -5,12 +5,11 @@
 
 #include "editreceptdefdialog.h"
 
-#include "FindVoedingsmiddel.h"
-#include "ItemEditVisitor.h"
-
-#include "model/IModel.h"
 #include "model/LotFactory.h"
 #include "model/ReceptDefinitie.h"
+
+#include "FindVoedingsmiddel.h"
+#include "ItemEditVisitor.h"
 
 // EditReceptDefDialog dialog
 
@@ -27,10 +26,19 @@ BEGIN_MESSAGE_MAP(EditReceptDefDialog, CDialog)
 END_MESSAGE_MAP()
 
 
-EditReceptDefDialog::EditReceptDefDialog(weight::IModel& aModel, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, weight::ReceptDefinitie& aRecept, CWnd* pParent)
+EditReceptDefDialog::EditReceptDefDialog(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
+                                         std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                                         std::shared_ptr<weight::PointsCalculator> calculator,
+                                         std::shared_ptr<weight::IStringRepository> categories,
+                                         std::shared_ptr<weight::IStringRepository> brands,
+                                         weight::ReceptDefinitie& aRecept,
+                                         CWnd* pParent)
     : CDialog(EditReceptDefDialog::IDD, pParent)
-    , mModel(aModel)
-    , m_recipes(recipes)
+    , m_foodDefinitions(std::move(foodDefinitions))
+    , m_recipes(std::move(recipes))
+    , m_calculator(std::move(calculator))
+    , m_categories(std::move(categories))
+    , m_brands(std::move(brands))
     , mRecept(aRecept)
 {
 }
@@ -71,8 +79,7 @@ void EditReceptDefDialog::EditSelectedItem()
     if (item == nullptr)
         return;
 
-    ItemEditVisitor visitor(mModel.GetRecipeDefinitionRepository(), mModel.GetFoodDefinitionRepository(),
-                            mModel.GetCalculator(), this);
+    ItemEditVisitor visitor(m_recipes, m_foodDefinitions, m_calculator, this);
     item->GetItem()->Accept(visitor);
 
     mItemList.View(mRecept.GetItems());
@@ -85,8 +92,8 @@ void EditReceptDefDialog::EditSelectedItem()
 
 void EditReceptDefDialog::OnBnClickedAdd()
 {
-    CFindVoedingsmiddel dialog(*mModel.GetFoodDefinitionRepository(), *mModel.GetCategoryRepository(), *mModel.GetBrandRepository(),
-                               std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
+    CFindVoedingsmiddel dialog(*m_foodDefinitions, *m_categories, *m_brands,
+                               std::make_unique<weight::LotFactory>(m_calculator), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)
     {

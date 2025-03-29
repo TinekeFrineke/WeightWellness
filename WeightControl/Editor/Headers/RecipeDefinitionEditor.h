@@ -5,7 +5,9 @@
 class CWnd;
 
 namespace weight {
-class IModel;
+class IStringRepository;
+class PointsCalculator;
+class VMDefinitie;
 
 template <typename TYPE> class IRepository;
 }
@@ -14,13 +16,27 @@ class RecipeDefinitionEditor
     : public IRecipeDefinitionEditor
 {
 public:
-    explicit RecipeDefinitionEditor(weight::IModel& model, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, CWnd* parent) : m_model(model), m_parent(parent) {}
+    RecipeDefinitionEditor(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
+                           std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                           std::shared_ptr<weight::PointsCalculator> calculator,
+                           std::shared_ptr<weight::IStringRepository> categories,
+                           std::shared_ptr<weight::IStringRepository> brands,
+                           CWnd* parent)
+        : m_recipes(std::move(recipes))
+        , m_foodDefinitions(std::move(foodDefinitions))
+        , m_calculator(std::move(calculator))
+        , m_categories(std::move(categories))
+        , m_brands(std::move(brands))
+        , m_parent(parent) {}
 
     bool Edit(weight::ReceptDefinitie& portie) const override;
     std::unique_ptr<weight::ReceptDefinitie> Create() const override;
 
 private:
-    weight::IModel& m_model;
     std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
+    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::PointsCalculator> m_calculator;
+    std::shared_ptr<weight::IStringRepository> m_categories;
+    std::shared_ptr<weight::IStringRepository> m_brands;
     CWnd* m_parent;
 };

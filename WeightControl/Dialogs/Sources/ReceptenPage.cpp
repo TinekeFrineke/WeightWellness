@@ -18,10 +18,18 @@
 // It would be better if this happens only when the user presses "OK".
 
 IMPLEMENT_DYNAMIC(ReceptenPage, CDialog)
-ReceptenPage::ReceptenPage(weight::IModel& aModel, std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes, CWnd* pParent)
+ReceptenPage::ReceptenPage(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
+                           std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                           std::shared_ptr<weight::PointsCalculator> calculator,
+                           std::shared_ptr<weight::IStringRepository> categories,
+                           std::shared_ptr<weight::IStringRepository> brands,
+                           CWnd* pParent)
     : CDialog(ReceptenPage::IDD, pParent)
-    , mModel(aModel)
-    , m_recipes(recipes)
+    , m_recipes(std::move(recipes))
+    , m_foodDefinitions(std::move(foodDefinitions))
+    , m_calculator(std::move(calculator))
+    , m_categories(std::move(categories))
+    , m_brands(std::move(brands))
 {
 }
 
@@ -59,7 +67,8 @@ BOOL ReceptenPage::OnInitDialog()
 
 void ReceptenPage::OnBnClickedAdd()
 {
-    RecipeDefinitionEditor editor(mModel, m_recipes, this);
+    RecipeDefinitionEditor editor(m_recipes, m_foodDefinitions, m_calculator,
+                                  m_categories, m_brands, this);
     auto definition = editor.Create();
     if (definition != nullptr)
         m_recipes->Add(std::move(definition));
@@ -79,7 +88,7 @@ void ReceptenPage::OnBnClickedEdit()
     if (definition == nullptr)
         return;
 
-    RecipeDefinitionEditor editor(mModel, m_recipes, this);
+    RecipeDefinitionEditor editor(m_recipes, m_foodDefinitions, m_calculator, m_categories, m_brands, this);
     if (editor.Edit(*definition))
         mReceptenList.View(m_recipes->GetAll());
 }
@@ -92,7 +101,7 @@ void ReceptenPage::OnNMDblclkList1(NMHDR* pNMHDR, LRESULT* pResult)
     if (definition == nullptr)
         return;
 
-    RecipeDefinitionEditor editor(mModel, m_recipes, this);
+    RecipeDefinitionEditor editor(m_recipes, m_foodDefinitions, m_calculator, m_categories, m_brands, this);
     if (editor.Edit(*definition))
         mReceptenList.View(m_recipes->GetAll());
 

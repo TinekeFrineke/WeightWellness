@@ -6,6 +6,7 @@
 #include "WWDialog.h"
 
 #include "ItemsPage.h"
+#include "PageFactory.h"
 #include "PersonaliaDialog.h"
 #include "ReceptenPage.h"
 #include "DiaryPage.h"
@@ -73,10 +74,15 @@ END_MESSAGE_MAP()
 
 BOOL CWWDialog::OnInitDialog()
 {
+    PageFactory factory(mModel.GetRecipeDefinitionRepository(),
+                        mModel.GetFoodDefinitionRepository(),
+                        mModel.GetCalculator(),
+                        mModel.GetCategoryRepository(),
+                        mModel.GetBrandRepository());
     mTabControl.AddPage(std::make_unique<CPersonaliaDialog>(mModel, this), IDD_PERSONALIA_PAGE, _T("Personalia"));
     mTabControl.AddPage(std::make_unique<CDiaryPage>(mModel, this), IDD_DIARY_PAGE, _T("Dagboek"));
     mTabControl.AddPage(std::make_unique<CItemsPage>(mModel, this), IDD_ITEMS_PAGE, _T("Items"));
-    mTabControl.AddPage(std::make_unique<ReceptenPage>(mModel, mModel.GetRecipeDefinitionRepository(), this), IDD_RECEPTEN_PAGE, _T("Recepten"));
+    mTabControl.AddPage(factory.CreateRecipesPage(), IDD_RECEPTEN_PAGE, _T("Recepten"));
 
     CDialog::OnInitDialog();
 
