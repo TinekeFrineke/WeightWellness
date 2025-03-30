@@ -32,9 +32,7 @@ public:
     STRATEGY_TYPE GetStrategy() const noexcept override { return mStrategyType; }
     void SetStrategy(STRATEGY_TYPE eType) override;
 
-    IWeek* FindWeek(const Utils::Date& aDate) override;
-    IWeek* CreateWeek(const Utils::Date& aDate);
-    bool Add(std::unique_ptr<IWeek> aWeek) override;
+    IWeek* CreateWeek(const Utils::Date& aDate) override;
 
     bool Add(std::unique_ptr<VMDefinitie> aDefinitie) override;
 
@@ -44,17 +42,17 @@ public:
     std::shared_ptr<IRepository<VMDefinitie>> GetFoodDefinitionRepository() const noexcept override;
     std::shared_ptr<IRepository<ReceptDefinitie>> GetRecipeDefinitionRepository() const noexcept override;
 
-    const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept override { return mWeeks; }
+    std::shared_ptr<IWeekRepository> GetWeekRepository() const noexcept override { return m_weeks; }
     std::shared_ptr<BonusPointsMap> GetBonusPointsMap() const noexcept override { return mBonusPointsMap; }
 
-    double GetPuntenTotaal(STRATEGY_TYPE eType) const;
-    double GetWeekPuntenTotaal() const;
-    double GetVrijePunten() const;
+    double GetPuntenTotaal(STRATEGY_TYPE eType) const override;
+    double GetWeekPuntenTotaal() const override;
+    double GetVrijePunten() const override;
 
     std::shared_ptr<PointsCalculator> GetCalculator() const noexcept override { return m_calculator; }
 
 private:
-    std::vector<std::unique_ptr<IWeek>> mWeeks;
+    std::shared_ptr<IWeekRepository> m_weeks;
     std::shared_ptr<IRepository<VMDefinitie>> m_foodDefinitions;
     std::shared_ptr<IRepository<ReceptDefinitie>> m_recipeDefinitions;
     std::unique_ptr<Personalia> mPersonalia;

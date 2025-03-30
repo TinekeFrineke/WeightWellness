@@ -143,7 +143,7 @@ bool Week::SetEndDate(const Utils::Date& aDate)
     if (!mStartDate.DaysDifference(aDate, daysdifference))
         return false;
 
-    if (daysdifference < 1 || daysdifference > 13)
+    if (daysdifference > 13)
         return false;
 
     mEndDate = aDate;

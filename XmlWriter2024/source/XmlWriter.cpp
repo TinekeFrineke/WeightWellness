@@ -34,6 +34,7 @@
 #include "model/IRepository.h"
 #include "model/IStringRepository.h"
 #include "model/IWeek.h"
+#include "model/IWeekRepository.h"
 #include "model/ManualItem.h"
 #include "model/NutritionalValue.h"
 #include "model/Personalia.h"
@@ -216,7 +217,7 @@ weight::Result XmlWriter::WriteWeeks(const std::tstring& aDirectory)
 {
     weight::Result result = weight::Result::Ok;
 
-    const auto& weeks = mModel.GetWeeks();
+    auto weeks = mModel.GetWeekRepository()->GetAll();
     for (size_t i = 0; i < weeks.size() && result == weight::Result::Ok; ++i)
     {
         Utils::Date startdate = weeks[i]->GetStartDate();

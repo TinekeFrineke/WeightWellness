@@ -16,6 +16,7 @@ namespace weight {
 class BonusPointsMap;
 class IStringRepository;
 class IWeek;
+class IWeekRepository;
 class Personalia;
 class PointsCalculator;
 class ReceptDefinitie;
@@ -34,10 +35,8 @@ public:
     virtual STRATEGY_TYPE GetStrategy() const noexcept = 0;
     virtual void SetStrategy(STRATEGY_TYPE eType) = 0;
 
-    virtual IWeek* FindWeek(const Utils::Date& aDate) = 0;
-
-    virtual bool Add(std::unique_ptr<IWeek> aWeek) = 0;
     virtual bool Add(std::unique_ptr<VMDefinitie> aDefinitie) = 0;
+    virtual IWeek* CreateWeek(const Utils::Date& aDate) = 0;
 
     virtual std::shared_ptr<IStringRepository> GetUnitRepository() const noexcept = 0;
     virtual std::shared_ptr<IStringRepository> GetCategoryRepository() const noexcept = 0;
@@ -45,7 +44,7 @@ public:
     virtual std::shared_ptr<IRepository<VMDefinitie>> GetFoodDefinitionRepository() const noexcept = 0;
     virtual std::shared_ptr<IRepository<ReceptDefinitie>> GetRecipeDefinitionRepository() const noexcept = 0;
 
-    virtual const std::vector<std::unique_ptr<IWeek>>& GetWeeks() const noexcept = 0;
+    virtual std::shared_ptr<IWeekRepository> GetWeekRepository() const noexcept = 0;
     virtual std::shared_ptr<BonusPointsMap> GetBonusPointsMap() const noexcept = 0;
 
     virtual double GetPuntenTotaal(STRATEGY_TYPE eType) const = 0;

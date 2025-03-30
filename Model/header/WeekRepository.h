@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-
 #include "IWeekRepository.h"
 
 
@@ -13,9 +11,13 @@ class WeekRepository
     : public IWeekRepository
 {
 public:
-    bool Add(std::unique_ptr<Week> definition) override;
-    void Clear() override;
-    std::vector<Week*> GetAll() const override;
+    IWeek* Create(const Utils::Date& date) override;
+    bool Add(std::unique_ptr<IWeek> definition) override;
+    virtual IWeek* FindWeekContaining(const Utils::Date& date) const override;
+    std::vector<IWeek*> GetAll() const override;
+
+private:
+    std::vector<std::unique_ptr<IWeek>> m_weeks;
 };
 
 } // namespace weight

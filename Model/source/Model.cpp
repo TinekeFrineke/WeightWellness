@@ -3,6 +3,7 @@
 
 #include <tchar.h>
 #include <assert.h>
+#include <sstream>
 
 #include "IWeek.h"
 #include "Lot.h"
@@ -12,6 +13,7 @@
 #include "Repository.h"
 #include "StringRepository.h"
 #include "VoedingsmiddelDefinitie.h"
+#include "WeekRepository.h"
 
 namespace weight
 {
@@ -19,6 +21,7 @@ namespace weight
 
 Model::Model()
     : mStrategyType(STRATEGY_TYPE::KCal)
+    , m_weeks(std::make_shared<WeekRepository>())
     , m_foodDefinitions(std::make_shared<Repository<VMDefinitie>>())
     , m_recipeDefinitions(std::make_shared<Repository<ReceptDefinitie>>())
     , m_units(std::make_shared<StringRepository>())
@@ -43,42 +46,28 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
     if (GetPersonalia() != nullptr)
         GetPersonalia()->SetStrategy(eType);
 
-    IWeek* week = FindWeek(Utils::Date::Today());
+    IWeek* week = m_weeks->FindWeekContaining(Utils::Date::Today());
 
     if (week != nullptr)
         week->SetStrategy(eType, *this);
 }
 
 
-IWeek* Model::FindWeek(const Utils::Date& aDate)
-{
-    for (const auto& week : mWeeks)
-        if (week->Includes(aDate))
-            return week.get();
-
-    return nullptr;
-}
-
 IWeek* Model::CreateWeek(const Utils::Date& aDate)
 {
-    auto weekptr = FindWeek(aDate);
-    if (weekptr != nullptr)
-        return weekptr;
+    auto week = m_weeks->FindWeekContaining(aDate);
+    if (week != nullptr)
+        return week;
 
-    // Week not found, create a new week
-    Utils::Date enddate(aDate);
-    enddate.AddDays(6);
-    while (FindWeek(enddate) != nullptr && enddate != aDate)
-        enddate.SubtractDays(1);
+    week = m_weeks->Create(aDate);
+    if (week == nullptr)
+        return week;
 
-    auto week = ModelFactory().CreateWeek(aDate, enddate);
     week->SetPoints(GetPersonalia()->GetPuntenTotaal(GetStrategy()));
     week->SetSaveablePoints(GetVrijePunten());
     week->SetStrategy(GetStrategy(), *this);
     week->SetStartWeight(GetPersonalia()->GetHuidigGewicht());
-    weekptr = week.get();
-    Add(std::move(week));
-    return weekptr;
+    return week;
 }
 
 
@@ -106,24 +95,6 @@ std::shared_ptr<IRepository<ReceptDefinitie>> Model::GetRecipeDefinitionReposito
 {
     return m_recipeDefinitions;
 }
-
-bool Model::Add(std::unique_ptr<IWeek> aWeek)
-{
-    for (const auto& week: mWeeks)
-    {
-        if (week->GetStartDate() == aWeek->GetStartDate())
-        {
-            TCHAR smsg[1024];
-            _stprintf_s(smsg, _T("Could not add week with startdate %s\n"), ToString(aWeek->GetStartDate()).c_str());
-            ::MessageBox(0, smsg, _T("ERROR"), MB_OK);
-            return false;
-        }
-    }
-
-    mWeeks.push_back(std::move(aWeek));
-    return true;
-}
-
 
 bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
 {

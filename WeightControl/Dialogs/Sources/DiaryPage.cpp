@@ -8,6 +8,7 @@
 #include "model/IDay.h"
 #include "model/IModel.h"
 #include "model/IWeek.h"
+#include "model/IWeekRepository.h"
 #include "model/LotFactory.h"
 #include "model/ManualItem.h"
 #include "model/ModelFactory.h"
@@ -97,22 +98,11 @@ void CDiaryPage::OnCancel()
 
 bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
 {
-    mWeek = mModel.FindWeek(aDate);
+    mWeek = mModel.GetWeekRepository()->FindWeekContaining(aDate);
     if (mWeek == nullptr)
-    {
-        // Week not found, create a new week
-        Utils::Date enddate(aDate);
-        enddate.AddDays(6);
-        while (mModel.FindWeek(enddate))
-            enddate.SubtractDays(1);
-        auto week = weight::ModelFactory().CreateWeek(aDate, enddate);
-        mWeek = week.get();
-        mWeek->SetPoints(mModel.GetPersonalia()->GetPuntenTotaal(mModel.GetStrategy()));
-        mWeek->SetSaveablePoints(mModel.GetVrijePunten());
-        mWeek->SetStrategy(mModel.GetStrategy(), mModel);
-        mWeek->SetStartWeight(mModel.GetPersonalia()->GetHuidigGewicht());
-        mModel.Add(std::move(week));
-    }
+        mWeek = mModel.CreateWeek(aDate);
+    if (mWeek == nullptr)
+        return false;
 
     switch (mWeek->GetStrategy())
     {

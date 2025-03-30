@@ -36,6 +36,7 @@
 #include "model/IRepository.h"
 #include "model/IStringRepository.h"
 #include "model/IWeek.h"
+#include "model/IWeekRepository.h"
 #include "model/ManualItem.h"
 #include "model/ModelFactory.h"
 #include "model/NutritionalValue.h"
@@ -352,7 +353,7 @@ weight::Result XmlReader::ReadWeek(const std::tstring& aDirectory)
                 return weight::Result::InterpretError;
         }
 
-        if (!mModel.Add(std::move(week)))
+        if (!mModel.GetWeekRepository()->Add(std::move(week)))
             return weight::Result::InterpretError;
 
         return weight::Result::Ok;

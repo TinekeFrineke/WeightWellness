@@ -129,6 +129,7 @@
     <ClInclude Include="interface\model\Subject.h" />
     <ClInclude Include="interface\model\Voedingsmiddel.h" />
     <ClInclude Include="interface\model\VoedingsmiddelDefinitie.h" />
+    <ClInclude Include="interface\model\WeekRepository.h" />
     <ClInclude Include="interface\model\WWDefinitions.h" />
     <ClInclude Include="interface\model\XmlDefinitions.h" />
   </ItemGroup>

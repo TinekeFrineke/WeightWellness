@@ -40,7 +40,7 @@ public:
     double GetSaveablePoints() const override { return mSaveablePoints; }
     STRATEGY_TYPE GetStrategy() const override { return mStrategy; }
 
-    bool SetEndDate(const Utils::Date& aDate);
+    bool SetEndDate(const Utils::Date& aDate) override;
     void SetPoints(double aPoints) override { mPoints = aPoints; }
     void SetSaveablePoints(double aPoints) override { mSaveablePoints = aPoints; }
     void SetStartWeight(double aWeight) override { mStartWeight = aWeight; }
