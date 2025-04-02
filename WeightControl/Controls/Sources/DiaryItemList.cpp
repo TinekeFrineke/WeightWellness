@@ -28,7 +28,7 @@
 // CDiaryItemList
 
 CDiaryItemList::CDiaryItemList()
-    : mDate(Utils::Date::Today())
+    : mDate(Utils::Today())
     , mDay(nullptr)
 {
 }

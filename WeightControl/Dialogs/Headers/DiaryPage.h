@@ -44,7 +44,7 @@ protected:
     DECLARE_MESSAGE_MAP()
 
     afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
-    afx_msg void OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult);
+    //afx_msg void OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult);
     afx_msg void OnBnClickedAddFood();
     afx_msg void OnDeltaposSpinWeekEinde(NMHDR* pNMHDR, LRESULT* pResult);
     afx_msg void OnEnChangeBonuspunten();

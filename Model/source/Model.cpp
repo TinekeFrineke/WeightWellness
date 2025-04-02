@@ -46,7 +46,7 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
     if (GetPersonalia() != nullptr)
         GetPersonalia()->SetStrategy(eType);
 
-    IWeek* week = m_weeks->FindWeekContaining(Utils::Date::Today());
+    IWeek* week = m_weeks->FindWeekContaining(Utils::Today());
 
     if (week != nullptr)
         week->SetStrategy(eType, *this);

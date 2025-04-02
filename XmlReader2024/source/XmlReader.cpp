@@ -2,10 +2,11 @@
 #include "XmlReader.h"
 
 #include <assert.h>
+#include <filesystem>
 #include <stdlib.h>
 #include <tchar.h>
 
-#include "Utilities/FileUtils.h"
+#include "Utilities/PathUtilities.h"
 
 #include "generated/XmlBonusCell.h"
 #include "generated/XmlBonusCellReader.h"
@@ -88,9 +89,8 @@ weight::Result XmlReader::ReadPersonalia(const std::tstring& aDirectory)
         
         auto personalia = std::make_unique<weight::Personalia>(xmlpersonalia->Getgebruikersnaam());
         personalia->SetName(xmlpersonalia->Getnaam());
-        Utils::Date date(Utils::Date::Today());
-        if (Utils::ToDate(xmlpersonalia->Getgeboren(), date))
-            personalia->SetDateOfBirth(date);
+        Utils::Date date(Utils::Today());
+        personalia->SetDateOfBirth(Utils::ToDate(xmlpersonalia->Getgeboren()));
         personalia->SetGeslacht(xmlpersonalia->Getgeslacht() == XmlPersonalia::geslacht::Mannelijk
                                 ? weight::Personalia::GESLACHT::Mannelijk : weight::Personalia::GESLACHT::Vrouwelijk);
         switch (xmlpersonalia->Getwerk())
@@ -304,18 +304,15 @@ weight::Result XmlReader::ReadRecepten(const std::tstring& aDirectory)
 
 weight::Result XmlReader::ReadWeeks(const std::tstring& aDirectory)
 {
-    std::tstring filename(aDirectory + _T("\\week*.xml"));
-    //TCHAR filemask[_MAX_PATH];
-    //_stprintf(filemask, _T("%sweek????????.xml"), aDirectory.c_str());
-    WIN32_FIND_DATA finddata;
-    HANDLE hFind = FindFirstFile(filename.c_str(), &finddata);
-    bool bContinue = true;
-    while (bContinue) {
-        ReadWeek(aDirectory + _T("\\") + finddata.cFileName);
-        bContinue = FindNextFile(hFind, &finddata) != FALSE;
-    }
+    if (!std::filesystem::exists(aDirectory) || !std::filesystem::is_directory(aDirectory))
+        return weight::Result::InterpretError;
 
-    FindClose(hFind);
+    const std::wstring mask(L"week*.xml");
+    const auto files = path_utilities::FindFiles(aDirectory, mask);
+
+    for (const auto& file : files) {
+        ReadWeek(aDirectory + _T("\\") + file);
+    }
 
     return weight::Result::Ok;
 }

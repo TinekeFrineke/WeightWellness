@@ -10,7 +10,7 @@
 #include <xercesc/util/PlatformUtils.hpp>
 
 #include "Utilities/Inifile.h"
-#include "Utilities/PathUtils.h"
+//#include "Utilities/PathUtils.h"
 
 #include "model/ModelFactory.h"
 #include "model/Personalia.h"
@@ -40,8 +40,7 @@ CWWApplication::CWWApplication()
     }
     catch (const XERCES_CPP_NAMESPACE::XMLException& toCatch)
     {
-        std::cout << "Error during initialization of xerces-c: "
-            << toCatch.getMessage();
+        std::wcout << L"Error during initialization of xerces-c: " << toCatch.getMessage();
         throw;
     }
 

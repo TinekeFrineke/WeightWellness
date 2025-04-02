@@ -69,15 +69,15 @@ void BonusListItem::Write(CListCtrl& aControl, int iItemIndex)
     switch (mBonus.GetIntensity())
     {
         case weight::Bonus::INTENSITY::Low:
-            lvi.pszText = _T("low");
+            lvi.pszText = const_cast<wchar_t*>(L"low");
             break;
 
         case weight::Bonus::INTENSITY::Medium:
-            lvi.pszText = _T("medium");
+            lvi.pszText = const_cast<wchar_t *>(L"medium");
             break;
 
         case weight::Bonus::INTENSITY::High:
-            lvi.pszText = _T("high");
+            lvi.pszText = const_cast<wchar_t*>(L"high");
             break;
     }
 

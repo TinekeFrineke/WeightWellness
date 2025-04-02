@@ -13,8 +13,8 @@ namespace ww2024
 void XmlClass::ParseErrorHandler::warning(const XERCES_CPP_NAMESPACE::SAXParseException& e)
 {
     TCHAR smsg[1024];
-    _stprintf_s(smsg, _T("Warning at file \"%s\", line %d, char %d: %s\n"),
-                e.getSystemId(), e.getLineNumber(), e.getColumnNumber(), e.getMessage());
+    _stprintf_s(smsg, L"Warning at file \"%s\", line %d, char %d: %s\n",
+                e.getSystemId(), static_cast<int>(e.getLineNumber()), static_cast<int>(e.getColumnNumber()), e.getMessage());
 
     ::MessageBox(0, smsg, _T("WARNING"), MB_OK);
 }
@@ -24,7 +24,7 @@ void XmlClass::ParseErrorHandler::error(const XERCES_CPP_NAMESPACE::SAXParseExce
 {
     TCHAR smsg[1024];
     _stprintf_s(smsg, _T("Error at file \"%s\", line %d, char %d: %s\n"),
-                e.getSystemId(), e.getLineNumber(), e.getColumnNumber(), e.getMessage());
+                e.getSystemId(), static_cast<int>(e.getLineNumber()), static_cast<int>(e.getColumnNumber()), e.getMessage());
 
     ::MessageBox(0, smsg, _T("ERROR"), MB_OK);
 
@@ -36,7 +36,7 @@ void XmlClass::ParseErrorHandler::fatalError(const XERCES_CPP_NAMESPACE::SAXPars
 {
     TCHAR smsg[1024];
     _stprintf_s(smsg, _T("Fatal Error at file \"%s\", line %d, char %d: %s\n"),
-                e.getSystemId(), e.getLineNumber(), e.getColumnNumber(), e.getMessage());
+                e.getSystemId(), static_cast<int>(e.getLineNumber()), static_cast<int>(e.getColumnNumber()), e.getMessage());
 
     ::MessageBox(0, smsg, _T("FATAL ERROR"), MB_OK);
 

@@ -109,8 +109,7 @@ double Week::GetWeekPointsLeft(const Utils::Date& aDate)
                 }
             }
 
-            int daysleft;
-            mEndDate.DaysDifference(aDate, daysleft);
+            int daysleft = mEndDate.DaysDifference(aDate);
             weekpoints += daysleft * GetSaveablePoints();
 
             return weekpoints;
@@ -139,10 +138,7 @@ bool Week::SetEndDate(const Utils::Date& aDate)
     if (aDate < mStartDate)
         return false;
 
-    int daysdifference;
-    if (!mStartDate.DaysDifference(aDate, daysdifference))
-        return false;
-
+    int daysdifference = mStartDate.DaysDifference(aDate);
     if (daysdifference > 13)
         return false;
 

@@ -84,7 +84,7 @@ BOOL CDiaryPage::OnInitDialog()
     mItemList.SetSelectionMark(0);
     mItemList.ShowWindow(SW_SHOW);
 
-    ProcessDate(Utils::Date::Today());
+    ProcessDate(Utils::Today());
     UpdatePointsLeft();
 
     return TRUE;
@@ -139,15 +139,15 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
 }
 
 
-void CDiaryPage::OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult)
-{
-    LPNMDATETIMECHANGE pDTChange = reinterpret_cast<LPNMDATETIMECHANGE>(pNMHDR);
-    Utils::Date date(Utils::Date::FromSystemTime(pDTChange->st));
-
-    ProcessDate(date);
-
-    *pResult = 0;
-}
+//void CDiaryPage::OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult)
+//{
+//    LPNMDATETIMECHANGE pDTChange = reinterpret_cast<LPNMDATETIMECHANGE>(pNMHDR);
+//    Utils::Date date(Utils::Date::FromSystemTime(pDTChange->st));
+//
+//    ProcessDate(date);
+//
+//    *pResult = 0;
+//}
 
 void CDiaryPage::OnBnClickedAddFood()
 {
@@ -173,31 +173,21 @@ void CDiaryPage::OnDeltaposSpinWeekEinde(NMHDR* pNMHDR, LRESULT* pResult)
     LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 
     Utils::Date date(Utils::ToDate(mEndOfWeek.GetValue()));
-    if (pNMUpDown->iDelta < 0)
-    {
-        if (date > mWeek->GetStartDate())
-        {
-            int diff;
-            if (date.DaysDifference(mWeek->GetStartDate(), diff))
-            {
-                if (diff < 14)
-                    date.AddDays(1);
-            }
+    if (pNMUpDown->iDelta < 0) {
+        if (date > mWeek->GetStartDate()) {
+            int diff = date.DaysDifference(mWeek->GetStartDate());
+            if (diff < 14)
+                date.AddDays(1);
         }
 
         mEndOfWeek.SetValue(Utils::ToString(date));
     }
-    else
-    {
+    else {
         if (date > mWeek->GetStartDate() &&
-            date > Utils::Date::Today())
-        {
-            int diff;
-            if (date.DaysDifference(mWeek->GetStartDate(), diff))
-            {
-                if (diff > 3)
-                    date.SubtractDays(1);
-            }
+            date > Utils::Today()) {
+            int diff(date.DaysDifference(mWeek->GetStartDate()));
+            if (diff > 3)
+                date.SubtractDays(1);
         }
 
         mEndOfWeek.SetValue(Utils::ToString(date));
@@ -234,7 +224,7 @@ void CDiaryPage::OnBnClickedDayPlus()
 {
     Utils::Date date(Utils::ToDate(mDate.GetValue()));
     date.AddDays(1);
-    if (date <= Utils::Date::Today())
+    if (date <= Utils::Today())
         ProcessDate(date);
 }
 
