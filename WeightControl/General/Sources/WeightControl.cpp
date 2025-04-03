@@ -68,8 +68,8 @@ BOOL CWWApplication::InitInstance()
 
     TCHAR dir[MAX_PATH];
     GetCurrentDirectory(MAX_PATH, dir);
-
-    Inifile inifile(std::wstring(dir) + L"\\weightcontrol.ini");
+    std::wifstream input(std::wstring(dir) + L"\\weightcontrol.ini");
+    Inifile inifile(input);
 
     if (inifile.empty()) {
         MessageBox(0, _T("Unable to open inifile"), inifile.GetName().c_str(), MB_OK);
