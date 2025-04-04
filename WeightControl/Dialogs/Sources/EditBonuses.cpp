@@ -4,9 +4,6 @@
 #include "stdafx.h"
 
 #include "EditBonuses.h"
-
-#include "model/IModel.h"
-
 #include "EditBonusDialog.h"
 
 

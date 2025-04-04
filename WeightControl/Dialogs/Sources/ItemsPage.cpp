@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "afxmsg_.h"
 
+#include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
 #include "model/IStringRepository.h"
 #include "model/VoedingsmiddelDefinitie.h"
@@ -20,13 +21,15 @@
 // CItemsPage dialog
 
 IMPLEMENT_DYNAMIC(CItemsPage, CDialog)
-CItemsPage::CItemsPage(weight::IModel& aModel, const IPageFactory& factory, CWnd* pParent /*=nullptr*/)
+
+
+CItemsPage::CItemsPage(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions, const IPageFactory& factory, CWnd* pParent)
     : CDialog(CItemsPage::IDD, pParent)
+    , m_foodDefinitions(std::move(foodDefinitions))
     , m_pageFactory(factory)
-    , mModel(aModel)
-    , mCategory(aModel.GetCategoryRepository()->Get())
-    , mMerk(aModel.GetBrandRepository()->Get(), true)
-    , mItemsList({}/*aModel.GetFoodDefinitionRepository()->GetAll()*/)
+    , mCategory(m_foodDefinitions->GetCategoryRepository()->Get())
+    , mMerk(m_foodDefinitions->GetBrandRepository()->Get(), true)
+    , mItemsList({})
     , mUpdatingFilter(false)
 {
 }
@@ -83,8 +86,8 @@ void CItemsPage::OnBnClickedAdd()
     auto editor(m_pageFactory.CreateFoodDefinitionEditor(this));
     auto food = editor->Create();
     if (food != nullptr) {
-        mModel.Add(std::move(food));
-        mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
+        m_foodDefinitions->Add(std::move(food));
+        mItemsList.SetDefinitions(m_foodDefinitions->GetAll());
         mItemsList.Fill();
     }
 }
@@ -101,7 +104,7 @@ void CItemsPage::OnCancel()
 void CItemsPage::OnShowWindow(BOOL bShow, UINT nStatus)
 {
     if (bShow == TRUE)
-        mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
+        mItemsList.SetDefinitions(m_foodDefinitions->GetAll());
     CDialog::OnShowWindow(bShow, nStatus);
 }
 
@@ -111,8 +114,8 @@ void CItemsPage::OnBnClickedDelete()
     if (definition == nullptr)
         return;
 
-    if (mModel.GetFoodDefinitionRepository()->Remove(definition->GetName())) {
-        mItemsList.SetDefinitions(mModel.GetFoodDefinitionRepository()->GetAll());
+    if (m_foodDefinitions->Remove(definition->GetName())) {
+        mItemsList.SetDefinitions(m_foodDefinitions->GetAll());
     }
 }
 

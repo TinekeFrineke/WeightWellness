@@ -17,7 +17,7 @@
 
 namespace weight
 {
-class FixedVMDef;
+class IFoodDefinitionRepository;
 class IStringRepository;
 class PointsCalculator;
 class VMDefinitie;
@@ -30,7 +30,7 @@ class CEditFoodDefDialog: public CDialog
     DECLARE_DYNAMIC(CEditFoodDefDialog)
 
 public:
-    CEditFoodDefDialog(std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+    CEditFoodDefDialog(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                        std::shared_ptr<weight::IStringRepository> units,
                        std::shared_ptr<weight::IStringRepository> categories,
                        std::shared_ptr<weight::IStringRepository> brands,
@@ -43,10 +43,10 @@ public:
     // Dialog Data
     enum { IDD = IDD_EDITFOOD_DIALOG };
 
-    BOOL                      OnInitDialog();
+    BOOL OnInitDialog();
 
 protected:
-    virtual void              DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
     DECLARE_MESSAGE_MAP()
 
@@ -103,7 +103,7 @@ private:
     std::shared_ptr<weight::IStringRepository> m_units;
     std::shared_ptr<weight::IStringRepository> m_categories;
     std::shared_ptr<weight::IStringRepository> m_brands;
-    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
 
     std::shared_ptr<weight::PointsCalculator> m_calculator;
 };

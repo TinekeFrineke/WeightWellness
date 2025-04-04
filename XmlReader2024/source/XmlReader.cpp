@@ -34,6 +34,7 @@
 
 #include "model/Bonus.h"
 #include "model/BonusPointsMap.h"
+#include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
 #include "model/IStringRepository.h"
 #include "model/IWeek.h"
@@ -166,7 +167,7 @@ weight::Result XmlReader::ReadUnits(const std::tstring& aDirectory)
             return weight::Result::Ok;
         const auto& units(xmlunits->GetUnitList());
         for (size_t i = 0; i < units.size(); ++i)
-            mModel.GetUnitRepository()->Add(units[i]->Getnaam());
+            mModel.GetFoodDefinitionRepository()->GetUnitRepository()->Add(units[i]->Getnaam());
 
         return weight::Result::Ok;
     }
@@ -225,8 +226,7 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
                 definitie->AddPortie(std::move(portie));
             }
 
-            mModel.Add(std::move(definitie));
-            mModel.GetBrandRepository()->Add(vm->Getmerk());
+            mModel.GetFoodDefinitionRepository()->Add(std::move(definitie));
         }
     }
     catch (XmlClass::Result result) {

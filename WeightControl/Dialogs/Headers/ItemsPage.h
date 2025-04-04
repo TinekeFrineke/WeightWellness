@@ -5,7 +5,7 @@
 #include "controls/StringEdit.h"
 #include "controls/TabPage.h"
 
-#include "model/IModel.h"
+#include "model/IFoodDefinitionRepository.h"
 
 #include "VMDefinitiesList.h"
 #include "ComboBox.h"
@@ -21,7 +21,7 @@ class CItemsPage: public CDialog, public TabPage
     DECLARE_DYNAMIC(CItemsPage)
 
 public:
-    CItemsPage(weight::IModel& aModel, const IPageFactory& factory, CWnd* pParent = NULL);   // standard constructor
+    CItemsPage(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions, const IPageFactory& factory, CWnd* pParent = NULL);   // standard constructor
     virtual ~CItemsPage();
 
     // Dialog Data
@@ -56,10 +56,11 @@ private:
     BrandComboBox       mMerk;
 
     const IPageFactory& m_pageFactory;
-    weight::IModel& mModel;
     VMDefinitiesList mItemsList;
 
     bool mUpdatingFilter;
+    std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
+
 public:
     afx_msg void OnCbnEditchangeCombo1();
     afx_msg void OnBnClickedCheckFavourites();

@@ -16,6 +16,7 @@
 namespace weight
 {
 class Day;
+class IFoodDefinitionRepository;
 class ILotFactory;
 class IStringRepository;
 class Voedingsmiddel;
@@ -30,7 +31,7 @@ class CFindVoedingsmiddel: public CDialog
     DECLARE_DYNAMIC(CFindVoedingsmiddel)
 
 public:
-    CFindVoedingsmiddel(const weight::IRepository<weight::VMDefinitie>& foodDefinitions,
+    CFindVoedingsmiddel(const weight::IFoodDefinitionRepository& foodDefinitions,
                         const weight::IStringRepository& categoryRepositiory,
                         const weight::IStringRepository& brandRepository,
                         std::unique_ptr<weight::ILotFactory> lotFactory,

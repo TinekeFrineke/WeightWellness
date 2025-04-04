@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 
-#include "model/IModel.h"
 #include "model/ReceptDefinitie.h"
 
 #include "EditReceptDefDialog.h"

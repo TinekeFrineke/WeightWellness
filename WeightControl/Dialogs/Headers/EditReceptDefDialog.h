@@ -8,6 +8,7 @@
 
 namespace weight
 {
+class IFoodDefinitionRepository;
 class IStringRepository;
 class PointsCalculator;
 class ReceptDefinitie;
@@ -25,7 +26,7 @@ class EditReceptDefDialog: public CDialog
 
 public:
     EditReceptDefDialog(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
-                        std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                        std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                         std::shared_ptr<weight::PointsCalculator> calculator,
                         std::shared_ptr<weight::IStringRepository> categories,
                         std::shared_ptr<weight::IStringRepository> brands,
@@ -55,7 +56,7 @@ private:
     void EditSelectedItem();
 
     std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
-    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
     std::shared_ptr<weight::PointsCalculator> m_calculator;
     std::shared_ptr<weight::IStringRepository> m_categories;
     std::shared_ptr<weight::IStringRepository> m_brands;

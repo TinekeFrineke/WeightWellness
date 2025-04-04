@@ -4,7 +4,7 @@
 
 namespace weight
 {
-class IModel;
+class IFoodDefinitionRepository;
 class ReceptDefinitie;
 class VMDefinitie;
 
@@ -17,7 +17,7 @@ class ItemEditVisitor: public weight::ItemVisitor
 {
 public:
     ItemEditVisitor(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
-                    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                    std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                     std::shared_ptr<weight::PointsCalculator> calculator,
                     CWnd* aParent);
 
@@ -27,7 +27,7 @@ public:
 
 private:
     std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
-    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
     std::shared_ptr<weight::PointsCalculator> m_calculator;
     CWnd* mParent;
 };

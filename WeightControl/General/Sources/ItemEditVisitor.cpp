@@ -5,7 +5,7 @@
 
 #include "ItemEditVisitor.h"
 
-#include "model/IModel.h"
+#include "model/IFoodDefinitionRepository.h"
 #include "model/IRepository.h"
 #include "model/ManualItem.h"
 #include "model/NutritionalValue.h"
@@ -22,7 +22,7 @@
 
 
 ItemEditVisitor::ItemEditVisitor(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
-                                 std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                                 std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                                  std::shared_ptr<weight::PointsCalculator> calculator,
                                  CWnd* aParent)
     : m_recipes(recipes)

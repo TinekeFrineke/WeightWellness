@@ -9,7 +9,7 @@
 #include "EditFoodDefDialog.h"
 
 
-FoodDefinitionEditor::FoodDefinitionEditor(std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+FoodDefinitionEditor::FoodDefinitionEditor(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                                            std::shared_ptr<weight::PointsCalculator> calculator,
                                            std::shared_ptr<weight::IStringRepository> categories,
                                            std::shared_ptr<weight::IStringRepository> brands,

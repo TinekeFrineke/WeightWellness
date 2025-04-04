@@ -112,11 +112,8 @@ BOOL CWWApplication::InitInstance()
     mModel->SetStrategy(mModel->GetPersonalia()->GetStrategy());
 
     auto pagefactory(std::make_unique<PageFactory>(mModel->GetRecipeDefinitionRepository(),
-                     mModel->GetFoodDefinitionRepository(),
-                     mModel->GetCalculator(),
-                     mModel->GetCategoryRepository(),
-                     mModel->GetBrandRepository(),
-                     mModel->GetUnitRepository()));
+                                                   mModel->GetFoodDefinitionRepository(),
+                                                   mModel->GetCalculator()));
 
     CWWDialog dlg(*mModel, std::move(pagefactory));
     m_pMainWnd = &dlg;

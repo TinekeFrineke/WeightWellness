@@ -15,7 +15,6 @@ class VMState;
 namespace weight
 {
 class Day;
-class IModel;
 class Recept;
 class ReceptDefinitie;
 }
@@ -65,6 +64,6 @@ private:
     std::unique_ptr<weight::Recept> mRecept;
     weight::ReceptDefinitie* mDefinitie;
 
-    bool                  mUpdating;
-    bool                  mUpdatingFilter;
+    bool mUpdating;
+    bool mUpdatingFilter;
 };

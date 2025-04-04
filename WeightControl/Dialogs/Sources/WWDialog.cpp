@@ -81,7 +81,7 @@ BOOL CWWDialog::OnInitDialog()
 {
     mTabControl.AddPage(std::make_unique<CPersonaliaDialog>(mModel, mModel.GetPersonalia(), this), IDD_PERSONALIA_PAGE, const_cast<wchar_t*>(L"Personalia"));
     mTabControl.AddPage(std::make_unique<CDiaryPage>(mModel, this), IDD_DIARY_PAGE, const_cast<wchar_t*>(L"Dagboek"));
-    mTabControl.AddPage(std::make_unique<CItemsPage>(mModel, *m_factory, this), IDD_ITEMS_PAGE, const_cast<wchar_t*>(L"Items"));
+    mTabControl.AddPage(std::make_unique<CItemsPage>(mModel.GetFoodDefinitionRepository(), *m_factory, this), IDD_ITEMS_PAGE, const_cast<wchar_t*>(L"Items"));
     mTabControl.AddPage(m_factory->CreateRecipesPage(), IDD_RECEPTEN_PAGE, const_cast<wchar_t*>(L"Recepten"));
 
     CDialog::OnInitDialog();

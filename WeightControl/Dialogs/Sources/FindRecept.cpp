@@ -6,7 +6,6 @@
 #include "FindRecept.h"
 
 #include "model/IDay.h"
-#include "model/IModel.h"
 #include "model/IRepository.h"
 #include "model/Portie.h"
 #include "model/Recept.h"

@@ -5,6 +5,7 @@
 class CWnd;
 
 namespace weight {
+class IFoodDefinitionRepository;
 class IStringRepository;
 class PointsCalculator;
 class VMDefinitie;
@@ -15,7 +16,7 @@ template <typename TYPE> class IRepository;
 class FoodDefinitionEditor
 {
 public:
-    FoodDefinitionEditor(std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+    FoodDefinitionEditor(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                          std::shared_ptr<weight::PointsCalculator> calculator,
                          std::shared_ptr<weight::IStringRepository> categories,
                          std::shared_ptr<weight::IStringRepository> brands,
@@ -26,7 +27,7 @@ public:
 
 private:
     mutable bool m_isNewDefinition{ false };
-    std::shared_ptr<weight::IRepository<weight::VMDefinitie>> m_foodDefinitions;
+    std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
     std::shared_ptr<weight::PointsCalculator> m_calculator;
     std::shared_ptr<weight::IStringRepository> m_categories;
     std::shared_ptr<weight::IStringRepository> m_brands;

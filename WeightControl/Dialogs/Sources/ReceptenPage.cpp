@@ -19,7 +19,7 @@
 
 IMPLEMENT_DYNAMIC(ReceptenPage, CDialog)
 ReceptenPage::ReceptenPage(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
-                           std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
+                           std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                            std::shared_ptr<weight::PointsCalculator> calculator,
                            std::shared_ptr<weight::IStringRepository> categories,
                            std::shared_ptr<weight::IStringRepository> brands,

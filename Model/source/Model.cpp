@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <sstream>
 
+#include "FoodDefinitionRepository.h"
 #include "IWeek.h"
 #include "Lot.h"
 #include "ModelFactory.h"
@@ -22,11 +23,8 @@ namespace weight
 Model::Model()
     : mStrategyType(STRATEGY_TYPE::KCal)
     , m_weeks(std::make_shared<WeekRepository>())
-    , m_foodDefinitions(std::make_shared<Repository<VMDefinitie>>())
+    , m_foodDefinitions(std::make_shared<FoodDefinitionRepository>())
     , m_recipeDefinitions(std::make_shared<Repository<ReceptDefinitie>>())
-    , m_units(std::make_shared<StringRepository>())
-    , m_categories(std::make_shared<StringRepository>())
-    , m_brands(std::make_shared<StringRepository>())
     , m_calculator(std::make_shared< PointsCalculator>())
 {
     m_calculator->SetStrategy(STRATEGY_TYPE::KCal);
@@ -71,22 +69,7 @@ IWeek* Model::CreateWeek(const Utils::Date& aDate)
 }
 
 
-std::shared_ptr<IStringRepository> Model::GetUnitRepository() const noexcept
-{
-    return m_units;
-}
-
-std::shared_ptr<IStringRepository> Model::GetCategoryRepository() const noexcept
-{
-    return m_categories;
-}
-
-std::shared_ptr<IStringRepository> Model::GetBrandRepository() const noexcept
-{
-    return m_brands;
-}
-
-std::shared_ptr<IRepository<VMDefinitie>> Model::GetFoodDefinitionRepository() const noexcept
+std::shared_ptr<IFoodDefinitionRepository> Model::GetFoodDefinitionRepository() const noexcept
 {
     return m_foodDefinitions;
 }
@@ -95,18 +78,6 @@ std::shared_ptr<IRepository<ReceptDefinitie>> Model::GetRecipeDefinitionReposito
 {
     return m_recipeDefinitions;
 }
-
-bool Model::Add(std::unique_ptr<VMDefinitie> aDefinitie)
-{
-    auto definition(aDefinitie.get());
-    if (!m_foodDefinitions->Add(std::move(aDefinitie)))
-        return false;
-
-    m_units->Add(definition->GetUnit());
-    m_categories->Add(definition->GetCategory());
-    return true;
-}
-
 
 double Model::GetVrijePunten() const
 {

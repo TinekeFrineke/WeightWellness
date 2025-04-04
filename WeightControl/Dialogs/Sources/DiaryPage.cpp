@@ -6,6 +6,7 @@
 #include "DiaryPage.h"
 
 #include "model/IDay.h"
+#include "model/IFoodDefinitionRepository.h"
 #include "model/IModel.h"
 #include "model/IWeek.h"
 #include "model/IWeekRepository.h"
@@ -139,21 +140,11 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
 }
 
 
-//void CDiaryPage::OnDtnDatetimechangeDiarydate(NMHDR* pNMHDR, LRESULT* pResult)
-//{
-//    LPNMDATETIMECHANGE pDTChange = reinterpret_cast<LPNMDATETIMECHANGE>(pNMHDR);
-//    Utils::Date date(Utils::Date::FromSystemTime(pDTChange->st));
-//
-//    ProcessDate(date);
-//
-//    *pResult = 0;
-//}
-
 void CDiaryPage::OnBnClickedAddFood()
 {
     CFindVoedingsmiddel dialog(*mModel.GetFoodDefinitionRepository(),
-                               *mModel.GetCategoryRepository(),
-                               *mModel.GetBrandRepository(),
+                               *mModel.GetFoodDefinitionRepository()->GetCategoryRepository(),
+                               *mModel.GetFoodDefinitionRepository()->GetBrandRepository(),
                                std::make_unique<weight::LotFactory>(mModel.GetCalculator()), this);
     INT_PTR nResponse = dialog.DoModal();
     if (nResponse == IDOK)

@@ -1,22 +1,21 @@
 
 #include "PageFactory.h"
 
+#include "model/IFoodDefinitionRepository.h"
+
 #include "EditReceptDefDialog.h"
 #include "FoodDefinitionEditor.h"
 #include "ReceptenPage.h"
 
 PageFactory::PageFactory(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
-                         std::shared_ptr<weight::IRepository<weight::VMDefinitie>> foodDefinitions,
-                         std::shared_ptr<weight::PointsCalculator> calculator,
-                         std::shared_ptr<weight::IStringRepository> categories,
-                         std::shared_ptr<weight::IStringRepository> brands,
-                         std::shared_ptr<weight::IStringRepository> units)
+                         std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
+                         std::shared_ptr<weight::PointsCalculator> calculator)
     : m_recipes(std::move(recipes))
     , m_foodDefinitions(std::move(foodDefinitions))
     , m_calculator(std::move(calculator))
-    , m_categories(std::move(categories))
-    , m_brands(std::move(brands))
-    , m_units(std::move(units))
+    , m_categories(std::move(m_foodDefinitions->GetCategoryRepository()))
+    , m_brands(std::move(m_foodDefinitions->GetBrandRepository()))
+    , m_units(std::move(m_foodDefinitions->GetUnitRepository()))
 {
 }
 

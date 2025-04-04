@@ -30,6 +30,7 @@
 
 #include "model/Bonus.h"
 #include "model/IDay.h"
+#include "model/IFoodDefinitionRepository.h"
 #include "model/IModel.h"
 #include "model/IRepository.h"
 #include "model/IStringRepository.h"
@@ -126,7 +127,7 @@ weight::Result XmlWriter::WriteUnits(const std::tstring& aFilename)
 {
     XmlUnits xmlunits;
 
-    const auto units = mModel.GetUnitRepository()->Get();
+    const auto units = mModel.GetFoodDefinitionRepository()->GetUnitRepository()->Get();
     for (auto unit : units)
     {
         auto xmlUnit = std::make_unique<XmlUnit>();
