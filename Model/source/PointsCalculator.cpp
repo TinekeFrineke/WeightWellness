@@ -9,8 +9,7 @@ static int PointsCalculatorInstances = 0;
 
 
 PointsCalculator::PointsCalculator()
-    :   mImplementation(std::make_unique<KCalCalculator>())
-    , mStrategy(STRATEGY_TYPE::KCal)
+    : mImplementation(std::make_unique<KCalCalculator>())
 {
 }
 
@@ -36,8 +35,6 @@ void PointsCalculator::SetStrategy(STRATEGY_TYPE eStrategy)
         default:
             throw 0;
     }
-
-    mStrategy = eStrategy;
 }
 
 

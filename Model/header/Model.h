@@ -20,7 +20,7 @@ public:
     ~Model() override;
 
     Personalia* GetPersonalia() const override;
-    void SetPersonalia(std::unique_ptr<Personalia> personalia);
+    void SetPersonalia(std::unique_ptr<Personalia> personalia) noexcept override;
 
     STRATEGY_TYPE GetStrategy() const noexcept override { return mStrategyType; }
     void SetStrategy(STRATEGY_TYPE eType) override;
@@ -33,7 +33,7 @@ public:
     std::shared_ptr<IWeekRepository> GetWeekRepository() const noexcept override { return m_weeks; }
     std::shared_ptr<BonusPointsMap> GetBonusPointsMap() const noexcept override { return mBonusPointsMap; }
 
-    double GetPuntenTotaal(STRATEGY_TYPE eType) const override;
+    double GetPuntenTotaal(STRATEGY_TYPE eType) const noexcept override;
     double GetWeekPuntenTotaal() const override;
     double GetVrijePunten() const override;
 

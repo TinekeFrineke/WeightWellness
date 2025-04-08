@@ -109,8 +109,6 @@ BOOL CWWApplication::InitInstance()
         }
     }
 
-    mModel->SetStrategy(mModel->GetPersonalia()->GetStrategy());
-
     auto pagefactory(std::make_unique<PageFactory>(mModel->GetRecipeDefinitionRepository(),
                                                    mModel->GetFoodDefinitionRepository(),
                                                    mModel->GetCalculator()));

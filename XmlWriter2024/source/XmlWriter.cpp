@@ -104,7 +104,7 @@ weight::Result XmlWriter::WritePersonalia(const std::tstring& aFilename)
     xmlpersonalia->Setstreefgewicht(personalia->GetStreefGewicht());
     xmlpersonalia->Setstartgewicht(personalia->GetStartGewicht());
     xmlpersonalia->Sethuidiggewicht(personalia->GetHuidigGewicht());
-    switch (personalia->GetStrategy())
+    switch (mModel.GetStrategy())
     {
         case weight::STRATEGY_TYPE::KCal:
             xmlpersonalia->Setstrategie(XmlPersonalia::strategie::KCal);

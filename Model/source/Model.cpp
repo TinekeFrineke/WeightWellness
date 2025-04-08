@@ -41,8 +41,6 @@ void Model::SetStrategy(STRATEGY_TYPE eType)
 
     mStrategyType = eType;
     m_calculator->SetStrategy(eType);
-    if (GetPersonalia() != nullptr)
-        GetPersonalia()->SetStrategy(eType);
 
     IWeek* week = m_weeks->FindWeekContaining(Utils::Today());
 
@@ -98,12 +96,12 @@ Personalia* Model::GetPersonalia() const
 }
 
 
-void Model::SetPersonalia(std::unique_ptr<Personalia> personalia)
+void Model::SetPersonalia(std::unique_ptr<Personalia> personalia) noexcept
 {
     mPersonalia = std::move(personalia);
 }
 
-double Model::GetPuntenTotaal(STRATEGY_TYPE eType) const
+double Model::GetPuntenTotaal(STRATEGY_TYPE eType) const noexcept
 {
     return GetPersonalia()->GetPuntenTotaal(eType);
 }

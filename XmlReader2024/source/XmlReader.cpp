@@ -122,10 +122,10 @@ weight::Result XmlReader::ReadPersonalia(const std::tstring& aDirectory)
         switch (xmlpersonalia->Getstrategie())
         {
             case XmlPersonalia::strategie::KCal:
-                personalia->SetStrategy(weight::STRATEGY_TYPE::KCal);
+                mModel.SetStrategy(weight::STRATEGY_TYPE::KCal);
                 break;
             case XmlPersonalia::strategie::CarboHydrates:
-                personalia->SetStrategy(weight::STRATEGY_TYPE::CarboHydrates);
+                mModel.SetStrategy(weight::STRATEGY_TYPE::CarboHydrates);
                 break;
             default:
                 return weight::Result::InterpretError;

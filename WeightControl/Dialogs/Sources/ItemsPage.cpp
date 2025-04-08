@@ -25,12 +25,12 @@ IMPLEMENT_DYNAMIC(CItemsPage, CDialog)
 
 CItemsPage::CItemsPage(std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions, const IPageFactory& factory, CWnd* pParent)
     : CDialog(CItemsPage::IDD, pParent)
-    , m_foodDefinitions(std::move(foodDefinitions))
     , m_pageFactory(factory)
-    , mCategory(m_foodDefinitions->GetCategoryRepository()->Get())
-    , mMerk(m_foodDefinitions->GetBrandRepository()->Get(), true)
+    , mCategory(foodDefinitions->GetCategoryRepository()->Get())
+    , mMerk(foodDefinitions->GetBrandRepository()->Get(), true)
     , mItemsList({})
     , mUpdatingFilter(false)
+    , m_foodDefinitions(std::move(foodDefinitions))
 {
 }
 
