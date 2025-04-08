@@ -20,6 +20,7 @@
 #include "NewNameDialog.h"
 #include "PageFactory.h"
 #include "WWDialog.h"
+#include "MessageHandler.h"
 
 // CWWApplication
 
@@ -30,7 +31,8 @@ END_MESSAGE_MAP()
 
 // CWWApplication construction
 CWWApplication::CWWApplication()
-    : mModel(weight::ModelFactory().CreateModel())
+    : m_messageHandler(std::make_shared<MessageHandler>())
+    , mModel(weight::ModelFactory(m_messageHandler).CreateModel())
 {
     //_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 
@@ -78,7 +80,7 @@ BOOL CWWApplication::InitInstance()
 
     mDataDirectory = inifile[_T("General")][_T("DataPath")];
 
-    ww2024::XmlReader reader(*mModel);
+    ww2024::XmlReader reader(*mModel, m_messageHandler);
     reader.Read(mDataDirectory);
     if (mModel->GetPersonalia() == nullptr) {
         NewNameDialog dialog(NULL);
@@ -109,7 +111,9 @@ BOOL CWWApplication::InitInstance()
         }
     }
 
-    auto pagefactory(std::make_unique<PageFactory>(mModel->GetRecipeDefinitionRepository(),
+    auto pagefactory(std::make_unique<PageFactory>(m_messageHandler,
+                                                   *mModel,
+                                                   mModel->GetRecipeDefinitionRepository(),
                                                    mModel->GetFoodDefinitionRepository(),
                                                    mModel->GetCalculator()));
 

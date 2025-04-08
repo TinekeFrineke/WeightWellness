@@ -53,8 +53,9 @@ namespace ww2024
 {
 
 
-XmlReader::XmlReader(weight::IModel& aModel)
+XmlReader::XmlReader(weight::IModel& aModel, std::shared_ptr<weight::IMessageHandler> messageHandler)
     : mModel(aModel)
+    , m_messageHandler(std::move(messageHandler))
 {
 }
 
@@ -326,8 +327,8 @@ weight::Result XmlReader::ReadWeek(const std::tstring& aDirectory)
         if (xmlweek == nullptr)
             return weight::Result::Ok;
 
-        auto week = weight::ModelFactory().CreateWeek(Utils::ToDate(xmlweek->Getbegindatum()),
-                                                      Utils::ToDate(xmlweek->Geteinddatum()));
+        auto week = weight::ModelFactory(m_messageHandler).CreateWeek(Utils::ToDate(xmlweek->Getbegindatum()),
+                                                                      Utils::ToDate(xmlweek->Geteinddatum()));
         week->SetPoints(xmlweek->Getpunten());
         week->SetSaveablePoints(xmlweek->Getweekpunten());
         week->SetStartWeight(xmlweek->Getstartweight());
@@ -487,7 +488,7 @@ std::unique_ptr<weight::ManualItem> XmlReader::Create(const XmlHandmatigitem& an
 
 std::unique_ptr<weight::IDay> XmlReader::Create(const XmlDag& aDag)
 {
-    auto day = weight::ModelFactory().CreateDay(Utils::ToDate(aDag.Getdatum()));
+    auto day = weight::ModelFactory(m_messageHandler).CreateDay(Utils::ToDate(aDag.Getdatum()));
     if (!aDag.Getgewicht().empty())
         day->SetWeight(Str::ToDouble(aDag.Getgewicht().c_str()));
 

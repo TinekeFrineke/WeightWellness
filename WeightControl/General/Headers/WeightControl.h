@@ -13,6 +13,7 @@
 #include "resource.h"		// main symbols
 
 namespace weight {
+class IMessageHandler;
 class IModel;
 }
 
@@ -37,6 +38,7 @@ public:
     DECLARE_MESSAGE_MAP()
 
 private:
+    std::shared_ptr<weight::IMessageHandler> m_messageHandler;
     std::unique_ptr<weight::IModel> mModel;
     std::wstring   mDataDirectory;
 };

@@ -15,6 +15,7 @@
 
 namespace weight{
 class IDay;
+class IMessageHandler;
 class IModel;
 class IWeek;
 }
@@ -26,7 +27,7 @@ class CDiaryPage: public CDialog, public TabPage
     DECLARE_DYNAMIC(CDiaryPage)
 
 public:
-    explicit CDiaryPage(weight::IModel& aModel, CWnd* pParent = NULL);   // standard constructor
+    CDiaryPage(weight::IModel& aModel, std::shared_ptr<weight::IMessageHandler> messageHandler, CWnd* pParent = NULL);
     virtual           ~CDiaryPage();
 
     // Dialog Data
@@ -69,6 +70,7 @@ private:
     weight::IModel& mModel;
     weight::IWeek* mWeek{};
     weight::IDay* mDay{};
+    std::shared_ptr<weight::IMessageHandler> m_messageHandler;
 
     CStringEdit mDate;
     CDoubleEdit mPunten;

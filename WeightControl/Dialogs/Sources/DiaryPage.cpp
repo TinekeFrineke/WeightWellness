@@ -66,9 +66,10 @@ BEGIN_MESSAGE_MAP(CDiaryPage, CDialog)
 END_MESSAGE_MAP()
 
 
-CDiaryPage::CDiaryPage(weight::IModel& aModel, CWnd* pParent /*=nullptr*/)
-    : CDialog(CDiaryPage::IDD, pParent),
-    mModel(aModel)
+CDiaryPage::CDiaryPage(weight::IModel& aModel, std::shared_ptr<weight::IMessageHandler> messageHandler, CWnd* pParent)
+    : CDialog(CDiaryPage::IDD, pParent)
+    , mModel(aModel)
+    , m_messageHandler(messageHandler)
 {
 }
 
@@ -125,7 +126,7 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     mDay = mWeek->GetDay(aDate);
     if (mDay == nullptr)
     {
-        auto day = weight::ModelFactory().CreateDay(aDate);
+        auto day = weight::ModelFactory(m_messageHandler).CreateDay(aDate);
         mDay = day.get();
         mDay->SetWeight(mModel.GetPersonalia()->GetHuidigGewicht());
         mWeek->Add(std::move(day));

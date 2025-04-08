@@ -24,6 +24,7 @@ namespace weight
 {
 
 class Gerecht;
+class IMessageHandler;
 class ManualItem;
 class Recept;
 class Voedingsmiddel;
@@ -36,7 +37,7 @@ namespace ww2024
 class XmlReader
 {
 public:
-    explicit XmlReader(weight::IModel& aModel);
+    XmlReader(weight::IModel& aModel, std::shared_ptr<weight::IMessageHandler> messageHandler);
 
     weight::Result                      Read(const std::tstring& aDirectory);
 
@@ -61,6 +62,7 @@ private:
     std::unique_ptr<weight::IDay> Create(const ww2024::XmlDag& aDag);
     weight::Bonus Create(const ww2024::XmlBonuscell& aCell);
     weight::IModel& mModel;
+    std::shared_ptr<weight::IMessageHandler> m_messageHandler;
 };
 
 

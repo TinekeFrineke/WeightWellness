@@ -6,10 +6,16 @@
 
 #include "Utilities/date.h"
 
+#include "IMessageHandler.h"
 #include "IWeek.h"
 #include "ModelFactory.h"
 
 namespace weight {
+
+WeekRepository::WeekRepository(std::shared_ptr<IMessageHandler> messageHandler)
+    : m_messageHandler(std::move(messageHandler))
+{
+}
 
 IWeek* WeekRepository::Create(const Utils::Date& date)
 {
@@ -23,7 +29,7 @@ IWeek* WeekRepository::Create(const Utils::Date& date)
     while (FindWeekContaining(enddate) != nullptr && enddate != date)
         enddate.SubtractDays(1);
 
-    auto week = ModelFactory().CreateWeek(date, enddate);
+    auto week = ModelFactory(m_messageHandler).CreateWeek(date, enddate);
     weekptr = week.get();
     if (Add(std::move(week)))
         return weekptr;
@@ -39,7 +45,7 @@ bool WeekRepository::Add(std::unique_ptr<IWeek> aWeek)
         {
             std::wstringstream message;
             message << L"Could not add week with startdate  " << ToString(aWeek->GetStartDate());
-            ::MessageBox(0, message.str().c_str(), _T("ERROR"), MB_OK);
+            m_messageHandler->error(message.str());
             return false;
         }
         else
@@ -50,7 +56,7 @@ bool WeekRepository::Add(std::unique_ptr<IWeek> aWeek)
                     std::wstringstream message;
                     message << L"Could not add week : Overlaps with " << ToString(week->GetStartDate())
                         << L" - " << ToString(week->GetEndDate());
-                    ::MessageBox(0, message.str().c_str(), _T("ERROR"), MB_OK);
+                    m_messageHandler->error(message.str());
                     return false;
                 }
 

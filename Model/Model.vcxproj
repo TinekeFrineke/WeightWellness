@@ -187,6 +187,7 @@
     <ClInclude Include="interface\model\IDay.h" />
     <ClInclude Include="interface\model\IFoodDefinitionRepository.h" />
     <ClInclude Include="interface\model\ILotFactory.h" />
+    <ClInclude Include="interface\model\IMessageHandler.h" />
     <ClInclude Include="interface\model\IModel.h" />
     <ClInclude Include="interface\model\IObserver.h" />
     <ClInclude Include="interface\model\IRecipeRepository.h" />

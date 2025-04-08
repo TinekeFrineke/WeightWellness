@@ -20,9 +20,9 @@ namespace weight
 {
 
 
-Model::Model()
+Model::Model(std::shared_ptr<IMessageHandler> messageHandler)
     : mStrategyType(STRATEGY_TYPE::KCal)
-    , m_weeks(std::make_shared<WeekRepository>())
+    , m_weeks(std::make_shared<WeekRepository>(messageHandler))
     , m_foodDefinitions(std::make_shared<FoodDefinitionRepository>())
     , m_recipeDefinitions(std::make_shared<Repository<ReceptDefinitie>>())
     , m_calculator(std::make_shared< PointsCalculator>())

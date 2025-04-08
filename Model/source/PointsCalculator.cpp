@@ -4,9 +4,28 @@
 namespace weight
 {
 
+namespace {
 
-static int PointsCalculatorInstances = 0;
+int PointsCalculatorInstances = 0;
 
+class KCalCalculator: public PointsCalculatorBase
+{
+public:
+    double GetPointsPer100Units(const FoodParameters& aParameters) const override;
+};
+
+
+class CarboHydratesCalculator: public PointsCalculatorBase
+{
+public:
+    double GetPointsPer100Units(const FoodParameters& aParameters) const override;
+
+private:
+};
+
+
+
+}
 
 PointsCalculator::PointsCalculator()
     : mImplementation(std::make_unique<KCalCalculator>())

@@ -7,6 +7,8 @@
 
 namespace weight {
 class IFoodDefinitionRepository;
+class IMessageHandler;
+class IModel;
 class IStringRepository;
 class PointsCalculator;
 class ReceptDefinitie;
@@ -15,22 +17,28 @@ class VMDefinitie;
 template <typename TYPE> class IRepository;
 }
 
+class CDiaryPage;
 class EditReceptDefDialog;
 
 class PageFactory
     : public IPageFactory {
 public:
-    PageFactory(std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
+    PageFactory(std::shared_ptr<weight::IMessageHandler> messageHandler,
+                weight::IModel& model,
+                std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> recipes,
                 std::shared_ptr<weight::IFoodDefinitionRepository> foodDefinitions,
                 std::shared_ptr<weight::PointsCalculator> calculator);
     ~PageFactory() override;
 
     std::unique_ptr<ReceptenPage> CreateRecipesPage() const override;
     std::unique_ptr<EditReceptDefDialog> CreateEditRecipeDefinitionsDialog(weight::ReceptDefinitie& aRecept, CWnd* parent) const override;
+    std::unique_ptr<CDiaryPage> CreateDiaryPage(CWnd* parent) const override;
 
     std::unique_ptr<FoodDefinitionEditor> CreateFoodDefinitionEditor(CWnd* parent) const override;
 
 private:
+    std::shared_ptr<weight::IMessageHandler> m_messageHandler;
+    weight::IModel& m_model;
     std::shared_ptr<weight::IRepository<weight::ReceptDefinitie>> m_recipes;
     std::shared_ptr<weight::IFoodDefinitionRepository> m_foodDefinitions;
     std::shared_ptr<weight::PointsCalculator> m_calculator;

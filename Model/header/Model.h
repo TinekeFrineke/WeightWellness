@@ -12,11 +12,12 @@ namespace weight
 
 class IBrandRepository;
 class ICategoryRepository;
+class IMessageHandler;
 
 class Model: public IModel
 {
 public:
-    Model();
+    Model(std::shared_ptr<IMessageHandler> messageHandler);
     ~Model() override;
 
     Personalia* GetPersonalia() const override;

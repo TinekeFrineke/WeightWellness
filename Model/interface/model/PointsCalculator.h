@@ -65,22 +65,6 @@ public:
 };
 
 
-class KCalCalculator: public PointsCalculatorBase
-{
-public:
-    double GetPointsPer100Units(const FoodParameters& aParameters) const override;
-};
-
-
-class CarboHydratesCalculator: public PointsCalculatorBase
-{
-public:
-    double GetPointsPer100Units(const FoodParameters& aParameters) const override;
-
-private:
-};
-
-
 class PointsCalculator: public PointsCalculatorBase
 {
 public:
