@@ -308,7 +308,7 @@ weight::Result XmlReader::ReadWeeks(const std::tstring& aDirectory)
     if (!std::filesystem::exists(aDirectory) || !std::filesystem::is_directory(aDirectory))
         return weight::Result::InterpretError;
 
-    const std::wstring mask(L"week*.xml");
+    const std::string mask("week*.xml");
     const auto files = path_utilities::FindFiles(aDirectory, mask);
 
     for (const auto& file : files) {

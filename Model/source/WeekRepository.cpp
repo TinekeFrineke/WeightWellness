@@ -43,8 +43,8 @@ bool WeekRepository::Add(std::unique_ptr<IWeek> aWeek)
     {
         if (week->GetStartDate() == aWeek->GetStartDate())
         {
-            std::wstringstream message;
-            message << L"Could not add week with startdate  " << ToString(aWeek->GetStartDate());
+            std::stringstream message;
+            message << "Could not add week with startdate  " << ToString(aWeek->GetStartDate());
             m_messageHandler->error(message.str());
             return false;
         }
@@ -53,9 +53,9 @@ bool WeekRepository::Add(std::unique_ptr<IWeek> aWeek)
             auto date = aWeek->GetStartDate();
             while (date != aWeek->GetEndDate()) {
                 if (week->Includes(date)) {
-                    std::wstringstream message;
-                    message << L"Could not add week : Overlaps with " << ToString(week->GetStartDate())
-                        << L" - " << ToString(week->GetEndDate());
+                    std::stringstream message;
+                    message << "Could not add week : Overlaps with " << ToString(week->GetStartDate())
+                        << " - " << ToString(week->GetEndDate());
                     m_messageHandler->error(message.str());
                     return false;
                 }

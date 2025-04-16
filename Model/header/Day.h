@@ -48,8 +48,8 @@ public:
     double                    GetTotalBonusPoints() const override { return GetCalculatedBonusPoints() + GetFreeBonusPoints(); }
 
     // Entity overrides
-    std::wstring      GetInstanceName() const override { return Utils::ToString(mDate); }
-    static std::tstring       GetClassName() { return _T("Dag"); }
+    std::string GetInstanceName() const override { return Utils::ToString(mDate); }
+    static std::string GetClassName() { return _T("Dag"); }
 
 private:
     Day& operator=(const Day&) = delete;

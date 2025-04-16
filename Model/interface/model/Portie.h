@@ -14,23 +14,23 @@ namespace weight
 class Portie: public Entity<Portie>
 {
 public:
-    Portie(const std::wstring& aName);
+    Portie(const std::string& aName);
     Portie(const Portie& portie);
     ~Portie();
 
     double GetUnits() const noexcept { return mUnits; }
-    std::wstring GetName() const { return mName; }
+    std::string GetName() const { return mName; }
 
     void                  SetUnits(double anAmount) noexcept { mUnits = anAmount; }
-    void                  SetName(const std::wstring& aName) { mName = aName; }
+    void                  SetName(const std::string& aName) { mName = aName; }
 
     // Entity overrides
-    virtual std::wstring  GetInstanceName() const noexcept override { return mName; }
-    static std::wstring   GetClassName() { return _T("Portie"); }
+    virtual std::string  GetInstanceName() const noexcept override { return mName; }
+    static std::string   GetClassName() { return "Portie"; }
 
 private:
     double mUnits;
-    std::wstring mName;
+    std::string mName;
 };
 
 

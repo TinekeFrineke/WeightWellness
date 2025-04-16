@@ -13,13 +13,13 @@ class Portie;
 class PortieComboBox: public CComboBox
 {
 public:
-    PortieComboBox(const std::wstring& aPortie);
+    PortieComboBox(const std::string& aPortie);
     void Initialize();
-    void Fill(const std::vector<std::wstring>& aNames, const std::tstring& aPortie = _T(""));
-    void Fill(const std::vector<std::unique_ptr<weight::Portie>>& aList, const std::tstring& aPortie = _T(""));
+    void Fill(const std::vector<std::string>& aNames, const std::string& aPortie = _T(""));
+    void Fill(const std::vector<std::unique_ptr<weight::Portie>>& aList, const std::string& aPortie = _T(""));
 
-    std::wstring GetString() const;
-    void SetString(const std::wstring& aString);
+    std::string GetString() const;
+    void SetString(const std::string& aString);
 
     weight::Portie* GetSelectedPortie();
 
@@ -30,5 +30,5 @@ public:
     DECLARE_MESSAGE_MAP()
 
 private:
-    std::wstring mInitialPortie;
+    std::string mInitialPortie;
 };

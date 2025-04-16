@@ -12,11 +12,11 @@ namespace weight
 class Naam
 {
 public:
-    explicit Naam(const std::wstring& aName) : mName(aName) {}
-    std::wstring Get() const { return mName; }
+    explicit Naam(const std::string& aName) : mName(aName) {}
+    std::string Get() const { return mName; }
 
 private:
-    std::wstring mName;
+    std::string mName;
 };
 
 

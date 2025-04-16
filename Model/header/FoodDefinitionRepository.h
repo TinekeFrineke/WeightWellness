@@ -15,10 +15,10 @@ public:
     virtual ~FoodDefinitionRepository() override = default;
     FoodDefinitionRepository();
 
-    bool Has(const std::wstring& name) const override;
-    VMDefinitie* Find(const std::wstring& name) const override;
+    bool Has(const std::string& name) const override;
+    VMDefinitie* Find(const std::string& name) const override;
     bool Add(std::unique_ptr<VMDefinitie> definition) override;
-    bool Remove(const std::wstring& name) override;
+    bool Remove(const std::string& name) override;
     void Clear() override;
     std::vector<VMDefinitie*> GetAll() const override;
 

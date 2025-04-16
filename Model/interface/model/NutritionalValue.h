@@ -31,8 +31,8 @@ public:
     void SetFibersPer100Units(double aVezels) { m_parameters.SetVezelsPer100Units(aVezels); }
 
 protected:
-    std::wstring GetInstanceName() const noexcept override;
-    static std::tstring GetClassName();
+    std::string GetInstanceName() const noexcept override;
+    static std::string GetClassName();
 
 private:
     std::shared_ptr<weight::PointsCalculator> m_calculator;

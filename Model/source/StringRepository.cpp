@@ -3,12 +3,12 @@
 
 namespace weight {
 
-std::vector<std::wstring> StringRepository::Get() const
+std::vector<std::string> StringRepository::Get() const
 {
     return m_elements;
 }
 
-void StringRepository::Add(const std::wstring& element)
+void StringRepository::Add(const std::string& element)
 {
     if (element.empty() || std::find(m_elements.begin(), m_elements.end(), element) != m_elements.end())
         return;

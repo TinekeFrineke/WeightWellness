@@ -13,7 +13,7 @@ BEGIN_MESSAGE_MAP(PortieComboBox, CComboBox)
 END_MESSAGE_MAP()
 
 
-PortieComboBox::PortieComboBox(const std::wstring& aPortie)
+PortieComboBox::PortieComboBox(const std::string& aPortie)
     : mInitialPortie(aPortie)
 {
 }
@@ -27,7 +27,7 @@ void PortieComboBox::Initialize()
 }
 
 
-void PortieComboBox::Fill(const std::vector<std::wstring>& aNames, const std::tstring& aPortie)
+void PortieComboBox::Fill(const std::vector<std::string>& aNames, const std::string& aPortie)
 {
     ResetContent();
 
@@ -75,16 +75,16 @@ weight::Portie* PortieComboBox::GetSelectedPortie()
 }
 
 
-void PortieComboBox::SetString(const std::wstring& aString)
+void PortieComboBox::SetString(const std::string& aString)
 {
     SetWindowText(aString.c_str());
 }
 
 
-std::wstring PortieComboBox::GetString() const
+std::string PortieComboBox::GetString() const
 {
     assert(m_hWnd != NULL);
     CString text;
     GetWindowText(text);
-    return (const TCHAR*)text;
+    return (const char*)text;
 }

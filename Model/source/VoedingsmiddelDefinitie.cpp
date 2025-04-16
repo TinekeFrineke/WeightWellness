@@ -18,8 +18,8 @@ int Entity<VMDefinitie>::mNumberOfInstances = 0;
 
 
 VMDefinitie::VMDefinitie(std::shared_ptr<weight::PointsCalculator> calculator,
-                         const std::tstring& aName,
-                         const std::wstring& aUnit,
+                         const std::string& aName,
+                         const std::string& aUnit,
                          std::unique_ptr<NutritionalValue> nutritionalValue)
     : m_calculator(std::move(calculator))
     , mName(aName)
@@ -110,7 +110,7 @@ bool VMDefinitie::RemovePortie(Portie* aPortie)
     return false;
 }
 
-bool VMDefinitie::RemovePortie(const std::wstring& name)
+bool VMDefinitie::RemovePortie(const std::string& name)
 {
     for (std::vector<std::unique_ptr<Portie>>::iterator iter = mPortieList.begin(); iter != mPortieList.end(); ++iter)
     {

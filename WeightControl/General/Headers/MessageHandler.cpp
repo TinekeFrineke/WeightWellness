@@ -3,22 +3,22 @@
 
 #include <Windows.h>
 
-void MessageHandler::info(const std::wstring& message)
+void MessageHandler::info(const std::string& message)
 {
-    issueMessage(message, L"INFO", MB_ICONINFORMATION);
+    issueMessage(message, "INFO", MB_ICONINFORMATION);
 }
 
-void MessageHandler::warning(const std::wstring& message)
+void MessageHandler::warning(const std::string& message)
 {
-    issueMessage(message, L"WARNING", MB_ICONWARNING);
+    issueMessage(message, "WARNING", MB_ICONWARNING);
 }
 
-void MessageHandler::error(const std::wstring& message)
+void MessageHandler::error(const std::string& message)
 {
-    issueMessage(message, L"ERROR", MB_ICONERROR);
+    issueMessage(message, "ERROR", MB_ICONERROR);
 }
 
-void MessageHandler::issueMessage(const std::wstring& message, const std::wstring& caption, unsigned int severity)
+void MessageHandler::issueMessage(const std::string& message, const std::string& caption, unsigned int severity)
 {
     ::MessageBox(0, message.c_str(), caption.c_str(), MB_OK | severity);
 }

@@ -5,8 +5,8 @@
 #include <assert.h>
 
 
-BrandComboBox::BrandComboBox(const std::vector<std::wstring>& availableTexts, bool aIsForFiltering,
-                             const std::tstring& anInitialBrand)
+BrandComboBox::BrandComboBox(const std::vector<std::string>& availableTexts, bool aIsForFiltering,
+                             const std::string& anInitialBrand)
     : weight::ComboBox(availableTexts, anInitialBrand)
     , mIsForFiltering(aIsForFiltering)
 {

@@ -14,7 +14,7 @@ END_MESSAGE_MAP()
 namespace weight
 {
 
-ComboBox::ComboBox(const std::vector<std::wstring>& availableTexts, const std::tstring& anInitialText)
+ComboBox::ComboBox(const std::vector<std::string>& availableTexts, const std::string& anInitialText)
     : m_availableTexts(availableTexts)
     , mInitialText(anInitialText)
 {
@@ -48,15 +48,15 @@ void ComboBox::AddLines()
 }
 
 
-std::wstring ComboBox::GetEditString() const
+std::string ComboBox::GetEditString() const
 {
     CString text;
     GetWindowText(text);
-    return static_cast<const TCHAR*>(text);
+    return static_cast<const char*>(text);
 }
 
 
-std::wstring ComboBox::GetString() const
+std::string ComboBox::GetString() const
 {
     int nIndex = GetCurSel();
 
@@ -71,7 +71,7 @@ std::wstring ComboBox::GetString() const
 }
 
 
-void ComboBox::SetText(const std::wstring& aString)
+void ComboBox::SetText(const std::string& aString)
 {
     SetWindowText(aString.c_str());
 }

@@ -28,14 +28,14 @@ double NutritionalValue::GetPointsPer100Units() const
     return m_calculator->GetPointsPer100Units(m_parameters);
 }
 
-std::wstring NutritionalValue::GetInstanceName() const noexcept
+std::string NutritionalValue::GetInstanceName() const noexcept
 {
-    return L"None";
+    return "None";
 }
 
-std::tstring NutritionalValue::GetClassName()
+std::string NutritionalValue::GetClassName()
 {
-    return _T("NutritionalValue");
+    return "NutritionalValue";
 }
 
 } // namespace weight

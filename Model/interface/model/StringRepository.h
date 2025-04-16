@@ -10,12 +10,12 @@ class StringRepository
     : public IStringRepository
 {
 public:
-    std::vector<std::wstring> Get() const override;
-    void Add(const std::wstring& element) override;
+    std::vector<std::string> Get() const override;
+    void Add(const std::string& element) override;
     void Clear() noexcept override;
 
 private:
-    std::vector<std::wstring> m_elements;
+    std::vector<std::string> m_elements;
 
 };
 

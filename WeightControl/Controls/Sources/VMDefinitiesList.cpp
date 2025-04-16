@@ -17,14 +17,14 @@ END_MESSAGE_MAP()
 
 namespace {
 
-bool CategoryMatches(const std::wstring& itemCategory, const std::wstring& categoryFilter)
+bool CategoryMatches(const std::string& itemCategory, const std::string& categoryFilter)
 {
     if (categoryFilter.empty())
         return true;
     return itemCategory == categoryFilter;
 }
 
-bool BrandMatches(const std::wstring& itemBrand, const std::wstring& brandFilter)
+bool BrandMatches(const std::string& itemBrand, const std::string& brandFilter)
 {
     if (brandFilter.empty() || brandFilter == L"<alles>")
         return true;
@@ -33,7 +33,7 @@ bool BrandMatches(const std::wstring& itemBrand, const std::wstring& brandFilter
     return itemBrand == brandFilter;
 }
 
-bool NameMatches(const std::wstring& itemName, const std::wstring& nameFilter)
+bool NameMatches(const std::string& itemName, const std::string& nameFilter)
 {
     if (nameFilter.empty())
         return true;

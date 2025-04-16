@@ -16,10 +16,10 @@ class RecipeRepository
 {
 public:
     // Inherited via IRecipeRepository
-    bool Has(const std::wstring& name) const override;
-    ReceptDefinitie* Find(const std::wstring& name) const override;
+    bool Has(const std::string& name) const override;
+    ReceptDefinitie* Find(const std::string& name) const override;
     bool Add(std::unique_ptr<ReceptDefinitie> definition) override;
-    bool Remove(const std::wstring& name) override;
+    bool Remove(const std::string& name) override;
     void Clear() override;
     std::vector<ReceptDefinitie*> GetAll() const override;
 };

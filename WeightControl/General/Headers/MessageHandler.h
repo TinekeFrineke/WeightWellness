@@ -7,11 +7,11 @@ class MessageHandler
     : public weight::IMessageHandler
 {
 public:
-    void info(const std::wstring& message) override;
-    void warning(const std::wstring& message) override;
-    void error(const std::wstring& message) override;
+    void info(const std::string& message) override;
+    void warning(const std::string& message) override;
+    void error(const std::string& message) override;
 
 private:
-    void issueMessage(const std::wstring& message, const std::wstring& caption, unsigned int severity);
+    void issueMessage(const std::string& message, const std::string& caption, unsigned int severity);
 };
 

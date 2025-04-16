@@ -10,16 +10,16 @@ namespace weight
 class ComboBox: public CComboBox
 {
 public:
-    ComboBox(const std::vector<std::wstring>& availableTexts, const std::wstring& anInitialText = _T(""));
+    ComboBox(const std::vector<std::string>& availableTexts, const std::string& anInitialText = "");
 
     void Initialize();
     void Fill();
 
     virtual void AddLines();
 
-    std::wstring GetString() const;
-    std::wstring GetEditString() const;
-    void SetText(const std::wstring& aString);
+    std::string GetString() const;
+    std::string GetEditString() const;
+    void SetText(const std::string& aString);
 
     //{{AFX_MSG(weight::ComboBox)
   //afx_msg int                 OnCreate(LPCREATESTRUCT lpCreateStruxct);
@@ -28,8 +28,8 @@ public:
     DECLARE_MESSAGE_MAP()
 
 private:
-    std::vector<std::wstring> m_availableTexts;
-    std::tstring mInitialText;
+    std::vector<std:wstring> m_availableTexts;
+    std::string mInitialText;
 };
 
 } // namespace weight

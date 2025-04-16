@@ -10,9 +10,9 @@ namespace weight
 {
 
 
-Voedingsmiddel::Voedingsmiddel(const std::tstring& aName,
+Voedingsmiddel::Voedingsmiddel(const std::string& aName,
                                std::unique_ptr<Lot> aLot,
-                               const std::wstring& aUnit)
+                               const std::string& aUnit)
     : mName(aName),
     mLot(std::move(aLot)),
     mUnit(aUnit)

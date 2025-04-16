@@ -8,12 +8,12 @@ namespace weight {
 
 
 
-bool RecipeRepository::Has(const std::wstring& name) const
+bool RecipeRepository::Has(const std::string& name) const
 {
     return Repository<ReceptDefinitie>::Has(name);
 }
 
-ReceptDefinitie* RecipeRepository::Find(const std::wstring& name) const
+ReceptDefinitie* RecipeRepository::Find(const std::string& name) const
 {
     return Repository<ReceptDefinitie>::Find(name);
 }
@@ -23,7 +23,7 @@ bool RecipeRepository::Add(std::unique_ptr<ReceptDefinitie> definition)
     return Repository<ReceptDefinitie>::Add(std::move(definition));
 }
 
-bool RecipeRepository::Remove(const std::wstring& name)
+bool RecipeRepository::Remove(const std::string& name)
 {
     return Repository<ReceptDefinitie>::Remove(name);
 }

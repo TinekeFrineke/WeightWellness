@@ -15,11 +15,11 @@ public:
     explicit ReceptDefinitie(const std::tstring& aName) : mName(aName) {}
     virtual ~ReceptDefinitie() noexcept = default;
 
-    virtual std::tstring          GetName() const { return mName; }
+    virtual std::string          GetName() const { return mName; }
     virtual double                GetPointsPerPortion() const;
     int                           GetPortions() const { return mPorties.Get(); }
 
-    void                          SetName(const std::wstring& name) { mName = name; }
+    void                          SetName(const std::string& name) { mName = name; }
     void                          SetPortions(int aPorties) { mPorties.Set(aPorties); }
     void                          Add(std::unique_ptr<Item> anItem);
     void                          Remove(Item* anItem);

@@ -12,11 +12,11 @@ class EntityBase
 protected:
     virtual ~EntityBase() = default;
 
-    void Register(const std::wstring& aClassName,
-                  const std::wstring& anInstanceName,
+    void Register(const std::string& aClassName,
+                  const std::string& anInstanceName,
                   int                  aNumberOfInstances) noexcept;
-    void Unregister(const std::wstring& aClassName,
-                    const std::wstring& anInstanceName,
+    void Unregister(const std::string& aClassName,
+                    const std::string& anInstanceName,
                     int                  aNumberOfInstances) noexcept;
 };
 
@@ -30,7 +30,7 @@ public:
     void Unregister() noexcept;
 
 protected:
-    virtual std::wstring GetInstanceName() const = 0;
+    virtual std::string GetInstanceName() const = 0;
 
 private:
     static int mNumberOfInstances;

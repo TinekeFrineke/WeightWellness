@@ -13,12 +13,12 @@ FoodDefinitionRepository::FoodDefinitionRepository()
 {
 }
 
-bool FoodDefinitionRepository::Has(const std::wstring& name) const
+bool FoodDefinitionRepository::Has(const std::string& name) const
 {
     return Repository<VMDefinitie>::Has(name);
 }
 
-VMDefinitie* FoodDefinitionRepository::Find(const std::wstring& name) const
+VMDefinitie* FoodDefinitionRepository::Find(const std::string& name) const
 {
     return Repository<VMDefinitie>::Find(name);
 }
@@ -35,7 +35,7 @@ bool FoodDefinitionRepository::Add(std::unique_ptr<VMDefinitie> definition)
     return true;
 }
 
-bool FoodDefinitionRepository::Remove(const std::wstring& name)
+bool FoodDefinitionRepository::Remove(const std::string& name)
 {
     return Repository<VMDefinitie>::Remove(name);
 }

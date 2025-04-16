@@ -27,7 +27,7 @@ public:
     CWWApplication();
     ~CWWApplication();
 
-    std::wstring      GetDataDirectory() const { return mDataDirectory; }
+    std::string      GetDataDirectory() const { return mDataDirectory; }
 
     // Overrides
 public:
@@ -40,7 +40,7 @@ public:
 private:
     std::shared_ptr<weight::IMessageHandler> m_messageHandler;
     std::unique_ptr<weight::IModel> mModel;
-    std::wstring   mDataDirectory;
+    std::string   mDataDirectory;
 };
 
 extern CWWApplication theApp;

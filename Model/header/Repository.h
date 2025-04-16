@@ -14,25 +14,25 @@ template <typename TYPE>
 class Repository : public IRepository<TYPE>
 {
 public:
-    virtual bool Has(const std::wstring& name) const override;
-    virtual TYPE* Find(const std::wstring& name) const override;
+    virtual bool Has(const std::string& name) const override;
+    virtual TYPE* Find(const std::string& name) const override;
     virtual bool Add(std::unique_ptr<TYPE> definition) override;
-    virtual bool Remove(const std::wstring& name) override;
+    virtual bool Remove(const std::string& name) override;
     virtual void Clear() override;
     virtual std::vector<TYPE*> GetAll() const override;
 
 private:
-    std::map<std::wstring, std::unique_ptr<TYPE>> m_elements;
+    std::map<std::string, std::unique_ptr<TYPE>> m_elements;
 };
 
 template <typename TYPE>
-bool Repository<TYPE>::Has(const std::wstring& name) const
+bool Repository<TYPE>::Has(const std::string& name) const
 {
     return m_elements.find(name) != m_elements.end();
 }
 
 template <typename TYPE>
-TYPE* Repository<TYPE>::Find(const std::wstring& name) const
+TYPE* Repository<TYPE>::Find(const std::string& name) const
 {
     auto iterator = m_elements.find(name);
     if (iterator == m_elements.end())
@@ -52,7 +52,7 @@ bool Repository<TYPE>::Add(std::unique_ptr<TYPE> definition)
 }
 
 template <typename TYPE>
-bool Repository<TYPE>::Remove(const std::wstring& name)
+bool Repository<TYPE>::Remove(const std::string& name)
 {
     auto iterator = m_elements.find(name);
     if (iterator == m_elements.end())

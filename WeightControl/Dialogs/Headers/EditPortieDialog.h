@@ -47,7 +47,7 @@ private:
     weight::VMDefinitie& mDefinitie;
     weight::Portie* mPortie;
 
-    std::vector<std::wstring> mPortienames;
+    std::vector<std::string> mPortienames;
 
     CDoubleEdit       mPoints;
     CStringEdit       mVoedingsMiddel;

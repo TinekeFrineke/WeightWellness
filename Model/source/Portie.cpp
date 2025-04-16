@@ -14,7 +14,7 @@ namespace weight
 int Entity<Portie>::mNumberOfInstances = 0;
 
 
-Portie::Portie(const std::wstring& aName)
+Portie::Portie(const std::string& aName)
     : mName(aName)
     , mUnits(0)
 {
