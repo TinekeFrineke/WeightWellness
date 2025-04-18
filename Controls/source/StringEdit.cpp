@@ -4,7 +4,7 @@
 
 #include <assert.h>
 
-std::tstring CStringEdit::GetValue() const
+std::string CStringEdit::GetValue() const
 {
   assert(m_hWnd != NULL);
   CString text;
@@ -13,7 +13,7 @@ std::tstring CStringEdit::GetValue() const
 }
 
 
-void CStringEdit::SetValue(const std::tstring & aValue)
+void CStringEdit::SetValue(const std::string & aValue)
 {
   assert(m_hWnd != NULL);
   SetWindowText(aValue.c_str());

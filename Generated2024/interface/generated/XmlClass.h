@@ -44,8 +44,8 @@ public:
         void resetErrors();
     };
 
-    Result ParseDocument(const std::wstring& aFilename,
-                        XERCES_CPP_NAMESPACE::XercesDOMParser& aParser);
+    Result ParseDocument(const std::string& aFilename,
+                         XERCES_CPP_NAMESPACE::XercesDOMParser& aParser);
 };
 
 

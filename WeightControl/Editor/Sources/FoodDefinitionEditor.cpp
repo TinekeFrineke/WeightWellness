@@ -40,7 +40,7 @@ std::unique_ptr<weight::VMDefinitie> FoodDefinitionEditor::Create() const
 {
     m_isNewDefinition = true;
     auto nutritionalValue = std::make_unique<weight::NutritionalValue>(m_calculator);
-    auto definition = std::make_unique<weight::VMDefinitie>(m_calculator, L"", L"g", std::move(nutritionalValue));
+    auto definition = std::make_unique<weight::VMDefinitie>(m_calculator, "", "g", std::move(nutritionalValue));
     if (Edit(*definition)) {
         m_isNewDefinition = false;
         return std::move(definition);

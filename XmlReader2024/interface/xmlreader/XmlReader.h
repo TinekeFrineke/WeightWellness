@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Utilities/StrUtils.h"
-
 #include "model/IDay.h"
 #include "model/IModel.h"
 #include "model/Portie.h"
@@ -39,21 +37,21 @@ class XmlReader
 public:
     XmlReader(weight::IModel& aModel, std::shared_ptr<weight::IMessageHandler> messageHandler);
 
-    weight::Result                      Read(const std::tstring& aDirectory);
+    weight::Result                      Read(const std::string& aDirectory);
 
-    weight::Result                      ReadPersonalia(const std::tstring& aDirectory);
-    weight::Result                      ReadUnits(const std::tstring& aDirectory);
-    weight::Result                      ReadVoedingsmiddelDefinities(const std::tstring& aDirectory);
-    weight::Result                      ReadRecepten(const std::tstring& aDirectory);
-    weight::Result                      ReadGerechten(const std::tstring& aDirectory);
-    weight::Result                      ReadWeeks(const std::tstring& aDirectory);
-    weight::Result                      ReadBonusCells(const std::tstring& aDirectory);
+    weight::Result                      ReadPersonalia(const std::string& aDirectory);
+    weight::Result                      ReadUnits(const std::string& aDirectory);
+    weight::Result                      ReadVoedingsmiddelDefinities(const std::string& aDirectory);
+    weight::Result                      ReadRecepten(const std::string& aDirectory);
+    weight::Result                      ReadGerechten(const std::string& aDirectory);
+    weight::Result                      ReadWeeks(const std::string& aDirectory);
+    weight::Result                      ReadBonusCells(const std::string& aDirectory);
 
 private:
     XmlReader& operator=(const XmlReader&) = delete;
     XmlReader(const XmlReader&) = delete;
 
-    weight::Result                      ReadWeek(const std::tstring& aDirectory);
+    weight::Result                      ReadWeek(const std::string& aDirectory);
 
     weight::Portie Create(const ww2024::XmlPortie& aPortie);
     std::unique_ptr<weight::Voedingsmiddel> Create(const ww2024::XmlVoedingsmiddel& aVoedingsmiddel);

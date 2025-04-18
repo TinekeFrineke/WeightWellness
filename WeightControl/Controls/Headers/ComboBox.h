@@ -28,7 +28,7 @@ public:
     DECLARE_MESSAGE_MAP()
 
 private:
-    std::vector<std:wstring> m_availableTexts;
+    std::vector<std::string> m_availableTexts;
     std::string mInitialText;
 };
 

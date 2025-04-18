@@ -8,7 +8,7 @@ namespace weight
 {
 
 
-Personalia::Personalia(const std::tstring& aUserName)
+Personalia::Personalia(const std::string& aUserName)
     : mUserName(aUserName),
     mDateOfBirth(Utils::Today()),
     mKCPuntenTotaal(0),

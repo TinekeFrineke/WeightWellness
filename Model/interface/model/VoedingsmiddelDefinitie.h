@@ -58,8 +58,8 @@ public:
     const NutritionalValue& GetNutritionalValue() const noexcept { return *mPoints; }
 
     // Entity overrides
-    std::tstring GetInstanceName() const noexcept override { return mName; }
-    static std::tstring GetClassName() { return _T("VMDefinitie"); }
+    std::string GetInstanceName() const noexcept override { return mName; }
+    static std::string GetClassName() { return "VMDefinitie"; }
 
 private:
     std::string mUnit;

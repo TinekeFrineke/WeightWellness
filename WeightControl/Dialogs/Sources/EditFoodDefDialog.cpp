@@ -111,7 +111,7 @@ BOOL CEditFoodDefDialog::OnInitDialog()
     mName.SetReadOnly(!m_newDefinition);
     mEenheden.SetValue(100);
 
-    std::tstring eenheden = m_definition.GetUnit().c_str();
+    std::string eenheden = m_definition.GetUnit().c_str();
 
     mName.SetValue(m_definition.GetName());
 
@@ -145,19 +145,19 @@ BOOL CEditFoodDefDialog::OnInitDialog()
 
 void CEditFoodDefDialog::FillStatics()
 {
-    std::tstring eehedenname(mUnitBox.GetString().empty() ? _T("eenheden") : mUnitBox.GetString());
+    std::string eehedenname(mUnitBox.GetString().empty() ? "eenheden" : mUnitBox.GetString());
     TCHAR labelstring[1024];
-    _stprintf_s(labelstring, _T("kCal per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
+    sprintf_s(labelstring, "kCal per %d %s", mEenheden.GetValue(), eehedenname.c_str());
     mKCalPer100Static.SetWindowText(labelstring);
-    _stprintf_s(labelstring, _T("Eiwitten per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
+    sprintf_s(labelstring, "Eiwitten per %d %s", mEenheden.GetValue(), eehedenname.c_str());
     mEiwitPer100Static.SetWindowText(labelstring);
-    _stprintf_s(labelstring, _T("Koolhydraten per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
+    sprintf_s(labelstring, "Koolhydraten per %d %s", mEenheden.GetValue(), eehedenname.c_str());
     mKoolhydratenPer100Static.SetWindowText(labelstring);
-    _stprintf_s(labelstring, _T("Vet per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
+    sprintf_s(labelstring, "Vet per %d %s", mEenheden.GetValue(), eehedenname.c_str());
     mVetPer100Static.SetWindowText(labelstring);
-    _stprintf_s(labelstring, _T("Vezels per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
+    sprintf_s(labelstring, "Vezels per %d %s", mEenheden.GetValue(), eehedenname.c_str());
     mVezelsPer100Static.SetWindowText(labelstring);
-    _stprintf_s(labelstring, _T("Punten per %d %s"), mEenheden.GetValue(), eehedenname.c_str());
+    sprintf_s(labelstring, "Punten per %d %s", mEenheden.GetValue(), eehedenname.c_str());
     mEenhedenStatic.SetWindowText(eehedenname.c_str());
 }
 
@@ -216,7 +216,7 @@ bool CEditFoodDefDialog::CreateCommonFoodParts()
 
 bool CEditFoodDefDialog::CreateFood()
 {
-    std::tstring name = mName.GetValue();
+    std::string name = mName.GetValue();
     if (name.empty())
         return false;
 
@@ -225,7 +225,7 @@ bool CEditFoodDefDialog::CreateFood()
 
     if (mEenheden.GetValue() == 0)
     {
-        MessageBox(_T("Ongeldig aantal eenheden!"), _T("ERROR"), MB_OK);
+        MessageBox("Ongeldig aantal eenheden!", "ERROR", MB_OK);
         return false;
     }
 
@@ -263,16 +263,16 @@ bool CEditFoodDefDialog::FinalizeData()
 
 void CEditFoodDefDialog::OnBnClickedOk()
 {
-    std::tstring name = mName.GetValue();
+    std::string name = mName.GetValue();
     if (name.empty())
     {
-        ::MessageBox(0, _T("Enter a unique name"), _T("Error"), MB_OK);
+        MessageBox("Enter a unique name", "Error", MB_OK);
         return;
     }
 
     if (m_newDefinition && m_foodDefinitions->Has(name))
     {
-        ::MessageBox(0, _T("Een voedingsmiddel met deze naam bestaat al!"), _T("Error"), MB_OK);
+        MessageBox("Een voedingsmiddel met deze naam bestaat al!", "Error", MB_OK);
         return;
     }
 

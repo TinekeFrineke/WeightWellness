@@ -8,8 +8,8 @@
 class CStringEdit : public CEdit
 {
 public:
-  std::tstring        GetValue() const;
-  void                SetValue(const std::tstring & aValue);
+  std::string GetValue() const;
+  void SetValue(const std::string & aValue);
 
 protected:
 };

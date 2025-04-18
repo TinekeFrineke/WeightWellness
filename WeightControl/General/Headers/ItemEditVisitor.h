@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "model/Item.h"
 
 namespace weight

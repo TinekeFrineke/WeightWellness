@@ -1,32 +1,35 @@
 #include "XmlClass.h"
 
-#include <tchar.h>
+#include <io.h>
+#include <sstream>
 #include <windows.h>
 #include <xercesc/framework/localfileinputsource.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/sax/saxparseexception.hpp>
 
+#include <Utilities/strutils.h>
 
 namespace ww2024
+
 {
 
 void XmlClass::ParseErrorHandler::warning(const XERCES_CPP_NAMESPACE::SAXParseException& e)
 {
-    TCHAR smsg[1024];
-    _stprintf_s(smsg, L"Warning at file \"%s\", line %d, char %d: %s\n",
-                e.getSystemId(), static_cast<int>(e.getLineNumber()), static_cast<int>(e.getColumnNumber()), e.getMessage());
-
-    ::MessageBox(0, smsg, _T("WARNING"), MB_OK);
+    std::stringstream message;
+    message << "Warning at file \"" << Str::ToString(e.getSystemId())
+        << " line " << e.getLineNumber() << " char " << e.getColumnNumber()
+        << ": " << Str::ToString(e.getMessage());
+    ::MessageBox(0, message.str().c_str(), "WARNING", MB_OK);
 }
 
 
 void XmlClass::ParseErrorHandler::error(const XERCES_CPP_NAMESPACE::SAXParseException& e)
 {
-    TCHAR smsg[1024];
-    _stprintf_s(smsg, _T("Error at file \"%s\", line %d, char %d: %s\n"),
-                e.getSystemId(), static_cast<int>(e.getLineNumber()), static_cast<int>(e.getColumnNumber()), e.getMessage());
-
-    ::MessageBox(0, smsg, _T("ERROR"), MB_OK);
+    std::stringstream message;
+    message << "Error at file \"" << Str::ToString(e.getSystemId())
+        << " line " << e.getLineNumber() << " char " << e.getColumnNumber()
+        << ": " << Str::ToString(e.getMessage());
+    ::MessageBox(0, message.str().c_str(), "ERROR", MB_OK);
 
     throw e;
 }
@@ -34,11 +37,11 @@ void XmlClass::ParseErrorHandler::error(const XERCES_CPP_NAMESPACE::SAXParseExce
 
 void XmlClass::ParseErrorHandler::fatalError(const XERCES_CPP_NAMESPACE::SAXParseException& e)
 {
-    TCHAR smsg[1024];
-    _stprintf_s(smsg, _T("Fatal Error at file \"%s\", line %d, char %d: %s\n"),
-                e.getSystemId(), static_cast<int>(e.getLineNumber()), static_cast<int>(e.getColumnNumber()), e.getMessage());
-
-    ::MessageBox(0, smsg, _T("FATAL ERROR"), MB_OK);
+    std::stringstream message;
+    message << "Fatal error at file \"" << Str::ToString(e.getSystemId())
+        << " line " << e.getLineNumber() << " char " <<e.getColumnNumber()
+        << ": " << Str::ToString(e.getMessage());
+    ::MessageBox(0, message.str().c_str(), "FATAL ERROR", MB_OK);
 
     throw e;
 }
@@ -48,10 +51,10 @@ void XmlClass::ParseErrorHandler::resetErrors()
 {
 }
 
-XmlClass::Result XmlClass::ParseDocument(const std::wstring &                   aFilename,
-                                          XERCES_CPP_NAMESPACE::XercesDOMParser &aParser)
+XmlClass::Result XmlClass::ParseDocument(const std::string& aFilename,
+                                          XERCES_CPP_NAMESPACE::XercesDOMParser& aParser)
 {
-    if (_taccess(aFilename.c_str(), 0) == -1)
+    if (_access(aFilename.c_str(), 0) == -1)
     {
         switch (errno)
         {
@@ -62,21 +65,21 @@ XmlClass::Result XmlClass::ParseDocument(const std::wstring &                   
         }
     }
 
-    XERCES_CPP_NAMESPACE::LocalFileInputSource source(NULL, aFilename.c_str());
+    XERCES_CPP_NAMESPACE::LocalFileInputSource source(nullptr, Str::ToWString(aFilename).c_str());
     try
     {
         aParser.parse(source);
     }
     catch (const XERCES_CPP_NAMESPACE::XMLException& e)
     {
-        ::MessageBox(0, (std::wstring(_T("Exception occurred: ")) + e.getMessage() + _T("; File being parsed is ") + aFilename).c_str(),
-                     _T("ERROR"), MB_OK);
+        ::MessageBox(0, ("Exception occurred: " + Str::ToString(e.getMessage()) + "; File being parsed is " + aFilename).c_str(),
+                     "ERROR", MB_OK);
         return Result::ParserError;
     }
  	catch (...)
  	{
-        ::MessageBox(0, (std::wstring(_T("Unexpected Exception occurred: ")) + aFilename).c_str(),
-                     _T("ERROR"), MB_OK);
+        ::MessageBox(0, ("Unexpected Exception occurred: " + aFilename).c_str(),
+                     "ERROR", MB_OK);
         return Result::ParserError;
 	}
 

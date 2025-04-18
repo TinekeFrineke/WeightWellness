@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "Item.h"
 
 namespace weight
@@ -10,20 +9,20 @@ namespace weight
 class ManualItem: public Item
 {
 public:
-    ManualItem(const std::tstring& aName, double aPoints)
+    ManualItem(const std::string& aName, double aPoints)
         : mName(aName)
         , mPoints(aPoints) {}
 
     virtual               ~ManualItem() {}
-    virtual std::tstring  GetName() const { return mName; }
+    virtual std::string   GetName() const { return mName; }
     virtual double        GetPoints() const { return mPoints; }
     virtual void          Accept(ItemVisitor& aVisitor);
 
     void                  Set(double aPoints) { mPoints = aPoints; }
 
 private:
-    std::tstring          mName;
-    double                mPoints;
+    std::string mName;
+    double mPoints;
 };
 
 

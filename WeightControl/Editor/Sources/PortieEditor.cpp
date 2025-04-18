@@ -18,7 +18,7 @@ bool PortieEditor::Edit(weight::Portie& portie) const
 
 std::unique_ptr<weight::Portie> PortieEditor::Create() const
 {
-    auto portie = std::make_unique<weight::Portie>(L"");
+    auto portie = std::make_unique<weight::Portie>("");
     if (Edit(*portie.get()))
         return portie;
 

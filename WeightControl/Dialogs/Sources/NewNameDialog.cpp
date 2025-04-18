@@ -22,7 +22,7 @@ NewNameDialog::~NewNameDialog()
 {
 }
 
-std::tstring NewNameDialog::GetName() const
+std::string NewNameDialog::GetName() const
 {
   return m_Name;
 }

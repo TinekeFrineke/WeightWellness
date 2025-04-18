@@ -110,7 +110,7 @@ void EditReceptDefDialog::OnBnClickedAdd()
 void EditReceptDefDialog::OnBnClickedOk()
 {
     if (mName.GetValue().empty()) {
-        MessageBox(L"Empty name not allowed!", L"ERROR");
+        MessageBox("Empty name not allowed!", "ERROR");
         return;
     }
 

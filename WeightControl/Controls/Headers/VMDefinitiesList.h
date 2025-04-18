@@ -17,22 +17,22 @@ class VMDefinitiesFilter
 {
 public:
     VMDefinitiesFilter() : mFavouritesOnly(false) {}
-    VMDefinitiesFilter(const std::tstring& aName,
-                       const std::tstring& aCategory,
-                       const std::tstring& aMerk);
+    VMDefinitiesFilter(const std::string& aName,
+                       const std::string& aCategory,
+                       const std::string& aMerk);
 
-    std::tstring                GetDescription() const { return mName; }
-    std::tstring                GetCategory() const { return mCategory; }
-    std::tstring                GetBrand() const { return mMerk; }
+    std::string GetDescription() const { return mName; }
+    std::string GetCategory() const { return mCategory; }
+    std::string GetBrand() const { return mMerk; }
 
-    bool                        IsFavouritesOnly() const { return mFavouritesOnly; }
-    void                        SetFavouritesOnly(bool bFilter);
+    bool         IsFavouritesOnly() const { return mFavouritesOnly; }
+    void         SetFavouritesOnly(bool bFilter);
 
 private:
-    std::tstring                mName;
-    std::tstring                mCategory;
-    std::tstring                mMerk;
-    bool                        mFavouritesOnly;
+    std::string mName;
+    std::string mCategory;
+    std::string mMerk;
+    bool        mFavouritesOnly;
 };
 
 class VMDefinitiesListItem

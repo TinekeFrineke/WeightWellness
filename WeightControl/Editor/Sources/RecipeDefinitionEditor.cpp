@@ -19,7 +19,7 @@ bool RecipeDefinitionEditor::Edit(weight::ReceptDefinitie& definition) const
 
 std::unique_ptr<weight::ReceptDefinitie> RecipeDefinitionEditor::Create() const
 {
-    auto definition(std::make_unique<weight::ReceptDefinitie>(L""));
+    auto definition(std::make_unique<weight::ReceptDefinitie>(""));
 
     if (Edit(*definition))
         return definition;

@@ -87,9 +87,9 @@ BOOL CWWApplication::InitInstance()
         INT_PTR nResponse = dialog.DoModal();
         if (nResponse == IDOK)
         {
-            std::tstring name(dialog.GetName());
+            std::string name(dialog.GetName());
             if (name.empty()) {
-                MessageBox(0, _T("Empty personalia not allowed"), _T("ERROR"), MB_OK);
+                MessageBox(0, "Empty personalia not allowed", "ERROR", MB_OK);
                 return FALSE;
             }
 
@@ -97,8 +97,7 @@ BOOL CWWApplication::InitInstance()
                 mModel->SetPersonalia(std::make_unique<weight::Personalia>(name));
             }
             catch (const std::runtime_error& error) {
-                std::tstring terror(Str::ToTString(error.what()));
-                MessageBox(0, _T("Invalid personalia"), terror.c_str(), MB_OK);
+                MessageBox(0, "Invalid personalia", error.what(), MB_OK);
                 return FALSE;
             }
             // TODO ww2024: Place code here to handle when the dialog is
@@ -144,13 +143,11 @@ CWWApplication::~CWWApplication()
         writer.Write(mDataDirectory);
     }
     catch (const XERCES_CPP_NAMESPACE::IOException& error) {
-        std::tstring terror(Str::ToTString(error.getMessage()));
-        ::MessageBox(0, terror.c_str(), _T("Xerces Exception"), MB_OK);
+        ::MessageBox(0, Str::ToString(error.getMessage()).c_str(), "Xerces Exception", MB_OK);
     }
     catch (const std::exception& anException)
     {
-        std::tstring terror(Str::ToTString(anException.what()));
-        ::MessageBox(0, terror.c_str(), _T("Exception"), MB_OK);
+        ::MessageBox(0, anException.what(), "Exception", MB_OK);
     }
 
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate();

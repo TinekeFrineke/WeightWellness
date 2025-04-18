@@ -46,7 +46,7 @@ void PortieComboBox::Fill(const std::vector<std::string>& aNames, const std::str
 }
 
 
-void PortieComboBox::Fill(const std::vector<std::unique_ptr<weight::Portie>>& aList, const std::tstring& aPortie)
+void PortieComboBox::Fill(const std::vector<std::unique_ptr<weight::Portie>>& aList, const std::string& aPortie)
 {
     ResetContent();
 

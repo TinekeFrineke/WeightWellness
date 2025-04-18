@@ -26,9 +26,9 @@ bool CategoryMatches(const std::string& itemCategory, const std::string& categor
 
 bool BrandMatches(const std::string& itemBrand, const std::string& brandFilter)
 {
-    if (brandFilter.empty() || brandFilter == L"<alles>")
+    if (brandFilter.empty() || brandFilter == "<alles>")
         return true;
-    if (brandFilter == _T("<merkloos>") && itemBrand.empty())
+    if (brandFilter == "<merkloos>" && itemBrand.empty())
         return true;
     return itemBrand == brandFilter;
 }
@@ -38,7 +38,7 @@ bool NameMatches(const std::string& itemName, const std::string& nameFilter)
     if (nameFilter.empty())
         return true;
     
-    return Str::ToUpper(itemName).find(Str::ToUpper(nameFilter)) != std::tstring::npos;
+    return Str::ToUpper(itemName).find(Str::ToUpper(nameFilter)) != std::string::npos;
 }
 
 bool Complies(const weight::VMDefinitie& anItem,
@@ -71,9 +71,9 @@ private:
 
 
 
-VMDefinitiesFilter::VMDefinitiesFilter(const std::tstring& aName,
-                                       const std::tstring& aCategory,
-                                       const std::tstring& aMerk)
+VMDefinitiesFilter::VMDefinitiesFilter(const std::string& aName,
+                                       const std::string& aCategory,
+                                       const std::string& aMerk)
     : mName(aName)
     , mCategory(aCategory)
     , mMerk(aMerk)
@@ -107,7 +107,7 @@ void VMDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
     aControl.SetItemText(item, 2, mItem->GetUnit().c_str());
 
     TCHAR points[256];
-    _stprintf_s(points, _T("%.2f"), mItem->GetPointsPer100Units());
+    sprintf_s(points, "%.2f", mItem->GetPointsPer100Units());
     aControl.SetItemText(item, 3, points);
 
     aControl.SetItemData(item, (DWORD_PTR)this);
@@ -130,10 +130,10 @@ VMDefinitiesList::~VMDefinitiesList()
 
 void VMDefinitiesList::Initialize()
 {
-    InsertColumn(1, _T("Naam"), LVCFMT_LEFT, 200);
-    InsertColumn(2, _T("Categorie"), LVCFMT_LEFT, 100);
-    InsertColumn(3, _T("Eenheid"), LVCFMT_LEFT, 80);
-    InsertColumn(4, _T("Punten/100 eenh."), LVCFMT_RIGHT, 80);
+    InsertColumn(1, "Naam", LVCFMT_LEFT, 200);
+    InsertColumn(2, "Categorie", LVCFMT_LEFT, 100);
+    InsertColumn(3, "Eenheid", LVCFMT_LEFT, 80);
+    InsertColumn(4, "Punten/100 eenh.", LVCFMT_RIGHT, 80);
 
     Fill();
 }

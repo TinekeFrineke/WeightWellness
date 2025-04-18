@@ -19,7 +19,7 @@ public:
 	NewNameDialog(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~NewNameDialog();
 
-  std::tstring GetName() const;
+  std::string GetName() const;
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -32,6 +32,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
   CStringEdit mName;
-  std::tstring m_Name;
+  std::string m_Name;
   afx_msg void OnBnClickedOk();
 };

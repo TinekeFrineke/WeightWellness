@@ -60,7 +60,7 @@ XmlReader::XmlReader(weight::IModel& aModel, std::shared_ptr<weight::IMessageHan
 }
 
 
-weight::Result XmlReader::Read(const std::tstring& aDirectory)
+weight::Result XmlReader::Read(const std::string& aDirectory)
 {
     weight::Result result = ReadPersonalia(aDirectory + _T("\\personalia.xml"));
     if (result == weight::Result::Ok)
@@ -80,7 +80,7 @@ weight::Result XmlReader::Read(const std::tstring& aDirectory)
 }
 
 
-weight::Result XmlReader::ReadPersonalia(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadPersonalia(const std::string& aDirectory)
 {
     XmlPersonaliaReader reader;
 
@@ -159,7 +159,7 @@ weight::Result XmlReader::ReadPersonalia(const std::tstring& aDirectory)
 
 }
 
-weight::Result XmlReader::ReadUnits(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadUnits(const std::string& aDirectory)
 {
     XmlUnitsReader reader;
     try {
@@ -193,7 +193,7 @@ weight::Result XmlReader::ReadUnits(const std::tstring& aDirectory)
 }
 
 
-weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::string& aDirectory)
 {
     XmlVoedingsmiddeldefsReader reader;
     try {
@@ -254,7 +254,7 @@ weight::Result XmlReader::ReadVoedingsmiddelDefinities(const std::tstring& aDire
 }
 
 
-weight::Result XmlReader::ReadRecepten(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadRecepten(const std::string& aDirectory)
 {
     XmlReceptdefsReader reader;
     try {
@@ -303,7 +303,7 @@ weight::Result XmlReader::ReadRecepten(const std::tstring& aDirectory)
 }
 
 
-weight::Result XmlReader::ReadWeeks(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadWeeks(const std::string& aDirectory)
 {
     if (!std::filesystem::exists(aDirectory) || !std::filesystem::is_directory(aDirectory))
         return weight::Result::InterpretError;
@@ -312,14 +312,14 @@ weight::Result XmlReader::ReadWeeks(const std::tstring& aDirectory)
     const auto files = path_utilities::FindFiles(aDirectory, mask);
 
     for (const auto& file : files) {
-        ReadWeek(aDirectory + _T("\\") + file);
+        ReadWeek(aDirectory + "\\" + file);
     }
 
     return weight::Result::Ok;
 }
 
 
-weight::Result XmlReader::ReadWeek(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadWeek(const std::string& aDirectory)
 {
     XmlWeekReader reader;
     try {
@@ -377,7 +377,7 @@ weight::Result XmlReader::ReadWeek(const std::tstring& aDirectory)
 }
 
 
-weight::Result XmlReader::ReadGerechten(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadGerechten(const std::string& aDirectory)
 {
     (void)aDirectory;
 
@@ -385,7 +385,7 @@ weight::Result XmlReader::ReadGerechten(const std::tstring& aDirectory)
 }
 
 
-weight::Result XmlReader::ReadBonusCells(const std::tstring& aDirectory)
+weight::Result XmlReader::ReadBonusCells(const std::string& aDirectory)
 {
     //XmlBonuslistReader reader;
     //try {

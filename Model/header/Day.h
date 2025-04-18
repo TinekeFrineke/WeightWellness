@@ -49,7 +49,7 @@ public:
 
     // Entity overrides
     std::string GetInstanceName() const override { return Utils::ToString(mDate); }
-    static std::string GetClassName() { return _T("Dag"); }
+    static std::string GetClassName() { return "Dag"; }
 
 private:
     Day& operator=(const Day&) = delete;

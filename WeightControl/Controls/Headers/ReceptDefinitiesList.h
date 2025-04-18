@@ -3,8 +3,7 @@
 #include "afxcmn.h"
 #include <memory>
 #include <vector>
-
-#include "Utilities/StrUtils.h"
+#include <string>
 
 namespace weight
 {
@@ -19,12 +18,12 @@ class ReceptDefinitiesFilter
 {
 public:
     ReceptDefinitiesFilter() {}
-    ReceptDefinitiesFilter(const std::tstring& aDescription);
+    ReceptDefinitiesFilter(const std::string& aDescription);
 
-    std::tstring                GetDescription() const { return mDescription; }
+    std::string GetDescription() const { return mDescription; }
 
 private:
-    std::tstring                mDescription;
+    std::string mDescription;
 };
 
 class ReceptDefinitiesListItem;

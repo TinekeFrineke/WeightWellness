@@ -30,7 +30,7 @@ private:
 };
 
 
-ReceptDefinitiesFilter::ReceptDefinitiesFilter(const std::tstring& aDescription)
+ReceptDefinitiesFilter::ReceptDefinitiesFilter(const std::string& aDescription)
     : mDescription(aDescription)
 {
 }
@@ -40,7 +40,7 @@ bool ReceptDefinitiesList::Complies(const weight::ReceptDefinitie& anItem,
                                     const ReceptDefinitiesFilter& aFilter)
 {
     bool bDescriptionComplies = aFilter.GetDescription().empty() ||
-        Str::ToUpper(anItem.GetName()).find(Str::ToUpper(aFilter.GetDescription())) != std::tstring::npos;
+        Str::ToUpper(anItem.GetName()).find(Str::ToUpper(aFilter.GetDescription())) != std::string::npos;
 
     return bDescriptionComplies;
 }
@@ -52,7 +52,7 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
     lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
     lvi.iItem = iItemIndex;
     lvi.iSubItem = 0;
-    TCHAR* name = _tcsdup(mItem->GetName().c_str());
+    char* name = strdup(mItem->GetName().c_str());
     lvi.pszText = name;
     lvi.iImage = 0;
     lvi.stateMask = LVIS_STATEIMAGEMASK;
@@ -60,7 +60,7 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
 
     int item = aControl.InsertItem(&lvi);
 
-    TCHAR points[256];
+    char points[256];
     _stprintf_s(points, _T("%.2f"), mItem->GetPointsPerPortion());
     aControl.SetItemText(iItemIndex, 1, points);
     //_stprintf_s(points, _T("%d"), mItem->GetPortions());
@@ -85,8 +85,8 @@ ReceptDefinitiesList::~ReceptDefinitiesList()
 
 void ReceptDefinitiesList::Initialize()
 {
-    InsertColumn(1, _T("Naam"), LVCFMT_LEFT, 200);
-    InsertColumn(2, _T("Punten/portie"), LVCFMT_RIGHT, 80);
+    InsertColumn(1, "Naam", LVCFMT_LEFT, 200);
+    InsertColumn(2, "Punten/portie", LVCFMT_RIGHT, 80);
 }
 
 

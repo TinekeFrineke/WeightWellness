@@ -64,7 +64,7 @@ BOOL EditFoodDialog::OnInitDialog()
     const auto& lot = mVoedingsmiddel.GetConstLot();
     mAantalEenheden.SetValue(lot.GetPortie().GetUnits() * lot.GetNumberOfPortions());
     mAantalPorties.SetValue(lot.GetNumberOfPortions());
-    std::tstring name(lot.GetPortie().GetName());
+    std::string name(lot.GetPortie().GetName());
     int index = mPortie.FindStringExact(0, name.c_str());
     mPortie.SetCurSel(index);
     mPunten.SetValue(lot.GetPoints());

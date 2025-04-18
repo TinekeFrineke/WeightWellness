@@ -12,7 +12,7 @@ namespace weight
 class ReceptDefinitie
 {
 public:
-    explicit ReceptDefinitie(const std::tstring& aName) : mName(aName) {}
+    explicit ReceptDefinitie(const std::string& aName) : mName(aName) {}
     virtual ~ReceptDefinitie() noexcept = default;
 
     virtual std::string          GetName() const { return mName; }
@@ -29,7 +29,7 @@ public:
     Subject<int>& NumberOfPortions() noexcept { return mPorties; }
 
 private:
-    std::tstring mName;
+    std::string mName;
     std::vector<std::unique_ptr<Item>> mItems;
 #ifdef NEW_TRAIL
     IntSubject mPorties;

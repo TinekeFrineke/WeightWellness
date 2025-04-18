@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Utilities/StrUtils.h"
+#include <string>
 
 #include "xmlbase/XmlBase.h"
 
@@ -36,7 +36,7 @@ public:
     // TF_TODO Writer for bonus points
     XmlWriter(weight::IModel & aModel) : mModel(aModel) {}
 
-    weight::Result Write(const std::tstring & aDirectory);
+    weight::Result Write(const std::string & aDirectory);
 
     weight::Result Create(const weight::IDay & aDag, XmlDag & aDay);
     weight::Result Create(const weight::Voedingsmiddel & aMiddel, XmlVoedingsmiddel & aDay);
@@ -48,13 +48,13 @@ public:
 private:
     XmlWriter & operator=(const XmlWriter &) = delete;
 
-    weight::Result WritePersonalia(const std::tstring & aFilename);
-    weight::Result WriteUnits(const std::tstring & aFilename);
-    weight::Result WriteVoedingsmiddelDefinities(const std::tstring & aFilename);
-    weight::Result WriteRecepten(const std::tstring & aFilename);
-    weight::Result WriteWeeks(const std::tstring & aDirectory);
+    weight::Result WritePersonalia(const std::string & aFilename);
+    weight::Result WriteUnits(const std::string & aFilename);
+    weight::Result WriteVoedingsmiddelDefinities(const std::string & aFilename);
+    weight::Result WriteRecepten(const std::string & aFilename);
+    weight::Result WriteWeeks(const std::string & aDirectory);
 
-    weight::Result Write(weight::IWeek & aWeek, const std::tstring & aFilename);
+    weight::Result Write(weight::IWeek & aWeek, const std::string & aFilename);
 
     weight::IModel& mModel;
 };

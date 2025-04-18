@@ -311,7 +311,7 @@ void CDiaryPage::OnShowWindow(BOOL bShow, UINT nStatus)
     CDialog::OnShowWindow(bShow, nStatus);
 
     if (mDay == nullptr) {
-        MessageBox(L"Day == nulptr!!!", L"FATAL ERROR", MB_OK);
+        MessageBox("Day == nulptr!!!", "FATAL ERROR", MB_OK);
         return;
     }
 
@@ -329,7 +329,7 @@ void CDiaryPage::OnEnChangeWeekEinde()
 {
     if (!mWeek->SetEndDate(Utils::ToDate(mEndOfWeek.GetValue())))
     {
-        ::MessageBox(m_hWnd, (_T("Could not set end date ") + mEndOfWeek.GetValue()).c_str(), _T("Error"), MB_OK);
+        ::MessageBox(m_hWnd, ("Could not set end date " + mEndOfWeek.GetValue()).c_str(), "Error", MB_OK);
         return;
     }
 
