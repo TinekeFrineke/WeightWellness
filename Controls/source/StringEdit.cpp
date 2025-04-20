@@ -9,7 +9,7 @@ std::string CStringEdit::GetValue() const
   assert(m_hWnd != NULL);
   CString text;
   GetWindowText(text);
-  return (const TCHAR *)text;
+  return (const char*)text;
 }
 
 

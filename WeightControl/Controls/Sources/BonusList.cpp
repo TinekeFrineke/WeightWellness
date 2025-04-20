@@ -65,7 +65,6 @@ void BonusListItem::Write(CListCtrl& aControl, int iItemIndex)
     lvi.iItem = iItemIndex;
     lvi.iSubItem = 0;
 
-    //TCHAR intensity[256];
     switch (mBonus.GetIntensity())
     {
         case weight::Bonus::INTENSITY::Low:
@@ -89,12 +88,13 @@ void BonusListItem::Write(CListCtrl& aControl, int iItemIndex)
     count = count;
     (void)index;
 
-    TCHAR duration[256];
-    _stprintf_s(duration, _T("%d"), mBonus.GetDuration());
+    char duration[256];
+    
+    sprintf_s(duration, "%d", mBonus.GetDuration());
     BOOL bResult = aControl.SetItemText(index, 1, duration);
 
-    TCHAR points[256];
-    _stprintf_s(points, _T("%d"), mBonus.GetPoints());
+    char points[256];
+    sprintf_s(points, "%d", mBonus.GetPoints());
     bResult = aControl.SetItemText(index, 2, points);
     bResult = aControl.SetItemData(index, (DWORD_PTR)this);
     bResult = bResult;
@@ -107,9 +107,9 @@ void BonusListItem::Write(CListCtrl& aControl, int iItemIndex)
 BonusList::BonusList()
 {
     SetNumberOfColumns(3);
-    SetColumnInfo(0, ColInfo(100, LVCFMT_LEFT, _T("Naam")));
-    SetColumnInfo(1, ColInfo(80, LVCFMT_RIGHT, _T("Tijd")));
-    SetColumnInfo(2, ColInfo(100, LVCFMT_RIGHT, _T("Punten")));
+    SetColumnInfo(0, ColInfo(100, LVCFMT_LEFT, "Naam"));
+    SetColumnInfo(1, ColInfo(80, LVCFMT_RIGHT, "Tijd"));
+    SetColumnInfo(2, ColInfo(100, LVCFMT_RIGHT, "Punten"));
 }
 
 BonusList::~BonusList()

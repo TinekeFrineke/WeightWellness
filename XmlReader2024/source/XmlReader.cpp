@@ -62,15 +62,15 @@ XmlReader::XmlReader(weight::IModel& aModel, std::shared_ptr<weight::IMessageHan
 
 weight::Result XmlReader::Read(const std::string& aDirectory)
 {
-    weight::Result result = ReadPersonalia(aDirectory + _T("\\personalia.xml"));
+    weight::Result result = ReadPersonalia(aDirectory + "\\personalia.xml");
     if (result == weight::Result::Ok)
-        result = ReadVoedingsmiddelDefinities(aDirectory + _T("\\voedingsmiddeldefinities.xml"));
+        result = ReadVoedingsmiddelDefinities(aDirectory + "\\voedingsmiddeldefinities.xml");
     if (result == weight::Result::Ok)
-        result = ReadUnits(aDirectory + _T("\\units.xml"));
+        result = ReadUnits(aDirectory + "\\units.xml");
     if (result == weight::Result::Ok)
-        result = ReadRecepten(aDirectory + _T("\\recepten.xml"));
+        result = ReadRecepten(aDirectory + "\\recepten.xml");
     if (result == weight::Result::Ok)
-        result = ReadGerechten(aDirectory + _T("\\restaurantgerechten.xml"));
+        result = ReadGerechten(aDirectory + "\\restaurantgerechten.xml");
     if (result == weight::Result::Ok)
         result = ReadWeeks(aDirectory);
     if (result == weight::Result::Ok)
@@ -389,7 +389,7 @@ weight::Result XmlReader::ReadBonusCells(const std::string& aDirectory)
 {
     //XmlBonuslistReader reader;
     //try {
-    //    auto xmlbonuslist = reader.Read(aDirectory + _T("\\bonuspoints.xml"));
+    //    auto xmlbonuslist = reader.Read(aDirectory + "\\bonuspoints.xml");
 
 
     //    for (size_t i = 0; i < xmlbonuslist->GetBonuscellList().size(); ++i)

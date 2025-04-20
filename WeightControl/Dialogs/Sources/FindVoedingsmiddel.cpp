@@ -47,7 +47,7 @@ CFindVoedingsmiddel::CFindVoedingsmiddel(const weight::IFoodDefinitionRepository
     , mFood(nullptr)
     , m_lotFactory(std::move(lotFactory))
     , mDefinitie(nullptr)
-    , mPortieNaam(_T(""))
+    , mPortieNaam("")
     , mUpdating(false)
     , mUpdatingFilter(false)
 {
@@ -100,11 +100,11 @@ BOOL CFindVoedingsmiddel::OnInitDialog()
 
     mCategorieBox.Initialize();
     mCategorieBox.Fill();
-    mCategorieBox.SetText(_T(""));
+    mCategorieBox.SetText("");
 
     mMerkBox.Initialize();
     mMerkBox.Fill();
-    mMerkBox.SetText(_T(""));
+    mMerkBox.SetText("");
 
     return TRUE;
 }
@@ -115,7 +115,7 @@ void CFindVoedingsmiddel::OnBnClickedOk()
     weight::Portie* portie = mPortieNaam.GetSelectedPortie();
     if (portie == nullptr)
     {
-        ::MessageBox(m_hWnd, _T("Pick a valid portion"), _T("ERROR"), MB_OK);
+        ::MessageBox(m_hWnd, "Pick a valid portion", "ERROR", MB_OK);
         return;
     }
 
@@ -238,7 +238,7 @@ void CFindVoedingsmiddel::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
     weight::Portie* portie = mPortieNaam.GetSelectedPortie();
     if (portie == nullptr)
     {
-        ::MessageBox(m_hWnd, _T("Pick a valid portion"), _T("ERROR"), MB_OK);
+        ::MessageBox(m_hWnd, "Pick a valid portion", "ERROR", MB_OK);
         return;
     }
 

@@ -34,7 +34,7 @@ CMyTabControl::CMyTabControl()
 CMyTabControl::~CMyTabControl() = default;
 
 
-void CMyTabControl::AddPage(std::unique_ptr<TabPage> aPage, UINT aResourceID, TCHAR* aName)
+void CMyTabControl::AddPage(std::unique_ptr<TabPage> aPage, UINT aResourceID, char* aName)
 {
     assert(aPage->GetDialog() != NULL);
     m_tabPages.push_back(std::make_unique<DialogData>(std::move(aPage), aResourceID, aName));
@@ -123,7 +123,7 @@ void CMyTabControl::UpdateSelection()
     }
 }
 
-CMyTabControl::DialogData::DialogData(std::unique_ptr<TabPage> aDialog, UINT anID, TCHAR* aName)
+CMyTabControl::DialogData::DialogData(std::unique_ptr<TabPage> aDialog, UINT anID, char* aName)
     : mDialog(std::move(aDialog))
     , mResourceID(anID)
     , mName(aName)

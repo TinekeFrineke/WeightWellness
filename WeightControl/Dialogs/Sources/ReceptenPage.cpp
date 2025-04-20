@@ -115,7 +115,7 @@ void ReceptenPage::OnBnClickedDelete()
     if (definition == nullptr)
         return;
 
-    if (::MessageBox(m_hWnd, _T("Zeker weten?"), _T("Waarschuwing"), MB_ICONQUESTION | MB_YESNO) == IDYES) {
+    if (::MessageBox(m_hWnd, "Zeker weten?", "Waarschuwing", MB_ICONQUESTION | MB_YESNO) == IDYES) {
         m_recipes->Remove(definition->GetName());
     }
 

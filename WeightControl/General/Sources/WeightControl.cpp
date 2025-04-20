@@ -68,17 +68,18 @@ BOOL CWWApplication::InitInstance()
 
     AfxEnableControlContainer();
 
-    TCHAR dir[MAX_PATH];
+    char dir[MAX_PATH];
     GetCurrentDirectory(MAX_PATH, dir);
-    std::ifstream input(std::string(dir) + "\\weightcontrol.ini");
+    auto fileName{ std::string(dir) + "\\weightcontrol.ini" };
+    std::ifstream input(fileName);
     Inifile inifile(input);
 
     if (inifile.empty()) {
-        MessageBox(0, _T("Unable to open inifile"), inifile.GetName().c_str(), MB_OK);
+        MessageBox(0, (fileName + ": Unable to open inifile").c_str(), "ERROR", MB_OK);
         return FALSE;
     }
 
-    mDataDirectory = inifile[_T("General")][_T("DataPath")];
+    mDataDirectory = inifile["General"]["DataPath"];
 
     ww2024::XmlReader reader(*mModel, m_messageHandler);
     reader.Read(mDataDirectory);
@@ -105,7 +106,7 @@ BOOL CWWApplication::InitInstance()
         }
         else if (nResponse == IDCANCEL)
         {
-            MessageBox(0, _T("Unable to create personalia"), _T("ERROR"), MB_OK);
+            MessageBox(0, "Unable to create personalia", "ERROR", MB_OK);
             return FALSE;
         }
     }

@@ -20,12 +20,12 @@ public:
 
     struct ColInfo
     {
-        ColInfo() : mMinWidth(0), mAlignment(LVCFMT_LEFT), mHeader(_T("")) {}
-        ColInfo(int aMinWidth, int anAlignment, const TCHAR* aHeader)
+        ColInfo() : mMinWidth(0), mAlignment(LVCFMT_LEFT), mHeader("") {}
+        ColInfo(int aMinWidth, int anAlignment, const char* aHeader)
             : mMinWidth(aMinWidth), mAlignment(anAlignment), mHeader(aHeader) {}
         int mMinWidth;
         int mAlignment;
-        const TCHAR* mHeader;
+        const char* mHeader;
     };
 
     void                            SetColumnInfo(int iColumn, const ColInfo& aInfo);

@@ -76,7 +76,7 @@ BOOL CEditPortieDialog::OnInitDialog()
 
 void CEditPortieDialog::OnBnClickedOk()
 {
-    TCHAR text[1024];
+    char text[1024];
     mNaam.GetWindowText(text, 1024);
 
     mPortie->SetName(text);

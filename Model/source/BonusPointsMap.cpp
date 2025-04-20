@@ -47,14 +47,14 @@ int& PointsPerDuration::operator[](int aDuration)
 
 //void PointsPerDuration::Debug() const
 //{
-//  TCHAR smsg[1024];
+//  char smsg[1024];
 //
 //  // Add points in reverse order of duration
 //  for (BonusDurationList::const_iterator iter = mBonusDurations.begin();
 //       iter != mBonusDurations.end();
 //       ++iter)
 //  {
-//    _stprintf(smsg, _T("      mDuration == %d mPoints == %d\n"), iter->mDuration, iter->mPoints);
+//    sprintf(smsg, "      mDuration == %d mPoints == %d\n", iter->mDuration, iter->mPoints);
 //    OutputDebugString(smsg);
 //  }
 //}
@@ -125,14 +125,14 @@ PointsPerDuration& PointsPerDurationAndWeight::operator[](int aWeight)
 
 //void PointsPerDurationAndWeight::Debug() const
 //{
-//  TCHAR smsg[1024];
+//  char smsg[1024];
 //
 //  for (BonusDurationWeightList::const_iterator iter = mBonusDurationWeights.begin();
 //       iter != mBonusDurationWeights.end();
 //       ++iter)
 //    
 //  {
-//    _stprintf(smsg, _T("    mWeight == %d\n"), iter->mWeight);
+//    sprintf(smsg, "    mWeight == %d\n", iter->mWeight);
 //    OutputDebugString(smsg);
 //    iter->mPointsPerDuration.Debug();
 //  }
@@ -172,15 +172,15 @@ const PointsPerDurationAndWeight& BonusPointsMap::operator[](MOVEMENT_INTENSITY 
 
 //void BonusPointsMap::Debug() const
 //{
-//  TCHAR smsg[1024];
+//  char smsg[1024];
 //
 //  for (IntensityPointsMap::const_iterator iter = mPointsMap.begin();
 //       iter != mPointsMap.end();
 //       ++iter)
 //  {
-//    _stprintf(smsg, _T("  mIntensity == %s\n"), iter->first == MI_Low     ? _T("MI_Low")
-//                                              : iter->first == MI_Medium  ? _T("MI_Medium")
-//                                              :                             _T("MI_High"));
+//    sprintf(smsg, "  mIntensity == %s\n", iter->first == MI_Low     ? "MI_Low"
+//                                              : iter->first == MI_Medium  ? "MI_Medium"
+//                                              :                             "MI_High");
 //    OutputDebugString(smsg);
 //    iter->second.Debug();
 //  }

@@ -95,7 +95,7 @@ void VMDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
     lvi.mask = LVIF_TEXT;
     lvi.iItem = iItemIndex;
     lvi.iSubItem = 0;
-    TCHAR* name = _tcsdup(mItem->GetName().c_str());
+    char* name = _tcsdup(mItem->GetName().c_str());
     lvi.pszText = name;
     lvi.lParam = (LPARAM)mItem;
 
@@ -106,7 +106,7 @@ void VMDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
     aControl.SetItemText(item, 1, mItem->GetCategory().c_str());
     aControl.SetItemText(item, 2, mItem->GetUnit().c_str());
 
-    TCHAR points[256];
+    char points[256];
     sprintf_s(points, "%.2f", mItem->GetPointsPer100Units());
     aControl.SetItemText(item, 3, points);
 

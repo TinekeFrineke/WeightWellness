@@ -66,14 +66,15 @@ void ItemListItem::Write(CListCtrl& aControl, int iItemIndex)
     lvi.mask = LVIF_TEXT | LVIF_PARAM/* | LVIF_IMAGE | LVIF_STATE*/;
     lvi.iItem = iItemIndex;
     lvi.iSubItem = 0;
-    TCHAR* name = _tcsdup(mItem->GetName().c_str());
+    char* name = _tcsdup(mItem->GetName().c_str());
     lvi.pszText = name;
     lvi.lParam = (LPARAM)mItem;
 
     int index = aControl.InsertItem(&lvi);
 
-    TCHAR points[256];
-    _stprintf_s(points, _T("%.2f"), mItem->GetPoints());
+    char points[256];
+    
+    sprintf_s(points, "%.2f", mItem->GetPoints());
     aControl.SetItemText(index, 1, points);
     aControl.SetItemData(index, (DWORD_PTR)this);
 
@@ -92,8 +93,8 @@ weight::Item* ItemListItem::GetItem()
 ItemList::ItemList()
 {
     SetNumberOfColumns(2);
-    SetColumnInfo(0, ColInfo(80, LVCFMT_LEFT, _T("Naam")));
-    SetColumnInfo(1, ColInfo(100, LVCFMT_RIGHT, _T("Punten")));
+    SetColumnInfo(0, ColInfo(80, LVCFMT_LEFT, "Naam"));
+    SetColumnInfo(1, ColInfo(100, LVCFMT_RIGHT, "Punten"));
 }
 
 ItemList::~ItemList()

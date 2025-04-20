@@ -18,7 +18,7 @@ public:
     CMyTabControl();
     virtual ~CMyTabControl();
 
-    void AddPage(std::unique_ptr<TabPage> aPage, UINT aResourceID, TCHAR* aName);
+    void AddPage(std::unique_ptr<TabPage> aPage, UINT aResourceID, char* aName);
 
     void Initialize();
     void SelectPage(int iPage);
@@ -41,19 +41,19 @@ protected:
 private:
     struct DialogData
     {
-        DialogData(std::unique_ptr<TabPage> aDialog, UINT anID, TCHAR* aName);
+        DialogData(std::unique_ptr<TabPage> aDialog, UINT anID, char* aName);
         ~DialogData();
         std::unique_ptr<TabPage> mDialog;
         UINT                  mResourceID;
-        TCHAR* mName;
+        char* mName;
     };
 
     void                    SetRectangle();
     void                    UpdateSelection();
 
     std::vector<std::unique_ptr<DialogData>> m_tabPages;
-    int                     m_tabCurrent;
-    int                     m_nNumberOfPages;
+    int                     m_tabCurrent{};
+    int                     m_nNumberOfPages{};
 
 };
 

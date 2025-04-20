@@ -16,8 +16,8 @@ BrandComboBox::BrandComboBox(const std::vector<std::string>& availableTexts, boo
 void BrandComboBox::AddLines()
 {
     if (mIsForFiltering) {
-        AddString(_T("<alles>"));
-        AddString(_T("<merkloos>"));
+        AddString("<alles>");
+        AddString("<merkloos>");
     }
 
     weight::ComboBox::AddLines();

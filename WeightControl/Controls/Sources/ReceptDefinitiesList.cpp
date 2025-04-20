@@ -52,7 +52,7 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
     lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
     lvi.iItem = iItemIndex;
     lvi.iSubItem = 0;
-    char* name = strdup(mItem->GetName().c_str());
+    char* name = _strdup(mItem->GetName().c_str());
     lvi.pszText = name;
     lvi.iImage = 0;
     lvi.stateMask = LVIS_STATEIMAGEMASK;
@@ -61,9 +61,9 @@ void ReceptDefinitiesListItem::Write(CListCtrl& aControl, int iItemIndex)
     int item = aControl.InsertItem(&lvi);
 
     char points[256];
-    _stprintf_s(points, _T("%.2f"), mItem->GetPointsPerPortion());
+    sprintf_s(points, "%.2f", mItem->GetPointsPerPortion());
     aControl.SetItemText(iItemIndex, 1, points);
-    //_stprintf_s(points, _T("%d"), mItem->GetPortions());
+    //sprintf_s(points, "%d", mItem->GetPortions());
     //aControl.SetItemText(iItemIndex, 2, points);
     aControl.SetItemData(item, (DWORD_PTR)this);
 

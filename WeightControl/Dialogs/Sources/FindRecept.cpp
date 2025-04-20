@@ -78,13 +78,13 @@ void CFindRecept::OnBnClickedOk()
     weight::ReceptDefinitie* definition = mItemList.GetSelectedDefinition();
     if (definition == nullptr)
     {
-        ::MessageBox(m_hWnd, _T("Pick a valid item"), _T("ERROR"), MB_OK);
+        ::MessageBox(m_hWnd, "Pick a valid item", "ERROR", MB_OK);
         return;
     }
 
     if (mPorties.GetValue() <= 0)
     {
-        ::MessageBox(m_hWnd, _T("Set a valid portion"), _T("ERROR"), MB_OK);
+        ::MessageBox(m_hWnd, "Set a valid portion", "ERROR", MB_OK);
         return;
     }
 
@@ -147,7 +147,7 @@ void CFindRecept::OnNMDblclkItemlist(NMHDR* pNMHDR, LRESULT* pResult)
     weight::ReceptDefinitie* definition = mItemList.GetSelectedDefinition();
     if (definition == nullptr)
     {
-        ::MessageBox(m_hWnd, _T("Pick a valid item"), _T("ERROR"), MB_OK);
+        ::MessageBox(m_hWnd, "Pick a valid item", "ERROR", MB_OK);
         return;
     }
 

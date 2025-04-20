@@ -222,7 +222,7 @@ weight::Result XmlWriter::WriteWeeks(const std::string& aDirectory)
     for (size_t i = 0; i < weeks.size() && result == weight::Result::Ok; ++i)
     {
         Utils::Date startdate = weeks[i]->GetStartDate();
-        result = Write(*weeks[i], aDirectory + _T("\\week") + Utils::ToString(startdate) + _T(".xml"));
+        result = Write(*weeks[i], aDirectory + "\\week" + Utils::ToString(startdate) + ".xml");
     }
 
     return result;

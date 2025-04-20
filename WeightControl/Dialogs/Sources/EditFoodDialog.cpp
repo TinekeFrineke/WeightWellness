@@ -133,7 +133,7 @@ void EditFoodDialog::OnBnClickedOk()
 {
     if (mPortie.GetSelectedPortie() == nullptr)
     {
-        MessageBox(_T("Select a valid portion"), _T("Error"), MB_OK);
+        MessageBox("Select a valid portion", "Error", MB_OK);
         return;
     }
 

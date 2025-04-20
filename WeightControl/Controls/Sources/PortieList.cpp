@@ -26,7 +26,7 @@ void PortieListItem::Write(CListCtrl& aControl, int iItemIndex)
         lvi.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_STATE;
         lvi.iItem = iItemIndex;
         lvi.iSubItem = 0;
-        TCHAR* name = _tcsdup(mPortie->GetName().c_str());
+        char* name = _tcsdup(mPortie->GetName().c_str());
         lvi.pszText = name;
         lvi.iImage = 0;
         lvi.stateMask = LVIS_STATEIMAGEMASK;
@@ -38,8 +38,8 @@ void PortieListItem::Write(CListCtrl& aControl, int iItemIndex)
         aControl.SetItemText(iItemIndex, 1, mPortie->GetName().c_str());
     }
 
-    TCHAR units[256];
-    _stprintf_s(units, _T("%.2f"), (mPortie->GetUnits() * m_pointsPer100Units) / 100);
+    char units[256];
+    sprintf_s(units, "%.2f", (mPortie->GetUnits() * m_pointsPer100Units) / 100);
     aControl.SetItemText(iItemIndex, 1, units);
 
 }
@@ -53,8 +53,8 @@ PortieList::~PortieList() = default;
 
 void PortieList::Initialize()
 {
-    InsertColumn(1, _T("Naam"), LVCFMT_LEFT, 200);
-    InsertColumn(3, _T("Punten/portie"), LVCFMT_RIGHT, 80);
+    InsertColumn(1, "Naam", LVCFMT_LEFT, 200);
+    InsertColumn(3, "Punten/portie", LVCFMT_RIGHT, 80);
 }
 
 

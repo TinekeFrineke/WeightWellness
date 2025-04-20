@@ -146,7 +146,7 @@ BOOL CEditFoodDefDialog::OnInitDialog()
 void CEditFoodDefDialog::FillStatics()
 {
     std::string eehedenname(mUnitBox.GetString().empty() ? "eenheden" : mUnitBox.GetString());
-    TCHAR labelstring[1024];
+    char labelstring[1024];
     sprintf_s(labelstring, "kCal per %d %s", mEenheden.GetValue(), eehedenname.c_str());
     mKCalPer100Static.SetWindowText(labelstring);
     sprintf_s(labelstring, "Eiwitten per %d %s", mEenheden.GetValue(), eehedenname.c_str());

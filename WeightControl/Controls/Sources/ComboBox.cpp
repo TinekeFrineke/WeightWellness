@@ -67,7 +67,7 @@ std::string ComboBox::GetString() const
     CString text;
     GetLBText(nIndex, text);
 
-    return static_cast<const TCHAR*>(text);
+    return static_cast<const char*>(text);
 }
 
 

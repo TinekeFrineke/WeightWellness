@@ -109,10 +109,10 @@ bool CDiaryPage::ProcessDate(const Utils::Date& aDate)
     switch (mWeek->GetStrategy())
     {
         case weight::STRATEGY_TYPE::KCal:
-            mStrategie.SetValue(_T("KCal"));
+            mStrategie.SetValue("KCal");
             break;
         case weight::STRATEGY_TYPE::CarboHydrates:
-            mStrategie.SetValue(_T("CarboHydrates"));
+            mStrategie.SetValue("CarboHydrates");
             break;
         default:
             assert(false);

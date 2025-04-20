@@ -8,7 +8,7 @@ class BrandComboBox: public weight::ComboBox
 {
 public:
     BrandComboBox(const std::vector<std::string>& availableTexts, bool aIsForFiltering,
-                  const std::string& anInitialBrand = _T(""));
+                  const std::string& anInitialBrand = "");
 
     void AddLines() override;
 
