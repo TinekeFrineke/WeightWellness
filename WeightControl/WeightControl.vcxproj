@@ -65,7 +65,6 @@
     <ClInclude Include="Editor\Headers\IRecipeDefinitionEditor.h" />
     <ClInclude Include="Editor\Headers\PortieEditor.h" />
     <ClInclude Include="Editor\Headers\RecipeDefinitionEditor.h" />
-    <ClInclude Include="Factories\interface\factories\IViewModelFactory.h" />
     <ClInclude Include="General\Headers\ItemEditVisitor.h" />
     <ClInclude Include="General\Headers\MessageHandler.h" />
     <ClInclude Include="General\Headers\stdafx.h" />
@@ -159,7 +158,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)Model\interface\;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;C:\Projects\VC2019\;C:\Projects\Combined\utilities_versions\v1.0.2\interface;C:\Projects\Combined\xerces280\src</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -167,7 +166,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\controls.lib;C:\Projects\Combined\Utilities\build\vc2019\$(PlatformTarget)\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2024.lib;C:\Projects\VC2019\xerces280\Build\$(PlatformTarget)\VC2019\$(Configuration)\xerces-c_2D.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\controls.lib;C:\Projects\Combined\utilities_versions\v1.0.2\build\vs2019\$(PlatformTarget)\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2024.lib;C:\Projects\Combined\xerces280\Build\$(PlatformTarget)\VC2019\$(Configuration)\xerces-c_2D.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -188,7 +187,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;WEIGHT_NAMESPACE=ww2019;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)ViewModel\header;$(SolutionDir)ViewModel\interface\viewmodel;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Controls\Headers;$(ProjectDir)Dialogs\Headers;$(ProjectDir)Editor\Headers;$(ProjectDir)Factories\headers;$(ProjectDir)General\Headers;$(ProjectDir)Factories\interface\factories;$(SolutionDir)Controls\interface;$(SolutionDir)Model\interface\;$(SolutionDir)XmlBase\interface;$(SolutionDir)XmlReader2024\interface;$(SolutionDir)XmlWriter2024\interface;$(SolutionDir)Model\interface;C:\Projects\VC2019\;C:\Projects\Combined\utilities_versions\v1.0.2\interface;C:\Projects\Combined\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
     </ClCompile>
@@ -197,7 +196,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\controls.lib;C:\Projects\Combined\Utilities\build\vc2019\$(PlatformTarget)\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2024.lib;C:\Projects\VC2019\xerces280\Build\$(PlatformTarget)\VC2019\$(Configuration)\xerces-c_2.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\controls.lib;C:\Projects\Combined\utilities_versions\v1.0.2\build\vs2019\$(PlatformTarget)\$(Configuration)\Utilities.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Model.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlReader2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\XmlWriter2024.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\generated2024.lib;C:\Projects\Combined\xerces280\Build\$(PlatformTarget)\VC2019\$(Configuration)\xerces-c_2.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

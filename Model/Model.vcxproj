@@ -95,7 +95,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\VC2019;C:\Projects\Combined\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;CRTDBG_MAP_ALLOC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -115,7 +115,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\VC2019;C:\Projects\Combined\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;CRTDBG_MAP_ALLOC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -134,7 +134,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\VC2019;C:\Projects\Combined\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -155,7 +155,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019;C:\Projects\VC2019\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)header;$(ProjectDir)interface\model;$(SolutionDir)Generated2019\Interface\;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\VC2019;C:\Projects\Combined\xerces280\src;C:\Projects\VC2019\WW\Generated12\Interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -218,7 +218,6 @@
     <ClInclude Include="interface\model\VoedingsmiddelDefinitie.h" />
     <ClInclude Include="interface\model\WeekRepository.h" />
     <ClInclude Include="interface\model\WWDefinitions.h" />
-    <ClInclude Include="interface\model\XmlDefinitions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Bonus.cpp" />

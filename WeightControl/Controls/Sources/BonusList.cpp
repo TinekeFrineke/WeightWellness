@@ -23,7 +23,6 @@
 
 
 #include "model/IDay.h"
-//#include "WW/Model/Bonus.h"
 
 /*
 ListControl::ListControl()

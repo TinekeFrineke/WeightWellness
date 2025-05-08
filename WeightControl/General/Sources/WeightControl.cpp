@@ -10,7 +10,6 @@
 #include <xercesc/util/PlatformUtils.hpp>
 
 #include "Utilities/Inifile.h"
-//#include "Utilities/PathUtils.h"
 
 #include "model/ModelFactory.h"
 #include "model/Personalia.h"
@@ -72,7 +71,8 @@ BOOL CWWApplication::InitInstance()
     GetCurrentDirectory(MAX_PATH, dir);
     auto fileName{ std::string(dir) + "\\weightcontrol.ini" };
     std::ifstream input(fileName);
-    Inifile inifile(input);
+    Inifile inifile;
+    input >> inifile;
 
     if (inifile.empty()) {
         MessageBox(0, (fileName + ": Unable to open inifile").c_str(), "ERROR", MB_OK);

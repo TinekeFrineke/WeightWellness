@@ -200,7 +200,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -222,7 +222,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -244,7 +244,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -266,7 +266,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Projects\VC2019;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src\;$(ProjectDir)Interface\generated</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

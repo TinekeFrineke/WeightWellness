@@ -109,7 +109,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -128,7 +128,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -147,7 +147,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -166,7 +166,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\Utilities\src\include;C:\Projects\VC2019\xerces280\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)interface\xmlwriter\;$(SolutionDir)XmlBase\interface\;$(SolutionDir)Model\interface;$(SolutionDir)Generated2024\Interface;C:\Projects\Combined\utilities_versions\v1.0.2\interface\;C:\Projects\Combined\xerces280\src</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
