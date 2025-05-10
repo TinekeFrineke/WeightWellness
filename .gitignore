@@ -35,3 +35,4 @@ Solution.VC.db-wal
 *.pch
 /.vs/
 /weight_ui/WeightControl/Data/
+/weight_conversion/.vs/
