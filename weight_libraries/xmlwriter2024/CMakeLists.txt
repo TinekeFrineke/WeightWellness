@@ -1,3 +1,4 @@
+
 add_library(xmlwriter2024 STATIC
     source/XmlItemCreateVisitor.cpp
     source/XmlVMCreateVisitor.cpp
@@ -7,6 +8,19 @@ add_library(xmlwriter2024 STATIC
     interface/xmlwriter/XmlWriter.h
 )
 
+
+set_output_directories(xmlwriter2024)
+
+target_compile_definitions(xmlwriter2024 PRIVATE
+    PROJ_XMLUTIL
+    PROJ_XMLPARSER
+    PROJ_SAX4C
+    PROJ_SAX2
+    PROJ_PARSERS
+    PROJ_DOM
+    PROJ_VALIDATORS
+    PROJ_FRAMEWORK
+)
 
 target_include_directories(xmlwriter2024 PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/interface/xmlwriter/

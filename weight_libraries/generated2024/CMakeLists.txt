@@ -1,3 +1,4 @@
+
 add_library(generated2024
     source/XmlBonuscell.cpp
     source/XmlBonuscellReader.cpp
@@ -98,6 +99,20 @@ add_library(generated2024
     interface/generated/XmlWeekReader.h
     interface/generated/XmlWeekWriter.h
 )
+
+set_output_directories(generated2024)
+
+target_compile_definitions(generated2024 PRIVATE
+    PROJ_XMLUTIL
+    PROJ_XMLPARSER
+    PROJ_SAX4C
+    PROJ_SAX2
+    PROJ_PARSERS
+    PROJ_DOM
+    PROJ_VALIDATORS
+    PROJ_FRAMEWORK
+)
+
 
 target_include_directories(generated2024 PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/interface/generated/
