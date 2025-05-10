@@ -1,0 +1,27 @@
+#pragma once
+
+#include <map>
+
+#include "IRecipeRepository.h"
+#include "Repository.h"
+
+
+namespace weight {
+
+class ReceptDefinitie;
+
+class RecipeRepository
+    : public IRecipeRepository
+    , private Repository<ReceptDefinitie>
+{
+public:
+    // Inherited via IRecipeRepository
+    bool Has(const std::string& name) const override;
+    ReceptDefinitie* Find(const std::string& name) const override;
+    bool Add(std::unique_ptr<ReceptDefinitie> definition) override;
+    bool Remove(const std::string& name) override;
+    void Clear() override;
+    std::vector<ReceptDefinitie*> GetAll() const override;
+};
+
+} // namespace weight

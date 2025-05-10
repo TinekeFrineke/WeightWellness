@@ -1,0 +1,132 @@
+
+add_library(model_interface INTERFACE
+    interface/model/Bonus.h
+    interface/model/BonusPointsMap.h
+    interface/model/Entity.h
+    interface/model/IDay.h
+    interface/model/IFoodDefinitionRepository.h
+    interface/model/ILotFactory.h
+    interface/model/IMessageHandler.h
+    interface/model/IModel.h
+    interface/model/IObserver.h
+    interface/model/IRecipeRepository.h
+    interface/model/IRepository.h
+    interface/model/IStringRepository.h
+    interface/model/ISubject.h
+    interface/model/Item.h
+    interface/model/IWeek.h
+    interface/model/IWeekRepository.h
+    interface/model/Lot.h
+    interface/model/LotFactory.h
+    interface/model/ManualItem.h
+    interface/model/ModelException.h
+    interface/model/ModelFactory.h
+    interface/model/Naam.h
+    interface/model/NutritionalValue.h
+    interface/model/Observer.h
+    interface/model/Personalia.h
+    interface/model/PointsCalculator.h
+    interface/model/Portie.h
+    interface/model/Recept.h
+    interface/model/ReceptDefinitie.h
+    interface/model/Subject.h
+    interface/model/StringRepository.h
+    interface/model/Voedingsmiddel.h
+    interface/model/VoedingsmiddelDefinitie.h
+    interface/model/WWDefinitions.h
+)
+
+target_include_directories(model_interface INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/interface/
+)
+
+
+add_library(model
+    source/Bonus.cpp
+    source/BonusPointsMap.cpp
+    source/Day.cpp
+    source/Entity.cpp
+    source/FoodDefinitionRepository.cpp
+    source/Lot.cpp
+    source/LotFactory.cpp
+    source/Model.cpp
+    source/ModelException.cpp
+    source/ModelFactory.cpp
+    source/NutritionalValue.cpp
+    source/Observer.cpp
+    source/Personalia.cpp
+    source/PointsCalculator.cpp
+    source/Portie.cpp
+    source/Recept.cpp
+    source/ReceptDefinitie.cpp
+    source/RecipeRepository.cpp
+    source/StringRepository.cpp
+    source/Subject.cpp
+    source/Voedingsmiddel.cpp
+    source/VoedingsmiddelDefinitie.cpp
+    source/Week.cpp
+    source/WeekRepository.cpp
+    header/Day.h
+    header/FoodDefinitionRepository.h
+    header/Model.h
+    header/RecipeRepository.h
+    header/Repository.h
+    header/Week.h
+    header/WeekRepository.h
+    interface/model/Bonus.h
+    interface/model/BonusPointsMap.h
+    interface/model/Entity.h
+    interface/model/IDay.h
+    interface/model/IFoodDefinitionRepository.h
+    interface/model/ILotFactory.h
+    interface/model/IMessageHandler.h
+    interface/model/IModel.h
+    interface/model/IObserver.h
+    interface/model/IRecipeRepository.h
+    interface/model/IRepository.h
+    interface/model/IStringRepository.h
+    interface/model/ISubject.h
+    interface/model/Item.h
+    interface/model/IWeek.h
+    interface/model/IWeekRepository.h
+    interface/model/Lot.h
+    interface/model/LotFactory.h
+    interface/model/ManualItem.h
+    interface/model/ModelException.h
+    interface/model/ModelFactory.h
+    interface/model/Naam.h
+    interface/model/NutritionalValue.h
+    interface/model/Observer.h
+    interface/model/Personalia.h
+    interface/model/PointsCalculator.h
+    interface/model/Portie.h
+    interface/model/Recept.h
+    interface/model/ReceptDefinitie.h
+    interface/model/Subject.h
+    interface/model/StringRepository.h
+    interface/model/Voedingsmiddel.h
+    interface/model/VoedingsmiddelDefinitie.h
+    interface/model/WWDefinitions.h
+)
+
+# Go though some hassle to import utilities
+#add_library(utilities STATIC IMPORTED)
+#set_target_properties(utilities PROPERTIES
+#    IMPORTED_LOCATION C:/Projects/Combined/utilities_versions/v1.0.2/build/utilities.lib
+#    INTERFACE_INCLUDE_DIRECTORIES C:/Projects/Combined/utilities_versions/v1.0.2/interface
+#)
+
+#target_link_libraries(model PRIVATE utilities)
+
+target_include_directories(model PUBLIC
+    ${CMAKE_SOURCE_DIR}/interface/
+)
+
+message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+
+target_include_directories(model PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/interface/model/
+    ${CMAKE_CURRENT_SOURCE_DIR}/header/
+    C:/Projects/Combined/utilities_versions/v1.0.2/interface/
+)
+
