@@ -1,0 +1,125 @@
+
+add_library(generated2024
+    source/XmlBonuscell.cpp
+    source/XmlBonuscellReader.cpp
+    source/XmlBonuscellWriter.cpp
+    source/XmlBonuslist.cpp
+    source/XmlBonuslistReader.cpp
+    source/XmlBonuslistWriter.cpp
+    source/XmlClass.cpp
+    source/XmlDag.cpp
+    source/XmlDagReader.cpp
+    source/XmlDagWriter.cpp
+    source/XmlHandmatigitem.cpp
+    source/XmlHandmatigitemReader.cpp
+    source/XmlHandmatigitemWriter.cpp
+    source/XmlPersonalia.cpp
+    source/XmlPersonaliaReader.cpp
+    source/XmlPersonaliaWriter.cpp
+    source/XmlPortie.cpp
+    source/XmlPortieReader.cpp
+    source/XmlPortieWriter.cpp
+    source/XmlRecept.cpp
+    source/XmlReceptdef.cpp
+    source/XmlReceptdefReader.cpp
+    source/XmlReceptdefs.cpp
+    source/XmlReceptdefsReader.cpp
+    source/XmlReceptdefsWriter.cpp
+    source/XmlReceptdefWriter.cpp
+    source/XmlReceptReader.cpp
+    source/XmlReceptWriter.cpp
+    source/XmlUnit.cpp
+    source/XmlUnitReader.cpp
+    source/XmlUnits.cpp
+    source/XmlUnitsReader.cpp
+    source/XmlUnitsWriter.cpp
+    source/XmlUnitWriter.cpp
+    source/XmlVoedingsmiddel.cpp
+    source/XmlVoedingsmiddeldef.cpp
+    source/XmlVoedingsmiddeldefReader.cpp
+    source/XmlVoedingsmiddeldefs.cpp
+    source/XmlVoedingsmiddeldefsReader.cpp
+    source/XmlVoedingsmiddeldefsWriter.cpp
+    source/XmlVoedingsmiddeldefWriter.cpp
+    source/XmlVoedingsmiddelReader.cpp
+    source/XmlVoedingsmiddelWriter.cpp
+    source/XmlVoedingswaarde.cpp
+    source/XmlVoedingswaardeReader.cpp
+    source/XmlVoedingswaardeWriter.cpp
+    source/XmlWeek.cpp
+    source/XmlWeekReader.cpp
+    source/XmlWeekWriter.cpp
+    interface/generated/XmlBonuscell.h
+    interface/generated/XmlBonuscellReader.h
+    interface/generated/XmlBonuscellWriter.h
+    interface/generated/XmlBonuslist.h
+    interface/generated/XmlBonuslistReader.h
+    interface/generated/XmlBonuslistWriter.h
+    interface/generated/XmlClass.h
+    interface/generated/XmlDag.h
+    interface/generated/XmlDagReader.h
+    interface/generated/XmlDagWriter.h
+    interface/generated/XmlHandmatigitem.h
+    interface/generated/XmlHandmatigitemReader.h
+    interface/generated/XmlHandmatigitemWriter.h
+    interface/generated/XmlPersonalia.h
+    interface/generated/XmlPersonaliaReader.h
+    interface/generated/XmlPersonaliaWriter.h
+    interface/generated/XmlPortie.h
+    interface/generated/XmlPortieReader.h
+    interface/generated/XmlPortieWriter.h
+    interface/generated/XmlRecept.h
+    interface/generated/XmlReceptdef.h
+    interface/generated/XmlReceptdefReader.h
+    interface/generated/XmlReceptdefs.h
+    interface/generated/XmlReceptdefsReader.h
+    interface/generated/XmlReceptdefsWriter.h
+    interface/generated/XmlReceptdefWriter.h
+    interface/generated/XmlReceptReader.h
+    interface/generated/XmlReceptWriter.h
+    interface/generated/XmlUnit.h
+    interface/generated/XmlUnitReader.h
+    interface/generated/XmlUnits.h
+    interface/generated/XmlUnitsReader.h
+    interface/generated/XmlUnitsWriter.h
+    interface/generated/XmlUnitWriter.h
+    interface/generated/XmlVoedingsmiddel.h
+    interface/generated/XmlVoedingsmiddeldef.h
+    interface/generated/XmlVoedingsmiddeldefReader.h
+    interface/generated/XmlVoedingsmiddeldefs.h
+    interface/generated/XmlVoedingsmiddeldefsReader.h
+    interface/generated/XmlVoedingsmiddeldefsWriter.h
+    interface/generated/XmlVoedingsmiddeldefWriter.h
+    interface/generated/XmlVoedingsmiddelReader.h
+    interface/generated/XmlVoedingsmiddelWriter.h
+    interface/generated/XmlVoedingswaarde.h
+    interface/generated/XmlVoedingswaardeReader.h
+    interface/generated/XmlVoedingswaardeWriter.h
+    interface/generated/XmlWeek.h
+    interface/generated/XmlWeekReader.h
+    interface/generated/XmlWeekWriter.h
+)
+
+set_output_directories(generated2024)
+
+target_compile_definitions(generated2024 PRIVATE
+    PROJ_XMLUTIL
+    PROJ_XMLPARSER
+    PROJ_SAX4C
+    PROJ_SAX2
+    PROJ_PARSERS
+    PROJ_DOM
+    PROJ_VALIDATORS
+    PROJ_FRAMEWORK
+)
+
+
+target_include_directories(generated2024 PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/interface/generated/
+)
+
+target_include_directories(generated2024 PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/interface/
+    "C:/Projects/Combined/Xerces280/src/"
+    "C:/Projects/Combined/utilities_versions/v1.0.2/interface/"
+)
