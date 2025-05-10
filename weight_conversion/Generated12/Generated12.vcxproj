@@ -140,9 +140,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Source\XmlBonuscell.cpp" />
     <ClCompile Include="Source\XmlBonuscellReader.cpp" />
     <ClCompile Include="Source\XmlBonuscellWriter.cpp" />
